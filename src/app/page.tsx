@@ -59,7 +59,9 @@ export default function Home() {
       const { auth } = require("@/lib/firebase");
       currentUser = auth.currentUser;
 
-      if (!currentUser) return; // Should not happen if login worked
+      if (!currentUser) {
+        throw new Error("ログインに失敗しました。認証設定を確認してください。");
+      }
 
       let newId = generateRoomId();
       let docRef = doc(db, "rooms", newId);

@@ -36,6 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             await signInAnonymously(auth);
         } catch (error) {
             console.error("Error signing in anonymously:", error);
+            throw error; // Rethrow so the UI can handle it
         }
     };
 
