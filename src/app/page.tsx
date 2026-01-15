@@ -235,7 +235,7 @@ export default function Home() {
               </li>
               <li className="flex gap-3">
                 <span className="text-amber-500 font-bold">04.</span>
-                <span>回答速度に応じてボーナススコアが加算されます。最速の賢者を目指せ！</span>
+                <span>回答速度に応じてボーナススコアが加算されます。最速を目指せ！</span>
               </li>
             </ul>
           </motion.div>
@@ -253,7 +253,7 @@ export default function Home() {
             <div className="space-y-6">
               <div>
                 <h3 className="text-amber-400 font-bold mb-1">リアルタイム対戦</h3>
-                <p className="text-amber-100/60 text-sm">Firebaseを使用した超高速同期により、仲間と同じ瞬間にクイズに挑めます。</p>
+                <p className="text-amber-100/60 text-sm">オンライン高速同期により、仲間と同じ瞬間にクイズに挑めます。</p>
               </div>
               <div>
                 <h3 className="text-amber-400 font-bold mb-1">スピードボーナス</h3>
@@ -277,7 +277,7 @@ export default function Home() {
           <p className="max-w-2xl mx-auto text-amber-100/70 leading-loose">
             Fantasy Quizzes Kingdomは、単なるクイズアプリではありません。
             友人たちと知恵を競い、一瞬の判断力を磨く、まさに知略の戦場です。
-            インストール不要で、今すぐブラウザから冒険を開始できます。
+            インストール不要で、今すぐブラウザから開始できます。
           </p>
         </motion.section>
       </div>

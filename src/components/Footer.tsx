@@ -27,12 +27,10 @@ export default function Footer() {
                         利用規約
                     </Link>
                     <a
-                        href="https://sparks-station.com/"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="mailto:contact@sparks-station.com"
                         className="hover:text-amber-500 transition-colors"
                     >
-                        運営元
+                        お問い合わせ
                     </a>
                 </nav>
 
