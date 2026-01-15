@@ -127,7 +127,7 @@ export default function GuestLobby() {
                                 <Button
                                     onClick={handleJoin}
                                     disabled={!nickname || !selectedIcon}
-                                    className="w-full h-20 text-xl font-black fantasy-button group"
+                                    className="w-full h-20 text-xl font-black fantasy-button group text-amber-100"
                                 >
                                     参加する <Sword className="ml-3 h-6 w-6 group-hover:rotate-12 transition-transform" />
                                 </Button>

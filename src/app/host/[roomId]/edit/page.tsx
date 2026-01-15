@@ -267,7 +267,7 @@ export default function QuizEditor() {
                             <p className="text-amber-200/70 text-sm">参加者に出題するクイズを作成してください。</p>
                         </div>
                     </div>
-                    <Button onClick={handleSaveAll} className="fantasy-button px-8 h-14 text-lg">
+                    <Button onClick={handleSaveAll} className="fantasy-button px-8 h-14 text-lg text-amber-100">
                         <Save className="mr-2 h-5 w-5" /> 保存して戻る
                     </Button>
                 </header>
@@ -305,11 +305,8 @@ export default function QuizEditor() {
                         合計 {questions.length} 問
                     </p>
                     <div className="flex gap-4">
-                        <Button variant="ghost" onClick={() => router.push(`/host/${roomId}`)} className="text-white/50 hover:text-white">
-                            破棄して戻る
-                        </Button>
-                        <Button onClick={handleSaveAll} className="fantasy-button px-10">
-                            クイズを保存する
+                        <Button onClick={handleSaveAll} className="fantasy-button px-10 text-amber-100">
+                            保存して戻る
                         </Button>
                     </div>
                 </div>

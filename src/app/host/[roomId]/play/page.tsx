@@ -64,10 +64,7 @@ export default function HostPlay() {
 
                 if (remaining <= 0) {
                     clearInterval(interval);
-                    // Only auto-advance if we were counting down. 
-                    // Use a ref or check if we haven't already marked as done?
-                    // Ideally handleTimeUp() is safe to call multiple times as it checks phase.
-                    if (timeLeft > 0) {
+                    if (room.currentPhase === "question") {
                         handleTimeUp();
                     }
                 }
@@ -90,18 +87,20 @@ export default function HostPlay() {
     const handleNextPhase = async () => {
         if (!room || questions.length === 0) return;
 
-        if (room.currentPhase === "result") {
+        if (room.currentPhase === "question") {
+            // If host force-closes, go straight to result
             await updateDoc(doc(db, "rooms", roomId), {
-                currentPhase: "leaderboard"
+                currentPhase: "result"
             });
-        } else if (room.currentPhase === "leaderboard") {
+        } else if (room.currentPhase === "result") {
+            // Result screen should show ranking immediately? Or keep leaderboard as separate?
+            // User said "解答を締めきったらその問題の結果画面を自動で表示し、次へは一度押せば次の画面に切り替わるようにしたい"
+            // I will skip 'leaderboard' and go straight to next question or finished.
             const nextIndex = room.currentQuestionIndex + 1;
             if (nextIndex < questions.length) {
-                // Determine time limit for the next question
                 const nextQ = questions[nextIndex];
                 const limit = nextQ.timeLimit || 20;
 
-                // Explicitly set startTime
                 await updateDoc(doc(db, "rooms", roomId), {
                     currentQuestionIndex: nextIndex,
                     currentPhase: "question",
@@ -148,22 +147,21 @@ export default function HostPlay() {
                             </span>
                         </div>
                         <div className="flex gap-2">
-                            {room.currentPhase === "question" && (
+                            {room.currentPhase === "question" ? (
                                 <Button
                                     size="lg"
-                                    onClick={handleTimeUp}
-                                    className="fantasy-button h-16 px-6 text-lg bg-red-900/80 border-red-500/50 hover:bg-red-800"
+                                    onClick={handleNextPhase}
+                                    className="fantasy-button h-16 px-6 text-lg bg-red-900/80 border-red-500/50 hover:bg-red-800 text-amber-100"
                                 >
                                     解答を締め切る
                                 </Button>
-                            )}
-                            {(room.currentPhase !== "question" || timeLeft <= 0) && (
+                            ) : (
                                 <motion.div
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                 >
-                                    <Button size="lg" onClick={handleNextPhase} className="fantasy-button h-16 px-10 text-xl group">
-                                        {room.currentPhase === "leaderboard" && room.currentQuestionIndex === questions.length - 1 ? "クイズを終了する" : "次へ"} <ChevronRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                                    <Button size="lg" onClick={handleNextPhase} className="fantasy-button h-16 px-10 text-xl group text-amber-100">
+                                        {room.currentQuestionIndex === questions.length - 1 ? "クイズを終了する" : "次へ"} <ChevronRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                                     </Button>
                                 </motion.div>
                             )}
