@@ -185,7 +185,7 @@ const QuestionItem = memo(({
 
                             <div className="p-4 rounded-xl bg-amber-900/10 border border-amber-500/20 space-y-3">
                                 <p className="rpg-label !mb-0 text-[10px]">魔導士の助言</p>
-                                <p className="text-xs text-amber-200/50 leading-relaxed italic">
+                                <p className="text-xs text-amber-200/70 leading-relaxed italic">
                                     「正しい答えのラジオボタンにチェックを入れるのを忘れるな。さもなくば、誰もその試練を突破できぬだろう。」
                                 </p>
                             </div>
@@ -264,7 +264,7 @@ export default function QuizEditor() {
                                 <Scroll className="h-8 w-8 text-amber-500" />
                                 クイズの内容を編集
                             </h1>
-                            <p className="text-amber-200/50 text-sm">参加者に出題するクイズを作成してください。</p>
+                            <p className="text-amber-200/70 text-sm">参加者に出題するクイズを作成してください。</p>
                         </div>
                     </div>
                     <Button onClick={handleSaveAll} className="fantasy-button px-8 h-14 text-lg">
@@ -290,7 +290,7 @@ export default function QuizEditor() {
                         variant="outline"
                         className="w-full h-24 border-dashed border-amber-900/50 hover:bg-amber-900/10 hover:border-amber-500 transition-all group rounded-3xl"
                     >
-                        <div className="flex flex-col items-center gap-2 text-amber-200/50 group-hover:text-amber-400">
+                        <div className="flex flex-col items-center gap-2 text-amber-200/70 group-hover:text-amber-400">
                             <Plus className="h-8 w-8" />
                             <span className="font-black text-sm uppercase tracking-[0.2em]">あらたな問題を追加</span>
                         </div>

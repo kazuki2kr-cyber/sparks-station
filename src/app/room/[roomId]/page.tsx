@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Users, Crown, Sword, Shield, Scroll } from "lucide-react";
+import { Sparkles, Users, Crown, Sword, Shield, Scroll, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function GuestLobby() {
@@ -83,7 +83,7 @@ export default function GuestLobby() {
             <div className="min-h-screen flex items-center justify-center bg-slate-950 p-6">
                 <Card className="fantasy-card border-none bg-black/40 text-center p-12">
                     <h1 className="text-3xl font-black gold-text mb-4">ルームが見つかりません</h1>
-                    <p className="text-amber-200/50 mb-8 font-bold">指定された参加コードのルームは見つかりませんでした。</p>
+                    <p className="text-amber-200/70 mb-8 font-bold">指定された参加コードのルームは見つかりませんでした。</p>
                     <Button onClick={() => router.push("/")} className="fantasy-button px-10">ホームに戻る</Button>
                 </Card>
             </div>
@@ -104,7 +104,7 @@ export default function GuestLobby() {
                         >
                             参加登録
                         </motion.h1>
-                        <p className="text-amber-200/50 text-sm font-bold tracking-widest">クイズに参加するための名前とアイコンを決めましょう</p>
+                        <p className="text-amber-200/70 text-sm font-bold tracking-widest">クイズに参加するための名前とアイコンを決めましょう</p>
                     </header>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -120,7 +120,7 @@ export default function GuestLobby() {
                             </div>
 
                             <div className="pt-6 border-t border-white/5 space-y-4 text-center">
-                                <p className="text-amber-200/30 text-xs italic leading-relaxed">
+                                <p className="text-amber-200/70 text-xs italic leading-relaxed">
                                     入力した名前はランキングや結果画面に表示されます。
                                 </p>
                                 <Button
@@ -180,7 +180,7 @@ export default function GuestLobby() {
                         </div>
                     </div>
                     <h1 className="text-5xl font-black gold-text italic mb-4">{nickname} さん</h1>
-                    <p className="text-amber-200/50 font-bold tracking-[0.3em] uppercase">ルームへの参加が完了しました</p>
+                    <p className="text-amber-200/70 font-bold tracking-[0.3em] uppercase">ルームへの参加が完了しました</p>
                 </div>
 
                 <Card className="fantasy-card border-none bg-black/60 p-10 relative overflow-visible">
@@ -198,7 +198,7 @@ export default function GuestLobby() {
                                 ホストの開始合図を待機中...
                             </p>
                         </div>
-                        <p className="text-amber-200/30 text-sm leading-relaxed max-w-md mx-auto italic">
+                        <p className="text-amber-200/70 text-sm leading-relaxed max-w-md mx-auto italic">
                             間もなくクイズが開始されます。そのままお待ちください。
                         </p>
                     </div>
@@ -214,6 +214,16 @@ export default function GuestLobby() {
                         </div>
                     </div>
                 </Card>
+
+                <div className="flex justify-center pb-8">
+                    <Button
+                        variant="ghost"
+                        onClick={() => router.push("/")}
+                        className="text-amber-500/60 hover:text-amber-400 hover:bg-amber-950/30 text-xs font-bold tracking-widest uppercase transition-colors"
+                    >
+                        <Home className="mr-2 h-4 w-4" /> ホームに戻る
+                    </Button>
+                </div>
 
                 <div className="flex justify-center gap-4 text-white/20 font-black tracking-[0.4em] text-[10px] uppercase pt-12">
                     <span className="flex items-center gap-2"><Sparkles className="h-3 w-3" /> Magic</span>

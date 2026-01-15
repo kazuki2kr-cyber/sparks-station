@@ -55,7 +55,7 @@ export default function GuestResults() {
                         <Trophy className="h-20 w-20 text-amber-500 mx-auto drop-shadow-[0_0_30px_rgba(251,191,36,0.6)]" />
                     </motion.div>
                     <h1 className="text-5xl font-black italic gold-text tracking-widest uppercase mb-2">最終結果</h1>
-                    <p className="text-amber-200/50 font-bold tracking-[0.2em] uppercase">参加者たちの最終記録</p>
+                    <p className="text-amber-200/70 font-bold tracking-[0.2em] uppercase">参加者たちの最終記録</p>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

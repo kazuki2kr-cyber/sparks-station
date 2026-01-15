@@ -75,7 +75,7 @@ export default function HostResults() {
                                 最終結果
                             </h1>
                         </motion.div>
-                        <p className="text-amber-200/50 font-bold tracking-[0.2em] uppercase text-sm">クイズは終了し、参加者の順位が決まりました</p>
+                        <p className="text-amber-200/70 font-bold tracking-[0.2em] uppercase text-sm">クイズは終了し、参加者の順位が決まりました</p>
                     </div>
                     <div className="flex gap-4">
                         <Button onClick={handleResetGame} variant="outline" className="h-14 border-amber-900/50 hover:bg-amber-900/20 text-amber-200 px-8">
@@ -157,7 +157,7 @@ export default function HostResults() {
                                 </div>
 
                                 <div className="space-y-3 pt-6 border-t border-white/5">
-                                    <Button variant="ghost" className="w-full justify-start text-amber-200/50 hover:text-amber-400 hover:bg-amber-900/10 h-14 px-6 rounded-2xl">
+                                    <Button variant="ghost" className="w-full justify-start text-amber-200/70 hover:text-amber-400 hover:bg-amber-900/10 h-14 px-6 rounded-2xl">
                                         <Download className="mr-3 h-5 w-5" /> 結果をCSVでダウンロード
                                     </Button>
                                     <Button

@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Timer, Trophy, CheckCircle2, XCircle, Swords, Shield, Sparkles } from "lucide-react";
+import { Timer, Trophy, CheckCircle2, XCircle, Swords, Shield, Sparkles, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function GuestPlay() {
@@ -139,7 +139,7 @@ export default function GuestPlay() {
     if (!room || !currentQuestion || !player) return (
         <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 gap-6">
             <Sparkles className="h-12 w-12 text-amber-500 animate-spin" />
-            <p className="text-amber-200/50 font-black tracking-widest animate-pulse">クイズを読み込み中...</p>
+            <p className="text-amber-200/70 font-black tracking-widest animate-pulse">クイズを読み込み中...</p>
         </div>
     );
 
@@ -280,6 +280,17 @@ export default function GuestPlay() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Footer / Home Button */}
+            <div className="relative z-10 flex justify-center pb-8 mt-4">
+                <Button
+                    variant="ghost"
+                    onClick={() => router.push("/")}
+                    className="text-amber-500/60 hover:text-amber-400 hover:bg-amber-950/30 text-xs font-bold tracking-widest uppercase transition-colors"
+                >
+                    <Home className="mr-2 h-4 w-4" /> ホームに戻る
+                </Button>
+            </div>
         </div>
     );
 }

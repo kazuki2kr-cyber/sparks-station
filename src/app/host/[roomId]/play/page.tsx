@@ -154,7 +154,7 @@ export default function HostPlay() {
                                     onClick={handleTimeUp}
                                     className="fantasy-button h-16 px-6 text-lg bg-red-900/80 border-red-500/50 hover:bg-red-800"
                                 >
-                                    強制終了
+                                    解答を締め切る
                                 </Button>
                             )}
                             {(room.currentPhase !== "question" || timeLeft <= 0) && (

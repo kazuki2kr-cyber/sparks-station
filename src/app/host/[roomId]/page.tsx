@@ -8,7 +8,8 @@ import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, Settings, Play, ChevronRight, Copy, Share2, Crown, ScrollText } from "lucide-react";
+import { Users, Settings, Play, ChevronRight, Copy, Share2, Crown, ScrollText, Home } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,6 +26,7 @@ export default function HostDashboard() {
     const [players, setPlayers] = useState<Player[]>([]);
     const [roomStatus, setRoomStatus] = useState<string>("waiting");
     const [hostName, setHostName] = useState<string>("");
+    const [roomName, setRoomName] = useState<string>("fantasy room");
     const { toast } = useToast();
     const router = useRouter();
 
@@ -41,6 +43,7 @@ export default function HostDashboard() {
                 }
                 setRoomStatus(data.status);
                 setHostName(data.hostName);
+                if (data.roomName) setRoomName(data.roomName);
             } else {
                 router.push("/");
             }
@@ -63,6 +66,17 @@ export default function HostDashboard() {
         toast({
             title: "召喚コードをコピーしました",
             description: "冒険者たちにこのURLを共有してください！",
+        });
+    };
+
+    const handleUpdateRoomName = async () => {
+        if (!roomName.trim()) return;
+        await updateDoc(doc(db, "rooms", roomId), {
+            roomName: roomName
+        });
+        toast({
+            title: "ルーム名を変更しました",
+            description: roomName,
         });
     };
 
@@ -100,7 +114,16 @@ export default function HostDashboard() {
                             <Crown className="h-8 w-8 text-amber-500 animate-pulse" />
                             <h1 className="text-4xl font-black gold-text italic tracking-tight">クイズ管理者画面</h1>
                         </div>
-                        <p className="text-amber-200/50 font-medium">ルームを管理し、冒険を導きましょう</p>
+                        <p className="text-amber-200/70 font-medium">クイズの設定などルームの管理が行えます</p>
+                        <div className="pt-2">
+                            <label className="text-xs font-bold text-amber-500/80 uppercase tracking-widest pl-1">ルーム名</label>
+                            <Input
+                                value={roomName}
+                                onChange={(e) => setRoomName(e.target.value)}
+                                onBlur={handleUpdateRoomName}
+                                className="bg-black/40 border-amber-900/50 text-white font-bold h-10 mt-1 max-w-md focus:border-amber-500 transition-colors"
+                            />
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -210,6 +233,17 @@ export default function HostDashboard() {
                         </Card>
                     </div>
                 </div>
+                {/* Footer / Home Button */}
+                <div className="relative z-10 flex justify-center pb-8 mt-12">
+                    <Button
+                        variant="ghost"
+                        onClick={() => router.push("/")}
+                        className="text-amber-500/60 hover:text-amber-400 hover:bg-amber-950/30 text-xs font-bold tracking-widest uppercase transition-colors"
+                    >
+                        <Home className="mr-2 h-4 w-4" /> ホームに戻る
+                    </Button>
+                </div>
+
             </div>
         </div>
     );
