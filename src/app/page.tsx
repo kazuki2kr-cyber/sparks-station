@@ -240,7 +240,7 @@ export default function Home() {
                       <div className="flex items-center gap-2 text-amber-500 font-black text-sm uppercase tracking-widest">
                         Multiplayer
                       </div>
-                      <h3 className="text-xl font-black text-white">みんなで遊ぶ</h3>
+                      <h3 className="text-xl font-black text-white">みんなで遊ぶ（ルームを作る）</h3>
                       <p className="text-amber-100/60 text-[10px] font-bold">
                         リアルタイム対戦モード
                       </p>
@@ -249,6 +249,12 @@ export default function Home() {
                       </p>
                     </div>
                   </motion.div>
+
+                  <div className="pt-2 px-1">
+                    <p className="text-amber-400 font-black text-[10px] uppercase tracking-widest animate-pulse">
+                      ルームに参加するにはコードを入力
+                    </p>
+                  </div>
 
                   <div className="flex gap-2">
                     <Input
@@ -266,9 +272,6 @@ export default function Home() {
                       参加
                     </Button>
                   </div>
-                  <p className="text-center text-amber-200/30 text-[10px] uppercase tracking-widest font-black">
-                    招待コードを入力して参加
-                  </p>
                 </div>
                 <div className="px-6 space-y-4">
                   <AdBanner adSlot="home_bottom" />
@@ -293,13 +296,43 @@ export default function Home() {
                 className="fantasy-card bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 space-y-4"
               >
                 <h2 className="text-2xl font-black gold-text italic flex items-center gap-3">
-                  <Sword className="h-6 w-6 text-amber-500" />
-                  遊び方
+                  <Crown className="h-6 w-6 text-amber-500" />
+                  スコアアタックモードの遊び方
                 </h2>
                 <ul className="space-y-4 text-amber-100/80 font-medium leading-relaxed">
                   <li className="flex gap-3">
                     <span className="text-amber-500 font-bold">01.</span>
-                    <span>「クイズを作成する」ボタンから、自分だけの対戦ルームを立ち上げます。</span>
+                    <span>「ひとりで遊ぶ」を選択して、スコアアタックを開始します。</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-amber-500 font-bold">02.</span>
+                    <span>厳選された一般常識問題が全10問出題されます。</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-amber-500 font-bold">03.</span>
+                    <span>各問題の制限時間は10秒。早く答えれば高得点！</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="text-amber-500 font-bold">04.</span>
+                    <span>最終スコアは全国ランキングに登録されます。トップ10を目指しましょう。</span>
+                  </li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="fantasy-card bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 space-y-4"
+              >
+                <h2 className="text-2xl font-black gold-text italic flex items-center gap-3">
+                  <Sword className="h-6 w-6 text-amber-500" />
+                  リアルタイム対戦モードの遊び方
+                </h2>
+                <ul className="space-y-4 text-amber-100/80 font-medium leading-relaxed">
+                  <li className="flex gap-3">
+                    <span className="text-amber-500 font-bold">01.</span>
+                    <span>「ルームを作る」ボタンから、自分だけの対戦ルームを立ち上げます。</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-amber-500 font-bold">02.</span>

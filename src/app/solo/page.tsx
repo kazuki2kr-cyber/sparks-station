@@ -160,7 +160,7 @@ export default function SoloPage() {
 
         if (isCorrect) {
             const speedBonus = Math.max(0, 1 - (timeSpent / 10)) * 50;
-            const points = Math.round(100 + speedBonus);
+            const points = Math.round(1000 + speedBonus);
             setScore(prev => prev + points);
         }
 
@@ -253,8 +253,8 @@ export default function SoloPage() {
                                             <div key={r.id} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5">
                                                 <div className="flex items-center gap-3">
                                                     <span className={`w-6 h-6 rounded flex items-center justify-center font-black text-xs ${idx === 0 ? "bg-amber-500 text-black" :
-                                                            idx === 1 ? "bg-slate-300 text-black" :
-                                                                idx === 2 ? "bg-amber-800 text-white" : "text-white/40"
+                                                        idx === 1 ? "bg-slate-300 text-black" :
+                                                            idx === 2 ? "bg-amber-800 text-white" : "text-white/40"
                                                         }`}>{idx + 1}</span>
                                                     <span className="font-bold text-sm truncate max-w-[100px]">{r.nickname}</span>
                                                 </div>
