@@ -157,10 +157,10 @@ export default function Home() {
                     <Sparkles className="h-16 w-16 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
                   </div>
                 </motion.div>
-                <CardTitle className="text-4xl font-black italic tracking-tighter gold-text uppercase">
+                <h1 className="text-4xl font-black italic tracking-tighter gold-text uppercase">
                   Fantasy Quizzes
                   <span className="block text-2xl mt-2 tracking-[0.5em]">Kingdom</span>
-                </CardTitle>
+                </h1>
                 <CardDescription className="text-amber-200/70 font-medium text-sm mt-4">
                   知識と速さで運命を切り拓け
                 </CardDescription>
