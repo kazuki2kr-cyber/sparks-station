@@ -25,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 2500); // 2.5 seconds total for splash
+    }, 1200); // 1.2 seconds total for splash
     return () => clearTimeout(timer);
   }, []);
 
@@ -133,13 +133,13 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="fixed inset-0 z-[100] bg-black flex items-center justify-center"
         >
           <motion.div
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative w-full h-full"
           >
             <img
@@ -155,7 +155,7 @@ export default function Home() {
           key="main"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="min-h-screen relative flex flex-col items-center justify-center p-4 overflow-x-hidden"
         >
           {/* Fantasy Background */}
