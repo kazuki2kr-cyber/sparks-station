@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     collection,
@@ -24,7 +24,6 @@ import {
     Sparkles,
     Home,
     Crown,
-    User,
     Loader2,
     CheckCircle2,
     XCircle
@@ -100,11 +99,8 @@ export default function SoloPage() {
         try {
             if (!user) await loginAnonymously();
 
-            // Fetch 10 random questions
             const snap = await getDocs(collection(db, "questions"));
             const allQuestions = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Question));
-
-            // Shuffle and pick 10
             const shuffled = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
 
             if (shuffled.length < 1) {
@@ -163,7 +159,6 @@ export default function SoloPage() {
         setTotalTime(prev => prev + timeSpent);
 
         if (isCorrect) {
-            // Speed bonus: max 50% extra (at 0s spent), min 0% (at 10s spent)
             const speedBonus = Math.max(0, 1 - (timeSpent / 10)) * 50;
             const points = Math.round(100 + speedBonus);
             setScore(prev => prev + points);
@@ -178,7 +173,6 @@ export default function SoloPage() {
         if (timerRef.current) clearInterval(timerRef.current);
         setGameState("result");
 
-        // Attempt to save result
         try {
             await addDoc(collection(db, "leaderboard"), {
                 nickname,
@@ -206,19 +200,18 @@ export default function SoloPage() {
                         className="w-full max-w-2xl z-10 space-y-8"
                     >
                         <div className="text-center space-y-2">
-                            <h1 className="text-5xl font-black gold-text italic tracking-widest uppercase">
-                                Solo Trial
+                            <h1 className="text-4xl font-black gold-text tracking-widest uppercase">
+                                Score Attack
                             </h1>
-                            <p className="text-amber-200/50 font-bold tracking-widest uppercase text-sm">
-                                一人の試練：知略と速さの極致へ
+                            <p className="text-amber-200/50 font-bold tracking-widest uppercase text-xs">
+                                スコアアタックモード
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                            {/* Entry Card */}
                             <Card className="fantasy-card border-none bg-black/60 p-6 space-y-6">
                                 <div className="space-y-4">
-                                    <label className="rpg-label block mb-2">勇者の名を入力せよ</label>
+                                    <label className="text-amber-500/70 font-bold text-xs uppercase tracking-widest ml-1">ニックネームを入力</label>
                                     <Input
                                         placeholder="ニックネーム..."
                                         value={nickname}
@@ -229,12 +222,12 @@ export default function SoloPage() {
                                 <div className="space-y-4">
                                     <div className="p-4 rounded-xl bg-amber-900/10 border border-amber-900/30">
                                         <h4 className="text-amber-400 font-bold mb-2 text-sm flex items-center gap-2">
-                                            <Sword className="h-4 w-4" /> 試練のルール
+                                            <Timer className="h-4 w-4" /> ルール
                                         </h4>
                                         <ul className="text-xs text-amber-200/60 space-y-1 leading-relaxed">
                                             <li>• 全10問。回答時間は各10秒。</li>
                                             <li>• 早く答えるほどスピードボーナス獲得！</li>
-                                            <li>• スコアは全国ランキングに刻まれます。</li>
+                                            <li>• ニックネームとスコアは全国ランキングに表示されます。</li>
                                         </ul>
                                     </div>
                                     <Button
@@ -242,12 +235,11 @@ export default function SoloPage() {
                                         disabled={!nickname || isLoading}
                                         className="w-full h-20 text-xl font-black fantasy-button group text-amber-100"
                                     >
-                                        {isLoading ? <Loader2 className="animate-spin" /> : "試練を開始する"}
+                                        {isLoading ? <Loader2 className="animate-spin" /> : "ゲームを開始する"}
                                     </Button>
                                 </div>
                             </Card>
 
-                            {/* Ranking Card */}
                             <Card className="fantasy-card border-none bg-black/60 p-6">
                                 <CardHeader className="p-0 pb-4">
                                     <CardTitle className="text-lg font-bold flex items-center gap-2">
@@ -292,7 +284,6 @@ export default function SoloPage() {
                         exit={{ opacity: 0, scale: 1.05 }}
                         className="w-full max-w-3xl z-10 flex flex-col items-center gap-8"
                     >
-                        {/* Header / Timer */}
                         <div className="w-full flex justify-between items-end px-4">
                             <div className="space-y-1">
                                 <Badge variant="outline" className="border-amber-500 text-amber-500 px-4 py-1">
@@ -303,12 +294,7 @@ export default function SoloPage() {
 
                             <div className="relative w-20 h-20 flex items-center justify-center">
                                 <svg className="absolute inset-0 w-full h-full -rotate-90">
-                                    <circle
-                                        cx="40" cy="40" r="36"
-                                        stroke="rgba(251,191,36,0.1)"
-                                        strokeWidth="4"
-                                        fill="none"
-                                    />
+                                    <circle cx="40" cy="40" r="36" stroke="rgba(251,191,36,0.1)" strokeWidth="4" fill="none" />
                                     <motion.circle
                                         cx="40" cy="40" r="36"
                                         stroke="#f59e0b"
@@ -325,7 +311,6 @@ export default function SoloPage() {
                             </div>
                         </div>
 
-                        {/* Question Card */}
                         <Card className="fantasy-card w-full border-none bg-black/60 p-10 md:p-16 relative overflow-hidden">
                             <div className="absolute top-0 right-10 p-2 opacity-5">
                                 <Sparkles className="h-40 w-40 text-amber-500" />
@@ -335,19 +320,16 @@ export default function SoloPage() {
                             </h2>
                         </Card>
 
-                        {/* Options */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                             {questions[currentQuestionIndex]?.options.map((option, idx) => {
                                 const isCorrect = idx === questions[currentQuestionIndex].correctIndex;
                                 const isSelected = idx === selectedOption;
-
                                 let btnStyle = "bg-white/5 border-white/10 hover:border-amber-500/50 hover:bg-white/10";
                                 if (answered) {
                                     if (isCorrect) btnStyle = "bg-green-500/20 border-green-500 shadow-[0_0_20px_rgba(34,197,94,0.3)]";
                                     else if (isSelected) btnStyle = "bg-red-500/20 border-red-500 opacity-50";
                                     else btnStyle = "bg-white/5 border-white/5 opacity-30";
                                 }
-
                                 return (
                                     <motion.button
                                         key={idx}
@@ -385,7 +367,7 @@ export default function SoloPage() {
                             >
                                 <Trophy className="h-24 w-24 text-amber-500 mx-auto drop-shadow-[0_0_30px_rgba(251,191,36,0.5)]" />
                             </motion.div>
-                            <h2 className="text-4xl font-black gold-text italic tracking-widest uppercase">試練完了</h2>
+                            <h2 className="text-4xl font-black gold-text tracking-widest uppercase">スコア確定</h2>
                         </div>
 
                         <Card className="fantasy-card border-none bg-black/60 p-10 space-y-8 relative">
@@ -420,7 +402,7 @@ export default function SoloPage() {
                         </Card>
 
                         <div className="flex items-center justify-center gap-2 text-white/20 font-black tracking-[0.4em] text-[10px] uppercase">
-                            <Crown className="h-3 w-3" /> Glory awaits the swift
+                            Glory awaits the swift
                         </div>
                     </motion.div>
                 )}

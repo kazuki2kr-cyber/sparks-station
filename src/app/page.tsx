@@ -206,11 +206,14 @@ export default function Home() {
                   </div>
                   <div className="relative z-10 flex flex-col gap-1">
                     <div className="flex items-center gap-2 text-amber-400 font-black text-sm uppercase tracking-widest">
-                      <Plus className="h-4 w-4" /> Solo Trial
+                      Solo Mode
                     </div>
-                    <h3 className="text-2xl font-black text-white italic">ひとりで試練に挑む</h3>
-                    <p className="text-amber-100/40 text-xs font-bold mt-1">
-                      10問のクイズに答え、全国ランキングの頂点を目指せ。
+                    <h3 className="text-xl font-black text-white">ひとりで遊ぶ</h3>
+                    <p className="text-amber-100/60 text-[10px] font-bold">
+                      スコアアタックモード
+                    </p>
+                    <p className="text-amber-100/30 text-[10px] mt-1">
+                      10問のクイズに答え、全国ランキングに挑戦。
                     </p>
                   </div>
                 </motion.div>
@@ -222,18 +225,30 @@ export default function Home() {
                   </span>
                 </div>
 
-                {/* Multiplayer Mode Section */}
+                {/* Multiplayer Mode Card */}
                 <div className="space-y-4">
-                  <Button
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={handleCreateRoom}
-                    disabled={isLoading}
-                    className="w-full fantasy-button py-7 text-lg group relative overflow-hidden text-amber-100 font-bold"
+                    className="relative p-6 rounded-2xl bg-gradient-to-br from-amber-600/20 to-amber-900/60 border border-amber-600/30 cursor-pointer group overflow-hidden"
                   >
-                    <span className="relative z-10 flex items-center">
-                      <Users className="mr-2 h-5 w-5" />
-                      みんなで戦場へ向かう
-                    </span>
-                  </Button>
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                      <Users className="h-20 w-20 text-white" />
+                    </div>
+                    <div className="relative z-10 flex flex-col gap-1">
+                      <div className="flex items-center gap-2 text-amber-500 font-black text-sm uppercase tracking-widest">
+                        Multiplayer
+                      </div>
+                      <h3 className="text-xl font-black text-white">みんなで遊ぶ</h3>
+                      <p className="text-amber-100/60 text-[10px] font-bold">
+                        リアルタイム対戦モード
+                      </p>
+                      <p className="text-amber-100/30 text-[10px] mt-1">
+                        最大20人で同時に競い合う早押しバトル。
+                      </p>
+                    </div>
+                  </motion.div>
 
                   <div className="flex gap-2">
                     <Input
@@ -248,11 +263,11 @@ export default function Home() {
                       disabled={roomId.length !== 6 || isLoading}
                       className="h-14 px-6 bg-amber-600 hover:bg-amber-500 text-black font-black disabled:opacity-50 disabled:bg-slate-800 shrink-0"
                     >
-                      参戦
+                      参加
                     </Button>
                   </div>
                   <p className="text-center text-amber-200/30 text-[10px] uppercase tracking-widest font-black">
-                    招待コードを入力して合流
+                    招待コードを入力して参加
                   </p>
                 </div>
                 <div className="px-6 space-y-4">
