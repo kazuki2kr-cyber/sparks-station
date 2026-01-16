@@ -71,23 +71,41 @@ export default function SoloPage() {
         if (gameState === "lobby") {
             const fetchRankings = async () => {
                 try {
-                    const q = query(
+                    // Try preferred query with two orders (Requires Composite Index)
+                    const qPrimary = query(
                         collection(db, "leaderboard"),
                         orderBy("score", "desc"),
                         orderBy("totalTime", "asc"),
                         limit(10)
                     );
-                    const snap = await getDocs(q);
+                    const snap = await getDocs(qPrimary);
                     const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Ranking));
                     setRankings(list);
                 } catch (error: any) {
-                    console.error("Error fetching rankings:", error);
-                    // Show a toast for ANY error during fetch to help diagnose
-                    toast({
-                        title: "ランキングの取得に失敗しました",
-                        description: error.message || "通信エラーが発生しました。",
-                        variant: "destructive"
-                    });
+                    console.error("Primary ranking fetch failed, trying fallback:", error);
+
+                    // Fallback to single order if the index doesn't exist yet
+                    try {
+                        const qFallback = query(
+                            collection(db, "leaderboard"),
+                            orderBy("score", "desc"),
+                            limit(10)
+                        );
+                        const snap = await getDocs(qFallback);
+                        const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Ranking));
+                        setRankings(list);
+
+                        // Notify that ranking is simplified
+                        if (error.message?.includes("index")) {
+                            console.warn("Composite index missing. Using simpler ranking.");
+                        }
+                    } catch (fallbackError: any) {
+                        toast({
+                            title: "ランキングの取得に失敗しました",
+                            description: fallbackError.message || "通信エラーが発生しました。",
+                            variant: "destructive"
+                        });
+                    }
                 }
             };
             fetchRankings();
@@ -381,7 +399,7 @@ export default function SoloPage() {
                             <h2 className="text-4xl font-black gold-text tracking-widest uppercase">スコア確定</h2>
                         </div>
 
-                        <Card className="fantasy-card border-none bg-black/60 p-10 pt-16 space-y-8 relative">
+                        <Card className="fantasy-card border-none bg-black/60 p-10 pt-16 space-y-8 relative !overflow-visible">
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-10 py-3 bg-amber-950 border-2 border-amber-500 rounded-full text-amber-500 font-black tracking-[0.2em] z-10 whitespace-nowrap">
                                 YOUR RESULT
                             </div>
