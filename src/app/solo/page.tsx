@@ -80,13 +80,20 @@ export default function SoloPage() {
                     const snap = await getDocs(q);
                     const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Ranking));
                     setRankings(list);
-                } catch (error) {
+                } catch (error: any) {
                     console.error("Error fetching rankings:", error);
+                    if (error.message?.includes("index")) {
+                        toast({
+                            title: "ランキングの表示に失敗しました",
+                            description: "インデックスの作成が必要です。コンソールを確認してください。",
+                            variant: "destructive"
+                        });
+                    }
                 }
             };
             fetchRankings();
         }
-    }, [gameState]);
+    }, [gameState, toast]);
 
     // Handle Game Start
     const startGame = async () => {
@@ -159,7 +166,7 @@ export default function SoloPage() {
         setTotalTime(prev => prev + timeSpent);
 
         if (isCorrect) {
-            const speedBonus = Math.max(0, 1 - (timeSpent / 10)) * 50;
+            const speedBonus = Math.max(0, 1 - (timeSpent / 10)) * 500;
             const points = Math.round(1000 + speedBonus);
             setScore(prev => prev + points);
         }
@@ -171,8 +178,9 @@ export default function SoloPage() {
 
     const endGame = async () => {
         if (timerRef.current) clearInterval(timerRef.current);
-        setGameState("result");
 
+        setIsLoading(true);
+        // Attempt to save result
         try {
             await addDoc(collection(db, "leaderboard"), {
                 nickname,
@@ -181,8 +189,12 @@ export default function SoloPage() {
                 timestamp: serverTimestamp(),
                 userId: user?.uid || "anonymous"
             });
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error saving score:", error);
+            toast({ title: "スコアの保存に失敗しました", description: error.message, variant: "destructive" });
+        } finally {
+            setIsLoading(false);
+            setGameState("result");
         }
     };
 
@@ -232,10 +244,10 @@ export default function SoloPage() {
                                     </div>
                                     <Button
                                         onClick={startGame}
-                                        disabled={!nickname || isLoading}
+                                        disabled={!nickname || (isLoading && gameState === "lobby")}
                                         className="w-full h-20 text-xl font-black fantasy-button group text-amber-100"
                                     >
-                                        {isLoading ? <Loader2 className="animate-spin" /> : "ゲームを開始する"}
+                                        {isLoading && gameState === "lobby" ? <Loader2 className="animate-spin" /> : "ゲームを開始する"}
                                     </Button>
                                 </div>
                             </Card>
@@ -393,10 +405,10 @@ export default function SoloPage() {
                                 </Button>
                                 <Button
                                     variant="outline"
-                                    onClick={() => router.push("/")}
+                                    onClick={() => setGameState("lobby")}
                                     className="w-full h-14 border-amber-900/50 text-amber-200/50 hover:bg-white/5"
                                 >
-                                    ホームに戻る
+                                    タイトルに戻る
                                 </Button>
                             </div>
                         </Card>
