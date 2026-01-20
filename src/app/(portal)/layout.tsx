@@ -16,7 +16,7 @@ export default function PortalLayout({
                         <div className="bg-emerald-500/10 p-2 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
                             <Terminal className="w-5 h-5 text-emerald-400" />
                         </div>
-                        <span className="font-bold text-lg tracking-tight">MicroTrend Japan</span>
+                        <span className="font-bold text-lg tracking-tight">Sparks Station</span>
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-400">
@@ -35,8 +35,12 @@ export default function PortalLayout({
 
             {/* Footer */}
             <footer className="border-t border-neutral-800 bg-neutral-950 mt-auto">
-                <div className="max-w-screen-xl mx-auto px-6 py-12 text-center text-sm text-neutral-500">
-                    <p>&copy; {(new Date()).getFullYear()} MicroTrend Japan. All rights reserved.</p>
+                <div className="max-w-screen-xl mx-auto px-6 py-12 flex flex-col items-center gap-6 text-sm text-neutral-500">
+                    <div className="flex gap-6">
+                        <Link href="/privacy" className="hover:text-neutral-300 transition-colors">Privacy Policy</Link>
+                        <Link href="/contact" className="hover:text-neutral-300 transition-colors">Contact</Link>
+                    </div>
+                    <p>&copy; {(new Date()).getFullYear()} Sparks Station. All rights reserved.</p>
                 </div>
             </footer>
         </div>

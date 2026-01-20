@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     try {
         const post = await getPostData(slug);
         return {
-            title: `${post.metadata.title} | MicroTrend Japan`,
+            title: `${post.metadata.title} | Sparks Station`,
             description: post.metadata.summary,
         };
     } catch {
