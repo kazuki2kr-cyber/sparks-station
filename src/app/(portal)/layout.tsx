@@ -13,10 +13,14 @@ export default function PortalLayout({
             <header className="border-b border-neutral-800 bg-neutral-900/80 backdrop-blur-md sticky top-0 z-50">
                 <div className="max-w-screen-xl mx-auto px-6 h-16 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="bg-emerald-500/10 p-2 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
-                            <Terminal className="w-5 h-5 text-emerald-400" />
+                        {/* Brand Logo Image */}
+                        <div className="relative w-40 h-10">
+                            <img
+                                src="/sparks-station-kv.png"
+                                alt="Sparks Station"
+                                className="object-contain w-full h-full"
+                            />
                         </div>
-                        <span className="font-bold text-lg tracking-tight">Sparks Station</span>
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-neutral-400">

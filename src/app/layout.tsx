@@ -38,11 +38,13 @@ export const metadata: Metadata = {
     siteName: "Sparks Station",
     locale: "ja_JP",
     type: "website",
+    images: ["/sparks-station-kv.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sparks Station",
     description: "海外の売却事例から「稼げるヒント」をエンジニアへ。",
+    images: ["/sparks-station-kv.png"],
   },
   other: {
     "google-adsense-account": "ca-pub-3577742758028719",
