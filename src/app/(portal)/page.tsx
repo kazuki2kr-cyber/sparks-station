@@ -1,4 +1,5 @@
 import { getSortedPostsData } from '@/lib/content';
+import Link from 'next/link';
 
 export default function PortalPage() {
     const posts = getSortedPostsData();
@@ -31,32 +32,34 @@ export default function PortalPage() {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {posts.map((post) => (
-                        <article key={post.slug} className="group bg-neutral-800/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-colors">
-                            <div className="aspect-video bg-neutral-800 relative overflow-hidden flex items-center justify-center">
-                                <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
-                                {/* Generative Placeholder for thumbnail */}
-                                <div className="text-neutral-700 text-6xl font-bold opacity-20 select-none">
-                                    {post.metadata.tags[0]}
+                        <Link key={post.slug} href={`/posts/${post.slug}`} className="block group">
+                            <article className="bg-neutral-800/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-colors h-full flex flex-col">
+                                <div className="aspect-video bg-neutral-800 relative overflow-hidden flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60"></div>
+                                    {/* Generative Placeholder for thumbnail */}
+                                    <div className="text-neutral-700 text-6xl font-bold opacity-20 select-none">
+                                        {post.metadata.tags[0]}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="p-6 space-y-4">
-                                <div className="flex items-center gap-3 text-xs font-mono text-emerald-400">
-                                    <span>{post.metadata.date}</span>
-                                    <span>•</span>
-                                    <span>{post.metadata.tags[0]}</span>
+                                <div className="p-6 space-y-4 flex-grow flex flex-col">
+                                    <div className="flex items-center gap-3 text-xs font-mono text-emerald-400">
+                                        <span>{post.metadata.date}</span>
+                                        <span>•</span>
+                                        <span>{post.metadata.tags[0]}</span>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-neutral-100 group-hover:text-emerald-400 transition-colors line-clamp-2">
+                                        {post.metadata.title}
+                                    </h3>
+                                    <p className="text-sm text-neutral-400 line-clamp-3 mb-auto">
+                                        {post.metadata.summary}
+                                    </p>
+                                    <div className="pt-4 flex items-center justify-between text-xs font-mono border-t border-neutral-700/50 mt-auto w-full">
+                                        <div className="text-neutral-500">MRR: <span className="text-neutral-300">{post.metadata.mrr || 'N/A'}</span></div>
+                                        <div className="text-neutral-500">Sold: <span className="text-neutral-300">{post.metadata.exit_price || 'N/A'}</span></div>
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-neutral-100 group-hover:text-emerald-400 transition-colors line-clamp-2">
-                                    {post.metadata.title}
-                                </h3>
-                                <p className="text-sm text-neutral-400 line-clamp-2">
-                                    {post.metadata.summary}
-                                </p>
-                                <div className="pt-4 flex items-center justify-between text-xs font-mono border-t border-neutral-700/50">
-                                    <div className="text-neutral-500">MRR: <span className="text-neutral-300">{post.metadata.mrr || 'N/A'}</span></div>
-                                    <div className="text-neutral-500">Sold: <span className="text-neutral-300">{post.metadata.exit_price || 'N/A'}</span></div>
-                                </div>
-                            </div>
-                        </article>
+                            </article>
+                        </Link>
                     ))}
                 </div>
             </section>

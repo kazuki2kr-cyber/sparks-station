@@ -1,4 +1,12 @@
-title: "レッドオーシャンで勝つ。月商1,200万円超えの電子署名SaaS「SignWell」の緻密な戦略" date: "2026-01-20" tags: ["MicroSaaS", "Exit", "ElectronicSignature", "GTM"] summary: "DocuSignなどの巨人が君臨する電子署名市場。後発のSignWellが、いかにして「契約書テンプレート」という上流工程を抑え、数億円規模のARRを築き上げたのかを分析します。" mrr: "$83,000+" exit_price: "$10,000,000+ (Estimated)" isPremium: false
+---
+title: "レッドオーシャンで勝つ。月商1,200万円超えの電子署名SaaS「SignWell」の緻密な戦略"
+date: "2026-01-20"
+tags: ["MicroSaaS", "Exit", "ElectronicSignature", "GTM"]
+summary: "DocuSignなどの巨人が君臨する電子署名市場。後発のSignWellが、いかにして「契約書テンプレート」という上流工程を抑え、数億円規模のARRを築き上げたのかを分析します。"
+mrr: "$83,000+"
+exit_price: "$10,000,000+ (Estimated)"
+isPremium: false
+---
 ① 【サマリー】30秒でわかる今回の案件
 サービス名 / ジャンル: SignWell（電子署名プラットフォーム）
 

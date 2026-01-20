@@ -53,4 +53,25 @@ export function getSortedPostsData(): Post[] {
             return -1;
         }
     });
+});
 }
+
+export async function getPostData(slug: string): Promise<Post> {
+    const fullPath = path.join(postsDirectory, `${slug}.md`);
+
+    if (!fs.existsSync(fullPath)) {
+        throw new Error('Post not found');
+    }
+
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    // Use gray-matter to parse the post metadata section
+    const { data, content } = matter(fileContents);
+
+    return {
+        slug,
+        content,
+        metadata: data as PostMetadata,
+    };
+}
+
