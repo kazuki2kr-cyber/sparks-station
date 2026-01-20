@@ -171,7 +171,7 @@ export default function Home() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => router.push("/solo")}
+                  onClick={() => router.push("/quiz/solo")}
                   className="relative p-6 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-900/40 border border-amber-500/30 cursor-pointer group overflow-hidden"
                 >
                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">

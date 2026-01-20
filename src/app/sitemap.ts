@@ -10,24 +10,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'weekly',
             priority: 1,
         },
+        // Quiz App URLs
         {
-            url: `${baseUrl}/solo`,
+            url: `${baseUrl}/quiz`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/quiz/solo`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
         },
         {
-            url: `${baseUrl}/contact`,
+            url: `${baseUrl}/quiz/contact`,
             lastModified: new Date(),
             priority: 0.5,
         },
         {
-            url: `${baseUrl}/privacy`,
+            url: `${baseUrl}/quiz/privacy`,
             lastModified: new Date(),
             priority: 0.3,
         },
         {
-            url: `${baseUrl}/terms`,
+            url: `${baseUrl}/quiz/terms`,
             lastModified: new Date(),
             priority: 0.3,
         },

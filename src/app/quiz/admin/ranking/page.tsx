@@ -52,7 +52,7 @@ export default function RankingAdmin() {
 
     useEffect(() => {
         if (!loading && (!isAuthorized || isAnonymous)) {
-            router.push("/admin");
+            router.push("/quiz/admin");
         } else if (isAuthorized) {
             fetchRankings();
         }
@@ -130,7 +130,7 @@ export default function RankingAdmin() {
             {/* Header */}
             <div className="flex items-center justify-between max-w-6xl mx-auto">
                 <div className="flex items-center gap-4">
-                    <Link href="/admin">
+                    <Link href="/quiz/admin">
                         <Button variant="ghost" size="icon" className="text-white/40 hover:text-white">
                             <ArrowLeft className="h-5 w-5" />
                         </Button>
@@ -142,7 +142,7 @@ export default function RankingAdmin() {
                         </h1>
                     </div>
                 </div>
-                <Button variant="ghost" onClick={async () => { await logout(); router.push("/admin"); }} className="text-white/40 hover:text-red-400">
+                <Button variant="ghost" onClick={async () => { await logout(); router.push("/quiz/admin"); }} className="text-white/40 hover:text-red-400">
                     <LogOut className="h-4 w-4 mr-2" /> Sign Out
                 </Button>
             </div>
