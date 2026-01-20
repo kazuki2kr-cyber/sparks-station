@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sparks-station.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Fantasy Quizzes Kingdom",
   description: "リアルタイムで競い合う、魔法と知略の早押しクイズ。仲間と共に究極の賢者を目指せ。",
   keywords: ["クイズ", "早押し", "ファンタジー", "対戦", "マルチプレイヤー", "スコアアタック"],
