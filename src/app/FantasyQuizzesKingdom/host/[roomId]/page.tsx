@@ -40,7 +40,7 @@ export default function HostDashboard() {
             if (snapshot.exists()) {
                 const data = snapshot.data();
                 if (data.hostId !== user.uid) {
-                    router.push("/");
+                    router.push("/FantasyQuizzesKingdom");
                     return;
                 }
                 setRoomStatus(data.status);
@@ -120,7 +120,7 @@ export default function HostDashboard() {
                 }
 
             } else {
-                router.push("/");
+                router.push("/FantasyQuizzesKingdom");
             }
         });
 
@@ -183,7 +183,7 @@ export default function HostDashboard() {
             startTime: Date.now(),
         });
 
-        router.push(`/host/${roomId}/play`);
+        router.push(`/FantasyQuizzesKingdom/host/${roomId}/play`);
     };
 
     if (!user) return null;
@@ -243,7 +243,7 @@ export default function HostDashboard() {
                     </Card>
                 ) : (
                     <Button
-                        onClick={() => router.push(`/host/${roomId}/edit`)}
+                        onClick={() => router.push(`/FantasyQuizzesKingdom/host/${roomId}/edit`)}
                         className="w-full text-2xl h-24 fantasy-button border-2 border-amber-500/50 shadow-[0_0_20px_rgba(251,191,36,0.2)] hover:scale-[1.01] transition-transform text-amber-100"
                     >
                         <Settings className="mr-3 h-8 w-8" />
