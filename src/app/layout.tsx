@@ -46,6 +46,9 @@ export const metadata: Metadata = {
     description: "海外の売却事例から「稼げるヒント」をエンジニアへ。",
     images: ["/sparks-station-kv.png"],
   },
+  icons: {
+    icon: "/icon.png",
+  },
   other: {
     "google-adsense-account": "ca-pub-3577742758028719",
   },

@@ -15,7 +15,7 @@ export default function PostCard({ post }: { post: Post }) {
 
                     {/* Tag Overlay */}
                     <div className="relative z-10 text-white font-bold text-3xl md:text-4xl tracking-tighter opacity-90 drop-shadow-md transform group-hover:scale-105 transition-transform duration-500 text-center px-4 leading-tight">
-                        {mainTag.replace(/([a-z])([A-Z])/g, '$1 $2').trim()}
+                        {mainTag.replace(/([a-z])([A-Z][a-z])/g, '$1 $2').trim()}
                     </div>
 
                     {/* Decorative shine effect */}
