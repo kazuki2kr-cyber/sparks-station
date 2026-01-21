@@ -73,11 +73,11 @@ export default function VoteButtons({ slug }: { slug: string }) {
                 <button
                     onClick={() => handleVote('helpful')}
                     disabled={!!userVote}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${userVote === 'helpful'
-                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                            : userVote
-                                ? 'opacity-50 cursor-not-allowed text-neutral-500'
-                                : 'hover:bg-neutral-800 text-neutral-300'
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all border ${userVote === 'helpful'
+                        ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                        : userVote
+                            ? 'opacity-50 cursor-not-allowed text-neutral-500 border-transparent'
+                            : 'bg-neutral-800/40 border-neutral-700/50 hover:bg-neutral-800 hover:border-neutral-600 text-neutral-300 cursor-pointer'
                         }`}
                 >
                     <ThumbsUp size={18} />
@@ -90,11 +90,11 @@ export default function VoteButtons({ slug }: { slug: string }) {
                 <button
                     onClick={() => handleVote('not_helpful')}
                     disabled={!!userVote}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${userVote === 'not_helpful'
-                            ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                            : userVote
-                                ? 'opacity-50 cursor-not-allowed text-neutral-500'
-                                : 'hover:bg-neutral-800 text-neutral-300'
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all border ${userVote === 'not_helpful'
+                        ? 'bg-red-500/20 text-red-400 border-red-500/30'
+                        : userVote
+                            ? 'opacity-50 cursor-not-allowed text-neutral-500 border-transparent'
+                            : 'bg-neutral-800/40 border-neutral-700/50 hover:bg-neutral-800 hover:border-neutral-600 text-neutral-300 cursor-pointer'
                         }`}
                 >
                     <ThumbsDown size={18} />
