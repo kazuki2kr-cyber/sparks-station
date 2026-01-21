@@ -217,7 +217,7 @@ export default function SoloPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="w-full max-w-2xl z-10 space-y-8"
+                        className="w-full max-w-4xl z-10 space-y-12"
                     >
                         <div className="text-center space-y-2">
                             <h1 className="text-4xl font-black gold-text tracking-widest uppercase">
@@ -290,10 +290,53 @@ export default function SoloPage() {
                             </Card>
                         </div>
 
+                        {/* Info Sections Merged from Main Page */}
+                        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="fantasy-card bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 space-y-4"
+                            >
+                                <h2 className="text-2xl font-black gold-text italic flex items-center gap-3">
+                                    <Crown className="h-6 w-6 text-amber-500" />
+                                    スコアアタックモードの遊び方
+                                </h2>
+                                <ul className="space-y-4 text-amber-100/80 font-medium leading-relaxed">
+                                    <li className="flex gap-3"><span className="text-amber-500 font-bold">01.</span><span>ニックネームを入力して開始。</span></li>
+                                    <li className="flex gap-3"><span className="text-amber-500 font-bold">02.</span><span>厳選された一般常識問題が全10問出題。</span></li>
+                                    <li className="flex gap-3"><span className="text-amber-500 font-bold">03.</span><span>各問題の制限時間は10秒。</span></li>
+                                    <li className="flex gap-3"><span className="text-amber-500 font-bold">04.</span><span>最終スコアは全国ランキングに登録。</span></li>
+                                </ul>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="fantasy-card bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 space-y-4"
+                            >
+                                <h2 className="text-2xl font-black gold-text italic flex items-center gap-3">
+                                    <Scroll className="h-6 w-6 text-amber-500" />
+                                    栄光への挑戦
+                                </h2>
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-amber-400 font-bold mb-1">登録不要で即冒険</h3>
+                                        <p className="text-amber-100/60 text-sm">面倒な登録は一切不要。今すぐ開始できます。</p>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-amber-400 font-bold mb-1">全国ランキングに挑戦</h3>
+                                        <p className="text-amber-100/60 text-sm">全国の騎士たちと競い、伝説の賢者を目指しましょう。</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </section>
+
                         <AdBanner adSlot="solo_lobby_bottom" />
 
-                        <div className="flex justify-center">
-                            <Button variant="ghost" onClick={() => router.push("/")} className="text-white/30 hover:text-amber-500">
+                        <div className="flex justify-center pb-8">
+                            <Button variant="ghost" onClick={() => router.push("/FantasyQuizzesKingdom")} className="text-white/30 hover:text-amber-500">
                                 <Home className="mr-2 h-4 w-4" /> ホームに戻る
                             </Button>
                         </div>
