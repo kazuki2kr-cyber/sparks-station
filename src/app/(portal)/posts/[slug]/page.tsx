@@ -5,6 +5,7 @@ import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { getThemeForTag } from '@/lib/theme';
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -41,16 +42,19 @@ export default async function PostPage({ params }: Props) {
         notFound();
     }
 
+    const mainTag = post.metadata.tags[0] || 'Tech';
+    const theme = getThemeForTag(mainTag);
+
     return (
         <article className="max-w-3xl mx-auto space-y-12">
             {/* Header */}
             <header className="space-y-6 text-center">
-                <div className="flex items-center justify-center gap-4 text-sm font-mono text-emerald-400">
+                <div className={`flex items-center justify-center gap-4 text-sm font-mono ${theme.primary}`}>
                     <time dateTime={post.metadata.date}>{post.metadata.date}</time>
                     <span>•</span>
                     <div className="flex gap-2">
                         {post.metadata.tags.map(tag => (
-                            <span key={tag} className="bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                            <span key={tag} className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border}`}>
                                 {tag}
                             </span>
                         ))}
@@ -65,14 +69,14 @@ export default async function PostPage({ params }: Props) {
                 <div className="bg-neutral-800/50 border border-neutral-800 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto flex justify-between items-center text-center">
                     <div>
                         <div className="text-xs text-neutral-500 uppercase tracking-wider mb-1">MRR (月商)</div>
-                        <div className="text-2xl md:text-3xl font-bold text-emerald-400 font-mono">
+                        <div className={`text-2xl md:text-3xl font-bold font-mono ${theme.metricValue}`}>
                             {post.metadata.mrr || 'N/A'}
                         </div>
                     </div>
                     <div className="w-px h-12 bg-neutral-800"></div>
                     <div>
                         <div className="text-xs text-neutral-500 uppercase tracking-wider mb-1">Sold (売却額)</div>
-                        <div className="text-2xl md:text-3xl font-bold text-amber-400 font-mono">
+                        <div className={`text-2xl md:text-3xl font-bold font-mono ${theme.metricValue === 'text-emerald-400' ? 'text-amber-400' : 'text-purple-300'}`}>
                             {post.metadata.exit_price || 'N/A'}
                         </div>
                     </div>
@@ -80,18 +84,17 @@ export default async function PostPage({ params }: Props) {
             </header>
 
             {/* Content using standard Prose styles but customized for dark mode */}
-            {/* Content using standard Prose styles but customized for dark mode */}
-            <div className="prose prose-invert prose-emerald max-w-none 
+            <div className={`prose prose-invert ${theme.prose} max-w-none 
                 prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-neutral-100
                 prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:pb-4 prose-h2:border-b prose-h2:border-neutral-800
-                prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6 prose-h3:text-emerald-400
+                ${theme.heading} prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
                 prose-p:text-neutral-300 prose-p:leading-9 prose-p:text-lg prose-p:mb-8 prose-p:tracking-wide
                 prose-li:text-neutral-300 prose-li:leading-8 prose-li:my-2 prose-li:tracking-wide
                 prose-ul:my-8 prose-ul:list-disc prose-ul:pl-6
                 prose-hr:my-20 prose-hr:border-neutral-800
                 prose-strong:text-white prose-strong:font-bold
-                prose-code:text-emerald-300 prose-code:bg-emerald-950/40 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
-                ">
+                prose-code:${theme.codeText} prose-code:${theme.codeBg} prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
+                `}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
             </div>
 

@@ -22,13 +22,16 @@ function getGradient(tag: string) {
     return GRADIENTS[index];
 }
 
+import { getThemeForTag } from '@/lib/theme';
+
 export default function PostCard({ post }: { post: Post }) {
     const mainTag = post.metadata.tags[0] || 'Tech';
     const gradient = getGradient(mainTag);
+    const theme = getThemeForTag(mainTag);
 
     return (
         <Link href={`/posts/${post.slug}`} className="block group h-full">
-            <article className="bg-neutral-800/50 border border-neutral-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300 h-full flex flex-col shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-1">
+            <article className={`bg-neutral-800/50 border border-neutral-800 rounded-2xl overflow-hidden transition-all duration-300 h-full flex flex-col shadow-lg hover:-translate-y-1 ${theme.hoverBorder} ${theme.hoverShadow}`}>
                 {/* Visual Thumbnail */}
                 <div className={`aspect-video relative overflow-hidden flex items-center justify-center bg-gradient-to-br ${gradient}`}>
                     <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
@@ -43,19 +46,19 @@ export default function PostCard({ post }: { post: Post }) {
                 </div>
 
                 <div className="p-6 space-y-4 flex-grow flex flex-col">
-                    <div className="flex items-center gap-3 text-xs font-mono text-emerald-400">
+                    <div className={`flex items-center gap-3 text-xs font-mono ${theme.primary}`}>
                         <span>{post.metadata.date}</span>
                         <span>•</span>
                         <div className="flex gap-2">
                             {post.metadata.tags.slice(0, 2).map(tag => (
-                                <span key={tag} className="bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
+                                <span key={tag} className={`${theme.bg} px-1.5 py-0.5 rounded border ${theme.border}`}>
                                     {tag}
                                 </span>
                             ))}
                         </div>
                     </div>
 
-                    <h3 className="text-xl font-bold text-neutral-100 group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                    <h3 className={`text-xl font-bold text-neutral-100 transition-colors line-clamp-2 leading-snug ${theme.groupHoverText}`}>
                         {post.metadata.title}
                     </h3>
 
