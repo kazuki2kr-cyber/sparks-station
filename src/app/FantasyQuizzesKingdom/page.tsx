@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { generateRoomId } from "@/lib/utils-game";
-import { Sparkles, Sword, Crown, Users, Scroll, ArrowLeft, Gamepad2 } from "lucide-react";
+import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
@@ -198,14 +198,14 @@ export default function Home() {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setViewMode("MULTI")}
-                        className="relative p-6 rounded-2xl bg-gradient-to-r from-cyan-600/20 to-cyan-900/40 border border-cyan-500/30 group overflow-hidden text-left"
+                        className="relative p-6 rounded-2xl bg-gradient-to-r from-amber-600/20 to-amber-900/40 border border-amber-500/30 group overflow-hidden text-left"
                       >
                         <div className="flex items-center gap-4">
-                          <Users className="h-10 w-10 text-cyan-400" />
+                          <Users className="h-10 w-10 text-amber-400" />
                           <div>
-                            <div className="text-cyan-400 font-bold text-xs uppercase tracking-widest">Multi Mode</div>
+                            <div className="text-amber-400 font-bold text-xs uppercase tracking-widest">Multi Mode</div>
                             <div className="text-xl font-black text-white">みんなで遊ぶ</div>
-                            <div className="text-cyan-100/50 text-[10px]">リアルタイム対戦・ルーム作成</div>
+                            <div className="text-amber-100/50 text-[10px]">リアルタイム対戦・ルーム作成</div>
                           </div>
                         </div>
                       </motion.button>
@@ -215,15 +215,7 @@ export default function Home() {
 
                 {/* MULTI MODE CONTENT */}
                 {viewMode === "MULTI" && (
-                  <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <Button
-                      variant="ghost"
-                      onClick={() => setViewMode("TOP")}
-                      className="w-full text-white/50 hover:text-white -mb-4"
-                    >
-                      <ArrowLeft className="mr-2 h-4 w-4" /> 戻る
-                    </Button>
-
+                  <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pt-4">
                     <div className="space-y-4">
                       <div className="text-center">
                         <h3 className="text-amber-400 font-bold text-sm uppercase tracking-widest mb-4">ルーム作成 (Create Room)</h3>
@@ -237,9 +229,9 @@ export default function Home() {
                           </Button>
                           <Button
                             onClick={() => handleCreateRoom('standard')}
-                            className="w-full h-14 bg-cyan-900/50 hover:bg-cyan-800/50 border border-cyan-500/30 text-cyan-100 font-bold"
+                            className="w-full h-14 bg-amber-900/50 hover:bg-amber-800/50 border border-amber-500/30 text-amber-100 font-bold opacity-80"
                           >
-                            <Gamepad2 className="mr-2 h-4 w-4 text-cyan-400" />
+                            <Gamepad2 className="mr-2 h-4 w-4 text-amber-400" />
                             既存問題で遊ぶ (Coming Soon)
                           </Button>
                         </div>
@@ -248,26 +240,39 @@ export default function Home() {
                       <div className="relative py-2">
                         <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-white/10" />
                         <span className="relative bg-[#0d0905] px-3 text-[10px] text-white/30 uppercase tracking-[0.4em] font-black block mx-auto w-fit">
-                          JOIN
+                          OR
                         </span>
                       </div>
 
-                      <div className="flex gap-2">
-                        <Input
-                          placeholder="6桁のコード"
-                          value={roomId}
-                          onChange={(e) => setRoomId(e.target.value)}
-                          maxLength={6}
-                          className="h-14 bg-black/40 border-amber-900/50 text-white placeholder:text-white/20 text-center text-xl font-mono tracking-widest focus:border-amber-500 focus:ring-amber-500"
-                        />
-                        <Button
-                          onClick={handleJoinRoom}
-                          disabled={roomId.length !== 6 || isLoading}
-                          className="h-14 px-6 bg-amber-600 hover:bg-amber-500 text-black font-black disabled:opacity-50 disabled:bg-slate-800 shrink-0"
-                        >
-                          参加
-                        </Button>
+                      <div className="text-center">
+                        <h3 className="text-amber-400 font-bold text-sm uppercase tracking-widest mb-4">ルームに参加 (JOIN ROOM)</h3>
+                        <div className="flex gap-2">
+                          <Input
+                            placeholder="6桁のコード"
+                            value={roomId}
+                            onChange={(e) => setRoomId(e.target.value)}
+                            maxLength={6}
+                            className="h-14 bg-black/40 border-amber-900/50 text-white placeholder:text-white/20 text-center text-xl font-mono tracking-widest focus:border-amber-500 focus:ring-amber-500"
+                          />
+                          <Button
+                            onClick={handleJoinRoom}
+                            disabled={roomId.length !== 6 || isLoading}
+                            className="h-14 px-6 bg-amber-600 hover:bg-amber-500 text-black font-black disabled:opacity-50 disabled:bg-slate-800 shrink-0"
+                          >
+                            参加
+                          </Button>
+                        </div>
                       </div>
+                    </div>
+
+                    <div className="flex justify-center pt-2">
+                      <Button
+                        variant="ghost"
+                        onClick={() => setViewMode("TOP")}
+                        className="text-white/30 hover:text-amber-500"
+                      >
+                        <ArrowLeft className="mr-2 h-4 w-4" /> ホームに戻る
+                      </Button>
                     </div>
                   </div>
                 )}
@@ -306,14 +311,14 @@ export default function Home() {
                   className="fantasy-card bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 space-y-4"
                 >
                   <h2 className="text-2xl font-black gold-text italic flex items-center gap-3">
-                    <Sword className="h-6 w-6 text-cyan-500" />
+                    <Sword className="h-6 w-6 text-amber-500" />
                     リアルタイム対戦モードの遊び方
                   </h2>
                   <ul className="space-y-4 text-amber-100/80 font-medium leading-relaxed">
-                    <li className="flex gap-3"><span className="text-cyan-500 font-bold">01.</span><span>ルームを作成し、IDを仲間に共有。</span></li>
-                    <li className="flex gap-3"><span className="text-cyan-500 font-bold">02.</span><span>全員が集まったらゲーム開始！</span></li>
-                    <li className="flex gap-3"><span className="text-cyan-500 font-bold">03.</span><span>回答速度に応じてボーナススコア。</span></li>
-                    <li className="flex gap-3"><span className="text-cyan-500 font-bold">04.</span><span>「既存問題」を選べばクイズ作成不要。</span></li>
+                    <li className="flex gap-3"><span className="text-amber-500 font-bold">01.</span><span>ルームを作成し、IDを仲間に共有。</span></li>
+                    <li className="flex gap-3"><span className="text-amber-500 font-bold">02.</span><span>全員が集まったらゲーム開始！</span></li>
+                    <li className="flex gap-3"><span className="text-amber-500 font-bold">03.</span><span>回答速度に応じてボーナススコア。</span></li>
+                    <li className="flex gap-3"><span className="text-amber-500 font-bold">04.</span><span>「既存問題」を選べばクイズ作成不要。</span></li>
                   </ul>
                 </motion.div>
 
@@ -323,16 +328,16 @@ export default function Home() {
                   className="fantasy-card bg-black/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 space-y-4"
                 >
                   <h2 className="text-2xl font-black gold-text italic flex items-center gap-3">
-                    <Sparkles className="h-6 w-6 text-cyan-500" />
+                    <Sparkles className="h-6 w-6 text-amber-500" />
                     特徴
                   </h2>
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-cyan-400 font-bold mb-1">リアルタイム同期</h3>
+                      <h3 className="text-amber-400 font-bold mb-1">リアルタイム同期</h3>
                       <p className="text-amber-100/60 text-sm">白熱した早押しバトルを遅延なく実現。</p>
                     </div>
                     <div>
-                      <h3 className="text-cyan-400 font-bold mb-1">2つの出題モード</h3>
+                      <h3 className="text-amber-400 font-bold mb-1">2つの出題モード</h3>
                       <p className="text-amber-100/60 text-sm">自分で作ったクイズで遊ぶことも、用意された難問に挑むことも可能。</p>
                     </div>
                   </div>
