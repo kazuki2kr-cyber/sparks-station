@@ -114,9 +114,6 @@ export default function CommentSection({ slug }: { slug: string }) {
                                     Logged in as: <span className="text-neutral-200 font-bold">{user.displayName || 'Anonymous'}</span>
                                     {user.email && <span className="text-neutral-500 text-xs ml-2">({user.email})</span>}
                                 </div>
-                                <div className="text-[10px] text-neutral-600 font-mono">
-                                    UID: {user.uid.slice(0, 8)}...
-                                </div>
                             </div>
                             <button
                                 onClick={() => auth.signOut()}
@@ -208,14 +205,11 @@ export default function CommentSection({ slug }: { slug: string }) {
                                         <span className="text-xs text-neutral-500">
                                             {comment.createdAt?.toDate().toLocaleDateString('ja-JP')}
                                         </span>
-                                        <span className="text-[10px] text-neutral-700 font-mono" title={comment.userId}>
-                                            (ID: {comment.userId.slice(0, 8)}...)
-                                        </span>
                                     </div>
                                     {user && user.uid === comment.userId && (
                                         <button
                                             onClick={() => handleDelete(comment.id)}
-                                            className="text-neutral-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all text-xs cursor-pointer"
+                                            className="text-neutral-500 hover:text-red-400 transition-colors text-xs cursor-pointer underline"
                                             title="削除する"
                                         >
                                             削除
