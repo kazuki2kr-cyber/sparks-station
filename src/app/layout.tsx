@@ -26,14 +26,14 @@ export const metadata: Metadata = {
 
 
   title: {
-    default: "Sparks Station | Micro-SaaS Insights for Engineers",
+    default: "Sparks Station | 最新の「開発事例」と先進的な「思想」を「プロダクト」へ。",
     template: "%s | Sparks Station",
   },
-  description: "海外の売却事例から「稼げるヒント」をエンジニアへ。Micro-SaaSの分析とExit事例を紹介するメディア。",
+  description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
   keywords: ["Micro-SaaS", "個人開発", "エンジニア", "副業", "スタートアップ", "SaaS"],
   openGraph: {
     title: "Sparks Station",
-    description: "海外の売却事例から「稼げるヒント」をエンジニアへ。",
+    description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
     url: "https://sparks-station.com",
     siteName: "Sparks Station",
     locale: "ja_JP",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sparks Station",
-    description: "海外の売却事例から「稼げるヒント」をエンジニアへ。",
+    description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
     images: ["/sparks-station-kv.png"],
   },
   icons: {
