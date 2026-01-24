@@ -16,11 +16,16 @@ import AdBanner from "@/components/AdBanner";
 
 type ViewMode = "TOP" | "MULTI";
 
+import { QUIZ_CATEGORIES } from "./lib/constants";
+
+// ... imports remain the same
+
 export default function Home() {
   const { user, loginAnonymously } = useAuth();
   const [viewMode, setViewMode] = useState<ViewMode>("TOP");
   const [roomId, setRoomId] = useState("");
   const [hostParticipates, setHostParticipates] = useState(false);
+  const [selectedCategoryId, setSelectedCategoryId] = useState("general");
   const [isLoading, setIsLoading] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
   const router = useRouter();
@@ -58,6 +63,9 @@ export default function Home() {
         docSnap = await getDoc(docRef);
       }
 
+      // Get Category Name for display
+      const cat = QUIZ_CATEGORIES.find(c => c.id === selectedCategoryId);
+
       await setDoc(doc(db, "rooms", newId), {
         status: "waiting",
         currentQuestionIndex: -1,
@@ -67,6 +75,8 @@ export default function Home() {
         createdAt: Date.now(),
         // Save mode here so room logic knows where to fetch questions from
         type: mode,
+        category: selectedCategoryId, // Save category
+        categoryName: cat?.name || "一般常識",
         hostParticipates,
         shortId: newId
       });
@@ -103,6 +113,8 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+
+  const selectedCategoryData = QUIZ_CATEGORIES.find(c => c.id === selectedCategoryId) || QUIZ_CATEGORIES[0];
 
   return (
     <AnimatePresence mode="wait">
@@ -145,8 +157,7 @@ export default function Home() {
           />
           <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
 
-          {/* Main Title Area (Always Visible in some form, but simplified in sub-modes if desired. 
-              Here we keep it consistent as Top View header) */}
+          {/* Main Title Area */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -179,11 +190,52 @@ export default function Home() {
                 {/* TOP MODE SELECTION */}
                 {viewMode === "TOP" && (
                   <div className="space-y-6 pt-4">
-                    <div className="grid grid-cols-1 gap-4">
+                    {/* Category Selector */}
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <h3 className="text-amber-400 font-bold text-xs uppercase tracking-widest text-center">
+                          Select Theme
+                        </h3>
+                        <div className="h-px w-12 bg-amber-500/30"></div>
+                      </div>
+
+                      <div className="grid grid-cols-5 gap-2">
+                        {QUIZ_CATEGORIES.map((cat) => {
+                          const Icon = cat.icon;
+                          const isSelected = selectedCategoryId === cat.id;
+                          return (
+                            <button
+                              key={cat.id}
+                              onClick={() => setSelectedCategoryId(cat.id)}
+                              className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all ${isSelected
+                                  ? "bg-amber-900/40 border border-amber-500 scale-105 shadow-[0_0_10px_rgba(251,191,36,0.2)]"
+                                  : "bg-black/20 border border-transparent hover:bg-white/5 opacity-60 hover:opacity-100"
+                                }`}
+                            >
+                              <Icon className={`h-6 w-6 mb-1 ${isSelected ? cat.color : "text-white"}`} />
+                              <span className={`text-[8px] font-bold whitespace-nowrap ${isSelected ? "text-amber-100" : "text-white/50"}`}>
+                                {cat.name}
+                              </span>
+                            </button>
+                          )
+                        })}
+                      </div>
+                      {/* Selected Description */}
+                      <div className="text-center p-2 bg-black/20 rounded-lg border border-white/5">
+                        <p className={`text-xs font-bold ${selectedCategoryData.color}`}>
+                          {selectedCategoryData.name}
+                        </p>
+                        <p className="text-[10px] text-amber-100/50 mt-1">
+                          {selectedCategoryData.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4 pt-2">
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => router.push("/FantasyQuizzesKingdom/solo")}
+                        onClick={() => router.push(`/FantasyQuizzesKingdom/solo?category=${selectedCategoryId}`)}
                         className="relative p-6 rounded-2xl bg-gradient-to-r from-amber-600/20 to-amber-900/40 border border-amber-500/30 group overflow-hidden text-left"
                       >
                         <div className="flex items-center gap-4">
@@ -191,7 +243,7 @@ export default function Home() {
                           <div>
                             <div className="text-amber-400 font-bold text-xs uppercase tracking-widest">Solo Mode</div>
                             <div className="text-xl font-black text-white">ひとりで遊ぶ</div>
-                            <div className="text-amber-100/50 text-[10px]">スコアアタック・ランキング挑戦</div>
+                            <div className="text-amber-100/50 text-[10px]">選択中のテーマでスコアアタック</div>
                           </div>
                         </div>
                       </motion.button>
@@ -207,7 +259,7 @@ export default function Home() {
                           <div>
                             <div className="text-amber-400 font-bold text-xs uppercase tracking-widest">Multi Mode</div>
                             <div className="text-xl font-black text-white">みんなで遊ぶ</div>
-                            <div className="text-amber-100/50 text-[10px]">リアルタイム対戦・ルーム作成</div>
+                            <div className="text-amber-100/50 text-[10px]">ルームを作成して対戦</div>
                           </div>
                         </div>
                       </motion.button>
@@ -221,6 +273,11 @@ export default function Home() {
                     <div className="space-y-4">
                       <div className="text-center">
                         <h3 className="text-amber-400 font-bold text-sm uppercase tracking-widest mb-4">ルーム作成 (Create Room)</h3>
+
+                        <div className="mb-4 p-2 bg-amber-900/10 border border-amber-500/20 rounded-lg inline-block">
+                          <span className="text-[10px] text-amber-200/50 block">Selected Theme</span>
+                          <span className={`font-bold text-sm ${selectedCategoryData.color}`}>{selectedCategoryData.name}</span>
+                        </div>
 
                         {/* Host Participation Toggle */}
                         <div className="flex justify-center mb-4">

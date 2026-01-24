@@ -303,7 +303,7 @@ export default function HostDashboard() {
                                     <Button variant="link" onClick={handleCopyInvite} className="text-amber-500 font-bold mt-2">招待リンクを共有</Button>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 max-h-[600px] overflow-y-auto custom-scrollbar pr-2">
                                     <AnimatePresence>
                                         {players.map((player) => (
                                             <motion.div
@@ -311,18 +311,18 @@ export default function HostDashboard() {
                                                 initial={{ opacity: 0, scale: 0.8 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.8 }}
-                                                className={`p-4 rounded-2xl border flex items-center gap-4 group transition-colors ${player.id === user.uid
+                                                className={`p-3 rounded-2xl border flex items-center gap-3 group transition-colors ${player.id === user.uid
                                                     ? "bg-amber-900/20 border-amber-500/50"
                                                     : "bg-black/50 border-amber-900/40 hover:border-amber-500"}`}
                                             >
-                                                <div className="relative">
-                                                    <img src={player.iconUrl} className="w-12 h-12 rounded-full border-2 border-amber-500/50" alt="" />
+                                                <div className="relative shrink-0">
+                                                    <img src={player.iconUrl} className="w-10 h-10 rounded-full border-2 border-amber-500/50" alt="" />
                                                     {player.id === user.uid && (
-                                                        <div className="absolute -top-1 -right-1 bg-amber-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">YOU</div>
+                                                        <div className="absolute -top-1 -right-1 bg-amber-500 text-black text-[8px] font-bold px-1 py-0.5 rounded-full">YOU</div>
                                                     )}
                                                 </div>
-                                                <div className="truncate">
-                                                    <p className="font-black text-amber-100 group-hover:text-white transition-colors capitalize">{player.name}</p>
+                                                <div className="truncate min-w-0">
+                                                    <p className="font-bold text-amber-100 group-hover:text-white transition-colors capitalize text-sm truncate">{player.name}</p>
                                                 </div>
                                             </motion.div>
                                         ))}
