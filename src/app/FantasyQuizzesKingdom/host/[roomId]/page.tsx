@@ -12,6 +12,7 @@ import { Users, Settings, Play, ChevronRight, Copy, Share2, Crown, ScrollText, H
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import { QUIZ_CATEGORIES } from "../../lib/constants";
 
 interface Player {
     id: string;
@@ -28,6 +29,7 @@ export default function HostDashboard() {
     const [hostName, setHostName] = useState<string>("");
     const [roomName, setRoomName] = useState<string>("Fantasy Room");
     const [roomType, setRoomType] = useState<string>("original");
+    const [roomCategory, setRoomCategory] = useState<string | null>(null);
     const [hostParticipates, setHostParticipates] = useState<boolean>(false);
     const { toast } = useToast();
     const router = useRouter();
@@ -47,56 +49,8 @@ export default function HostDashboard() {
                 setHostName(data.hostName);
                 if (data.roomName) setRoomName(data.roomName);
                 if (data.type) setRoomType(data.type);
+                if (data.category) setRoomCategory(data.category);
                 if (data.hostParticipates) setHostParticipates(data.hostParticipates);
-
-                // Initialize Standard Questions if needed
-                if (data.type === 'standard') {
-                    const questionsRef = collection(db, "rooms", roomId, "questions");
-                    const qSnap = await getDocs(questionsRef);
-
-                    if (qSnap.empty) {
-                        try {
-                            // Fetch questions from global 'questions' collection
-                            const globalQRef = collection(db, "questions");
-                            const globalSnap = await getDocs(globalQRef);
-
-                            if (!globalSnap.empty) {
-                                let allQuestions = globalSnap.docs.map(d => d.data());
-
-                                // Shuffle and pick up to 10
-                                const selected = allQuestions
-                                    .sort(() => 0.5 - Math.random())
-                                    .slice(0, 10);
-
-                                const batch = writeBatch(db);
-                                selected.forEach((q, index) => {
-                                    const newQRef = doc(questionsRef);
-                                    // Robust mapping
-                                    const choices = q.options || q.choices || [];
-                                    const correctIndex = q.correctIndex ?? q.correctAnswer ?? 0;
-
-                                    if (choices.length > 0) {
-                                        batch.set(newQRef, {
-                                            text: q.text || "No Question Text",
-                                            choices: choices,
-                                            correctAnswer: correctIndex,
-                                            timeLimit: q.timeLimit || 20,
-                                            points: q.points || 1000,
-                                            createdAt: Date.now() + index,
-                                            order: index
-                                        });
-                                    }
-                                });
-                                await batch.commit();
-                                console.log("Standard questions initialized from global DB");
-                            } else {
-                                console.warn("No questions found in global 'questions' collection");
-                            }
-                        } catch (err) {
-                            console.error("Error loading standard questions:", err);
-                        }
-                    }
-                }
 
                 // Auto-join Host if participating
                 if (data.hostParticipates) {
@@ -155,6 +109,93 @@ export default function HostDashboard() {
         });
     };
 
+    // Logic to select category and load questions
+    const handleSelectCategory = async (categoryId: string) => {
+        try {
+            // Update room category
+            const cat = QUIZ_CATEGORIES.find(c => c.id === categoryId);
+            await updateDoc(doc(db, "rooms", roomId), {
+                category: categoryId,
+                categoryName: cat?.name || "Unknown"
+            });
+
+            // Fetch and set questions
+            const questionsRef = collection(db, "rooms", roomId, "questions");
+            // Clear existing questions first (optional but safer)
+            const existingQSnap = await getDocs(questionsRef);
+            const deleteBatch = writeBatch(db);
+            existingQSnap.docs.forEach((doc) => {
+                deleteBatch.delete(doc.ref);
+            });
+            await deleteBatch.commit();
+
+            // Fetch generic questions based on category
+            let globalQRef = collection(db, "questions");
+            // NOTE: Ideally we query by category, but for now we fetch all and filter in memory or if "questions" collection has category field.
+            // Assuming "questions" collection has a "category" field.
+            // If category is "all", fetch all.
+
+            // Note: In real app, you should use query(collection, where('category', '==', categoryId))
+            // But checking previous code, it seems we fetch everything. Let's try to filter if possible of just random.
+            // For now, let's fetch all and filter if the data structure supports it, or just random if specific field is missing.
+
+            const globalSnap = await getDocs(globalQRef);
+            let allQuestions = globalSnap.docs.map(d => d.data());
+
+            if (categoryId !== "all") {
+                allQuestions = allQuestions.filter(q => q.category === categoryId);
+            }
+
+            if (allQuestions.length === 0) {
+                toast({
+                    title: "問題が見つかりません",
+                    description: "選択されたカテゴリの問題がまだ登録されていません。",
+                    variant: "destructive",
+                });
+                return;
+            }
+
+            // Shuffle and pick up to 10
+            const selected = allQuestions
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 10);
+
+            const batch = writeBatch(db);
+            selected.forEach((q, index) => {
+                const newQRef = doc(questionsRef);
+                const choices = q.options || q.choices || [];
+                const correctIndex = q.correctIndex ?? q.correctAnswer ?? 0;
+
+                if (choices.length > 0) {
+                    batch.set(newQRef, {
+                        text: q.text || "No Question Text",
+                        choices: choices,
+                        correctAnswer: correctIndex,
+                        timeLimit: q.timeLimit || 20,
+                        points: q.points || 1000,
+                        createdAt: Date.now() + index,
+                        order: index
+                    });
+                }
+            });
+            await batch.commit();
+
+            toast({
+                title: "問題を設定しました",
+                description: `テーマ「${cat?.name}」の問題をロードしました。`,
+            });
+
+        } catch (e: any) {
+            console.error("Error setting category:", e);
+            toast({
+                title: "エラーが発生しました",
+                description: "カテゴリの設定に失敗しました。",
+                variant: "destructive",
+            });
+        }
+    };
+
+
     const handleStartGame = async () => {
         if (players.length === 0) {
             toast({
@@ -170,7 +211,7 @@ export default function HostDashboard() {
         if (qSnap.empty) {
             toast({
                 title: "問題がありません",
-                description: "クイズ問題が読み込まれていません。画面を再読み込みするか、管理者にお問い合わせください。",
+                description: "クイズ問題がセットされていません。カテゴリを選択してください。",
                 variant: "destructive",
             });
             return;
@@ -187,6 +228,8 @@ export default function HostDashboard() {
     };
 
     if (!user) return null;
+
+    const selectedCategoryData = QUIZ_CATEGORIES.find(c => c.id === roomCategory);
 
     return (
         <div className="min-h-screen relative bg-slate-950 text-white p-4 md:p-8 overflow-hidden">
@@ -231,13 +274,47 @@ export default function HostDashboard() {
                 {/* Question Management / Type Indicator */}
                 {roomType === 'standard' ? (
                     <Card className="fantasy-card border-none bg-amber-900/20 border-amber-500/30">
-                        <CardContent className="flex items-center gap-4 p-6">
-                            <div className="p-3 rounded-full bg-amber-500/20">
-                                <ScrollText className="h-8 w-8 text-amber-400" />
+                        <CardContent className="space-y-4 p-6">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 rounded-full bg-amber-500/20">
+                                    <ScrollText className="h-8 w-8 text-amber-400" />
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold text-amber-100">既存問題モード (Standard Mode)</h3>
+                                    <p className="text-amber-200/60 text-sm">出題するテーマを選択してください。選ばれたテーマからランダムに10問が出題されます。</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-amber-100">既存問題モード (Standard Mode)</h3>
-                                <p className="text-amber-200/60 text-sm">システムが用意した厳選問題が出題されます。問題の追加・編集はできません。</p>
+
+                            {/* Category Selector UI */}
+                            <div className="pt-4 border-t border-white/10">
+                                <label className="text-amber-500/70 font-bold text-xs uppercase tracking-widest ml-1 mb-3 block">出題テーマを選択</label>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                                    {QUIZ_CATEGORIES.map((cat) => {
+                                        const Icon = cat.icon;
+                                        const isSelected = roomCategory === cat.id;
+                                        return (
+                                            <button
+                                                key={cat.id}
+                                                onClick={() => handleSelectCategory(cat.id)}
+                                                className={`flex flex-col items-center justify-center p-3 rounded-xl transition-all ${isSelected
+                                                    ? "bg-amber-900/40 border border-amber-500 scale-105 shadow-[0_0_10px_rgba(251,191,36,0.2)]"
+                                                    : "bg-black/20 border border-transparent hover:bg-white/5 opacity-60 hover:opacity-100"
+                                                    }`}
+                                            >
+                                                <Icon className={`h-6 w-6 mb-2 ${isSelected ? cat.color : "text-white"}`} />
+                                                <span className={`text-xs font-bold whitespace-nowrap ${isSelected ? "text-amber-100" : "text-white/50"}`}>
+                                                    {cat.name}
+                                                </span>
+                                            </button>
+                                        )
+                                    })}
+                                </div>
+                                {selectedCategoryData && (
+                                    <div className="mt-4 text-center p-2 bg-black/20 rounded-lg border border-white/5 animate-in fade-in slide-in-from-top-2">
+                                        <span className={`font-bold ${selectedCategoryData.color}`}>{selectedCategoryData.name}</span>
+                                        <span className="text-amber-100/50 text-sm ml-2">- {selectedCategoryData.description}</span>
+                                    </div>
+                                )}
                             </div>
                         </CardContent>
                     </Card>
@@ -340,8 +417,17 @@ export default function HostDashboard() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4 text-sm text-amber-100/60 leading-relaxed italic">
-                                <p>1. クイズの内容はいつでも「新しいクイズを作成する」から変更可能です。</p>
-                                <p>2. 各問題には制限時間と配点が設定できます。難易度に応じて調整しましょう。</p>
+                                {roomType === "original" ? (
+                                    <>
+                                        <p>1. クイズの内容は「新しいクイズを作成する」から自由に編集できます。</p>
+                                        <p>2. オリジナル問題で、仲間たちを楽しませましょう。</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p>1. 参加者が集まる前に「出題テーマ」を選択してください。</p>
+                                        <p>2. テーマを変更すると、新しい問題セットが自動的にロードされます。</p>
+                                    </>
+                                )}
                                 <p>3. 全員の準備ができたら「クイズを開始する」を押してください。</p>
                                 {hostParticipates && (
                                     <p className="text-amber-300 font-bold">★ あなたもプレイヤーとして参加中です！出題画面で回答を選んでください。</p>

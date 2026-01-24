@@ -20,8 +20,9 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Timer, ArrowLeft, Loader2, CheckCircle2, XCircle, Scroll, Home, Sparkles, Crown } from "lucide-react";
 import AdBanner from "@/components/AdBanner";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
+import { QUIZ_CATEGORIES } from "../lib/constants";
 
 type GameState = "lobby" | "playing" | "result";
 
@@ -41,8 +42,8 @@ interface Ranking {
 }
 
 function SoloGameContent() {
-    const searchParams = useSearchParams();
-    const category = searchParams.get("category") || "general";
+    // Removed useSearchParams for category. Default is now managed by local state.
+    const [category, setCategory] = useState<string>("general");
 
     const [gameState, setGameState] = useState<GameState>("lobby");
     const [nickname, setNickname] = useState("");
@@ -62,7 +63,9 @@ function SoloGameContent() {
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const startTimeRef = useRef<number>(0);
 
-    // Fetch Rankings for Lobby
+    const selectedCategoryData = QUIZ_CATEGORIES.find(c => c.id === category) || QUIZ_CATEGORIES[0];
+
+    // Fetch Rankings for Lobby - depends on selected category
     useEffect(() => {
         if (gameState === "lobby") {
             const fetchRankings = async () => {
@@ -111,22 +114,16 @@ function SoloGameContent() {
                         const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Ranking));
                         setRankings(list);
 
-                        if (error.message?.includes("index")) {
-                            console.warn("Composite index missing. Using simpler ranking.");
-                        }
+                        // Silent fallback unless debugging
+                        // console.warn("Using fallback ranking query", error.message);
                     } catch (fallbackError: any) {
                         console.error("Ranking fetch failed:", fallbackError);
-                        toast({
-                            title: "ランキングの取得に失敗しました",
-                            description: "通信エラーが発生しました。",
-                            variant: "destructive"
-                        });
                     }
                 }
             };
             fetchRankings();
         }
-    }, [gameState, toast, category]);
+    }, [gameState, category]); // Added category to dependency array to refresh ranking on change
 
     // Handle Game Start
     const startGame = async () => {
@@ -273,6 +270,41 @@ function SoloGameContent() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                         <Card className="fantasy-card border-none bg-black/60 p-6 space-y-6">
+
+                            {/* Category Selector */}
+                            <div className="space-y-3 pb-2 border-b border-white/10">
+                                <label className="text-amber-500/70 font-bold text-xs uppercase tracking-widest ml-1">テーマを選択</label>
+                                <div className="grid grid-cols-5 gap-2">
+                                    {QUIZ_CATEGORIES.map((cat) => {
+                                        const Icon = cat.icon;
+                                        const isSelected = category === cat.id;
+                                        return (
+                                            <button
+                                                key={cat.id}
+                                                onClick={() => setCategory(cat.id)}
+                                                className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all ${isSelected
+                                                    ? "bg-amber-900/40 border border-amber-500 scale-105 shadow-[0_0_10px_rgba(251,191,36,0.2)]"
+                                                    : "bg-black/20 border border-transparent hover:bg-white/5 opacity-60 hover:opacity-100"
+                                                    }`}
+                                            >
+                                                <Icon className={`h-5 w-5 mb-1 ${isSelected ? cat.color : "text-white"}`} />
+                                                <span className={`text-[8px] font-bold whitespace-nowrap ${isSelected ? "text-amber-100" : "text-white/50"}`}>
+                                                    {cat.name}
+                                                </span>
+                                            </button>
+                                        )
+                                    })}
+                                </div>
+                                <div className="text-center p-2 bg-black/20 rounded-lg border border-white/5">
+                                    <p className={`text-xs font-bold ${selectedCategoryData.color}`}>
+                                        {selectedCategoryData.name}
+                                    </p>
+                                    <p className="text-[10px] text-amber-100/50 mt-1">
+                                        {selectedCategoryData.description}
+                                    </p>
+                                </div>
+                            </div>
+
                             <div className="space-y-4">
                                 <label className="text-amber-500/70 font-bold text-xs uppercase tracking-widest ml-1">ニックネームを入力</label>
                                 <Input
@@ -288,7 +320,7 @@ function SoloGameContent() {
                                         <Timer className="h-4 w-4" /> ルール
                                     </h4>
                                     <ul className="text-xs text-amber-200/60 space-y-1 leading-relaxed">
-                                        <li>• {category === "all" ? "全ジャンル" : category} の問題が出題されます。</li>
+                                        <li>• <span className="font-bold text-amber-500">{category === "all" ? "全ジャンル" : selectedCategoryData.name}</span> の問題が出題されます。</li>
                                         <li>• 全10問。回答時間は各10秒。</li>
                                         <li>• 早く答えるほどスピードボーナス獲得！</li>
                                         <li>• ニックネームとスコアは全国ランキングに表示されます。</li>
@@ -308,7 +340,11 @@ function SoloGameContent() {
                             <CardHeader className="p-0 pb-4">
                                 <CardTitle className="text-lg font-bold flex items-center gap-2">
                                     <Trophy className="h-5 w-5 text-amber-500" />
-                                    <span className="gold-text italic uppercase">Top 10 Rankings</span>
+                                    <span className="gold-text italic uppercase">Rankings</span>
+                                    {/* Ranking Category Indicator */}
+                                    <span className="ml-auto text-xs py-1 px-2 rounded bg-amber-950/50 border border-amber-500/30 text-amber-200/70">
+                                        {selectedCategoryData.name}
+                                    </span>
                                 </CardTitle>
                             </CardHeader>
                             <div className="space-y-2 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
@@ -327,7 +363,8 @@ function SoloGameContent() {
                                     ))
                                 ) : (
                                     <div className="py-20 text-center text-white/20 italic">
-                                        戦績データがありません
+                                        戦績データがありません<br />
+                                        <span className="text-xs text-white/10">新しいテーマに挑戦しよう！</span>
                                     </div>
                                 )}
                             </div>
@@ -347,10 +384,10 @@ function SoloGameContent() {
                                 スコアアタックモードの遊び方
                             </h2>
                             <ul className="space-y-4 text-amber-100/80 font-medium leading-relaxed">
-                                <li className="flex gap-3"><span className="text-amber-500 font-bold">01.</span><span>ニックネームを入力して開始。</span></li>
-                                <li className="flex gap-3"><span className="text-amber-500 font-bold">02.</span><span>厳選された一般常識問題が全10問出題。</span></li>
+                                <li className="flex gap-3"><span className="text-amber-500 font-bold">01.</span><span>テーマを選択し、ニックネームを入力。</span></li>
+                                <li className="flex gap-3"><span className="text-amber-500 font-bold">02.</span><span>厳選された問題が全10問出題。</span></li>
                                 <li className="flex gap-3"><span className="text-amber-500 font-bold">03.</span><span>各問題の制限時間は10秒。</span></li>
-                                <li className="flex gap-3"><span className="text-amber-500 font-bold">04.</span><span>最終スコアは全国ランキングに登録。</span></li>
+                                <li className="flex gap-3"><span className="text-amber-500 font-bold">04.</span><span>ジャンル別ランキングで頂点を目指せ。</span></li>
                             </ul>
                         </motion.div>
 
@@ -493,6 +530,9 @@ function SoloGameContent() {
                             <p className="text-amber-200/40 text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                                 <Timer className="h-4 w-4" /> Total Time: {totalTime.toFixed(1)}s
                             </p>
+                            <div className="text-xs text-amber-500 font-bold uppercase tracking-widest mt-2 border-t border-white/5 pt-2">
+                                CATEGORY: {category.toUpperCase()}
+                            </div>
                         </div>
 
                         <div className="flex flex-col gap-4">
