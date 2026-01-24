@@ -1,38 +1,86 @@
-import { useSearchParams } from "next/navigation";
+"use client";
 
-// ... previous imports
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+    collection,
+    query,
+    orderBy,
+    limit,
+    getDocs,
+    addDoc,
+    serverTimestamp,
+    where
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { useAuth } from "@/lib/auth-context";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Trophy, Timer, ArrowLeft, Loader2, CheckCircle2, XCircle, Scroll, Home, Sparkles, Crown } from "lucide-react";
+import AdBanner from "@/components/AdBanner";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+
+type GameState = "lobby" | "playing" | "result";
+
+interface Question {
+    id: string;
+    text: string;
+    options: string[];
+    correctIndex: number;
+}
+
+interface Ranking {
+    id: string;
+    nickname: string;
+    score: number;
+    totalTime: number;
+    category?: string;
+}
 
 export default function SoloPage() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category") || "general";
 
-    // ... previous state
     const [gameState, setGameState] = useState<GameState>("lobby");
     const [nickname, setNickname] = useState("");
     const [rankings, setRankings] = useState<Ranking[]>([]);
-    // ...
+    const [questions, setQuestions] = useState<Question[]>([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [score, setScore] = useState(0);
+    const [totalTime, setTotalTime] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(10);
+    const [answered, setAnswered] = useState(false);
+    const [selectedOption, setSelectedOption] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { user, loginAnonymously } = useAuth();
+    const router = useRouter();
+    const { toast } = useToast();
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const startTimeRef = useRef<number>(0);
 
     // Fetch Rankings for Lobby
     useEffect(() => {
         if (gameState === "lobby") {
             const fetchRankings = async () => {
                 try {
-                    // Query filtering by category
-                    // Note: This requires a composite index: category ASC, score DESC, totalTime ASC
-                    let qBase = collection(db, "leaderboard");
                     let q;
-
                     if (category === "all") {
                         q = query(
-                            qBase,
+                            collection(db, "leaderboard"),
                             orderBy("score", "desc"),
+                            orderBy("totalTime", "asc"),
                             limit(10)
                         );
                     } else {
                         q = query(
-                            qBase,
+                            collection(db, "leaderboard"),
                             where("category", "==", category),
                             orderBy("score", "desc"),
+                            orderBy("totalTime", "asc"),
                             limit(10)
                         );
                     }
@@ -41,18 +89,44 @@ export default function SoloPage() {
                     const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Ranking));
                     setRankings(list);
                 } catch (error: any) {
-                    console.error("Ranking fetch failed:", error);
-                    // Fallback logic could be complex with category, so simplified warning
-                    toast({
-                        title: "ランキング取得エラー",
-                        description: "インデックス構築中の可能性があります。",
-                        variant: "destructive"
-                    });
+                    // Fallback if composite index is missing
+                    try {
+                        let qFallback;
+                        if (category === "all") {
+                            qFallback = query(
+                                collection(db, "leaderboard"),
+                                orderBy("score", "desc"),
+                                limit(10)
+                            );
+                        } else {
+                            qFallback = query(
+                                collection(db, "leaderboard"),
+                                where("category", "==", category),
+                                orderBy("score", "desc"),
+                                limit(10)
+                            );
+                        }
+
+                        const snap = await getDocs(qFallback);
+                        const list = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as Ranking));
+                        setRankings(list);
+
+                        if (error.message?.includes("index")) {
+                            console.warn("Composite index missing. Using simpler ranking.");
+                        }
+                    } catch (fallbackError: any) {
+                        console.error("Ranking fetch failed:", fallbackError);
+                        toast({
+                            title: "ランキングの取得に失敗しました",
+                            description: "通信エラーが発生しました。",
+                            variant: "destructive"
+                        });
+                    }
                 }
             };
             fetchRankings();
         }
-    }, [gameState, category, toast]);
+    }, [gameState, toast, category]);
 
     // Handle Game Start
     const startGame = async () => {
@@ -65,14 +139,14 @@ export default function SoloPage() {
         try {
             if (!user) await loginAnonymously();
 
-            let qQuery;
+            let qQuestions;
             if (category === "all") {
-                qQuery = query(collection(db, "questions"));
+                qQuestions = query(collection(db, "questions"));
             } else {
-                qQuery = query(collection(db, "questions"), where("category", "==", category));
+                qQuestions = query(collection(db, "questions"), where("category", "==", category));
             }
 
-            const snap = await getDocs(qQuery);
+            const snap = await getDocs(qQuestions);
             const allQuestions = snap.docs
                 .map(doc => {
                     const data = doc.data();
@@ -85,10 +159,11 @@ export default function SoloPage() {
                 })
                 .filter(q => q.options.length >= 2 && q.text);
 
-            if (allQuestions.length < 10) {
-                // Fallback if not enough questions in category, maybe fetch general?
-                // For now just show error or take what we have
-                if (allQuestions.length === 0) throw new Error("このカテゴリにはまだ問題がありません。");
+            if (allQuestions.length === 0) {
+                // Determine error message based on category
+                throw new Error(category === "all"
+                    ? "問題が見つかりませんでした。"
+                    : `テーマ「${category}」の問題はまだありません。`);
             }
 
             const shuffled = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
@@ -106,7 +181,54 @@ export default function SoloPage() {
         }
     };
 
-    // ... nextQuestion and handleAnswer remain same ...
+    const nextQuestion = (index: number, qList?: Question[]) => {
+        const list = qList || questions;
+        if (index >= list.length) {
+            endGame();
+            return;
+        }
+
+        setCurrentQuestionIndex(index);
+        setTimeLeft(10);
+        setAnswered(false);
+        setSelectedOption(null);
+        startTimeRef.current = Date.now();
+
+        if (timerRef.current) clearInterval(timerRef.current);
+        timerRef.current = setInterval(() => {
+            setTimeLeft(prev => {
+                if (prev <= 1) {
+                    handleAnswer(-1); // Timeout
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+    };
+
+    const handleAnswer = (optionIndex: number) => {
+        if (answered) return;
+        if (timerRef.current) clearInterval(timerRef.current);
+
+        const endTime = Date.now();
+        const timeSpent = (endTime - startTimeRef.current) / 1000;
+        const currentQ = questions[currentQuestionIndex];
+        const isCorrect = optionIndex === currentQ.correctIndex;
+
+        setAnswered(true);
+        setSelectedOption(optionIndex);
+        setTotalTime(prev => prev + timeSpent);
+
+        if (isCorrect) {
+            const speedBonus = Math.max(0, 1 - (timeSpent / 10)) * 500;
+            const points = Math.round(1000 + speedBonus);
+            setScore(prev => prev + points);
+        }
+
+        setTimeout(() => {
+            nextQuestion(currentQuestionIndex + 1);
+        }, 1200);
+    };
 
     const endGame = async () => {
         if (timerRef.current) clearInterval(timerRef.current);
@@ -117,7 +239,7 @@ export default function SoloPage() {
                 nickname,
                 score,
                 totalTime,
-                category, // Save category
+                category,
                 timestamp: serverTimestamp(),
                 userId: user?.uid || "anonymous"
             });
@@ -148,7 +270,7 @@ export default function SoloPage() {
                                 Score Attack
                             </h1>
                             <p className="text-amber-200/50 font-bold tracking-widest uppercase text-xs">
-                                スコアアタックモード
+                                スコアアタックモード / <span className="text-amber-500">{category.toUpperCase()}</span>
                             </p>
                         </div>
 
@@ -169,6 +291,7 @@ export default function SoloPage() {
                                             <Timer className="h-4 w-4" /> ルール
                                         </h4>
                                         <ul className="text-xs text-amber-200/60 space-y-1 leading-relaxed">
+                                            <li>• {category === "all" ? "全ジャンル" : category} の問題が出題されます。</li>
                                             <li>• 全10問。回答時間は各10秒。</li>
                                             <li>• 早く答えるほどスピードボーナス獲得！</li>
                                             <li>• ニックネームとスコアは全国ランキングに表示されます。</li>
