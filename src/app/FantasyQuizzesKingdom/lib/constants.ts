@@ -1,4 +1,4 @@
-import { Sparkles, BookOpen, Scroll, Gamepad2, PartyPopper } from "lucide-react";
+import { Sparkles, BookOpen, Scroll, Gamepad2, PartyPopper, Box, Flag } from "lucide-react";
 
 export type QuizCategory = {
     id: string;
@@ -10,32 +10,32 @@ export type QuizCategory = {
 
 export const QUIZ_CATEGORIES: QuizCategory[] = [
     {
-        id: "general",
-        name: "一般常識",
-        description: "幅広いジャンルからランダムに出題",
-        icon: Scroll,
-        color: "text-amber-400"
-    },
-    {
         id: "party",
         name: "パーティ",
-        description: "忘年会・新年会・歓迎会に！",
+        description: "みんなで盛り上がる！",
         icon: PartyPopper,
         color: "text-pink-400"
     },
     {
-        id: "anime-game",
-        name: "アニメ・ゲーム",
-        description: "サブカル知識を競う",
-        icon: Gamepad2,
-        color: "text-purple-400"
-    },
-    {
-        id: "study",
-        name: "歴史・学習",
-        description: "授業や勉強会に最適",
+        id: "history",
+        name: "歴史",
+        description: "歴史のロマンに浸る",
         icon: BookOpen,
         color: "text-blue-400"
+    },
+    {
+        id: "minecraft",
+        name: "マインクラフト",
+        description: "ブロックの世界の知識",
+        icon: Box, // Using Box as cube
+        color: "text-green-400"
+    },
+    {
+        id: "f1",
+        name: "F1",
+        description: "最速の世界を知る",
+        icon: Flag, // Using Flag for racing
+        color: "text-red-400"
     },
     {
         id: "all",
