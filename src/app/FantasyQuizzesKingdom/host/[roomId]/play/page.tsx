@@ -10,6 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Play, ChevronRight, Trophy, Timer, Swords, ShieldCheck, Crown, Shield, XCircle, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import FantasyCountdown from "@/app/FantasyQuizzesKingdom/components/FantasyCountdown";
 
 export default function HostPlay() {
     const { roomId } = useParams() as { roomId: string };
@@ -27,6 +28,9 @@ export default function HostPlay() {
     const [pointsEarned, setPointsEarned] = useState(0);
     const [basePointsEarned, setBasePointsEarned] = useState(0);
     const [speedBonusEarned, setSpeedBonusEarned] = useState(0);
+
+    // Countdown state
+    const [countdownSeconds, setCountdownSeconds] = useState<number | null>(null);
 
     useEffect(() => {
         if (authLoading || !user) return;
@@ -92,7 +96,24 @@ export default function HostPlay() {
         if (room?.currentPhase === "question" && questions.length > 0) {
             const interval = setInterval(() => {
                 const startTime = room.startTime || Date.now();
-                const elapsed = (Date.now() - startTime) / 1000;
+                const now = Date.now();
+
+                // Countdown Logic for 1st Question
+                if (room.currentQuestionIndex === 0) {
+                    const diff = (startTime - now) / 1000;
+                    if (diff > 0) {
+                        setCountdownSeconds(Math.ceil(diff)); // 3, 2, 1
+                        setTimeLeft(questions[room.currentQuestionIndex]?.timeLimit || 20);
+                        return; // Wait for start
+                    } else {
+                        if (countdownSeconds !== null) setCountdownSeconds(null);
+                    }
+                } else {
+                    // For other questions, ensure no countdown
+                    if (countdownSeconds !== null) setCountdownSeconds(null);
+                }
+
+                const elapsed = (now - startTime) / 1000;
                 const q = questions[room.currentQuestionIndex];
                 const timeLimit = q?.timeLimit || 20;
 
@@ -109,6 +130,7 @@ export default function HostPlay() {
             return () => clearInterval(interval);
         } else if (room?.currentPhase !== "question") {
             setTimeLeft(0);
+            setCountdownSeconds(null);
         }
     }, [room?.currentPhase, room?.startTime, questions, room?.currentQuestionIndex]);
 
@@ -144,7 +166,7 @@ export default function HostPlay() {
                     status: "finished",
                     currentPhase: "finished"
                 });
-                router.push(`/host/${roomId}/results`);
+                router.push(`/FantasyQuizzesKingdom/host/${roomId}/results`);
             }
         }
     };
@@ -197,6 +219,18 @@ export default function HostPlay() {
     return (
         <div className="min-h-screen relative bg-slate-950 text-white p-4 md:p-8 overflow-hidden">
             <div className="absolute inset-0 bg-[url('/fantasy-bg.png')] bg-cover bg-center mix-blend-overlay opacity-30 pointer-events-none" />
+
+            {/* Countdown Overlay */}
+            <AnimatePresence>
+                {countdownSeconds !== null && (
+                    <div className="fixed inset-0 z-[200]">
+                        <FantasyCountdown
+                            seconds={Math.min(3, countdownSeconds)}
+                            onComplete={() => setCountdownSeconds(null)}
+                        />
+                    </div>
+                )}
+            </AnimatePresence>
 
             {/* Answer Overlay Feedback for Host */}
             <AnimatePresence>

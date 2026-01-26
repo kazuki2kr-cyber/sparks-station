@@ -58,7 +58,7 @@ export default function SiteHeader() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.2 }}
-                            className="fixed inset-0 top-0 bg-neutral-950/95 backdrop-blur-xl z-40 flex flex-col pt-24 px-6 md:hidden"
+                            className="fixed inset-0 top-0 bg-neutral-950 z-40 flex flex-col pt-24 px-6 md:hidden"
                         >
                             <nav className="flex flex-col gap-8 text-2xl font-light text-neutral-300">
                                 {NAV_LINKS.map((link) => (

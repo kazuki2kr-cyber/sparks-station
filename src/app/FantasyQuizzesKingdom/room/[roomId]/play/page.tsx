@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Timer, Trophy, CheckCircle2, XCircle, Swords, Shield, Sparkles, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import FantasyCountdown from "@/app/FantasyQuizzesKingdom/components/FantasyCountdown";
 
 export default function GuestPlay() {
     const { roomId } = useParams() as { roomId: string };
@@ -25,6 +26,9 @@ export default function GuestPlay() {
     const [pointsEarned, setPointsEarned] = useState(0);
     const [basePointsEarned, setBasePointsEarned] = useState(0);
     const [speedBonusEarned, setSpeedBonusEarned] = useState(0);
+
+    // Countdown state
+    const [countdownSeconds, setCountdownSeconds] = useState<number | null>(null);
     const router = useRouter();
     const feedbackTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -40,7 +44,7 @@ export default function GuestPlay() {
                 setRoom(roomData);
 
                 if (roomData.status === "finished") {
-                    router.push(`/room/${roomId}/results`);
+                    router.push(`/FantasyQuizzesKingdom/room/${roomId}/results`);
                     return;
                 }
             }
@@ -96,7 +100,23 @@ export default function GuestPlay() {
         if (room?.currentPhase === "question" && currentQuestion) {
             const interval = setInterval(() => {
                 const startTime = room.startTime || Date.now();
-                const elapsed = (Date.now() - startTime) / 1000;
+                const now = Date.now();
+
+                // Countdown Logic for 1st Question
+                if (room.currentQuestionIndex === 0) {
+                    const diff = (startTime - now) / 1000;
+                    if (diff > 0) {
+                        setCountdownSeconds(Math.ceil(diff)); // 3, 2, 1
+                        setTimeLeft(currentQuestion.timeLimit || 20);
+                        return; // Wait for start
+                    } else {
+                        if (countdownSeconds !== null) setCountdownSeconds(null);
+                    }
+                } else {
+                    if (countdownSeconds !== null) setCountdownSeconds(null);
+                }
+
+                const elapsed = (now - startTime) / 1000;
                 const remaining = Math.max(0, (currentQuestion.timeLimit || 20) - elapsed);
                 setTimeLeft(remaining);
                 if (remaining <= 0) clearInterval(interval);
@@ -104,6 +124,7 @@ export default function GuestPlay() {
             return () => clearInterval(interval);
         } else if (room?.currentPhase === "result") {
             setTimeLeft(0);
+            setCountdownSeconds(null);
         }
     }, [room?.currentPhase, room?.startTime, currentQuestion]);
 
@@ -152,6 +173,17 @@ export default function GuestPlay() {
     return (
         <div className="min-h-screen relative bg-slate-950 text-white flex flex-col overflow-hidden">
             <div className="absolute inset-0 bg-[url('/fantasy-bg.png')] bg-cover bg-center mix-blend-overlay opacity-10 pointer-events-none" />
+
+            <AnimatePresence>
+                {countdownSeconds !== null && (
+                    <div className="fixed inset-0 z-[200]">
+                        <FantasyCountdown
+                            seconds={Math.min(3, countdownSeconds)}
+                            onComplete={() => setCountdownSeconds(null)}
+                        />
+                    </div>
+                )}
+            </AnimatePresence>
 
             {/* HUD Header */}
             <header className="z-10 bg-black/40 border-b border-amber-900/30 p-4 backdrop-blur-md">

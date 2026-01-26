@@ -233,13 +233,18 @@ export default function HostDashboard() {
             return;
         }
 
-        await updateDoc(doc(db, "rooms", roomId), {
-            status: "playing",
-            currentQuestionIndex: 0,
-            currentPhase: "question",
-            startTime: Date.now(),
-        });
+        // Initialize first question
+        // const firstQ = questions[0]; // 'questions' is not defined here
+        // const limit = firstQ.timeLimit || 20; // 'questions' is not defined here
 
+        await updateDoc(doc(db, "rooms", roomId), {
+            status: 'playing',
+            currentQuestionIndex: 0,
+            currentPhase: 'question',
+            startTime: Date.now() + 4000, // 3s countdown + 1s buffer
+            hostParticipates: hostParticipates
+        });
+        // Local redirect for host to play screen
         router.push(`/FantasyQuizzesKingdom/host/${roomId}/play`);
     };
 

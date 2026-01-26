@@ -23,6 +23,7 @@ import AdBanner from "@/components/AdBanner";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { QUIZ_CATEGORIES } from "../lib/constants";
+import FantasyCountdown from "../components/FantasyCountdown";
 
 type GameState = "lobby" | "playing" | "result";
 
@@ -56,6 +57,9 @@ function SoloGameContent() {
     const [answered, setAnswered] = useState(false);
     const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    // Countdown state (number of seconds to countdown, null if not active)
+    const [countdownSeconds, setCountdownSeconds] = useState<number | null>(null);
 
     const { user, loginAnonymously } = useAuth();
     const router = useRouter();
@@ -177,11 +181,16 @@ function SoloGameContent() {
             const shuffled = allQuestions.sort(() => 0.5 - Math.random()).slice(0, 10);
 
             setQuestions(shuffled);
+
+            // Start countdown instead of immediate game start
+            setCountdownSeconds(3);
+
+            // Background setup
             setGameState("playing");
             setCurrentQuestionIndex(0);
             setScore(0);
             setTotalTime(0);
-            nextQuestion(0, shuffled);
+            // nextQuestion will be called after countdown
         } catch (error: any) {
             toast({ title: "エラー", description: error.message, variant: "destructive" });
         } finally {
@@ -262,6 +271,16 @@ function SoloGameContent() {
 
     return (
         <AnimatePresence mode="wait">
+            {countdownSeconds !== null && (
+                <FantasyCountdown
+                    seconds={countdownSeconds}
+                    onComplete={() => {
+                        setCountdownSeconds(null);
+                        nextQuestion(0, questions);
+                    }}
+                />
+            )}
+
             {gameState === "lobby" && (
                 <motion.div
                     key="lobby"
