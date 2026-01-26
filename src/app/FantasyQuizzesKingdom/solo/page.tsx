@@ -588,8 +588,17 @@ function SoloGameContent() {
                                             score >= 8000 ? "Expert" :
                                                 score >= 5000 ? "Adventurer" : "Novice";
                                 const genreName = category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN";
-                                const text = `【TRIAL RECORD】\nName: ${nickname}\nGenre: ${genreName}\nScore: ${score}pt\nRank: ${rankTitle}\n\n#FantasyQuizzesKingdom #SparksStation #クイズ`;
-                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.origin)}`, '_blank');
+
+                                // OGP Share URL
+                                const shareUrl = new URL(`${window.location.origin}/share/result`);
+                                shareUrl.searchParams.set('name', nickname || 'Guest');
+                                shareUrl.searchParams.set('score', score.toString());
+                                shareUrl.searchParams.set('rank', rankTitle);
+                                shareUrl.searchParams.set('genre', genreName);
+                                shareUrl.searchParams.set('rankLabel', 'RANK');
+
+                                const text = `【TRIAL RECORD】\n#FantasyQuizzesKingdom #SparksStation #クイズ`;
+                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl.toString())}`, '_blank');
                             }}
                             className="w-full h-14 bg-black text-white hover:bg-black/80 font-bold rounded-xl border border-white/10 flex items-center justify-center gap-2"
                         >

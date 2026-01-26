@@ -77,8 +77,16 @@ export default function GuestResults() {
 
                         <Button
                             onClick={() => {
-                                const text = `【TRIAL RECORD】\nName: ${myPlayer.name}\nGenre: BATTLE\nScore: ${myPlayer.score}pt\nPosition: ${myRank}/${players.length}\n\n#FantasyQuizzesKingdom #SparksStation #クイズバトル`;
-                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.origin)}`, '_blank');
+                                // OGP Share URL
+                                const shareUrl = new URL(`${window.location.origin}/share/result`);
+                                shareUrl.searchParams.set('name', myPlayer.name);
+                                shareUrl.searchParams.set('score', myPlayer.score.toString());
+                                shareUrl.searchParams.set('rank', `${myRank} / ${players.length}`);
+                                shareUrl.searchParams.set('genre', 'BATTLE');
+                                shareUrl.searchParams.set('rankLabel', 'POSITION');
+
+                                const text = `【TRIAL RECORD】\n#FantasyQuizzesKingdom #SparksStation #クイズバトル`;
+                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl.toString())}`, '_blank');
                             }}
                             className="w-full h-14 bg-black text-white hover:bg-black/80 font-bold rounded-xl border border-white/10 flex items-center justify-center gap-2"
                         >
