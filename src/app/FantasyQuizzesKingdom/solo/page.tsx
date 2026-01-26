@@ -164,11 +164,26 @@ function SoloGameContent() {
             const allQuestions = snap.docs
                 .map(doc => {
                     const data = doc.data();
+                    const rawOptions = data.options || data.choices || [];
+                    const rawCorrectIndex = data.correctIndex ?? data.correctAnswer ?? 0;
+
+                    // Create shuffleable objects
+                    const choiceObjects = rawOptions.map((text: string, i: number) => ({
+                        text,
+                        isCorrect: i === rawCorrectIndex
+                    }));
+
+                    // Fisher-Yates Shuffle
+                    for (let i = choiceObjects.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [choiceObjects[i], choiceObjects[j]] = [choiceObjects[j], choiceObjects[i]];
+                    }
+
                     return {
                         id: doc.id,
                         text: data.text || "問題文なし",
-                        options: data.options || data.choices || [],
-                        correctIndex: data.correctIndex ?? data.correctAnswer ?? 0
+                        options: choiceObjects.map((c: any) => c.text),
+                        correctIndex: choiceObjects.findIndex((c: any) => c.isCorrect)
                     } as Question;
                 })
                 .filter(q => q.options.length >= 2 && q.text);
