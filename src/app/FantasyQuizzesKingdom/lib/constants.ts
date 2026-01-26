@@ -1,4 +1,4 @@
-import { Sparkles, BookOpen, Scroll, Gamepad2, PartyPopper, Box, Flag } from "lucide-react";
+import { Sparkles, BookOpen, Scroll, Gamepad2, PartyPopper, Box, Flag, Trophy } from "lucide-react";
 
 export type QuizCategory = {
     id: string;
@@ -36,6 +36,13 @@ export const QUIZ_CATEGORIES: QuizCategory[] = [
         description: "F1の世界の知識で競う",
         icon: Flag, // Using Flag for racing
         color: "text-red-400"
+    },
+    {
+        id: "keiba",
+        name: "競馬",
+        description: "G1レースや名馬の歴史",
+        icon: Trophy,
+        color: "text-amber-500"
     },
     {
         id: "all",
