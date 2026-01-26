@@ -25,6 +25,7 @@ import { useToast } from "@/hooks/use-toast";
 import { QUIZ_CATEGORIES } from "../lib/constants";
 import FantasyCountdown from "../components/FantasyCountdown";
 import ScoreCard from "../components/ScoreCard";
+import html2canvas from "html2canvas";
 
 type GameState = "lobby" | "playing" | "result";
 
@@ -67,6 +68,7 @@ function SoloGameContent() {
     const { toast } = useToast();
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const startTimeRef = useRef<number>(0);
+    const scoreCardRef = useRef<HTMLDivElement>(null);
 
     const selectedCategoryData = QUIZ_CATEGORIES.find(c => c.id === category) || QUIZ_CATEGORIES[0];
 
@@ -566,40 +568,92 @@ function SoloGameContent() {
                         <h2 className="text-4xl font-black gold-text tracking-widest uppercase">スコア確定</h2>
                     </div>
 
-                    <ScoreCard
-                        playerName={nickname || "Guest"}
-                        genre={category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN"}
-                        score={score}
-                        rank={
-                            score >= 14000 ? "Legend" :
-                                score >= 12000 ? "Grand Master" :
-                                    score >= 10000 ? "Master" :
-                                        score >= 8000 ? "Expert" :
-                                            score >= 5000 ? "Adventurer" : "Novice"
-                        }
-                    />
+                    <div ref={scoreCardRef} className="relative rounded-lg overflow-hidden transform transition-transform">
+                        <ScoreCard
+                            playerName={nickname || "Guest"}
+                            genre={category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN"}
+                            score={score}
+                            rank={
+                                score >= 14000 ? "Legend" :
+                                    score >= 12000 ? "Grand Master" :
+                                        score >= 10000 ? "Master" :
+                                            score >= 8000 ? "Expert" :
+                                                score >= 5000 ? "Adventurer" : "Novice"
+                            }
+                        />
+                    </div>
 
                     <div className="flex flex-col gap-3">
                         <Button
-                            onClick={() => {
-                                const rankTitle =
-                                    score >= 14000 ? "Legend" :
-                                        score >= 10000 ? "Master" :
-                                            score >= 8000 ? "Expert" :
-                                                score >= 5000 ? "Adventurer" : "Novice";
-                                const genreName = category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN";
+                            onClick={async () => {
+                                setIsLoading(true);
+                                try {
+                                    // 1. Capture Image & Copy to Clipboard
+                                    if (scoreCardRef.current) {
+                                        try {
+                                            const canvas = await html2canvas(scoreCardRef.current, {
+                                                useCORS: true,
+                                                scale: 2, // High resolution
+                                                backgroundColor: "#0f0505",
+                                                logging: false,
+                                            });
 
-                                // OGP Share URL
-                                const shareUrl = new URL(`${window.location.origin}/share/result`);
-                                shareUrl.searchParams.set('name', nickname || 'Guest');
-                                shareUrl.searchParams.set('score', score.toString());
-                                shareUrl.searchParams.set('rank', rankTitle);
-                                shareUrl.searchParams.set('genre', genreName);
-                                shareUrl.searchParams.set('rankLabel', 'RANK');
+                                            canvas.toBlob(async (blob) => {
+                                                if (blob) {
+                                                    try {
+                                                        const item = new ClipboardItem({ "image/png": blob });
+                                                        await navigator.clipboard.write([item]);
+                                                        toast({
+                                                            title: "画像をコピーしました！",
+                                                            description: "Xの投稿画面でペースト (Ctrl+V) してください。",
+                                                        });
+                                                    } catch (err) {
+                                                        console.error("Clipboard write failed:", err);
+                                                        // Fallback notification if clipboard write fails
+                                                        toast({
+                                                            title: "画像のコピーに失敗しました",
+                                                            description: "ブラウザの設定を確認してください。",
+                                                            variant: "destructive"
+                                                        });
+                                                    }
+                                                }
+                                            });
+                                        } catch (captureError) {
+                                            console.error("Capture failed:", captureError);
+                                        }
+                                    }
 
-                                const text = `【TRIAL RECORD】\n#FantasyQuizzesKingdom #SparksStation #クイズ`;
-                                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl.toString())}`, '_blank');
+                                    // 2. Prepare Data
+                                    const rankTitle =
+                                        score >= 14000 ? "Legend" :
+                                            score >= 10000 ? "Master" :
+                                                score >= 8000 ? "Expert" :
+                                                    score >= 5000 ? "Adventurer" : "Novice";
+                                    const genreName = category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN";
+
+                                    // 3. Open X Share (URL is still useful for OGPfallback or accessibility)
+                                    const shareUrl = new URL(`${window.location.origin}/share/result`);
+                                    shareUrl.searchParams.set('name', nickname || 'Guest');
+                                    shareUrl.searchParams.set('score', score.toString());
+                                    shareUrl.searchParams.set('rank', rankTitle);
+                                    shareUrl.searchParams.set('genre', genreName);
+                                    shareUrl.searchParams.set('rankLabel', 'RANK');
+
+                                    const text = `【TRIAL RECORD】\n#FantasyQuizzesKingdom #SparksStation #クイズ`;
+
+                                    // Short delay to let the toast appear before tab switch (optional but nice)
+                                    setTimeout(() => {
+                                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl.toString())}`, '_blank');
+                                    }, 800);
+
+                                } catch (error: any) {
+                                    console.error("Share error:", error);
+                                    toast({ title: "エラーが発生しました", description: error.message, variant: "destructive" });
+                                } finally {
+                                    setIsLoading(false);
+                                }
                             }}
+                            disabled={isLoading}
                             className="w-full h-14 bg-black text-white hover:bg-black/80 font-bold rounded-xl border border-white/10 flex items-center justify-center gap-2"
                         >
                             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
