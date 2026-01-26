@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { generateRoomId } from "@/lib/utils-game";
-import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2 } from "lucide-react";
+import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
@@ -396,6 +396,76 @@ export default function Home() {
             <div className="px-6 space-y-4">
               <AdBanner adSlot="home_bottom" />
             </div>
+
+            {/* SEO Content: Genre Introduction */}
+            {viewMode === "TOP" && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="max-w-4xl mx-auto px-4 pt-12 pb-8"
+              >
+                <h2 className="text-2xl font-black gold-text italic mb-8 text-center flex items-center justify-center gap-3">
+                  <Sparkles className="h-6 w-6 text-amber-500" />
+                  収録クイズジャンル
+                  <Sparkles className="h-6 w-6 text-amber-500" />
+                </h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Party */}
+                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-pink-900/20 flex items-center justify-center border border-pink-500/30">
+                      <PartyPopper className="h-6 w-6 text-pink-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-pink-400 font-bold mb-2">パーティ・宴会</h3>
+                      <p className="text-amber-100/70 text-sm leading-relaxed">
+                        忘年会、新年会、結婚式の二次会など、人が集まる場を最高に盛り上げるパーティクイズ。内輪ネタから一般的な常識問題まで、幹事様の味方となる機能が満載です。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* History */}
+                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-blue-900/20 flex items-center justify-center border border-blue-500/30">
+                      <BookOpen className="h-6 w-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-blue-400 font-bold mb-2">歴史・雑学</h3>
+                      <p className="text-amber-100/70 text-sm leading-relaxed">
+                        戦国武将から世界史の偉人、最新の時事問題まで。あなたの知識教養が試される本格的なクイズバトル。受験勉強の息抜きや、大人の嗜みとしての雑学力向上にも最適です。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Minecraft */}
+                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-green-900/20 flex items-center justify-center border border-green-500/30">
+                      <Box className="h-6 w-6 text-green-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-green-400 font-bold mb-2">マインクラフト (Minecraft)</h3>
+                      <p className="text-amber-100/70 text-sm leading-relaxed">
+                        クラフトレシピ、モブの特性、バイオームの秘密、レッドストーン回路の仕組みまで。初心者から上級クラフターまで楽しめる、ブロックの世界の深淵なる知識クイズ。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* F1 */}
+                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-red-900/20 flex items-center justify-center border border-red-500/30">
+                      <Flag className="h-6 w-6 text-red-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-red-400 font-bold mb-2">Formula 1 (F1)</h3>
+                      <p className="text-amber-100/70 text-sm leading-relaxed">
+                        歴代ワールドチャンピオン、伝説のチーム、サーキットの歴史から最新レギュレーションまで。モータースポーツの最高峰F1（フォーミュラ1）に関するマニアックな問題を出題。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.section>
+            )}
 
           </div>
         </motion.main>
