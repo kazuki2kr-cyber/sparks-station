@@ -420,7 +420,7 @@ export default function Home() {
                     <div>
                       <h3 className="text-pink-400 font-bold mb-2">パーティ・宴会</h3>
                       <p className="text-amber-100/70 text-sm leading-relaxed">
-                        忘年会、新年会、結婚式の二次会など、人が集まる場を最高に盛り上げるパーティクイズ。内輪ネタから一般的な常識問題まで、幹事様の味方となる機能が満載です。
+                        忘年会、新年会、結婚式の二次会など、人が集まる場を最高に盛り上げるパーティ早押しクイズ。みんなが答えられる一般的な常識問題！
                       </p>
                     </div>
                   </div>
@@ -433,7 +433,7 @@ export default function Home() {
                     <div>
                       <h3 className="text-blue-400 font-bold mb-2">歴史・雑学</h3>
                       <p className="text-amber-100/70 text-sm leading-relaxed">
-                        戦国武将から世界史の偉人、最新の時事問題まで。あなたの知識教養が試される本格的なクイズバトル。受験勉強の息抜きや、大人の嗜みとしての雑学力向上にも最適です。
+                        日本史、世界史、歴史的事件、偉人まで。あなたの知識教養が試される本格的なクイズバトル。受験勉強の息抜きや、大人の嗜みとしての雑学力向上にも最適です。
                       </p>
                     </div>
                   </div>
@@ -459,7 +459,7 @@ export default function Home() {
                     <div>
                       <h3 className="text-red-400 font-bold mb-2">Formula 1 (F1)</h3>
                       <p className="text-amber-100/70 text-sm leading-relaxed">
-                        歴代ワールドチャンピオン、伝説のチーム、サーキットの歴史から最新レギュレーションまで。モータースポーツの最高峰F1（フォーミュラ1）に関するマニアックな問題を出題。
+                        2025シーズンを中心にチーム、サーキットから最新レギュレーションまで。モータースポーツの最高峰F1（フォーミュラ1）に関するマニアックな問題を出題。
                       </p>
                     </div>
                   </div>
