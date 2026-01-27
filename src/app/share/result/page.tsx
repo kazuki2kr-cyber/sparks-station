@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
 import Link from 'next/link';
+import ScoreCard from '@/app/FantasyQuizzesKingdom/components/ScoreCard';
 
 type Props = {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -15,23 +16,6 @@ export async function generateMetadata(
     const score = params.score || '0';
     const rank = params.rank || 'Novice';
     const genre = params.genre || 'ALL';
-    const rankLabel = params.rankLabel || 'RANK';
-
-    // Construct the image URL
-    // Note: specific hardcoded host or relative URL for metadata
-    // In production, we need the deployment URL. 
-    // For metadata.openGraph.images, it's best to use absolute URL usually, but Next.js resolves relative.
-    // We'll pass query params to the API route.
-
-    const query = new URLSearchParams({
-        name: name as string,
-        score: score as string,
-        rank: rank as string,
-        genre: genre as string,
-        rankLabel: rankLabel as string,
-    });
-
-    const imageUrl = `/api/og?${query.toString()}`;
 
     return {
         title: `${name}'s Trial Record - Fantasy Quizzes Kingdom`,
@@ -39,13 +23,12 @@ export async function generateMetadata(
         openGraph: {
             title: 'TRIAL RECORD - Fantasy Quizzes Kingdom',
             description: `View ${name}'s result in the Wisdom Trial. Score: ${score}`,
-            images: [imageUrl],
+            // Images will reference the default site OGP or be omitted to avoid broken links
         },
         twitter: {
-            card: 'summary_large_image',
+            card: 'summary', // Changed to summary as we don't have a large dynamic image anymore
             title: 'TRIAL RECORD - Fantasy Quizzes Kingdom',
             description: `Score: ${score}pt | Rank: ${rank}`,
-            images: [imageUrl],
         },
     };
 }
@@ -53,14 +36,6 @@ export async function generateMetadata(
 export default async function SharePage({ searchParams }: Props) {
     const params = await searchParams;
     const { name, score, rank, genre, rankLabel } = params as Record<string, string>;
-
-    const query = new URLSearchParams({
-        name: name || 'Guest',
-        score: score || '0',
-        rank: rank || 'Novice',
-        genre: genre || 'ALL',
-        rankLabel: rankLabel || 'RANK',
-    });
 
     return (
         <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -71,12 +46,14 @@ export default async function SharePage({ searchParams }: Props) {
                     Trial Record
                 </h1>
 
-                {/* Display the generated OGP image for the user to see */}
+                {/* Display the ScoreCard Component instead of OGP Image */}
                 <div className="rounded-xl overflow-hidden shadow-2xl border-2 border-amber-900/50">
-                    <img
-                        src={`/api/og?${query.toString()}`}
-                        alt="Result Card"
-                        className="w-full h-auto"
+                    <ScoreCard
+                        playerName={name || 'Guest'}
+                        score={score || '0'}
+                        rank={rank || 'Novice'}
+                        genre={genre || 'ALL'}
+                        rankLabel={rankLabel || 'RANK'}
                     />
                 </div>
 
