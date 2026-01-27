@@ -46,9 +46,6 @@ export const metadata: Metadata = {
     description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
     images: ["/sparks-station-kv.png"],
   },
-  icons: {
-    icon: "/icon.png",
-  },
   other: {
     "google-adsense-account": "ca-pub-3577742758028719",
   },
