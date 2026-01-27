@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { generateRoomId } from "@/lib/utils-game";
-import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag, Trophy } from "lucide-react";
+import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag, Trophy, Snowflake } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import AdBanner from "@/components/AdBanner";
@@ -465,7 +465,7 @@ export default function Home() {
                   </div>
 
                   {/* Horse Racing */}
-                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4 md:col-span-2 lg:col-span-1">
+                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
                     <div className="shrink-0 w-12 h-12 rounded-full bg-amber-900/20 flex items-center justify-center border border-amber-500/30">
                       <Trophy className="h-6 w-6 text-amber-500" />
                     </div>
@@ -473,6 +473,19 @@ export default function Home() {
                       <h3 className="text-amber-500 font-bold mb-2">競馬 (Horse Racing)</h3>
                       <p className="text-amber-100/70 text-sm leading-relaxed">
                         伝説の名馬、感動のG1レース、JRAの歴史から最新データまで。すべてのホースマンに贈る、競馬知識の直線を駆け抜けるクイズ。
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Winter Olympics */}
+                  <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-cyan-900/20 flex items-center justify-center border border-cyan-500/30">
+                      <Snowflake className="h-6 w-6 text-cyan-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-cyan-400 font-bold mb-2">冬季五輪 (Winter Olympics)</h3>
+                      <p className="text-amber-100/70 text-sm leading-relaxed">
+                        雪と氷の祭典、冬季オリンピックの感動をクイズで振り返る。歴代の金メダリスト、競技ルール、開催地の記憶を試そう。
                       </p>
                     </div>
                   </div>

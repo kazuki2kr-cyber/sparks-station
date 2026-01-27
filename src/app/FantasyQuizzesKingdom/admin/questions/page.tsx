@@ -33,7 +33,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 
-import { ADMIN_WHITELIST } from "../../lib/constants";
+import { ADMIN_WHITELIST, QUIZ_CATEGORIES } from "../../lib/constants";
 
 interface Question {
     id: string;
@@ -330,12 +330,18 @@ export default function QuestionsAdmin() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label>カテゴリー</Label>
-                                        <Input
+                                        <select
                                             value={formData.category}
                                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                            placeholder="一般常識"
-                                            className="bg-white/5 border-white/10"
-                                        />
+                                            className="h-10 w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                        >
+                                            {QUIZ_CATEGORIES.map((cat) => (
+                                                <option key={cat.id} value={cat.id} className="bg-slate-900 text-white">
+                                                    {cat.name} ({cat.id})
+                                                </option>
+                                            ))}
+                                            <option value="general" className="bg-slate-900 text-white">General (その他)</option>
+                                        </select>
                                     </div>
                                     <div className="space-y-2">
                                         <Label>難易度 (1-5)</Label>
