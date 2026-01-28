@@ -419,7 +419,7 @@ export default function QuestionsAdmin() {
                         <p className="text-xs text-white/40">「冬季五輪」などの日本語カテゴリー名を、システム用IDに一括変換します。</p>
                         <Button
                             onClick={async () => {
-                                if (!confirm("「冬季五輪」カテゴリーの問題をすべて「winter_olympics」に変換しますか？")) return;
+                                if (!confirm("「冬季五輪」または「GENERAL」カテゴリーの問題をすべて「winter_olympics」に変換しますか？\n（※注意：意図しないGENERALの問題も変換される可能性があります）")) return;
                                 setIsLoading(true);
                                 try {
                                     const qRef = collection(db, "questions");
@@ -429,7 +429,7 @@ export default function QuestionsAdmin() {
 
                                     qSnap.docs.forEach(doc => {
                                         const data = doc.data();
-                                        if (data.category === "冬季五輪") {
+                                        if (data.category === "冬季五輪" || data.category === "general") {
                                             batch.update(doc.ref, { category: "winter_olympics" });
                                             count++;
                                         }
@@ -450,7 +450,7 @@ export default function QuestionsAdmin() {
                             }}
                             className="w-full bg-cyan-900/50 hover:bg-cyan-800/50 text-cyan-100 border border-cyan-500/30"
                         >
-                            カテゴリーデータの一括修正 (冬季五輪)
+                            カテゴリーデータの一括修正 (冬季五輪/GENERAL)
                         </Button>
                     </Card>
                 </div>
