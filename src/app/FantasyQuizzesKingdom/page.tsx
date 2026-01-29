@@ -12,7 +12,7 @@ import { generateRoomId } from "@/lib/utils-game";
 import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag, Trophy, Snowflake } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
-import AdBanner from "@/components/AdBanner";
+// import AdBanner from "@/components/AdBanner";
 
 type ViewMode = "TOP" | "MULTI";
 
@@ -394,7 +394,7 @@ export default function Home() {
             )}
 
             <div className="px-6 space-y-4">
-              <AdBanner adSlot="home_bottom" />
+              {/* <AdBanner adSlot="home_bottom" /> */}
             </div>
 
             {/* SEO Content: Genre Introduction */}

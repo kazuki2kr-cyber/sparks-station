@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Users, Crown, Sword, Shield, Scroll, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import AdBanner from "@/components/AdBanner";
+// import AdBanner from "@/components/AdBanner";
 
 export default function GuestLobby() {
     const { roomId } = useParams() as { roomId: string };
@@ -249,7 +249,7 @@ export default function GuestLobby() {
                 </div>
 
                 <div className="max-w-md mx-auto">
-                    <AdBanner adSlot="lobby_bottom" />
+                    {/* <AdBanner adSlot="lobby_bottom" /> */}
                 </div>
 
                 <div className="flex justify-center gap-4 text-white/20 font-black tracking-[0.4em] text-[10px] uppercase pt-12">

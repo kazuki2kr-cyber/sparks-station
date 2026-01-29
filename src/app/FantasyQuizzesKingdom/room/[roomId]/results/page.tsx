@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Trophy, Home, Crown, Star, Sparkles, Sword, Scroll } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import AdBanner from "@/components/AdBanner";
+// import AdBanner from "@/components/AdBanner";
 import ScoreCard from "@/app/FantasyQuizzesKingdom/components/ScoreCard";
 
 export default function GuestResults() {
@@ -132,7 +132,7 @@ export default function GuestResults() {
 
                 <div className="pt-12 flex flex-col items-center gap-6">
                     <div className="max-w-md w-full">
-                        <AdBanner adSlot="results_bottom" />
+                        {/* <AdBanner adSlot="results_bottom" /> */}
                     </div>
                     <Button onClick={() => router.push("/FantasyQuizzesKingdom")} className="fantasy-button h-16 px-16 text-xl group text-amber-100">
                         <Home className="mr-3 h-6 w-6" /> ホームへ戻る

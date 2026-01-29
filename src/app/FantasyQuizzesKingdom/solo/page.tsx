@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Timer, ArrowLeft, Loader2, CheckCircle2, XCircle, Scroll, Home, Sparkles, Crown } from "lucide-react";
-import AdBanner from "@/components/AdBanner";
+// import AdBanner from "@/components/AdBanner";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { QUIZ_CATEGORIES } from "../lib/constants";
@@ -462,7 +462,7 @@ function SoloGameContent() {
                         </motion.div>
                     </section>
 
-                    <AdBanner adSlot="solo_lobby_bottom" />
+                    {/* <AdBanner adSlot="solo_lobby_bottom" /> */}
 
                     <div className="flex justify-center pb-8">
                         <Button variant="ghost" onClick={() => router.push("/FantasyQuizzesKingdom")} className="text-white/30 hover:text-amber-500">
