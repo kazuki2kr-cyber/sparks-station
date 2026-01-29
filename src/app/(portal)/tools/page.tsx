@@ -1,6 +1,6 @@
 
 import { Metadata } from 'next';
-import { Terminal, Lightbulb, Palette, Server, ExternalLink } from 'lucide-react';
+import { Terminal, Sparkles, Server, LineChart, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ type ToolCategory = {
 
 const toolsData: ToolCategory[] = [
     {
-        title: "Development Environment",
+        title: "AI & Development",
         icon: <Terminal className="w-6 h-6 text-amber-500" />,
         tools: [
             {
@@ -40,58 +40,49 @@ const toolsData: ToolCategory[] = [
                 buttonText: "公式サイト",
             },
             {
+                name: "VS Code",
+                description: "世界標準のコードエディタ。豊富な拡張機能エコシステムと軽量な動作。Cursorのベースにもなっていますが、純粋な開発環境として依然強力です。",
+                tags: ["Editor", "Microsoft", "Standard"],
+                link: "https://code.visualstudio.com/",
+            },
+            {
+                name: "Antigravity",
+                description: "Google DeepMindが開発中の次世代エージェントAI。高度な推論能力と自律的なコーディング能力を持ち、開発者の意図を汲み取って実装まで完遂します。",
+                tags: ["AI Agent", "DeepMind", "Future"],
+                link: "https://deepmind.google/technologies/gemini/", // Link to Gemini/DeepMind page as placeholder or specific if known
+                buttonText: "詳細を見る",
+            },
+            {
+                name: "NotebookLM",
+                description: "GoogleのRAG搭載AIノートブック。論文や仕様書をアップロードするだけで、その内容を熟知した専属AIアシスタントが爆誕します。リサーチの相棒に。",
+                tags: ["AI", "Research", "Google"],
+                link: "https://notebooklm.google/",
+            },
+            {
+                name: "GitHub",
+                description: "ソースコード管理のインフラ。Copilotとの連携、ActionsによるCI/CD、Issue管理など、個人開発においても中心的なプラットフォームです。",
+                tags: ["git", "CI/CD", "Platform"],
+                link: "https://github.com/",
+            }
+        ]
+    },
+    {
+        title: "Infrastructure & Backend",
+        icon: <Server className="w-6 h-6 text-blue-500" />,
+        tools: [
+            {
                 name: "Vercel",
-                description: "フロントエンドのデプロイはこれ一択。GitHubにプッシュするだけで自動デプロイされる体験は、一度味わうと戻れません。Next.jsとの親和性も最高です。",
-                tags: ["Hosting", "CI/CD", "Free Tier"],
+                description: "フロントエンドのデプロイはこれ一択。GitHubにプッシュするだけで自動デプロイされる体験と、Next.jsへの最適化は他に代えがたい価値があります。",
+                tags: ["Hosting", "Serverless", "Next.js"],
                 link: "https://vercel.com/",
                 buttonText: "無料で始める",
-            }
-        ]
-    },
-    {
-        title: "Productivity & Management",
-        icon: <Lightbulb className="w-6 h-6 text-blue-500" />,
-        tools: [
-            {
-                name: "Notion",
-                description: "アイデア出し、タスク管理、仕様書作成、すべてがこれ一つで完結します。データベース機能を使えば、簡易的なCMSとして使うことも可能です。",
-                tags: ["Note", "Project Management", "SaaS"],
-                link: "https://www.notion.so/", // Replace with affiliate link
-                isAffiliate: true,
-                buttonText: "無料で試す",
             },
             {
-                name: "Linear",
-                description: "エンジニアのために作られた、美しく高速な課題管理ツール。キーボードショートカットだけで操作できるUIは、使うこと自体が快感になります。",
-                tags: ["Issue Tracking", "Agile", "Beautiful"],
-                link: "https://linear.app/",
-            }
-        ]
-    },
-    {
-        title: "Design & Marketing",
-        icon: <Palette className="w-6 h-6 text-pink-500" />,
-        tools: [
-            {
-                name: "Canva",
-                description: "記事のアイキャッチやSNS画像作成に。非デザイナーでも、「それっぽい」デザインが爆速で作れるテンプレートが山ほどあります。",
-                tags: ["Design", "NoCode", "Marketing"],
-                link: "https://www.canva.com/", // Replace with affiliate link
-                isAffiliate: true,
-                buttonText: "無料で使う",
+                name: "Firebase",
+                description: "Googleが提供するBaaS (Backend as a Service)。認証、データベース、ホスティングがこれ一つで完結。個人開発のバックエンド構築時間を大幅に短縮します。",
+                tags: ["Backend", "Database", "Auth"],
+                link: "https://firebase.google.com/",
             },
-            {
-                name: "Figma",
-                description: "ブラウザで動くUIデザインツールのデファクトスタンダード。個人開発のUI設計は、コードを書く前にFigmaで固めると手戻りが減ります。",
-                tags: ["UI/UX", "Design", "Collaboration"],
-                link: "https://www.figma.com/",
-            }
-        ]
-    },
-    {
-        title: "Infrastructure & Learning",
-        icon: <Server className="w-6 h-6 text-green-500" />,
-        tools: [
             {
                 name: "Xserver / Xdomain",
                 description: "WordPressブログを始めるなら安定・高速なXserverがおすすめ。キャンペーン期間中のドメイン無料特典なども魅力的です。",
@@ -99,13 +90,27 @@ const toolsData: ToolCategory[] = [
                 link: "https://px.a8.net/svt/ejp?a8mat=4AVHBZ+AUKDMA+CO4+15UCEA", // A8.net affiliate link
                 isAffiliate: true,
                 trackingPixel: "https://www10.a8.net/0.gif?a8mat=4AVHBZ+AUKDMA+CO4+15UCEA",
+            }
+        ]
+    },
+    {
+        title: "Operations & Growth",
+        icon: <LineChart className="w-6 h-6 text-green-500" />,
+        tools: [
+            {
+                name: "Google Search Console",
+                description: "サイトの健康状態を可視化する必須ツール。SEO対策、検索キーワードの分析、インデックス登録状況の確認など、運営には欠かせません。",
+                tags: ["SEO", "Analytics", "Google"],
+                link: "https://search.google.com/search-console/about",
             },
             {
-                name: "Udemy",
-                description: "新しい技術スタックを学ぶなら。セール時なら1,500円〜2,000円程度で、数時間のハンズオン形式の動画講座が手に入ります。",
-                tags: ["Learning", "Video", "Skill"],
-                link: "https://www.udemy.com/", // Replace with A8 link
+                name: "A8.net",
+                description: "国内最大手のアフィリエイトASP。テック系サービスの広告も多く、審査も通りやすいため、まずはここから登録するのが「収益化」の第一歩です。",
+                tags: ["Monetization", "ASP", "Must Have"],
+                link: "https://px.a8.net/svt/ejp?a8mat=4AVHBZ+AG9Z3M+0K+11O3G2",
                 isAffiliate: true,
+                trackingPixel: "https://www18.a8.net/0.gif?a8mat=4AVHBZ+AG9Z3M+0K+11O3G2",
+                buttonText: "無料登録する",
             }
         ]
     }
@@ -120,6 +125,9 @@ export default function ToolsPage() {
                     Sparks Stationの運営で使用している、または自信を持っておすすめできる「開発効率を爆上げするツール」たち。
                     <br className="hidden md:block" />
                     これらは私たちの開発ライフを支える、頼れる相棒です。
+                </p>
+                <p className="text-xs text-neutral-500 border border-neutral-800 bg-neutral-900/50 inline-block px-3 py-1 rounded-full">
+                    ※本ページはプロモーションが含まれています
                 </p>
             </header>
 
@@ -171,11 +179,6 @@ export default function ToolsPage() {
                                             {tool.buttonText || "公式サイト"}
                                             <ExternalLink className="w-4 h-4" />
                                         </a>
-                                        {tool.isAffiliate && (
-                                            <p className="text-[10px] text-neutral-600 text-center mt-2">
-                                                ※上記リンクはアフィリエイトを含みます
-                                            </p>
-                                        )}
                                         {/* Tracking Pixel for A8.net etc */}
                                         {tool.trackingPixel && (
                                             // eslint-disable-next-line @next/next/no-img-element
