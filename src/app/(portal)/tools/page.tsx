@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'Tools | Sparks Station',
-    description: 'Sparks Stationが厳選した、個人開発を加速させる「神ツール」一覧。',
+    description: 'Sparks Stationが厳選した、個人開発を加速させる「開発ツール」一覧。',
     alternates: {
         canonical: '/tools',
     },
@@ -85,7 +85,7 @@ const toolsData: ToolCategory[] = [
             },
             {
                 name: "Xserver / Xdomain",
-                description: "WordPressブログを始めるなら安定・高速なXserverがおすすめ。キャンペーン期間中のドメイン無料特典なども魅力的です。",
+                description: "安定・高速なプラットフォームとしてXserverは最有力の選択肢。WordPressブログも併せて管理でき、キャンペーンのドメイン特典も活用できるため、コストパフォーマンスに優れています。",
                 tags: ["Server", "WordPress", "Japan"],
                 link: "https://px.a8.net/svt/ejp?a8mat=4AVHBZ+AUKDMA+CO4+15UCEA", // A8.net affiliate link
                 isAffiliate: true,
@@ -122,7 +122,7 @@ export default function ToolsPage() {
             <header className="space-y-4">
                 <h1 className="text-3xl md:text-4xl font-bold text-white">Curated Tools</h1>
                 <p className="text-neutral-400 max-w-2xl">
-                    Sparks Stationの運営で使用している、または自信を持っておすすめできる「開発効率を爆上げするツール」たち。
+                    Sparks Stationの運営で使用している「開発効率を上げるツール」たち。
                     <br className="hidden md:block" />
                     これらは私たちの開発ライフを支える、頼れる相棒です。
                 </p>
