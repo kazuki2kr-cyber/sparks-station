@@ -24,19 +24,20 @@ type ToolCategory = {
     title: string;
     icon: React.ReactNode;
     tools: ToolItem[];
+    themeColor: string; // 'amber' | 'blue' | 'emerald' etc.
 };
 
 const toolsData: ToolCategory[] = [
     {
         title: "AI & Development",
         icon: <Terminal className="w-6 h-6 text-amber-500" />,
+        themeColor: "text-amber-400 border-amber-500/50 bg-amber-500/10 hover:shadow-amber-500/10",
         tools: [
             {
                 name: "Cursor",
                 description: "もはや「相棒」。VS Code派生のエディタに最強のAIが統合されています。コードベース全体を理解したチャット機能は、開発速度を劇的に向上させます。",
                 tags: ["Editor", "AI", "Must Have"],
                 link: "https://cursor.sh/",
-
             },
             {
                 name: "VS Code",
@@ -67,6 +68,7 @@ const toolsData: ToolCategory[] = [
     {
         title: "Infrastructure & Backend",
         icon: <Server className="w-6 h-6 text-blue-500" />,
+        themeColor: "text-blue-400 border-blue-500/50 bg-blue-500/10 hover:shadow-blue-500/10",
         tools: [
             {
                 name: "Vercel",
@@ -93,6 +95,7 @@ const toolsData: ToolCategory[] = [
     {
         title: "Operations & Growth",
         icon: <LineChart className="w-6 h-6 text-green-500" />,
+        themeColor: "text-emerald-400 border-emerald-500/50 bg-emerald-500/10 hover:shadow-emerald-500/10",
         tools: [
             {
                 name: "Google Search Console",
@@ -125,65 +128,80 @@ export default function ToolsPage() {
             </header>
 
             <div className="space-y-16">
-                {toolsData.map((category, idx) => (
-                    <section key={idx} className="space-y-6">
-                        <div className="flex items-center gap-3 border-b border-neutral-800 pb-2">
-                            {category.icon}
-                            <h2 className="text-xl md:text-2xl font-bold text-neutral-200">
-                                {category.title}
-                            </h2>
-                        </div>
+                {toolsData.map((category, idx) => {
+                    const colorTheme = ['amber', 'blue', 'emerald'][idx % 3];
+                    return (
+                        <section key={idx} className="space-y-6">
+                            <div className="flex items-center gap-3 border-b border-neutral-800 pb-2">
+                                {category.icon}
+                                <h2 className="text-xl md:text-2xl font-bold text-neutral-200">
+                                    {category.title}
+                                </h2>
+                            </div>
 
-                        <div className="grid md:grid-cols-2 gap-6">
-                            {category.tools.map((tool, toolIdx) => (
-                                <div key={toolIdx} className="group bg-neutral-900 border border-neutral-800 rounded-xl p-6 transition-all hover:border-neutral-700 hover:shadow-lg flex flex-col">
-                                    <div className="flex-grow">
-                                        <div className="flex justify-between items-start mb-4">
-                                            <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
-                                                {tool.name}
-                                            </h3>
-                                            <div className="flex gap-2">
-                                                {tool.tags.map(tag => (
-                                                    <span key={tag} className="text-[10px] uppercase tracking-wider bg-neutral-800 text-neutral-400 px-2 py-1 rounded">
-                                                        {tag}
-                                                    </span>
-                                                ))}
+                            <div className="grid md:grid-cols-2 gap-6">
+                                {category.tools.map((tool, toolIdx) => (
+                                    <div
+                                        key={toolIdx}
+                                        className={`
+                                        group bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col transition-all duration-300
+                                        hover:border-${colorTheme}-500/50 hover:shadow-lg hover:shadow-${colorTheme}-500/10
+                                    `}
+                                    >
+                                        <div className="flex-grow">
+                                            <div className="flex justify-between items-start mb-4">
+                                                <h3 className={`text-lg font-bold text-white transition-colors group-hover:text-${colorTheme}-400`}>
+                                                    {tool.name}
+                                                </h3>
+                                                <div className="flex gap-2">
+                                                    {tool.tags.map(tag => (
+                                                        <span
+                                                            key={tag}
+                                                            className={`
+                                                            text-[10px] uppercase tracking-wider px-2 py-1 rounded border
+                                                            bg-${colorTheme}-500/10 text-${colorTheme}-400 border-${colorTheme}-500/20
+                                                        `}
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
                                             </div>
+
+                                            <p className="text-sm text-neutral-400 leading-relaxed mb-6">
+                                                {tool.description}
+                                            </p>
                                         </div>
 
-                                        <p className="text-sm text-neutral-400 leading-relaxed mb-6">
-                                            {tool.description}
-                                        </p>
-                                    </div>
+                                        <div className="pt-4 border-t border-neutral-800">
 
-                                    <div className="pt-4 border-t border-neutral-800">
-
-                                        <a
-                                            href={tool.link}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg w-full justify-center transition-colors bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white"
-                                        >
-                                            公式サイト
-                                            <ExternalLink className="w-4 h-4" />
-                                        </a>
-                                        {/* Tracking Pixel for A8.net etc */}
-                                        {tool.trackingPixel && (
-                                            // eslint-disable-next-line @next/next/no-img-element
-                                            <img
-                                                src={tool.trackingPixel}
-                                                width="1"
-                                                height="1"
-                                                alt=""
-                                                className="hidden"
-                                            />
-                                        )}
+                                            <a
+                                                href={tool.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg w-full justify-center transition-colors bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white"
+                                            >
+                                                公式サイト
+                                                <ExternalLink className="w-4 h-4" />
+                                            </a>
+                                            {/* Tracking Pixel for A8.net etc */}
+                                            {tool.trackingPixel && (
+                                                // eslint-disable-next-line @next/next/no-img-element
+                                                <img
+                                                    src={tool.trackingPixel}
+                                                    width="1"
+                                                    height="1"
+                                                    alt=""
+                                                    className="hidden"
+                                                />
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
-                ))}
+                                ))}
+                            </div>
+                        </section>
+                    );
+                })}
             </div>
 
             <div className="flex justify-end mt-12">
