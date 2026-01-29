@@ -49,6 +49,11 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": "ca-pub-3577742758028719",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "FQK",
+  },
 };
 
 
