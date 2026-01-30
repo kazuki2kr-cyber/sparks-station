@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   },
 };
 
+import { Suspense } from "react";
+
 export default function Home() {
-  return <HomeClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-slate-950" />}>
+      <HomeClient />
+    </Suspense>
+  );
 }

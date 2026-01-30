@@ -464,11 +464,7 @@ function SoloGameContent() {
 
                     {/* <AdBanner adSlot="solo_lobby_bottom" /> */}
 
-                    <div className="flex justify-center pb-8">
-                        <Button variant="ghost" onClick={() => router.push("/FantasyQuizzesKingdom")} className="text-white/30 hover:text-amber-500">
-                            <Home className="mr-2 h-4 w-4" /> ホームに戻る
-                        </Button>
-                    </div>
+
                 </motion.div>
             )}
 

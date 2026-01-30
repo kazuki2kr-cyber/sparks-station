@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +25,16 @@ export default function HomeClient() {
     const [showSplash, setShowSplash] = useState(true);
     const router = useRouter();
     const { toast } = useToast();
+    const searchParams = useSearchParams();
+
+    // Reset view to TOP if query param exists (e.g. from footer link)
+    useEffect(() => {
+        if (searchParams.get("view") === "top") {
+            setViewMode("TOP");
+            // Optional: clear the param from URL without reload
+            window.history.replaceState(null, "", "/FantasyQuizzesKingdom");
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -312,15 +322,7 @@ export default function HomeClient() {
                                             </div>
                                         </div>
 
-                                        <div className="flex justify-center pt-2">
-                                            <Button
-                                                variant="ghost"
-                                                onClick={() => setViewMode("TOP")}
-                                                className="text-white/30 hover:text-amber-500"
-                                            >
-                                                <ArrowLeft className="mr-2 h-4 w-4" /> ホームに戻る
-                                            </Button>
-                                        </div>
+
 
                                     </div>
                                 )}

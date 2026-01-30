@@ -68,14 +68,7 @@ export default function PrivacyPolicyClient() {
                     </div>
                 </section>
 
-                <div className="flex justify-center">
-                    <Button
-                        onClick={() => router.push("/FantasyQuizzesKingdom")}
-                        className="fantasy-button px-10 h-14"
-                    >
-                        <Home className="mr-2 h-5 w-5" /> ホームに戻る
-                    </Button>
-                </div>
+
             </motion.div>
         </main>
     );
