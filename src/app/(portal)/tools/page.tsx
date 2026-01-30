@@ -18,20 +18,21 @@ type ToolItem = {
     link: string; // Affiliate link
     isAffiliate?: boolean;
     trackingPixel?: string;
+    buttonText?: string;
 };
 
 type ToolCategory = {
     title: string;
     icon: React.ReactNode;
     tools: ToolItem[];
-    themeColor: string; // 'amber' | 'blue' | 'emerald' etc.
+    color: string;
 };
 
 const toolsData: ToolCategory[] = [
     {
         title: "AI & Development",
         icon: <Terminal className="w-6 h-6 text-amber-500" />,
-        themeColor: "text-amber-400 border-amber-500/50 bg-amber-500/10 hover:shadow-amber-500/10",
+        color: "amber",
         tools: [
             {
                 name: "Cursor",
@@ -49,7 +50,7 @@ const toolsData: ToolCategory[] = [
                 name: "Antigravity",
                 description: "Google DeepMindが開発中の次世代エージェントAI。高度な推論能力と自律的なコーディング能力を持ち、開発者の意図を汲み取って実装まで完遂します。",
                 tags: ["AI Agent", "DeepMind", "Future"],
-                link: "https://deepmind.google/technologies/gemini/", // Link to Gemini/DeepMind page as placeholder or specific if known
+                link: "https://deepmind.google/technologies/gemini/",
             },
             {
                 name: "NotebookLM",
@@ -68,7 +69,7 @@ const toolsData: ToolCategory[] = [
     {
         title: "Infrastructure & Backend",
         icon: <Server className="w-6 h-6 text-blue-500" />,
-        themeColor: "text-blue-400 border-blue-500/50 bg-blue-500/10 hover:shadow-blue-500/10",
+        color: "blue",
         tools: [
             {
                 name: "Vercel",
@@ -86,7 +87,7 @@ const toolsData: ToolCategory[] = [
                 name: "Xserver / Xdomain",
                 description: "安定・高速なプラットフォームとしてXserverは最有力の選択肢。WordPressブログも併せて管理でき、キャンペーンのドメイン特典も活用できるため、コストパフォーマンスに優れています。",
                 tags: ["Server", "WordPress", "Japan"],
-                link: "https://px.a8.net/svt/ejp?a8mat=4AVHBZ+AUKDMA+CO4+15UCEA", // A8.net affiliate link
+                link: "https://px.a8.net/svt/ejp?a8mat=4AVHBZ+AUKDMA+CO4+15UCEA",
                 isAffiliate: true,
                 trackingPixel: "https://www10.a8.net/0.gif?a8mat=4AVHBZ+AUKDMA+CO4+15UCEA",
             }
@@ -95,7 +96,7 @@ const toolsData: ToolCategory[] = [
     {
         title: "Operations & Growth",
         icon: <LineChart className="w-6 h-6 text-green-500" />,
-        themeColor: "text-emerald-400 border-emerald-500/50 bg-emerald-500/10 hover:shadow-emerald-500/10",
+        color: "emerald",
         tools: [
             {
                 name: "Google Search Console",
@@ -112,16 +113,75 @@ const toolsData: ToolCategory[] = [
                 trackingPixel: "https://www18.a8.net/0.gif?a8mat=4AVHBZ+AG9Z3M+0K+11O3G2",
             }
         ]
+    },
+    {
+        title: "Gadgets & Gear",
+        icon: <Sparkles className="w-6 h-6 text-violet-500" />,
+        color: "violet",
+        tools: [
+            {
+                name: "iFLYTEK AINOTE Air 2",
+                description: "高性能な電子ペーパータブレット。紙のような書き心地と、驚異的な精度の音声認識・文字起こし機能を搭載。会議の議事録やアイデア出しに最強のデバイスです。",
+                tags: ["E-Paper", "Productivity", "Tablet"],
+                link: "https://hb.afl.rakuten.co.jp/ichiba/508380a7.418b1327.508380a8.8e12792f/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkadenshop%2Fs4103-can-5043-4%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+                buttonText: "商品ページへ",
+                isAffiliate: true,
+            },
+            {
+                name: "Keychron K2 Max",
+                description: "Macユーザーに最適なメカニカルキーボード。QMK/VIA対応でキー配置も自由自在。心地よい打鍵感とコンパクトな配列が、日々のコーディングを楽しくさせます。",
+                tags: ["Keyboard", "Mechanical", "Mac"],
+                link: "https://hb.afl.rakuten.co.jp/ichiba/508382ac.261481b2.508382ad.b288b4ca/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkitcut%2F5369483317%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+                buttonText: "商品ページへ",
+                isAffiliate: true,
+            },
+            {
+                name: "Keychron M6 Wireless Mouse",
+                description: "人間工学に基づいた軽量ワイヤレスマウス。長時間の作業でも疲れにくく、無限スクロールホイールがドキュメント閲覧やコーディングに威力を発揮します。",
+                tags: ["Mouse", "Ergonomic", "Wireless"],
+                link: "https://hb.afl.rakuten.co.jp/ichiba/508382ac.261481b2.508382ad.b288b4ca/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkitcut%2F54241058261%2F&link_type=text&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJ0ZXh0Iiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MCwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9",
+                buttonText: "商品ページへ",
+                isAffiliate: true,
+            }
+        ]
     }
 ];
+
+// Define color styles statically to ensure Tailwind JIT detects them
+const colorStyles: Record<string, {
+    container: string;
+    title: string;
+    tag: string;
+}> = {
+    amber: {
+        container: "hover:border-amber-500/50 hover:shadow-amber-500/10",
+        title: "group-hover:text-amber-400",
+        tag: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    },
+    blue: {
+        container: "hover:border-blue-500/50 hover:shadow-blue-500/10",
+        title: "group-hover:text-blue-400",
+        tag: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    },
+    emerald: {
+        container: "hover:border-emerald-500/50 hover:shadow-emerald-500/10",
+        title: "group-hover:text-emerald-400",
+        tag: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    },
+    violet: {
+        container: "hover:border-violet-500/50 hover:shadow-violet-500/10",
+        title: "group-hover:text-violet-400",
+        tag: "bg-violet-500/10 text-violet-400 border-violet-500/20",
+    },
+};
 
 export default function ToolsPage() {
     return (
         <div className="space-y-12">
             <header className="space-y-4">
-                <h1 className="text-3xl md:text-4xl font-bold text-white">Curated Tools</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-white">Curated Tools & Gear</h1>
                 <p className="text-neutral-400 max-w-2xl">
-                    Sparks Stationの運営で使用している「開発効率を上げるツール」たち。
+                    Sparks Stationの運営で使用している「開発効率を上げるツール」や「愛用ガジェット」。
                     <br className="hidden md:block" />
                     これらは私たちの開発ライフを支える、頼れる相棒です。
                 </p>
@@ -129,7 +189,8 @@ export default function ToolsPage() {
 
             <div className="space-y-16">
                 {toolsData.map((category, idx) => {
-                    const colorTheme = ['amber', 'blue', 'emerald'][idx % 3];
+                    const styles = colorStyles[category.color] || colorStyles.amber;
+
                     return (
                         <section key={idx} className="space-y-6">
                             <div className="flex items-center gap-3 border-b border-neutral-800 pb-2">
@@ -144,22 +205,22 @@ export default function ToolsPage() {
                                     <div
                                         key={toolIdx}
                                         className={`
-                                        group bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col transition-all duration-300
-                                        hover:border-${colorTheme}-500/50 hover:shadow-lg hover:shadow-${colorTheme}-500/10
+                                        group bg-neutral-900 border border-neutral-800 rounded-xl p-6 flex flex-col transition-all duration-300 hover:shadow-lg
+                                        ${styles.container}
                                     `}
                                     >
                                         <div className="flex-grow">
                                             <div className="flex justify-between items-start mb-4">
-                                                <h3 className={`text-lg font-bold text-white transition-colors group-hover:text-${colorTheme}-400`}>
+                                                <h3 className={`text-lg font-bold text-white transition-colors ${styles.title}`}>
                                                     {tool.name}
                                                 </h3>
-                                                <div className="flex gap-2">
+                                                <div className="flex gap-2 flex-wrap">
                                                     {tool.tags.map(tag => (
                                                         <span
                                                             key={tag}
                                                             className={`
                                                             text-[10px] uppercase tracking-wider px-2 py-1 rounded border
-                                                            bg-${colorTheme}-500/10 text-${colorTheme}-400 border-${colorTheme}-500/20
+                                                            ${styles.tag}
                                                         `}
                                                         >
                                                             {tag}
@@ -181,7 +242,7 @@ export default function ToolsPage() {
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg w-full justify-center transition-colors bg-neutral-800 text-neutral-300 hover:bg-neutral-700 hover:text-white"
                                             >
-                                                公式サイト
+                                                {tool.buttonText || "公式サイト"}
                                                 <ExternalLink className="w-4 h-4" />
                                             </a>
                                             {/* Tracking Pixel for A8.net etc */}

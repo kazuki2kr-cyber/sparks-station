@@ -481,7 +481,7 @@ function SoloGameContent() {
                             <Badge variant="outline" className="border-amber-500 text-amber-500 px-4 py-1">
                                 第 {currentQuestionIndex + 1} 問 / 10
                             </Badge>
-                            <div className="text-3xl font-black italic gold-text">SCORE: {score}</div>
+                            <div className="text-3xl font-black italic gold-text pr-4">SCORE: {score}</div>
                         </div>
 
                         <div className="relative w-20 h-20 flex items-center justify-center">
