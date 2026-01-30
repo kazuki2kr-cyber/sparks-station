@@ -12,6 +12,9 @@ import { Users, Play, ChevronRight, Trophy, Timer, Swords, ShieldCheck, Crown, S
 import { motion, AnimatePresence } from "framer-motion";
 import FantasyCountdown from "@/app/FantasyQuizzesKingdom/components/FantasyCountdown";
 import Image from "next/image";
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 export default function HostPlay() {
     const { roomId } = useParams() as { roomId: string };
@@ -325,8 +328,13 @@ export default function HostPlay() {
                             <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-4 border-r-4 border-amber-500" />
 
                             <CardHeader className="p-10 pb-4">
-                                <CardTitle className="text-4xl font-black text-center leading-tight gold-text">
-                                    {currentQuestion.text}
+                                <CardTitle className="text-4xl font-black text-center leading-tight gold-text [&_p]:inline">
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkMath]}
+                                        rehypePlugins={[rehypeKatex]}
+                                    >
+                                        {currentQuestion.text}
+                                    </ReactMarkdown>
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="p-10 pt-4 flex flex-col items-center">
@@ -388,7 +396,15 @@ export default function HostPlay() {
                                                                 "bg-amber-950 text-amber-500"}`}>
                                                     {i + 1}
                                                 </span>
-                                                <span className="text-2xl font-bold tracking-wide">{choice}</span>
+
+                                                <span className="text-2xl font-bold tracking-wide [&_p]:inline">
+                                                    <ReactMarkdown
+                                                        remarkPlugins={[remarkMath]}
+                                                        rehypePlugins={[rehypeKatex]}
+                                                    >
+                                                        {choice}
+                                                    </ReactMarkdown>
+                                                </span>
 
                                                 {/* My Answer Indicator */}
                                                 {isSelected && <div className="absolute top-2 right-2 flex items-center gap-1 text-[10px] font-bold text-amber-500 uppercase tracking-wider"><Sparkles className="h-3 w-3" /> Selected</div>}
@@ -467,7 +483,7 @@ export default function HostPlay() {
                         </Card>
                     </div>
                 </main>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

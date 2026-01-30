@@ -13,6 +13,9 @@ import { Timer, Trophy, CheckCircle2, XCircle, Swords, Shield, Sparkles, Home } 
 import { motion, AnimatePresence } from "framer-motion";
 import FantasyCountdown from "@/app/FantasyQuizzesKingdom/components/FantasyCountdown";
 import Image from "next/image";
+import ReactMarkdown from 'react-markdown';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 export default function GuestPlay() {
     const { roomId } = useParams() as { roomId: string };
@@ -245,9 +248,14 @@ export default function GuestPlay() {
                         <Card className="fantasy-card border-none bg-black/60 p-8 shadow-2xl">
                             <div className="absolute top-2 left-4 text-[10px] font-black italic gold-text tracking-[0.3em] uppercase opacity-50">Question {room.currentQuestionIndex + 1}</div>
                             <CardContent className="p-0 text-center">
-                                <h2 className="text-3xl font-black leading-tight italic gold-text drop-shadow-lg mb-4">
-                                    {currentQuestion.text}
-                                </h2>
+                                <div className="text-3xl font-black leading-tight italic gold-text drop-shadow-lg mb-4 [&_p]:inline">
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkMath]}
+                                        rehypePlugins={[rehypeKatex]}
+                                    >
+                                        {currentQuestion.text}
+                                    </ReactMarkdown>
+                                </div>
                                 {currentQuestion.imageUrl && (
                                     <Image
                                         src={currentQuestion.imageUrl}
@@ -287,7 +295,14 @@ export default function GuestPlay() {
                                     }`}>
                                     {i + 1}
                                 </span>
-                                <span className="flex-1 truncate tracking-wider">{choice}</span>
+                                <span className="flex-1 truncate tracking-wider [&_p]:inline">
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkMath]}
+                                        rehypePlugins={[rehypeKatex]}
+                                    >
+                                        {choice}
+                                    </ReactMarkdown>
+                                </span>
 
                                 {isCorrectAnswer && <motion.div initial={{ x: 20 }} animate={{ x: 0 }}><Shield className="h-6 w-6 text-white" /></motion.div>}
                                 {isWrongAnswer && <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}><XCircle className="h-6 w-6 text-white" /></motion.div>}
