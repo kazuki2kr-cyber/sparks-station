@@ -2,10 +2,10 @@ import type { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'Sparks Station',
-        short_name: 'Sparks Station',
-        description: '最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。',
-        start_url: '/',
+        name: 'Fantasy Quizzes Kingdom',
+        short_name: 'FQK',
+        description: 'A fantasy-themed quiz RPG application.',
+        start_url: '/FantasyQuizzesKingdom',
         display: 'standalone',
         background_color: '#0f172a', // Dark blue (slate-900 like) from the theme
         theme_color: '#fbbf24', // Gold (amber-400 like)
