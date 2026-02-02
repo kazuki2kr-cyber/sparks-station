@@ -22,6 +22,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             alternates: {
                 canonical: `/posts/${slug}`,
             },
+            openGraph: {
+                title: post.metadata.title,
+                description: post.metadata.summary,
+                type: 'article',
+                publishedTime: post.metadata.date,
+                authors: ['Sparks Station'],
+                tags: post.metadata.tags,
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title: post.metadata.title,
+                description: post.metadata.summary,
+            },
         };
     } catch {
         return {
@@ -49,8 +62,37 @@ export default async function PostPage({ params }: Props) {
     const mainTag = post.metadata.tags[0] || 'Tech';
     const theme = getThemeForTag(mainTag);
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: post.metadata.title,
+        description: post.metadata.summary,
+        datePublished: post.metadata.date,
+        author: {
+            '@type': 'Organization',
+            name: 'Sparks Station',
+            url: 'https://sparks-station.com'
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Sparks Station',
+            logo: {
+                '@type': 'ImageObject',
+                url: 'https://sparks-station.com/icon.png'
+            }
+        },
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://sparks-station.com/posts/${slug}`
+        }
+    };
+
     return (
         <article className="max-w-3xl mx-auto space-y-12">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             {/* Header */}
             <header className="space-y-6 text-center">
                 <div className={`flex items-center justify-center gap-4 text-sm font-mono ${theme.primary}`}>
