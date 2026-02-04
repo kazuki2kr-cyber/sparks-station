@@ -124,6 +124,7 @@ const toolsData: ToolCategory[] = [
                 description: "高性能な電子ペーパータブレット。紙のような書き心地と、驚異的な精度の音声認識・文字起こし機能を搭載。会議の議事録やアイデア出しに最強のデバイスです。",
                 tags: ["E-Paper", "Productivity", "Tablet"],
                 link: "https://amzn.to/4tlKIaQ",
+                buttonText: "Amazonで見る",
                 isAffiliate: true,
             },
             {
@@ -131,6 +132,7 @@ const toolsData: ToolCategory[] = [
                 description: "Macユーザーに最適なメカニカルキーボード。QMK/VIA対応でキー配置も自由自在。心地よい打鍵感とコンパクトな配列が、日々のコーディングを楽しくさせます。",
                 tags: ["Keyboard", "Mechanical", "Mac"],
                 link: "https://amzn.to/4atUoIO",
+                buttonText: "Amazonで見る",
                 isAffiliate: true,
             },
             {
@@ -138,6 +140,7 @@ const toolsData: ToolCategory[] = [
                 description: "人間工学に基づいた軽量ワイヤレスマウス。長時間の作業でも疲れにくく、無限スクロールホイールがドキュメント閲覧やコーディングに威力を発揮します。",
                 tags: ["Mouse", "Ergonomic", "Wireless"],
                 link: "https://amzn.to/4r0BO0O",
+                buttonText: "Amazonで見る",
                 isAffiliate: true,
             },
             {
@@ -145,6 +148,7 @@ const toolsData: ToolCategory[] = [
                 description: "コスパ最強の27インチWQHDモニター。IPSパネルで発色も良く、Type-C接続（65W給電）に対応しているためMacBookとの相性も抜群です。",
                 tags: ["Monitor", "IPS", "WQHD"],
                 link: "https://amzn.to/4qhjzD5",
+                buttonText: "Amazonで見る",
                 isAffiliate: true,
             }
         ]
