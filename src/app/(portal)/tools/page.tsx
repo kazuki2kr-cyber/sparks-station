@@ -1,6 +1,6 @@
 
 import { Metadata } from 'next';
-import { Terminal, Sparkles, Server, LineChart, ExternalLink } from 'lucide-react';
+import { Terminal, Sparkles, Server, LineChart, ExternalLink, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -144,6 +144,21 @@ const toolsData: ToolCategory[] = [
                 isAffiliate: true,
             }
         ]
+    },
+    {
+        title: "Skill Up & Career",
+        icon: <GraduationCap className="w-6 h-6 text-rose-500" />,
+        color: "rose",
+        tools: [
+            {
+                name: "デイトラ",
+                description: "「仕事につながるWebスキル」を最短距離で身につけるオンラインスクール。実務に即したカリキュラムと手厚いメンターサポートで、未経験からのエンジニア・デザイナー転職を強力にバックアップします。",
+                tags: ["Online Course", "Web Skills", "Career"],
+                link: "https://px.a8.net/svt/ejp?a8mat=4AVHC0+4VMW8I+5IZ2+5YRHE",
+                isAffiliate: true,
+                trackingPixel: "https://www19.a8.net/0.gif?a8mat=4AVHC0+4VMW8I+5IZ2+5YRHE"
+            }
+        ]
     }
 ];
 
@@ -172,6 +187,11 @@ const colorStyles: Record<string, {
         container: "hover:border-violet-500/50 hover:shadow-violet-500/10",
         title: "group-hover:text-violet-400",
         tag: "bg-violet-500/10 text-violet-400 border-violet-500/20",
+    },
+    rose: {
+        container: "hover:border-rose-500/50 hover:shadow-rose-500/10",
+        title: "group-hover:text-rose-400",
+        tag: "bg-rose-500/10 text-rose-400 border-rose-500/20",
     },
 };
 
