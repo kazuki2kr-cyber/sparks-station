@@ -187,8 +187,19 @@ function SoloGameContent() {
             if (category === "art_master") {
                 const { fetchArtQuestions } = await import("../lib/artQuiz");
                 const newQuestions = await fetchArtQuestions(10);
+                if (newQuestions.length === 0) {
+                    throw new Error("問題データの取得に失敗しました。");
+                }
                 setQuestions(newQuestions);
                 setShowCountdown(true);
+                setGameState("playing");
+                setCurrentQuestionIndex(0);
+                setScore(0);
+                setCurrentQuestionIndex(0);
+                setScore(0);
+                setTotalTime(0);
+                setUserAnswers([]); // Reset answers
+                setIsLoading(false);
                 return;
             }
 
