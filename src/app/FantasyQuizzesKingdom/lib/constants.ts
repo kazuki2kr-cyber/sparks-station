@@ -10,6 +10,13 @@ export type QuizCategory = {
 
 export const QUIZ_CATEGORIES: QuizCategory[] = [
     {
+        id: "world_master",
+        name: "World Master",
+        description: "国旗・人口・面積クイズ",
+        icon: Globe,
+        color: "text-emerald-400"
+    },
+    {
         id: "party",
         name: "パーティ",
         description: "みんなで盛り上がる！",
@@ -50,13 +57,6 @@ export const QUIZ_CATEGORIES: QuizCategory[] = [
         description: "雪と氷の祭典の知識",
         icon: Snowflake,
         color: "text-cyan-400"
-    },
-    {
-        id: "world_master",
-        name: "World Master",
-        description: "国旗・人口・面積クイズ",
-        icon: Globe,
-        color: "text-emerald-400"
     },
     {
         id: "all",

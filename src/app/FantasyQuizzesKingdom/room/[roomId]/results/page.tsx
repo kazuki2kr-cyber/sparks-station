@@ -106,15 +106,15 @@ export default function GuestResults() {
                         </header>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                            {/* My Result Card - ScoreCard Implementation */}
+                            {/* Left Column: Score Card & Review */}
                             <motion.div
                                 initial={{ x: -50, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
-                                className="flex flex-col gap-4"
+                                className="flex flex-col gap-8 md:col-span-1"
                             >
                                 <ScoreCard
                                     playerName={myPlayer.name}
-                                    genre="BATTLE" // Multi uses room category, but hardcoded or derived. Let's use fixed generic or try to fetch room info if possible, but simplicity: BATTLE
+                                    genre="BATTLE"
                                     score={myPlayer.score}
                                     rank={`${myRank} / ${players.length}`}
                                     rankLabel="POSITION"
@@ -138,16 +138,9 @@ export default function GuestResults() {
                                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                                     結果をXでポスト
                                 </Button>
-                            </motion.div>
 
-                            {/* Result Review Section (Only for me) */}
-                            <motion.div
-                                initial={{ x: -20, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="w-full md:col-span-1"
-                            >
-                                <Card className="fantasy-card border-none bg-black/60 w-full mb-8">
+                                {/* Play Record (Review) */}
+                                <Card className="fantasy-card border-none bg-black/60 w-full">
                                     <CardHeader className="pb-2">
                                         <CardTitle className="text-xl font-bold flex items-center gap-2">
                                             <Scroll className="h-5 w-5 text-amber-500" />
@@ -159,7 +152,6 @@ export default function GuestResults() {
                                             const ans = myPlayer.answers?.[q.id];
                                             const isCorrect = ans?.isCorrect;
                                             const timeTaken = ans?.timeTaken || 0;
-                                            // Handle case where answer might be missing or old format
                                             const selectedIndex = ans?.selectedOption !== undefined ? ans.selectedOption : -1;
                                             const skipped = ans === undefined;
 
@@ -209,7 +201,7 @@ export default function GuestResults() {
                             </motion.div>
 
                             {/* Podium for top 3 */}
-                            <div className="space-y-6">
+                            <div className="space-y-6 md:col-span-1">
                                 <h2 className="gold-text text-2xl font-black italic flex items-center gap-3 tracking-widest uppercase">
                                     <Crown className="h-7 w-7 text-amber-500" />
                                     ランキング

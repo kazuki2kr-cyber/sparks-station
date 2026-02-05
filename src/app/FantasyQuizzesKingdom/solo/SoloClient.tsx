@@ -607,8 +607,23 @@ function SoloGameContent() {
                         <h2 className="text-4xl font-black gold-text tracking-widest uppercase">スコア確定</h2>
                     </div>
 
+                    <div className="relative rounded-lg overflow-hidden transform transition-transform mb-6">
+                        <ScoreCard
+                            playerName={nickname || "Guest"}
+                            genre={category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN"}
+                            score={score}
+                            rank={
+                                score >= 14000 ? "Legend" :
+                                    score >= 12000 ? "Grand Master" :
+                                        score >= 10000 ? "Master" :
+                                            score >= 8000 ? "Expert" :
+                                                score >= 5000 ? "Adventurer" : "Novice"
+                            }
+                        />
+                    </div>
+
                     {/* Result Review Section */}
-                    <Card className="fantasy-card border-none bg-black/60 w-full">
+                    <Card className="fantasy-card border-none bg-black/60 w-full mb-8">
                         <CardHeader className="pb-2">
                             <CardTitle className="text-xl font-bold flex items-center gap-2">
                                 <Scroll className="h-5 w-5 text-amber-500" />
@@ -630,7 +645,7 @@ function SoloGameContent() {
                                                 </Badge>
                                                 <span className="text-xs font-bold text-amber-500/70">Q{idx + 1}</span>
                                             </div>
-                                            <span className="text-[10px] font-mono text-white/40">{ans.timeTaken.toFixed(2)}s</span>
+                                            <span className="text-xs font-mono text-white/40">{ans.timeTaken.toFixed(2)}s</span>
                                         </div>
 
                                         <p className="text-sm font-bold text-left leading-snug text-white/90">
@@ -662,21 +677,6 @@ function SoloGameContent() {
                             })}
                         </div>
                     </Card>
-
-                    <div className="relative rounded-lg overflow-hidden transform transition-transform">
-                        <ScoreCard
-                            playerName={nickname || "Guest"}
-                            genre={category === "all" ? "ALL" : QUIZ_CATEGORIES.find(c => c.id === category)?.name.toUpperCase() || "UNKNOWN"}
-                            score={score}
-                            rank={
-                                score >= 14000 ? "Legend" :
-                                    score >= 12000 ? "Grand Master" :
-                                        score >= 10000 ? "Master" :
-                                            score >= 8000 ? "Expert" :
-                                                score >= 5000 ? "Adventurer" : "Novice"
-                            }
-                        />
-                    </div>
 
                     <div className="flex flex-col gap-3">
                         <Button
