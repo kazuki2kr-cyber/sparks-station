@@ -148,10 +148,8 @@ function SoloGameContent() {
 
     // Handle Game Start
     const startGame = async () => {
-        if (!nickname.trim()) {
-            toast({ title: "名前を入力してください", variant: "destructive" });
-            return;
-        }
+        // Validation removed to allow anonymous play
+        // if (!nickname.trim()) { ... }
 
         setIsLoading(true);
         try {
@@ -335,7 +333,7 @@ function SoloGameContent() {
         setIsLoading(true);
         try {
             await addDoc(collection(db, "leaderboard"), {
-                nickname,
+                nickname: nickname.trim() || "名もなき挑戦者",
                 score,
                 totalTime,
                 category,
