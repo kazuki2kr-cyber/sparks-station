@@ -35,7 +35,7 @@ interface Question {
     options: string[];
     correctIndex: number;
     imageUrl?: string;
-    questionType?: 'flag' | 'population' | 'area';
+    questionType?: 'flag' | 'population' | 'area' | 'art';
 }
 
 interface Ranking {
@@ -172,6 +172,23 @@ function SoloGameContent() {
                 setTotalTime(0);
                 setUserAnswers([]); // Reset answers
                 setIsLoading(false);
+                return;
+            }
+
+            // Special Categories Handling (API/Local Data)
+            if (category === "world_master") {
+                const { fetchAndGenerateWorldQuestions } = await import("../lib/worldQuiz");
+                const newQuestions = await fetchAndGenerateWorldQuestions(10);
+                setQuestions(newQuestions);
+                setShowCountdown(true);
+                return;
+            }
+
+            if (category === "art_master") {
+                const { fetchArtQuestions } = await import("../lib/artQuiz");
+                const newQuestions = await fetchArtQuestions(10);
+                setQuestions(newQuestions);
+                setShowCountdown(true);
                 return;
             }
 

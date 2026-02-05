@@ -155,6 +155,32 @@ export default function HostDashboard() {
                     title: "問題を設定しました",
                     description: `テーマ「${cat?.name}」の問題をロードしました。`,
                 });
+            }
+
+            // Hijack for Art Master (Local Data/API)
+            if (categoryId === "art_master") {
+                const { fetchArtQuestions } = await import("../../lib/artQuiz");
+                const artQuestions = await fetchArtQuestions(10);
+                const batch = writeBatch(db);
+                artQuestions.forEach((q, index) => {
+                    const newQRef = doc(questionsRef);
+                    batch.set(newQRef, {
+                        text: q.text,
+                        choices: q.options,
+                        correctAnswer: q.correctIndex,
+                        timeLimit: 20,
+                        points: 1000,
+                        createdAt: Date.now() + index,
+                        order: index,
+                        imageUrl: q.imageUrl || null
+                    });
+                });
+                await batch.commit();
+
+                toast({
+                    title: "問題を設定しました",
+                    description: `テーマ「${cat?.name}」の問題をロードしました。`,
+                });
                 return;
             }
 

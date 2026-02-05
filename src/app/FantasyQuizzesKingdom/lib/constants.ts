@@ -1,4 +1,4 @@
-import { Sparkles, BookOpen, Scroll, Gamepad2, PartyPopper, Box, Flag, Trophy, Snowflake, Globe } from "lucide-react";
+import { Sparkles, BookOpen, Scroll, Gamepad2, PartyPopper, Box, Flag, Trophy, Snowflake, Globe, Palette } from "lucide-react";
 
 export type QuizCategory = {
     id: string;
@@ -15,6 +15,13 @@ export const QUIZ_CATEGORIES: QuizCategory[] = [
         description: "国旗・人口・面積クイズ",
         icon: Globe,
         color: "text-emerald-400"
+    },
+    {
+        id: "art_master",
+        name: "Art Master",
+        description: "名画の作者・タイトル",
+        icon: Palette,
+        color: "text-purple-400"
     },
     {
         id: "party",
