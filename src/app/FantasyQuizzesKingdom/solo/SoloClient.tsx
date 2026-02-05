@@ -48,7 +48,7 @@ interface Ranking {
 
 function SoloGameContent() {
     // Removed useSearchParams for category. Default is now managed by local state.
-    const [category, setCategory] = useState<string>("party");
+    const [category, setCategory] = useState<string>(QUIZ_CATEGORIES[0].id);
 
     const [gameState, setGameState] = useState<GameState>("lobby");
     const [nickname, setNickname] = useState("");
@@ -438,7 +438,7 @@ function SoloGameContent() {
                                 </div>
                                 <Button
                                     onClick={startGame}
-                                    disabled={!nickname || (isLoading && gameState === "lobby")}
+                                    disabled={isLoading && gameState === "lobby"}
                                     className="w-full h-20 text-xl font-black fantasy-button group text-amber-100"
                                 >
                                     {isLoading && gameState === "lobby" ? <Loader2 className="animate-spin" /> : "ゲームを開始する"}
