@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { QUIZ_CATEGORIES } from "../../lib/constants";
+import { fetchAndGenerateWorldQuestions } from "../../lib/worldQuiz";
 
 interface Player {
     id: string;
@@ -130,6 +131,33 @@ export default function HostDashboard() {
             await deleteBatch.commit();
 
             // Fetch generic questions based on category
+
+            // Hijack for World Master (API)
+            if (categoryId === "world_master") {
+                const worldQuestions = await fetchAndGenerateWorldQuestions(10);
+                const batch = writeBatch(db);
+                worldQuestions.forEach((q, index) => {
+                    const newQRef = doc(questionsRef);
+                    batch.set(newQRef, {
+                        text: q.text,
+                        choices: q.options,
+                        correctAnswer: q.correctIndex,
+                        timeLimit: 20,
+                        points: 1000,
+                        createdAt: Date.now() + index,
+                        order: index,
+                        imageUrl: q.imageUrl || null
+                    });
+                });
+                await batch.commit();
+
+                toast({
+                    title: "問題を設定しました",
+                    description: `テーマ「${cat?.name}」の問題をロードしました。`,
+                });
+                return;
+            }
+
             let globalQRef = collection(db, "questions");
             // NOTE: Ideally we query by category, but for now we fetch all and filter in memory or if "questions" collection has category field.
             // Assuming "questions" collection has a "category" field.

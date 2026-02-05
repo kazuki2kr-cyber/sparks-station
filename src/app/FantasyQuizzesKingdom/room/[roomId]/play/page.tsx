@@ -164,12 +164,14 @@ export default function GuestPlay() {
         setSpeedBonusEarned(bonusPt);
         setShowFeedback(true);
 
+        // Update player score and answer record
         const playerRef = doc(db, "rooms", roomId, "players", user!.uid);
         await updateDoc(playerRef, {
             score: increment(points),
             totalTime: increment(timeTaken),
             [`answers.${currentQuestion.id}`]: {
                 isCorrect: correct,
+                selectedOption: index,
                 timeTaken,
                 points
             }

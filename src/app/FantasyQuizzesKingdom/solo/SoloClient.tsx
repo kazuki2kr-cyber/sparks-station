@@ -25,6 +25,7 @@ import { useToast } from "@/hooks/use-toast";
 import { QUIZ_CATEGORIES } from "../lib/constants";
 import FantasyCountdown from "../components/FantasyCountdown";
 import ScoreCard from "../components/ScoreCard";
+import { fetchAndGenerateWorldQuestions } from "../lib/worldQuiz";
 
 type GameState = "lobby" | "playing" | "result";
 
@@ -33,6 +34,8 @@ interface Question {
     text: string;
     options: string[];
     correctIndex: number;
+    imageUrl?: string;
+    questionType?: 'flag' | 'population' | 'area';
 }
 
 interface Ranking {
@@ -154,6 +157,24 @@ function SoloGameContent() {
         try {
             if (!user) await loginAnonymously();
 
+            if (category === "world_master") {
+                const worldQuestions = await fetchAndGenerateWorldQuestions(10);
+                if (worldQuestions.length === 0) {
+                    throw new Error("問題データの取得に失敗しました。");
+                }
+                setQuestions(worldQuestions);
+                setShowCountdown(true);
+                setGameState("playing");
+                setCurrentQuestionIndex(0);
+                setScore(0);
+                setCurrentQuestionIndex(0);
+                setScore(0);
+                setTotalTime(0);
+                setUserAnswers([]); // Reset answers
+                setIsLoading(false);
+                return;
+            }
+
             let qQuestions;
             if (category === "all") {
                 qQuestions = query(collection(db, "questions"));
@@ -207,7 +228,9 @@ function SoloGameContent() {
             setGameState("playing");
             setCurrentQuestionIndex(0);
             setScore(0);
+            setScore(0);
             setTotalTime(0);
+            setUserAnswers([]); // Reset answers
             // nextQuestion will be called via onComplete callback
         } catch (error: any) {
             toast({ title: "エラー", description: error.message, variant: "destructive" });
@@ -215,6 +238,9 @@ function SoloGameContent() {
             setIsLoading(false);
         }
     };
+
+    // Track user answers for review
+    const [userAnswers, setUserAnswers] = useState<{ qIndex: number; qId: string; selectedIndex: number; correctIndex: number; timeTaken: number; isCorrect: boolean }[]>([]);
 
     const nextQuestion = (index: number, qList?: Question[]) => {
         const list = qList || questions;
@@ -253,6 +279,16 @@ function SoloGameContent() {
         setAnswered(true);
         setSelectedOption(optionIndex);
         setTotalTime(prev => prev + timeSpent);
+
+        // Record answer for review
+        setUserAnswers(prev => [...prev, {
+            qIndex: currentQuestionIndex,
+            qId: currentQ.id,
+            selectedIndex: optionIndex,
+            correctIndex: currentQ.correctIndex,
+            timeTaken: timeSpent,
+            isCorrect
+        }]);
 
         if (isCorrect) {
             const speedBonus = Math.max(0, 1 - (timeSpent / 10)) * 500;
@@ -510,6 +546,15 @@ function SoloGameContent() {
                         <h2 className="text-2xl md:text-3xl font-black text-white leading-relaxed relative z-10">
                             {questions[currentQuestionIndex]?.text}
                         </h2>
+                        {questions[currentQuestionIndex]?.imageUrl && (
+                            <div className="flex justify-center mt-6 relative z-10">
+                                <img
+                                    src={questions[currentQuestionIndex].imageUrl}
+                                    alt="Quiz Image"
+                                    className="h-32 md:h-56 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] rounded-md border border-white/10"
+                                />
+                            </div>
+                        )}
                     </Card>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
@@ -561,6 +606,62 @@ function SoloGameContent() {
                         </motion.div>
                         <h2 className="text-4xl font-black gold-text tracking-widest uppercase">スコア確定</h2>
                     </div>
+
+                    {/* Result Review Section */}
+                    <Card className="fantasy-card border-none bg-black/60 w-full">
+                        <CardHeader className="pb-2">
+                            <CardTitle className="text-xl font-bold flex items-center gap-2">
+                                <Scroll className="h-5 w-5 text-amber-500" />
+                                <span className="text-amber-100">プレイ記録</span>
+                            </CardTitle>
+                        </CardHeader>
+                        <div className="p-4 space-y-3 max-h-[400px] overflow-y-auto custom-scrollbar">
+                            {userAnswers.map((ans, idx) => {
+                                const question = questions[ans.qIndex];
+                                if (!question) return null;
+                                return (
+                                    <div key={idx} className={`p-3 rounded-xl border flex flex-col gap-2 ${ans.isCorrect ? "bg-green-900/10 border-green-500/30" : "bg-red-900/10 border-red-500/30"
+                                        }`}>
+                                        <div className="flex justify-between items-start gap-3">
+                                            <div className="flex items-center gap-2">
+                                                <Badge variant="outline" className={`${ans.isCorrect ? "border-green-500 text-green-400" : "border-red-500 text-red-400"
+                                                    } h-6 w-6 rounded-full p-0 flex items-center justify-center shrink-0`}>
+                                                    {ans.isCorrect ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
+                                                </Badge>
+                                                <span className="text-xs font-bold text-amber-500/70">Q{idx + 1}</span>
+                                            </div>
+                                            <span className="text-[10px] font-mono text-white/40">{ans.timeTaken.toFixed(2)}s</span>
+                                        </div>
+
+                                        <p className="text-sm font-bold text-left leading-snug text-white/90">
+                                            {questions[ans.qIndex].text}
+                                        </p>
+
+                                        {question.imageUrl && (
+                                            <div className="my-1">
+                                                <img src={question.imageUrl} className="h-16 object-contain rounded border border-white/5" />
+                                            </div>
+                                        )}
+
+                                        <div className="text-xs space-y-1 mt-1 text-left bg-black/20 p-2 rounded">
+                                            <div className="flex gap-2">
+                                                <span className="text-white/40 w-10 shrink-0">正解:</span>
+                                                <span className="text-green-400 font-bold">{question.options[ans.correctIndex]}</span>
+                                            </div>
+                                            {!ans.isCorrect && (
+                                                <div className="flex gap-2">
+                                                    <span className="text-white/40 w-10 shrink-0">回答:</span>
+                                                    <span className="text-red-400 font-bold line-through decoration-red-500/50">
+                                                        {ans.selectedIndex === -1 ? "時間切れ" : question.options[ans.selectedIndex]}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </Card>
 
                     <div className="relative rounded-lg overflow-hidden transform transition-transform">
                         <ScoreCard
@@ -622,8 +723,9 @@ function SoloGameContent() {
                         Glory awaits the swift
                     </div>
                 </motion.div>
-            )}
-        </AnimatePresence>
+            )
+            }
+        </AnimatePresence >
     );
 }
 

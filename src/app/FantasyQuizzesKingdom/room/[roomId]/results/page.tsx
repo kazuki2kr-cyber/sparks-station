@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { collection, onSnapshot, doc, getDoc } from "firebase/firestore";
+import { collection, onSnapshot, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Trophy, Home, Crown, Star, Sparkles, Sword, Scroll } from "lucide-react";
+import { Trophy, Home, Crown, Star, Sparkles, Sword, Scroll, CheckCircle2, XCircle } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 // import AdBanner from "@/components/AdBanner";
 import ScoreCard from "@/app/FantasyQuizzesKingdom/components/ScoreCard";
@@ -18,6 +20,7 @@ export default function GuestResults() {
     const [players, setPlayers] = useState<any[]>([]);
     const [myRank, setMyRank] = useState<number | null>(null);
     const [myPlayer, setMyPlayer] = useState<any>(null);
+    const [questions, setQuestions] = useState<any[]>([]);
     const router = useRouter();
 
     useEffect(() => {
@@ -35,6 +38,16 @@ export default function GuestResults() {
                 setMyPlayer(list[rank]);
             }
         });
+
+        // Fetch questions for review
+        const fetchQuestions = async () => {
+            const questionsRef = collection(db, "rooms", roomId, "questions");
+            const snapshot = await getDocs(questionsRef);
+            const qs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+            qs.sort((a: any, b: any) => (a.createdAt || 0) - (b.createdAt || 0));
+            setQuestions(qs);
+        }
+        fetchQuestions();
 
         return () => unsubscribe();
     }, [roomId, user, authLoading]);
@@ -127,6 +140,74 @@ export default function GuestResults() {
                                 </Button>
                             </motion.div>
 
+                            {/* Result Review Section (Only for me) */}
+                            <motion.div
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                transition={{ delay: 0.2 }}
+                                className="w-full md:col-span-1"
+                            >
+                                <Card className="fantasy-card border-none bg-black/60 w-full mb-8">
+                                    <CardHeader className="pb-2">
+                                        <CardTitle className="text-xl font-bold flex items-center gap-2">
+                                            <Scroll className="h-5 w-5 text-amber-500" />
+                                            <span className="text-amber-100">プレイ記録</span>
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <div className="p-4 space-y-3 max-h-[400px] overflow-y-auto custom-scrollbar">
+                                        {questions.map((q, idx) => {
+                                            const ans = myPlayer.answers?.[q.id];
+                                            const isCorrect = ans?.isCorrect;
+                                            const timeTaken = ans?.timeTaken || 0;
+                                            // Handle case where answer might be missing or old format
+                                            const selectedIndex = ans?.selectedOption !== undefined ? ans.selectedOption : -1;
+                                            const skipped = ans === undefined;
+
+                                            return (
+                                                <div key={q.id} className={`p-3 rounded-xl border flex flex-col gap-2 ${isCorrect ? "bg-green-900/10 border-green-500/30" : "bg-red-900/10 border-red-500/30"
+                                                    }`}>
+                                                    <div className="flex justify-between items-start gap-3">
+                                                        <div className="flex items-center gap-2">
+                                                            <Badge variant="outline" className={`${isCorrect ? "border-green-500 text-green-400" : "border-red-500 text-red-400"
+                                                                } h-6 w-6 rounded-full p-0 flex items-center justify-center shrink-0`}>
+                                                                {isCorrect ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
+                                                            </Badge>
+                                                            <span className="text-xs font-bold text-amber-500/70">Q{idx + 1}</span>
+                                                        </div>
+                                                        <span className="text-[10px] font-mono text-white/40">{timeTaken.toFixed(2)}s</span>
+                                                    </div>
+
+                                                    <p className="text-sm font-bold text-left leading-snug text-white/90">
+                                                        {q.text}
+                                                    </p>
+
+                                                    {q.imageUrl && (
+                                                        <div className="my-1">
+                                                            <Image src={q.imageUrl} alt="q" width={100} height={60} className="h-16 w-auto object-contain rounded border border-white/5" />
+                                                        </div>
+                                                    )}
+
+                                                    <div className="text-xs space-y-1 mt-1 text-left bg-black/20 p-2 rounded">
+                                                        <div className="flex gap-2">
+                                                            <span className="text-white/40 w-10 shrink-0">正解:</span>
+                                                            <span className="text-green-400 font-bold">{q.choices?.[q.correctAnswer]}</span>
+                                                        </div>
+                                                        {!isCorrect && (
+                                                            <div className="flex gap-2">
+                                                                <span className="text-white/40 w-10 shrink-0">回答:</span>
+                                                                <span className="text-red-400 font-bold line-through decoration-red-500/50">
+                                                                    {skipped ? "回答なし" : (selectedIndex === -1 ? "不明" : q.choices?.[selectedIndex])}
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </Card>
+                            </motion.div>
+
                             {/* Podium for top 3 */}
                             <div className="space-y-6">
                                 <h2 className="gold-text text-2xl font-black italic flex items-center gap-3 tracking-widest uppercase">
@@ -174,8 +255,9 @@ export default function GuestResults() {
                             </p>
                         </div>
                     </div>
-                )}
-            </AnimatePresence>
-        </div>
+                )
+                }
+            </AnimatePresence >
+        </div >
     );
 }

@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { generateRoomId } from "@/lib/utils-game";
-import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag, Trophy, Snowflake } from "lucide-react";
+import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag, Trophy, Snowflake, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 // import AdBanner from "@/components/AdBanner";
@@ -488,6 +488,18 @@ export default function HomeClient() {
                                             <h3 className="text-cyan-400 font-bold mb-2">冬季五輪 (Winter Olympics)</h3>
                                             <p className="text-amber-100/70 text-sm leading-relaxed">
                                                 雪と氷の祭典、冬季オリンピックの感動をクイズで振り返る。歴代の金メダリスト、競技ルール、開催地の記憶を試そう。
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {/* World Master */}
+                                    <div className="bg-black/40 backdrop-blur-md border border-amber-900/30 p-6 rounded-2xl flex gap-4">
+                                        <div className="shrink-0 w-12 h-12 rounded-full bg-emerald-900/20 flex items-center justify-center border border-emerald-500/30">
+                                            <Globe className="h-6 w-6 text-emerald-400" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-emerald-400 font-bold mb-2">World Master</h3>
+                                            <p className="text-amber-100/70 text-sm leading-relaxed">
+                                                国旗、人口、面積など。世界地理に関する知識を問うグローバルなクイズバトル。地図帳を眺めるのが好きだったあなたへ。
                                             </p>
                                         </div>
                                     </div>
