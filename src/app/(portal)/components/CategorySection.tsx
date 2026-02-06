@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Post } from '@/lib/content';
 import PostCard from './PostCard';
 import { Theme } from '@/lib/theme';
@@ -7,10 +8,15 @@ interface CategorySectionProps {
     description?: string;
     posts: Post[];
     theme: Theme;
+    limit?: number;
+    viewAllLink?: string;
 }
 
-export default function CategorySection({ title, description, posts, theme }: CategorySectionProps) {
+export default function CategorySection({ title, description, posts, theme, limit, viewAllLink }: CategorySectionProps) {
     if (posts.length === 0) return null;
+
+    const displayedPosts = limit ? posts.slice(0, limit) : posts;
+    const hasMore = limit ? posts.length > limit : false;
 
     return (
         <section className="py-8">
@@ -27,14 +33,26 @@ export default function CategorySection({ title, description, posts, theme }: Ca
                     )}
                 </div>
 
-                {/* Optional: Add "View All" link here if needed later */}
+                {viewAllLink && hasMore && (
+                    <Link href={viewAllLink} className={`hidden md:flex items-center gap-2 text-sm font-medium ${theme.primary} hover:opacity-80 transition-opacity`}>
+                        View All Cases →
+                    </Link>
+                )}
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {posts.map((post) => (
+                {displayedPosts.map((post) => (
                     <PostCard key={post.slug} post={post} />
                 ))}
             </div>
+
+            {viewAllLink && hasMore && (
+                <div className="mt-8 text-center md:hidden">
+                    <Link href={viewAllLink} className={`inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full border ${theme.border} ${theme.bg} ${theme.primary}`}>
+                        View All Cases →
+                    </Link>
+                </div>
+            )}
         </section>
     );
 }

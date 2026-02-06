@@ -1,5 +1,5 @@
-import { getSortedPostsData, Post } from '@/lib/content';
-import { getThemeForTag, THEMES } from '@/lib/theme';
+import { getSortedPostsData } from '@/lib/content';
+import { CATEGORIES, classifyPosts } from '@/lib/classifier';
 import HeroSection from './components/HeroSection';
 import CategorySection from './components/CategorySection';
 import { Metadata } from 'next';
@@ -19,53 +19,48 @@ export default async function PortalPage() {
 
     // 1. Latest Post (Hero)
     const latestPost = allPosts[0];
-    const remainingPosts = allPosts.slice(1);
 
-    // 2. Categorize remaining posts
-    const successPosts: Post[] = [];
-    const thoughtPosts: Post[] = [];
-    const failurePosts: Post[] = [];
-
-    remainingPosts.forEach(post => {
-        const mainTag = post.metadata.tags[0] || '';
-        const theme = getThemeForTag(mainTag);
-
-        if (theme === THEMES.rose) {
-            failurePosts.push(post);
-        } else if (theme === THEMES.purple) {
-            thoughtPosts.push(post);
-        } else {
-            // Emerald and Blue themes go here (Success/Tech)
-            successPosts.push(post);
-        }
-    });
+    // 2. Classify ALL posts (including latest, as requested)
+    const classified = classifyPosts(allPosts);
 
     return (
-        <div className="space-y-20 pb-20">
+        <div className="space-y-24 pb-20">
             {/* Hero Section */}
-            <HeroSection post={latestPost} />
+            <div className="space-y-4">
+                <div className="flex items-center gap-3 px-1">
+                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span>
+                    <span className="text-xs font-mono text-emerald-400/80 tracking-widest uppercase">Latest Spark</span>
+                </div>
+                <HeroSection post={latestPost} />
+            </div>
 
             {/* Category Sections */}
-            <div className="space-y-16">
+            <div className="space-y-20">
                 <CategorySection
-                    title="Success Case & Tech"
-                    description="世界の最先端事例と、実装のための技術スタック。"
-                    posts={successPosts}
-                    theme={THEMES.emerald}
+                    title={CATEGORIES.success.title}
+                    description={CATEGORIES.success.description}
+                    posts={classified.success}
+                    theme={CATEGORIES.success.theme}
+                    limit={6}
+                    viewAllLink={`/categories/${CATEGORIES.success.slug}`}
                 />
 
                 <CategorySection
-                    title="Philosophy & Narrative"
-                    description="プロダクトの魂となる「思想」と「物語」。"
-                    posts={thoughtPosts}
-                    theme={THEMES.purple}
+                    title={CATEGORIES.thought.title}
+                    description={CATEGORIES.thought.description}
+                    posts={classified.thought}
+                    theme={CATEGORIES.thought.theme}
+                    limit={6}
+                    viewAllLink={`/categories/${CATEGORIES.thought.slug}`}
                 />
 
                 <CategorySection
-                    title="Failure Cases"
-                    description="先人たちの失敗から学ぶ、生存への羅針盤。"
-                    posts={failurePosts}
-                    theme={THEMES.rose}
+                    title={CATEGORIES.failure.title}
+                    description={CATEGORIES.failure.description}
+                    posts={classified.failure}
+                    theme={CATEGORIES.failure.theme}
+                    limit={6}
+                    viewAllLink={`/categories/${CATEGORIES.failure.slug}`}
                 />
             </div>
         </div>
