@@ -27,10 +27,10 @@ export default async function PortalPage() {
         <div className="space-y-24 pb-20">
             {/* Hero Section */}
             <div className="space-y-4">
-                <div className="flex items-center gap-3 px-1">
-                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.5)]"></span>
-                    <span className="text-xs font-mono text-emerald-400/80 tracking-widest uppercase">Latest Spark</span>
-                </div>
+                <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 text-neutral-100">
+                    <span className="w-1.5 h-8 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
+                    Latest Spark
+                </h2>
                 <HeroSection post={latestPost} />
             </div>
 

@@ -11,16 +11,19 @@ export default function PostCard({ post }: { post: Post }) {
         <Link href={`/posts/${post.slug}`} className="block group h-full">
             <article className={`bg-neutral-800/50 border border-neutral-800 rounded-2xl overflow-hidden transition-all duration-300 h-full flex flex-col shadow-lg hover:-translate-y-1 ${theme.hoverBorder} ${theme.hoverShadow}`}>
                 {/* Visual Thumbnail */}
-                <div className={`aspect-video relative overflow-hidden flex items-center justify-center bg-gradient-to-br ${theme.gradient}`}>
-                    <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
+                {/* Visual Thumbnail - Minimalist Badge Style */}
+                <div className={`aspect-video relative overflow-hidden bg-gradient-to-br ${theme.gradient}`}>
+                    <div className="absolute inset-0 bg-black/10 backdrop-blur-[0px]"></div>
 
-                    {/* Tag Overlay */}
-                    <div className="relative z-10 text-white font-bold text-3xl md:text-4xl tracking-tighter opacity-90 drop-shadow-md transform group-hover:scale-105 transition-transform duration-500 text-center px-4 leading-tight">
-                        {mainTag.replace(/([a-z])([A-Z][a-z])/g, '$1 $2').trim()}
+                    {/* Corner Badge */}
+                    <div className="absolute top-3 right-3 z-10">
+                        <span className="inline-block bg-black/20 backdrop-blur-md border border-white/10 text-white/90 text-[10px] font-bold px-2 py-1 rounded tracking-wide shadow-sm">
+                            {mainTag}
+                        </span>
                     </div>
 
                     {/* Decorative shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-white/10 opacity-60"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-white/5 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                 </div>
 
                 <div className="p-6 space-y-4 flex-grow flex flex-col">
@@ -45,11 +48,6 @@ export default function PostCard({ post }: { post: Post }) {
                     </p>
 
                     <div className="pt-4 flex items-center justify-between text-xs font-mono border-t border-neutral-700/50 mt-5 w-full">
-                        <div className="flex flex-col gap-1">
-                            {post.metadata.mrr && <div className="text-neutral-500">MRR: <span className="text-neutral-300 font-bold">{post.metadata.mrr}</span></div>}
-                            {post.metadata.exit_price && <div className="text-neutral-500">Sold: <span className="text-neutral-300 font-bold">{post.metadata.exit_price}</span></div>}
-                        </div>
-
                         {/* Stats Footer (Integrated into card) */}
                         <PostStats slug={post.slug} theme={theme} />
                     </div>
