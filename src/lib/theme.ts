@@ -60,13 +60,33 @@ export const THEMES: Record<string, Theme> = {
         metricValue: 'text-cyan-400',
         gradient: 'from-blue-600 via-cyan-600 to-sky-600',
     },
+    rose: {
+        primary: 'text-rose-400',
+        bg: 'bg-rose-500/10',
+        border: 'border-rose-500/20',
+        hoverBorder: 'hover:border-rose-500/50',
+        hoverShadow: 'hover:shadow-rose-500/10',
+        groupHoverText: 'group-hover:text-rose-400',
+        prose: 'prose-rose',
+        heading: 'prose-h3:text-rose-400',
+        codeText: 'text-rose-300',
+        codeBg: 'bg-rose-950/40',
+        metricLabel: 'text-rose-400',
+        metricValue: 'text-rose-400',
+        gradient: 'from-rose-600 via-pink-600 to-red-600',
+    },
 };
 
 export function getThemeForTag(tag: string): Theme {
     const lowerTag = tag.toLowerCase();
 
+    // Failure Case tags trigger Rose theme
+    if (lowerTag.startsWith('failurecase')) {
+        return THEMES.rose;
+    }
+
     // Concept / Thought related tags trigger Purple theme
-    if (['narrativeengineering', 'thought', 'concept', 'singularity', 'philosophy'].includes(lowerTag)) {
+    if (['narrativeengineering', 'thought', 'concept', 'singularity', 'philosophy'].some(t => lowerTag.startsWith(t))) {
         return THEMES.purple;
     }
 
