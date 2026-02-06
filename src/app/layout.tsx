@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_JP } from "next/font/google"; // Import Noto_Sans_JP
 import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 
@@ -76,6 +77,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
+        <GoogleAnalytics gaId="G-4V4BG1669S" />
         <AuthProvider>
           {children}
         </AuthProvider>
