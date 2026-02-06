@@ -11,8 +11,8 @@ export default function PostCard({ post }: { post: Post }) {
         <Link href={`/posts/${post.slug}`} className="block group h-full">
             <article className={`bg-neutral-800/50 border border-neutral-800 rounded-2xl overflow-hidden transition-all duration-300 h-full flex flex-col shadow-lg hover:-translate-y-1 ${theme.hoverBorder} ${theme.hoverShadow}`}>
                 {/* Visual Thumbnail */}
-                {/* Visual Thumbnail - Minimalist Badge Style */}
-                <div className={`aspect-video relative overflow-hidden bg-gradient-to-br ${theme.gradient}`}>
+                {/* Visual Thumbnail - Minimalist Badge Style - Slim */}
+                <div className={`h-24 relative overflow-hidden bg-gradient-to-br ${theme.gradient}`}>
                     <div className="absolute inset-0 bg-black/10 backdrop-blur-[0px]"></div>
 
                     {/* Corner Badge */}
