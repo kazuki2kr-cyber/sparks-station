@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/quiz',
+        destination: '/FantasyQuizzesKingdom',
+        permanent: true,
+      },
+    ];
+  },
 
 };
 
