@@ -27,6 +27,25 @@ export default async function PortalPage() {
         <div className="space-y-24 pb-20">
             {/* Hero Section */}
             <div className="space-y-4">
+                <section className="text-center space-y-6 py-12 mb-12 relative">
+                    <h2 className="text-2xl md:text-3xl font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 uppercase mb-2">
+                        Sparks Station
+                    </h2>
+                    <div className="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/20 mb-4">
+                        Micro-SaaS Trends for Engineers
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-tight">
+                        最新の<span className="text-emerald-400">「開発事例」</span>と<br className="hidden md:block" />
+                        先進的な<span className="text-emerald-400">「思想」</span>を<br className="hidden md:block" />
+                        <span className="text-emerald-400">「プロダクト」</span>へ。
+                    </h1>
+                    <p className="text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                        海の向こうの開発事例と、世界をアップデートする概念。<br />
+                        2つの知見を種火（Sparks）に変えて、<br />
+                        プロダクトを創り出す。
+                    </p>
+                </section>
+
                 <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 text-neutral-100">
                     <span className="w-1.5 h-8 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
                     Latest Spark
