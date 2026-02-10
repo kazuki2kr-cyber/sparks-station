@@ -110,9 +110,13 @@ export default function AboutPage() {
                 <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <div className="space-y-4">
                         <h3 className="font-bold text-neutral-300 uppercase tracking-wider">運営者情報</h3>
-                        <dl className="grid grid-cols-[100px_1fr] gap-y-2">
+                        <dl className="grid grid-cols-[100px_1fr] gap-y-2 border-l-2 border-emerald-500/20 pl-4">
                             <dt>名称</dt>
                             <dd>Sparks Station 運営事務局</dd>
+                            <dt>開設</dt>
+                            <dd>2026年1月</dd>
+                            <dt>事業内容</dt>
+                            <dd>SaaSビジネスの事例研究・情報発信、Webアプリケーション開発</dd>
                             <dt>URL</dt>
                             <dd>https://sparks-station.com</dd>
                             <dt>お問い合わせ</dt>
