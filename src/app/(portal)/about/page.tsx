@@ -76,7 +76,7 @@ export default function AboutPage() {
                             <h3 className="text-xl font-bold text-white">Advanced Thoughts <span className="text-purple-400 text-sm font-normal ml-2">/ 思想</span></h3>
                             <p className="text-neutral-400 leading-relaxed">
                                 テクノロジーと社会の未来を定義する、先進的な概念の探求。<br />
-                                既存の枠組みを超え、新しいナラティブや価値観をプロダクトに宿すための思考実験。
+                                「Service-as-a-Software」や「Agent-First」など、既存の枠組みを超えた新しいナラティブを実装するための思考実験。
                             </p>
                         </div>
                     </div>
