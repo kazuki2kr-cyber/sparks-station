@@ -112,6 +112,8 @@ export default async function PostPage({ params }: Props) {
                 </h1>
 
                 {/* Metrics Card */}
+                {/* Metrics Card - Hidden as per request */}
+                {/* 
                 <div className="bg-neutral-800/50 border border-neutral-800 rounded-2xl p-6 md:p-8 max-w-2xl mx-auto flex justify-between items-center text-center">
                     <div>
                         <div className="text-xs text-neutral-500 uppercase tracking-wider mb-1">MRR (月商)</div>
@@ -126,7 +128,8 @@ export default async function PostPage({ params }: Props) {
                             {post.metadata.exit_price || 'N/A'}
                         </div>
                     </div>
-                </div>
+                </div> 
+                */}
             </header>
 
             {/* Content using standard Prose styles but customized for dark mode */}

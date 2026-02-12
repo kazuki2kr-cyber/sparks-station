@@ -31,18 +31,15 @@ export default async function PortalPage() {
                     <h2 className="text-2xl md:text-3xl font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 uppercase mb-2">
                         Sparks Station
                     </h2>
-                    <div className="inline-block px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-xs font-medium border border-emerald-500/20 mb-4">
-                        Micro-SaaS & Agentic Trends
-                    </div>
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-tight">
                         最新の<span className="text-emerald-400">「開発事例」</span>と<br className="hidden md:block" />
                         先進的な<span className="text-emerald-400">「思想」</span>を<br className="hidden md:block" />
-                        <span className="text-emerald-400">「プロダクト」</span>へ。
+                        <span className="text-emerald-400">「インフラ」</span>へ。
                     </h1>
                     <p className="text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                        海の向こうの開発事例と、AI時代の新たな概念。<br />
+                        海の向こうの開発事例と、AI時代の新たな思想。<br />
                         2つの知見を種火（Sparks）に変えて、<br />
-                        <span className="text-white font-bold">次世代の「インフラ」</span>を創り出す。
+                        次世代のインフラを創り出す。
                     </p>
                 </section>
 
