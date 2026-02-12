@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Post } from '@/lib/content';
 import { getThemeForTag } from '@/lib/theme';
 import PostStats from './PostStats';
@@ -13,16 +14,32 @@ export default function HeroSection({ post }: { post: Post }) {
                 <div className={`relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:shadow-${theme.primary}/20`}>
                     <div className="grid md:grid-cols-12 gap-0">
                         {/* Visual Side */}
-                        <div className={`md:col-span-7 aspect-video md:aspect-auto relative overflow-hidden min-h-[160px] md:min-h-[220px] flex items-center justify-center bg-gradient-to-br ${theme.gradient}`}>
-                            <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
-
-                            {/* Tag Overlay - Large (Removed for compactness/minimalism if desired, but keeping based on request to just compact size. Actually, let's keep it but slightly smaller or fully removed if minimalist? Plan said 'Compact HeroSection card size'. I will just reduce the text size.) */}
-                            <div className="relative z-10 text-white font-bold text-3xl md:text-5xl tracking-tighter opacity-90 drop-shadow-lg transform group-hover:scale-105 transition-transform duration-700 text-center px-4 leading-tight">
-                                {mainTag.replace(/([a-z])([A-Z][a-z])/g, '$1 $2').trim()}
-                            </div>
-
-                            {/* Decorative shine */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-white/10 opacity-60"></div>
+                        <div className="md:col-span-7 aspect-video md:aspect-auto relative overflow-hidden min-h-[160px] md:min-h-[220px]">
+                            {post.metadata.image ? (
+                                <>
+                                    <Image
+                                        src={post.metadata.image}
+                                        alt={post.metadata.title}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                    {/* Dark overlay for text readability */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/50 to-transparent"></div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient}`}></div>
+                                    <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
+                                    {/* Tag Overlay - Only shown when no image */}
+                                    <div className="absolute inset-0 flex items-center justify-center z-10">
+                                        <div className="text-white font-bold text-3xl md:text-5xl tracking-tighter opacity-90 drop-shadow-lg transform group-hover:scale-105 transition-transform duration-700 text-center px-4 leading-tight">
+                                            {mainTag.replace(/([a-z])([A-Z][a-z])/g, '$1 $2').trim()}
+                                        </div>
+                                    </div>
+                                    {/* Decorative shine */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-white/10 opacity-60"></div>
+                                </>
+                            )}
                         </div>
 
                         {/* Content Side */}

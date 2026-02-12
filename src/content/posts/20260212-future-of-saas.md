@@ -3,6 +3,7 @@ title: "「アプリ」が消える日。Nothingが描く『Just-in-Time Softwar
 date: "2026-02-12"
 tags: ["Concept", "SaaS_Trend", "AI_Agent", "Service-as-a-Software"]
 summary: "Nothingが提示した「アプリのない世界」は、SaaSのUIが消滅し、AIがオンデマンドでインターフェースを生成する未来を示唆しています。「ツール」から「インフラ」への回帰、そしてエンジニアが次に実装すべき『Service-as-a-Software』の概念を解剖します。"
+image: "/images/20260212.webp"
 ---
 
 ## ① 【サマリー】30秒でわかる今回の概念
