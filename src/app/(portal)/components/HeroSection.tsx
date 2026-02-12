@@ -13,7 +13,7 @@ export default function HeroSection({ post }: { post: Post }) {
                 <div className={`relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:shadow-${theme.primary}/20`}>
                     <div className="grid md:grid-cols-12 gap-0">
                         {/* Visual Side */}
-                        <div className={`md:col-span-7 aspect-video md:aspect-auto relative overflow-hidden min-h-[200px] md:min-h-[280px] flex items-center justify-center bg-gradient-to-br ${theme.gradient}`}>
+                        <div className={`md:col-span-7 aspect-video md:aspect-auto relative overflow-hidden min-h-[160px] md:min-h-[220px] flex items-center justify-center bg-gradient-to-br ${theme.gradient}`}>
                             <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
 
                             {/* Tag Overlay - Large (Removed for compactness/minimalism if desired, but keeping based on request to just compact size. Actually, let's keep it but slightly smaller or fully removed if minimalist? Plan said 'Compact HeroSection card size'. I will just reduce the text size.) */}
@@ -26,17 +26,17 @@ export default function HeroSection({ post }: { post: Post }) {
                         </div>
 
                         {/* Content Side */}
-                        <div className="md:col-span-5 p-6 md:p-8 flex flex-col justify-center relative bg-neutral-900/50 backdrop-blur-sm">
+                        <div className="md:col-span-5 p-4 md:p-6 flex flex-col justify-center relative bg-neutral-900/50 backdrop-blur-sm">
                             <div className={`inline-flex items-center gap-2 text-xs font-mono mb-4 ${theme.primary}`}>
                                 <span className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border} tracking-wide`}>LATEST SPARK</span>
                                 <span>{post.metadata.date}</span>
                             </div>
 
-                            <h2 className={`text-2xl md:text-3xl font-bold text-neutral-100 mb-4 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r ${theme.gradient} transition-all duration-300`}>
+                            <h2 className={`text-xl md:text-2xl font-bold text-neutral-100 mb-4 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r ${theme.gradient} transition-all duration-300`}>
                                 {post.metadata.title}
                             </h2>
 
-                            <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+                            <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-4 line-clamp-2">
                                 {post.metadata.summary}
                             </p>
 

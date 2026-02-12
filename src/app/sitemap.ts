@@ -70,5 +70,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         ...postUrls,
 
+        // Tag Pages
+        ...(() => {
+            const allTags = posts.flatMap(post => post.metadata.tags);
+            const uniqueTags = [...new Set(allTags)];
+            return uniqueTags.map(tag => ({
+                url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly' as const,
+                priority: 0.7,
+            }));
+        })(),
+
     ]
 }

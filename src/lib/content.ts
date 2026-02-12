@@ -12,6 +12,7 @@ export type PostMetadata = {
     mrr?: string;
     exit_price?: string;
     isPremium?: boolean;
+    image?: string; // Optional image path relative to public folder
 };
 
 export type Post = {

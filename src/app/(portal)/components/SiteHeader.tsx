@@ -6,10 +6,9 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_LINKS = [
-    { href: "/", label: "Insights" },
-    { href: "/products", label: "Products" },
+    { href: "/", label: "Articles" },
     { href: "/tools", label: "Tools" },
-    { href: "/about", label: "About" },
+    { href: "/products", label: "Products" },
 ];
 
 export default function SiteHeader() {
