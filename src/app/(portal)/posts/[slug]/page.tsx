@@ -3,6 +3,7 @@ import { getPostData, getSortedPostsData } from '@/lib/content';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getThemeForTag } from '@/lib/theme';
@@ -131,6 +132,19 @@ export default async function PostPage({ params }: Props) {
                 </div> 
                 */}
             </header>
+
+            {/* Article Hero Image */}
+            {post.metadata.image && (
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-neutral-700/50 shadow-lg">
+                    <Image
+                        src={post.metadata.image}
+                        alt={post.metadata.title}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+            )}
 
             {/* Content using standard Prose styles but customized for dark mode */}
             <div className={`prose prose-invert ${theme.prose} max-w-none 
