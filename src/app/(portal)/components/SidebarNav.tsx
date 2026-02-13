@@ -5,7 +5,7 @@ import { getSortedPostsData } from '@/lib/content';
 export default function SidebarNav() {
     const allPosts = getSortedPostsData();
 
-    // Extract unique tags from all posts (top 6)
+    // Extract unique tags from all posts (top 10)
     const allTags = allPosts.flatMap(post => post.metadata.tags);
     const tagCounts = allTags.reduce((acc, tag) => {
         acc[tag] = (acc[tag] || 0) + 1;
@@ -13,7 +13,7 @@ export default function SidebarNav() {
     }, {} as Record<string, number>);
     const topTags = Object.entries(tagCounts)
         .sort(([, a], [, b]) => b - a)
-        .slice(0, 6)
+        .slice(0, 10)
         .map(([tag]) => tag);
 
     return (

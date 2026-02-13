@@ -95,10 +95,10 @@ export default async function PostPage({ params }: Props) {
             />
             {/* Header */}
             <header className="space-y-6 text-center">
-                <div className={`flex items-center justify-center gap-4 text-sm font-mono ${theme.primary}`}>
+                <div className={`flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-sm font-mono ${theme.primary}`}>
                     <time dateTime={post.metadata.date}>{post.metadata.date}</time>
-                    <span>•</span>
-                    <div className="flex gap-2">
+                    <span className="hidden md:inline">•</span>
+                    <div className="flex flex-wrap justify-center gap-2">
                         {post.metadata.tags.map(tag => (
                             <span key={tag} className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border}`}>
                                 {tag}
