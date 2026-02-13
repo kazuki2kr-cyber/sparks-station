@@ -14,6 +14,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${decodedTag} - Sparks Station`,
         description: `Articles tagged with ${decodedTag}`,
+        robots: {
+            index: false,
+            follow: true,
+        },
     };
 }
 
