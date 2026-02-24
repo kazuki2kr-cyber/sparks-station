@@ -12,6 +12,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
+    // Tag pages
+    const allTags = posts.flatMap(post => post.metadata.tags)
+    const uniqueTags = [...new Set(allTags)]
+    const tagUrls = uniqueTags.map((tag) => ({
+        url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+    }))
+
     return [
         {
             url: baseUrl,
@@ -69,6 +79,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.8,
         },
         ...postUrls,
+        ...tagUrls,
         // Quiz App URLs
         {
             url: `${baseUrl}/FantasyQuizzesKingdom`,

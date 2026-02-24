@@ -13,10 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const decodedTag = decodeURIComponent(resolvedParams.tag);
     return {
         title: `${decodedTag} - Sparks Station`,
-        description: `Articles tagged with ${decodedTag}`,
-        robots: {
-            index: false,
-            follow: true,
+        description: `「${decodedTag}」タグの記事一覧 | Sparks Station`,
+        alternates: {
+            canonical: `/tags/${resolvedParams.tag}`,
         },
     };
 }
