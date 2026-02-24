@@ -8,7 +8,11 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
             disallow: [
-                '/FantasyQuizzesKingdom/',
+                '/FantasyQuizzesKingdom/admin',
+                '/FantasyQuizzesKingdom/room/',
+                '/FantasyQuizzesKingdom/host/',
+                '/FantasyQuizzesKingdom/debug',
+                '/FantasyQuizzesKingdom/design-preview',
             ],
         },
         sitemap: `${baseUrl}/sitemap.xml`,
