@@ -1,7 +1,7 @@
 ---
 title: "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First APIの実装論"
 date: "2026-02-14"
-tags: ["Concept", "AI Agent", "API Design", "SaaS", "Singularity"]
+tags: ["Concept", "AI", "SaaS", "Product"]
 summary: "AIがUIを直接操作し、アプリを自律生成する時代の到来により、従来の「画面を売る」ビジネスモデルが終焉を迎えようとしています。本質的な価値がGUIからコンテキスト（文脈）へと移行するパラダイムシフトの正体と、AIエージェントに選ばれるための具体的な実装ガイドを提示します。"
 image: "/images/20260213saas_is_dead.webp"
 ---
