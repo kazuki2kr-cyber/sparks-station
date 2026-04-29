@@ -2,8 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { doc, onSnapshot, setDoc, getDoc, collection, getCountFromServer } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { getLivePlayer, getLivePlayers, joinLiveRoom, liveStateRef, subscribeValue, LiveRoomState } from "../../lib/liveRoom";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,11 +33,9 @@ export default function GuestLobby() {
     useEffect(() => {
         if (authLoading) return;
 
-        const roomRef = doc(db, "rooms", roomId);
-        const unsubscribe = onSnapshot(roomRef, (snapshot) => {
-            if (snapshot.exists()) {
+        const unsubscribeLiveRoom = subscribeValue<LiveRoomState>(liveStateRef(roomId), (data) => {
+            if (data) {
                 setRoomExists(true);
-                const data = snapshot.data();
                 setRoomStatus(data.status);
 
                 if (data.status === "playing" && isJoined) {
@@ -51,9 +48,8 @@ export default function GuestLobby() {
 
         // Check if player is already in this room
         if (user) {
-            getDoc(doc(db, "rooms", roomId, "players", user.uid)).then((docSnap) => {
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
+            getLivePlayer(roomId, user.uid).then((data) => {
+                if (data) {
                     setNickname(data.name);
                     setSelectedIcon(data.iconUrl);
                     setIsJoined(true);
@@ -61,7 +57,9 @@ export default function GuestLobby() {
             });
         }
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribeLiveRoom();
+        };
     }, [roomId, isJoined, user, authLoading, router]);
 
     const handleJoin = async () => {
@@ -69,22 +67,20 @@ export default function GuestLobby() {
 
         try {
             // Check current player count
-            const playersRef = collection(db, "rooms", roomId, "players");
-            const snapshot = await getCountFromServer(playersRef);
-            const currentCount = snapshot.data().count;
+            const currentCount = (await getLivePlayers(roomId)).length;
 
             if (currentCount >= 50) {
                 alert("このルームは満員です（最大50名）。参加できません。");
                 return;
             }
 
-            await setDoc(doc(db, "rooms", roomId, "players", user.uid), {
+            await joinLiveRoom(roomId, user.uid, {
                 name: nickname,
                 iconUrl: selectedIcon,
                 score: 0,
                 totalTime: 0,
                 joinedAt: Date.now(),
-                answers: {}
+                answerCount: 0
             });
 
             setIsJoined(true);

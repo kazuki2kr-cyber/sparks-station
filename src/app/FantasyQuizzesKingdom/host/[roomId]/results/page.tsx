@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { collection, onSnapshot, doc, deleteDoc, getDocs, updateDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Trophy, Home, RotateCcw, Users, Download, Trash2, Crown, Sparkles, Scroll } from "lucide-react";
 import { motion } from "framer-motion";
+import { deleteLiveRoom, getLivePlayers, resetLivePlayers, updateLiveState } from "@/app/FantasyQuizzesKingdom/lib/liveRoom";
 
 export default function HostResults() {
     const { roomId } = useParams() as { roomId: string };
@@ -19,32 +20,30 @@ export default function HostResults() {
     useEffect(() => {
         if (authLoading || !user) return;
 
-        const playersRef = collection(db, "rooms", roomId, "players");
-        const unsubscribe = onSnapshot(playersRef, (snapshot) => {
-            const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        let cancelled = false;
+        getLivePlayers(roomId).then((livePlayers) => {
+            if (cancelled) return;
+            const list = livePlayers;
             list.sort((a: any, b: any) => b.score - a.score || a.totalTime - b.totalTime);
             setPlayers(list);
         });
 
-        return () => unsubscribe();
+        return () => {
+            cancelled = true;
+        };
     }, [roomId, user, authLoading]);
 
     const handleResetGame = async () => {
-        const playersRef = collection(db, "rooms", roomId, "players");
-        const snapshot = await getDocs(playersRef);
-        for (const d of snapshot.docs) {
-            await updateDoc(d.ref, {
-                score: 0,
-                totalTime: 0,
-                answers: {}
-            });
-        }
+        await resetLivePlayers(roomId);
 
-        await updateDoc(doc(db, "rooms", roomId), {
+        const waitingState = {
             status: "waiting",
             currentQuestionIndex: -1,
             currentPhase: "waiting"
-        });
+        } as const;
+
+        await updateLiveState(roomId, waitingState);
+        await updateDoc(doc(db, "rooms", roomId), waitingState);
 
         router.push(`/host/${roomId}`);
     };
@@ -52,6 +51,7 @@ export default function HostResults() {
     const handleDeleteRoom = async () => {
         if (confirm("ルームを削除しますか？この操作は取り消せません。")) {
             await deleteDoc(doc(db, "rooms", roomId));
+            await deleteLiveRoom(roomId);
             router.push("/FantasyQuizzesKingdom");
         }
     };

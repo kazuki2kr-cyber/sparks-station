@@ -14,13 +14,9 @@ import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { QUIZ_CATEGORIES } from "../../lib/constants";
 import { fetchAndGenerateWorldQuestions } from "../../lib/worldQuiz";
+import { LivePlayer, updateLiveState } from "../../lib/liveRoom";
 
-interface Player {
-    id: string;
-    name: string;
-    iconUrl: string;
-    joinedAt: number;
-}
+type Player = LivePlayer;
 
 export default function HostDashboard() {
     const { roomId } = useParams() as { roomId: string };
@@ -101,6 +97,9 @@ export default function HostDashboard() {
 
     const handleUpdateRoomName = async () => {
         if (!roomName.trim()) return;
+        await updateLiveState(roomId, {
+            roomName: roomName
+        });
         await updateDoc(doc(db, "rooms", roomId), {
             roomName: roomName
         });
@@ -115,6 +114,10 @@ export default function HostDashboard() {
         try {
             // Update room category
             const cat = QUIZ_CATEGORIES.find(c => c.id === categoryId);
+            await updateLiveState(roomId, {
+                category: categoryId,
+                categoryName: cat?.name || "Unknown"
+            });
             await updateDoc(doc(db, "rooms", roomId), {
                 category: categoryId,
                 categoryName: cat?.name || "Unknown"
@@ -291,13 +294,16 @@ export default function HostDashboard() {
         // const firstQ = questions[0]; // 'questions' is not defined here
         // const limit = firstQ.timeLimit || 20; // 'questions' is not defined here
 
-        await updateDoc(doc(db, "rooms", roomId), {
+        const gameState = {
             status: 'playing',
             currentQuestionIndex: 0,
             currentPhase: 'question',
             startTime: Date.now() + 4000, // 3s countdown + 1s buffer
             hostParticipates: hostParticipates
-        });
+        } as const;
+
+        await updateLiveState(roomId, gameState);
+        await updateDoc(doc(db, "rooms", roomId), gameState);
         // Local redirect for host to play screen
         router.push(`/FantasyQuizzesKingdom/host/${roomId}/play`);
     };

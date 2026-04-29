@@ -11,6 +11,7 @@ import { generateRoomId } from "@/lib/utils-game";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
+import { createLiveRoom } from "../../lib/liveRoom";
 
 export default function ThemeLandingPage({ slug, categoryId }: { slug: string, categoryId: string }) {
     const { user, loginAnonymously } = useAuth();
@@ -43,7 +44,7 @@ export default function ThemeLandingPage({ slug, categoryId }: { slug: string, c
                 docSnap = await getDoc(docRef);
             }
 
-            await setDoc(doc(db, "rooms", newId), {
+            const roomData = {
                 status: "waiting",
                 currentQuestionIndex: -1,
                 currentPhase: "waiting",
@@ -55,7 +56,10 @@ export default function ThemeLandingPage({ slug, categoryId }: { slug: string, c
                 categoryName: category?.name || "一般常識",
                 hostParticipates: false,
                 shortId: newId
-            });
+            } as const;
+
+            await setDoc(doc(db, "rooms", newId), roomData);
+            await createLiveRoom(newId, roomData);
 
             router.push(`/FantasyQuizzesKingdom/host/${newId}`);
 

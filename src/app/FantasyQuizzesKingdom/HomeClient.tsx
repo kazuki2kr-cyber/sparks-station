@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { generateRoomId } from "@/lib/utils-game";
+import { createLiveRoom } from "./lib/liveRoom";
 import { Sparkles, Sword, Crown, Users, ArrowLeft, Gamepad2, PartyPopper, BookOpen, Box, Flag, Trophy, Snowflake, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -68,7 +69,7 @@ export default function HomeClient() {
                 docSnap = await getDoc(docRef);
             }
 
-            await setDoc(doc(db, "rooms", newId), {
+            const roomData = {
                 status: "waiting",
                 currentQuestionIndex: -1,
                 currentPhase: "waiting",
@@ -80,7 +81,10 @@ export default function HomeClient() {
                 category: null, // Host will select category later for Standard mode
                 hostParticipates,
                 shortId: newId
-            });
+            } as const;
+
+            await setDoc(doc(db, "rooms", newId), roomData);
+            await createLiveRoom(newId, roomData);
 
             router.push(`/FantasyQuizzesKingdom/host/${newId}`);
         } catch (e: any) {

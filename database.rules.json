@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "liveRooms": {
+      "$roomId": {
+        ".read": true,
+        ".write": "auth != null && ((data.exists() && data.child('state/hostId').val() === auth.uid) || (newData.exists() && newData.child('state/hostId').val() === auth.uid))",
+        "state": {
+          ".write": "auth != null && (!data.exists() || data.child('hostId').val() === auth.uid || newData.child('hostId').val() === auth.uid)"
+        },
+        "players": {
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.hasChildren(['name', 'iconUrl', 'score', 'totalTime', 'joinedAt'])"
+          }
+        },
+        "answers": {
+          "$questionId": {
+            "$uid": {
+              ".write": "auth != null && auth.uid === $uid && !data.exists()",
+              ".validate": "newData.hasChildren(['uid', 'questionId', 'selectedOption', 'isCorrect', 'timeTaken', 'points', 'answeredAt']) && newData.child('uid').val() === auth.uid && newData.child('questionId').val() === $questionId"
+            }
+          }
+        }
+      }
+    }
+  }
+}

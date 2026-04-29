@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { doc, onSnapshot, updateDoc, increment, getDoc, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import { Progress } from "@/components/ui/progress";
@@ -16,6 +16,13 @@ import Image from "next/image";
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import {
+    LiveRoomState,
+    livePlayerRef,
+    liveStateRef,
+    submitLiveAnswer,
+    subscribeValue,
+} from "@/app/FantasyQuizzesKingdom/lib/liveRoom";
 
 export default function GuestPlay() {
     const { roomId } = useParams() as { roomId: string };
@@ -43,10 +50,8 @@ export default function GuestPlay() {
     useEffect(() => {
         if (authLoading || !user) return;
 
-        const roomRef = doc(db, "rooms", roomId);
-        const unsubscribeRoom = onSnapshot(roomRef, async (snapshot) => {
-            if (snapshot.exists()) {
-                const roomData = snapshot.data();
+        const unsubscribeRoom = subscribeValue<LiveRoomState>(liveStateRef(roomId), (roomData) => {
+            if (roomData) {
                 setRoom(roomData);
 
                 if (roomData.status === "finished") {
@@ -62,14 +67,12 @@ export default function GuestPlay() {
             const qs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
             // Sort by createdAt or order just in case
             qs.sort((a: any, b: any) => (a.createdAt || 0) - (b.createdAt || 0));
+            sessionStorage.setItem(`fqk:${roomId}:questions`, JSON.stringify(qs));
             setQuestions(qs);
         });
 
-        const playerRef = doc(db, "rooms", roomId, "players", user.uid);
-        const unsubscribePlayer = onSnapshot(playerRef, (snapshot) => {
-            if (snapshot.exists()) {
-                setPlayer(snapshot.data());
-            }
+        const unsubscribePlayer = subscribeValue<any>(livePlayerRef(roomId, user.uid), (data) => {
+            if (data) setPlayer(data);
         });
 
         return () => {
@@ -165,16 +168,14 @@ export default function GuestPlay() {
         setShowFeedback(true);
 
         // Update player score and answer record
-        const playerRef = doc(db, "rooms", roomId, "players", user!.uid);
-        await updateDoc(playerRef, {
-            score: increment(points),
-            totalTime: increment(timeTaken),
-            [`answers.${currentQuestion.id}`]: {
-                isCorrect: correct,
-                selectedOption: index,
-                timeTaken,
-                points
-            }
+        await submitLiveAnswer(roomId, user!.uid, {
+            uid: user!.uid,
+            questionId: currentQuestion.id,
+            selectedOption: index,
+            isCorrect: correct,
+            timeTaken,
+            points,
+            answeredAt: Date.now()
         });
     };
 

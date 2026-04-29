@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { collection, onSnapshot, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
@@ -13,6 +13,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 // import AdBanner from "@/components/AdBanner";
 import ScoreCard from "@/app/FantasyQuizzesKingdom/components/ScoreCard";
+import { getLiveAnswersForPlayer, getLivePlayers } from "@/app/FantasyQuizzesKingdom/lib/liveRoom";
 
 export default function GuestResults() {
     const { roomId } = useParams() as { roomId: string };
@@ -26,30 +27,45 @@ export default function GuestResults() {
     useEffect(() => {
         if (authLoading || !user) return;
 
-        const playersRef = collection(db, "rooms", roomId, "players");
-        const unsubscribe = onSnapshot(playersRef, (snapshot) => {
-            const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        let cancelled = false;
+
+        const fetchResults = async () => {
+            const list = await getLivePlayers(roomId);
             list.sort((a: any, b: any) => b.score - a.score || a.totalTime - b.totalTime);
+            if (cancelled) return;
             setPlayers(list);
 
             const rank = list.findIndex(p => p.id === user.uid);
-            if (rank !== -1) {
-                setMyRank(rank + 1);
-                setMyPlayer(list[rank]);
+            const currentPlayer = rank !== -1 ? list[rank] : null;
+            const cachedQuestions = sessionStorage.getItem(`fqk:${roomId}:questions`);
+            let qs = cachedQuestions ? JSON.parse(cachedQuestions) : null;
+
+            if (!qs) {
+                const questionsRef = collection(db, "rooms", roomId, "questions");
+                const snapshot = await getDocs(questionsRef);
+                qs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                qs.sort((a: any, b: any) => (a.createdAt || 0) - (b.createdAt || 0));
             }
-        });
 
-        // Fetch questions for review
-        const fetchQuestions = async () => {
-            const questionsRef = collection(db, "rooms", roomId, "questions");
-            const snapshot = await getDocs(questionsRef);
-            const qs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-            qs.sort((a: any, b: any) => (a.createdAt || 0) - (b.createdAt || 0));
+            if (cancelled) return;
             setQuestions(qs);
-        }
-        fetchQuestions();
 
-        return () => unsubscribe();
+            if (rank !== -1) {
+                const answers = await getLiveAnswersForPlayer(roomId, user.uid, qs.map((q: any) => q.id));
+                if (cancelled) return;
+                setMyRank(rank + 1);
+                setMyPlayer({
+                    ...currentPlayer,
+                    answers
+                });
+            }
+        };
+
+        fetchResults();
+
+        return () => {
+            cancelled = true;
+        };
     }, [roomId, user, authLoading]);
 
     // Tallying Effect

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { doc, onSnapshot, collection, updateDoc, query, orderBy, increment, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,18 @@ import Image from "next/image";
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import {
+    LiveAnswer,
+    LiveRoomState,
+    getLivePlayer,
+    joinLiveRoom,
+    liveStateRef,
+    submitLiveAnswer,
+    subscribeLivePlayers,
+    subscribeQuestionAnswers,
+    subscribeValue,
+    updateLiveState,
+} from "@/app/FantasyQuizzesKingdom/lib/liveRoom";
 
 export default function HostPlay() {
     const { roomId } = useParams() as { roomId: string };
@@ -22,6 +34,7 @@ export default function HostPlay() {
     const [room, setRoom] = useState<any>(null);
     const [questions, setQuestions] = useState<any[]>([]);
     const [players, setPlayers] = useState<any[]>([]);
+    const [currentAnswers, setCurrentAnswers] = useState<Record<string, LiveAnswer>>({});
     const [timeLeft, setTimeLeft] = useState(0);
     const router = useRouter();
 
@@ -41,21 +54,26 @@ export default function HostPlay() {
     useEffect(() => {
         if (authLoading || !user) return;
 
-        const roomRef = doc(db, "rooms", roomId);
-        const unsubscribeRoom = onSnapshot(roomRef, (snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.data();
-                if (data.hostId !== user.uid) {
-                    router.push("/FantasyQuizzesKingdom");
-                    return;
-                }
-                setRoom(data);
+        const unsubscribeRoom = subscribeValue<LiveRoomState>(liveStateRef(roomId), async (data) => {
+            if (!data) return;
+            if (data.hostId !== user.uid) {
+                router.push("/FantasyQuizzesKingdom");
+                return;
+            }
+            setRoom(data);
 
-                // Reset player state on new question
-                if (data.currentPhase === 'question' && selectedAnswer !== null) {
-                    // Check if question blocked or changed? 
-                    // This logic is tricky if updates happen frequently.
-                    // Better to reset only when index changes.
+            if (data.hostParticipates) {
+                const hostPlayer = await getLivePlayer(roomId, user.uid);
+                if (!hostPlayer) {
+                    await joinLiveRoom(roomId, user.uid, {
+                        name: data.hostName || "Host",
+                        iconUrl: `https://api.dicebear.com/7.x/pixel-art/svg?seed=${user.uid}`,
+                        score: 0,
+                        totalTime: 0,
+                        joinedAt: Date.now(),
+                        answerCount: 0,
+                        isHost: true,
+                    });
                 }
             }
         });
@@ -65,10 +83,7 @@ export default function HostPlay() {
             setQuestions(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
         });
 
-        const playersRef = collection(db, "rooms", roomId, "players");
-        const unsubscribePlayers = onSnapshot(playersRef, (snapshot) => {
-            setPlayers(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-        });
+        const unsubscribePlayers = subscribeLivePlayers(roomId, setPlayers);
 
         return () => {
             unsubscribeRoom();
@@ -76,6 +91,14 @@ export default function HostPlay() {
             unsubscribePlayers();
         };
     }, [roomId, user, authLoading, router]);
+
+    useEffect(() => {
+        if (!room || questions.length === 0) return;
+        const currentQuestion = questions[room.currentQuestionIndex];
+        if (!currentQuestion?.id) return;
+
+        return subscribeQuestionAnswers(roomId, currentQuestion.id, setCurrentAnswers);
+    }, [roomId, room?.currentQuestionIndex, questions]);
 
     // Reset loop for new questions
     useEffect(() => {
@@ -149,7 +172,7 @@ export default function HostPlay() {
 
     const handleTimeUp = async () => {
         if (room?.currentPhase === "question") {
-            await updateDoc(doc(db, "rooms", roomId), {
+            await updateLiveState(roomId, {
                 currentPhase: "result"
             });
         }
@@ -159,7 +182,7 @@ export default function HostPlay() {
         if (!room || questions.length === 0) return;
 
         if (room.currentPhase === "question") {
-            await updateDoc(doc(db, "rooms", roomId), {
+            await updateLiveState(roomId, {
                 currentPhase: "result"
             });
         } else if (room.currentPhase === "result") {
@@ -168,14 +191,14 @@ export default function HostPlay() {
                 const nextQ = questions[nextIndex];
                 const limit = nextQ.timeLimit || 20;
 
-                await updateDoc(doc(db, "rooms", roomId), {
+                await updateLiveState(roomId, {
                     currentQuestionIndex: nextIndex,
                     currentPhase: "question",
                     startTime: Date.now()
                 });
                 setTimeLeft(limit);
             } else {
-                await updateDoc(doc(db, "rooms", roomId), {
+                await updateLiveState(roomId, {
                     status: "finished",
                     currentPhase: "finished"
                 });
@@ -212,22 +235,21 @@ export default function HostPlay() {
         setSpeedBonusEarned(bonusPt);
         setShowFeedback(true);
 
-        const playerRef = doc(db, "rooms", roomId, "players", user!.uid);
-        await updateDoc(playerRef, {
-            score: increment(points),
-            totalTime: increment(timeTaken),
-            [`answers.${currentQuestion.id}`]: {
-                isCorrect: correct,
-                timeTaken,
-                points
-            }
+        await submitLiveAnswer(roomId, user!.uid, {
+            uid: user!.uid,
+            questionId: currentQuestion.id,
+            selectedOption: index,
+            isCorrect: correct,
+            timeTaken,
+            points,
+            answeredAt: Date.now()
         });
     };
 
     if (!room || questions.length === 0) return null;
 
     const currentQuestion = questions[room.currentQuestionIndex];
-    const answeredCount = players.filter(p => p.answers?.[currentQuestion?.id]).length;
+    const answeredCount = Object.keys(currentAnswers).length;
 
     return (
         <div className="min-h-screen relative bg-slate-950 text-white p-4 md:p-8 overflow-hidden">
