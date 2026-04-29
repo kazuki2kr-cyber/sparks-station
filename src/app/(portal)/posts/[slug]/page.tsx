@@ -8,6 +8,9 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { getThemeForTag } from '@/lib/theme';
 import FeedbackSection from '../../components/FeedbackSection';
+import RelatedArticles from './components/RelatedArticles';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://sparks-station.com';
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -17,6 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     try {
         const post = await getPostData(slug);
+        const ogImageParams = new URLSearchParams({
+            title: post.metadata.title,
+            tag: post.metadata.tags[0] || 'SuccessCase',
+            ...(post.metadata.mrr ? { mrr: post.metadata.mrr } : {}),
+            ...(post.metadata.exit_price ? { exit: post.metadata.exit_price } : {}),
+        });
+        const ogImageUrl = `${BASE_URL}/api/og?${ogImageParams.toString()}`;
+
         return {
             title: `${post.metadata.title} | Sparks Station`,
             description: post.metadata.summary,
@@ -30,11 +41,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 publishedTime: post.metadata.date,
                 authors: ['Sparks Station'],
                 tags: post.metadata.tags,
+                images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.metadata.title }],
             },
             twitter: {
                 card: 'summary_large_image',
                 title: post.metadata.title,
                 description: post.metadata.summary,
+                images: [ogImageUrl],
             },
         };
     } catch {
@@ -164,6 +177,9 @@ export default async function PostPage({ params }: Props) {
 
             {/* Feedback & Comments */}
             <FeedbackSection slug={post.slug} />
+
+            {/* Related Articles */}
+            <RelatedArticles currentSlug={post.slug} currentTags={post.metadata.tags} />
 
             {/* Footer / Navigation */}
             <div className="pt-12 border-t border-neutral-800 mt-16 flex justify-center">
