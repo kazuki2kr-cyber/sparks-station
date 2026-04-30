@@ -9,9 +9,10 @@ import { QUIZ_CATEGORIES } from "../../lib/constants";
 import { Sparkles, Sword, PartyPopper, Users, ArrowRight, CheckCircle2 } from "lucide-react";
 import { generateRoomId } from "@/lib/utils-game";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
 import { createLiveRoom } from "../../lib/liveRoom";
+import { replaceRoomQuestions } from "../../lib/roomQuestions";
 
 export default function ThemeLandingPage({ slug, categoryId }: { slug: string, categoryId: string }) {
     const { user, loginAnonymously } = useAuth();
@@ -28,8 +29,6 @@ export default function ThemeLandingPage({ slug, categoryId }: { slug: string, c
                 await loginAnonymously();
             }
 
-            // Re-check auth
-            const { auth } = require("@/lib/firebase");
             const currentUser = auth.currentUser;
             if (!currentUser) throw new Error("Authentication failed");
 
@@ -60,6 +59,7 @@ export default function ThemeLandingPage({ slug, categoryId }: { slug: string, c
 
             await setDoc(doc(db, "rooms", newId), roomData);
             await createLiveRoom(newId, roomData);
+            await replaceRoomQuestions(newId, categoryId);
 
             router.push(`/FantasyQuizzesKingdom/host/${newId}`);
 

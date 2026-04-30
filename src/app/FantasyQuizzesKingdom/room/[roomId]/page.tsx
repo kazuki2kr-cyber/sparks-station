@@ -26,7 +26,7 @@ export default function GuestLobby() {
     const animalIcons = useMemo(() => {
         return Array.from({ length: 100 }).map((_, i) => ({
             id: i,
-            url: `https://api.dicebear.com/7.x/pixel-art/svg?seed=${i + 123}` // Using pixel art for RPG feel
+            url: `https://api.dicebear.com/7.x/pixel-art/png?seed=${i + 123}` // Using pixel art for RPG feel
         }));
     }, []);
 

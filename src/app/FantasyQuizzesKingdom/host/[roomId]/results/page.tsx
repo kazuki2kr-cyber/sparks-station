@@ -45,7 +45,7 @@ export default function HostResults() {
         await updateLiveState(roomId, waitingState);
         await updateDoc(doc(db, "rooms", roomId), waitingState);
 
-        router.push(`/host/${roomId}`);
+        router.push(`/FantasyQuizzesKingdom/host/${roomId}`);
     };
 
     const handleDeleteRoom = async () => {

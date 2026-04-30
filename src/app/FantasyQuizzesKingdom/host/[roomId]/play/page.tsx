@@ -67,7 +67,7 @@ export default function HostPlay() {
                 if (!hostPlayer) {
                     await joinLiveRoom(roomId, user.uid, {
                         name: data.hostName || "Host",
-                        iconUrl: `https://api.dicebear.com/7.x/pixel-art/svg?seed=${user.uid}`,
+                        iconUrl: `https://api.dicebear.com/7.x/pixel-art/png?seed=${user.uid}`,
                         score: 0,
                         totalTime: 0,
                         joinedAt: Date.now(),

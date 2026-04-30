@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { doc, onSnapshot, collection, updateDoc, getDocs, deleteDoc, writeBatch, setDoc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot, collection, updateDoc, getDocs, writeBatch } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { QUIZ_CATEGORIES } from "../../lib/constants";
 import { fetchAndGenerateWorldQuestions } from "../../lib/worldQuiz";
-import { LivePlayer, updateLiveState } from "../../lib/liveRoom";
+import { getLivePlayer, joinLiveRoom, LivePlayer, subscribeLivePlayers, updateLiveState } from "../../lib/liveRoom";
 
 type Player = LivePlayer;
 
@@ -47,20 +47,19 @@ export default function HostDashboard() {
                 if (data.roomName) setRoomName(data.roomName);
                 if (data.type) setRoomType(data.type);
                 if (data.category) setRoomCategory(data.category);
-                if (data.hostParticipates) setHostParticipates(data.hostParticipates);
+                setHostParticipates(data.hostParticipates === true);
 
                 // Auto-join Host if participating
                 if (data.hostParticipates) {
-                    const hostPlayerRef = doc(db, "rooms", roomId, "players", user.uid);
-                    const hostPlayerSnap = await getDoc(hostPlayerRef);
-                    if (!hostPlayerSnap.exists()) {
-                        await setDoc(hostPlayerRef, {
+                    const hostPlayer = await getLivePlayer(roomId, user.uid);
+                    if (!hostPlayer) {
+                        await joinLiveRoom(roomId, user.uid, {
                             name: data.hostName || "管理者(プレイヤー)",
-                            iconUrl: `https://api.dicebear.com/7.x/pixel-art/svg?seed=${user.uid}`,
+                            iconUrl: `https://api.dicebear.com/7.x/pixel-art/png?seed=${user.uid}`,
                             score: 0,
                             totalTime: 0,
                             joinedAt: Date.now(),
-                            answers: {},
+                            answerCount: 0,
                             isHost: true
                         });
                         toast({
@@ -75,10 +74,7 @@ export default function HostDashboard() {
             }
         });
 
-        const playersRef = collection(db, "rooms", roomId, "players");
-        const unsubscribePlayers = onSnapshot(playersRef, (snapshot) => {
-            setPlayers(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Player)));
-        });
+        const unsubscribePlayers = subscribeLivePlayers(roomId, setPlayers);
 
         return () => {
             unsubscribeRoom();

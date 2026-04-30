@@ -244,7 +244,7 @@ export default function QuizEditor() {
             title: "試練の書を更新しました",
             description: "すべての変更が魔導書に刻まれました。",
         });
-        router.push(`/host/${roomId}`);
+        router.push(`/FantasyQuizzesKingdom/host/${roomId}`);
     };
 
     if (loading) return null;
@@ -256,7 +256,7 @@ export default function QuizEditor() {
             <div className="max-w-4xl mx-auto space-y-10 relative z-10">
                 <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-amber-900/30">
                     <div className="flex items-center gap-4">
-                        <Button variant="ghost" onClick={() => router.push(`/host/${roomId}`)} className="text-amber-400 hover:bg-amber-900/20">
+                        <Button variant="ghost" onClick={() => router.push(`/FantasyQuizzesKingdom/host/${roomId}`)} className="text-amber-400 hover:bg-amber-900/20">
                             <ArrowLeft className="h-6 w-6" />
                         </Button>
                         <div>
