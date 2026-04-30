@@ -147,7 +147,9 @@ export default function GuestPlay() {
     const handleAnswer = async (index: number) => {
         if (selectedAnswer !== null || room.currentPhase !== "question" || !currentQuestion) return;
 
-        const timeTaken = (Date.now() - room.startTime) / 1000;
+        const timeLimit = currentQuestion.timeLimit || 20;
+        const rawTimeTaken = (Date.now() - (room.startTime || Date.now())) / 1000;
+        const timeTaken = Math.min(timeLimit, Math.max(0, rawTimeTaken));
         const correct = index === currentQuestion.correctAnswer;
         setSelectedAnswer(index);
 
@@ -155,8 +157,8 @@ export default function GuestPlay() {
         let basePt = 0;
         let bonusPt = 0;
         if (correct) {
-            basePt = currentQuestion.points;
-            const speedFactor = Math.max(0, 1 - (timeTaken / currentQuestion.timeLimit)) * 0.5;
+            basePt = currentQuestion.points || 1000;
+            const speedFactor = Math.min(1, Math.max(0, 1 - (timeTaken / timeLimit))) * 0.5;
             bonusPt = Math.round(basePt * speedFactor);
             points = basePt + bonusPt;
         }

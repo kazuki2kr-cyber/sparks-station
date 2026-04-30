@@ -214,7 +214,9 @@ export default function HostPlay() {
         const currentQuestion = questions[room.currentQuestionIndex];
         if (!currentQuestion) return;
 
-        const timeTaken = (Date.now() - room.startTime) / 1000;
+        const timeLimit = currentQuestion.timeLimit || 20;
+        const rawTimeTaken = (Date.now() - (room.startTime || Date.now())) / 1000;
+        const timeTaken = Math.min(timeLimit, Math.max(0, rawTimeTaken));
         const correct = index === currentQuestion.correctAnswer;
         setSelectedAnswer(index);
 
@@ -224,7 +226,7 @@ export default function HostPlay() {
         if (correct) {
             // Default points if not set in question
             basePt = currentQuestion.points || 1000;
-            const speedFactor = Math.max(0, 1 - (timeTaken / (currentQuestion.timeLimit || 20))) * 0.5;
+            const speedFactor = Math.min(1, Math.max(0, 1 - (timeTaken / timeLimit))) * 0.5;
             bonusPt = Math.round(basePt * speedFactor);
             points = basePt + bonusPt;
         }
