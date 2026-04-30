@@ -188,6 +188,8 @@ export default function QuestionsAdmin() {
                     "keiba": "keiba",
                     "冬季五輪": "winter_olympics",
                     "winter_olympics": "winter_olympics",
+                    "芝浦": "shibaura",
+                    "shibaura": "shibaura",
                     "すべて": "all",
                     "all": "all"
                 };
@@ -238,7 +240,7 @@ export default function QuestionsAdmin() {
     };
 
     const downloadTemplate = () => {
-        const headers = "問題文,選択肢1,選択肢2,選択肢3,選択肢4,正解番号(0-3),カテゴリー(パーティ/歴史/マインクラフト/F1/競馬/冬季五輪),難易度(1-5)\n";
+        const headers = "問題文,選択肢1,選択肢2,選択肢3,選択肢4,正解番号(0-3),カテゴリー(パーティ/歴史/マインクラフト/F1/競馬/冬季五輪/芝浦),難易度(1-5)\n";
         const sample1 = "日本で一番高い山は？,富士山,北岳,奥穂高岳,間ノ岳,0,パーティ,1\n";
         const sample2 = "F1の最多チャンピオンは？,ハミルトン,シューマッハ,ベッテル,アロンソ,0,F1,3";
         const blob = new Blob([headers + sample1 + sample2], { type: 'text/csv;charset=utf-8;' });
