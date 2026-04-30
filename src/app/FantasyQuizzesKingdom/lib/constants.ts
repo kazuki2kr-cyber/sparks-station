@@ -66,6 +66,13 @@ export const QUIZ_CATEGORIES: QuizCategory[] = [
         color: "text-cyan-400"
     },
     {
+        id: "shibaura",
+        name: "芝浦",
+        description: "芝浦にまつわる知識",
+        icon: Scroll,
+        color: "text-orange-400"
+    },
+    {
         id: "all",
         name: "すべて",
         description: "全カテゴリからランダム",
