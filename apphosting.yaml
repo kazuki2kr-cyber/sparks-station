@@ -4,11 +4,40 @@
 # https://firebase.google.com/docs/app-hosting/configure
 
 runConfig:
-  cpu: 1
-  memoryMiB: 512
+  runtime: nodejs22
+  cpu: 2
+  memoryMiB: 2048
   minInstances: 0
   maxInstances: 10
+  timeoutSeconds: 300
   concurrency: 80
 
-environmentVariables:
-  []
+env:
+  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    value: "hayaoshi-aef9c"
+  - variable: FIREBASE_ADMIN_CLIENT_EMAIL
+    secret: FIREBASE_ADMIN_CLIENT_EMAIL
+  - variable: FIREBASE_ADMIN_PRIVATE_KEY
+    secret: FIREBASE_ADMIN_PRIVATE_KEY
+  - variable: ADMIN_UIDS
+    secret: ADMIN_UIDS
+  - variable: GEMINI_API_KEY
+    secret: GEMINI_API_KEY
+  - variable: CLOUDINARY_CLOUD_NAME
+    secret: CLOUDINARY_CLOUD_NAME
+  - variable: CLOUDINARY_API_KEY
+    secret: CLOUDINARY_API_KEY
+  - variable: CLOUDINARY_API_SECRET
+    secret: CLOUDINARY_API_SECRET
+  - variable: INSTAGRAM_BUSINESS_ACCOUNT_ID
+    secret: INSTAGRAM_BUSINESS_ACCOUNT_ID
+  - variable: INSTAGRAM_ACCESS_TOKEN
+    secret: INSTAGRAM_ACCESS_TOKEN
+  - variable: THREADS_USER_ID
+    secret: THREADS_USER_ID
+  - variable: THREADS_ACCESS_TOKEN
+    secret: THREADS_ACCESS_TOKEN
+  - variable: CRON_SECRET
+    secret: CRON_SECRET
+  - variable: REEL_BGM_URL
+    value: "https://res.cloudinary.com/dxexypvx6/video/upload/v1777169940/Morning_in_Minato_sgnp7f.mp3"
