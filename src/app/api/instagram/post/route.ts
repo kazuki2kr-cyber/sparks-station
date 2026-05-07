@@ -126,7 +126,7 @@ async function getImageResponseCtor(): Promise<typeof import("@vercel/og").Image
   const dynamicImport = new Function("specifier", "return import(specifier)") as (
     specifier: string
   ) => Promise<typeof import("@vercel/og")>;
-  const mod = await dynamicImport("@vercel/og");
+  const mod = await dynamicImport("@vercel/og/dist/index.node.js");
   imageResponseCtor = mod.ImageResponse;
   return imageResponseCtor;
 }
