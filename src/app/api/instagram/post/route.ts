@@ -1,7 +1,6 @@
 // Sparks Station SNS auto-posting — Reels + Threads thread support
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-import { ImageResponse } from "@vercel/og";
 import * as React from "react";
 import sharp from "sharp";
 import { readFileSync, writeFileSync, unlinkSync, existsSync, chmodSync } from "fs";
@@ -93,6 +92,7 @@ function normalizeForImage(text: string): string {
 let fontsLoaded = false;
 let registeredFontFamily = "NotoSansJP";
 let overlayFontData: ArrayBuffer | null = null;
+let imageResponseCtor: typeof import("@vercel/og").ImageResponse | null = null;
 
 function findOverlayFontPath(): string {
   const candidates = [
@@ -119,6 +119,16 @@ function getOverlayFontData(): ArrayBuffer {
   const buffer = readFileSync(findOverlayFontPath());
   overlayFontData = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
   return overlayFontData;
+}
+
+async function getImageResponseCtor(): Promise<typeof import("@vercel/og").ImageResponse> {
+  if (imageResponseCtor) return imageResponseCtor;
+  const dynamicImport = new Function("specifier", "return import(specifier)") as (
+    specifier: string
+  ) => Promise<typeof import("@vercel/og")>;
+  const mod = await dynamicImport("@vercel/og");
+  imageResponseCtor = mod.ImageResponse;
+  return imageResponseCtor;
 }
 
 function loadCanvas() {
@@ -277,6 +287,7 @@ async function makeOverlayPng(
   const fontSize = estimateFontSize(lines, options.baseFontSize, options.minFontSize, options.maxChars);
   const lineHeight = Math.round(fontSize * 1.22);
   const e = React.createElement;
+  const ImageResponse = await getImageResponseCtor();
   const response = new ImageResponse(
     e(
       "div",
