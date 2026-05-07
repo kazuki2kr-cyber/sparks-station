@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import sharp from "sharp";
 import { readFileSync, writeFileSync, unlinkSync, existsSync, chmodSync } from "fs";
-import { join } from "path";
+import { dirname, join } from "path";
 import { tmpdir } from "os";
 import { createHash, randomBytes } from "crypto";
 import { spawnSync } from "child_process";
@@ -99,7 +99,16 @@ function loadCanvas() {
 function ensureFonts() {
   if (fontsLoaded) return;
   const { GlobalFonts } = loadCanvas();
-  const base = join(process.cwd(), "public/fonts");
+  const baseCandidates = [
+    join(process.cwd(), "public/fonts"),
+    join(process.cwd(), "../../public/fonts"),
+    join(dirname(process.cwd()), "public/fonts"),
+    "/workspace/public/fonts",
+  ];
+  const base = baseCandidates.find((candidate) => existsSync(candidate));
+  if (!base) {
+    throw new Error(`フォントディレクトリ未検出: candidates=[${baseCandidates.join(",")}]`);
+  }
   const count = GlobalFonts.loadFontsFromDir(base);
   const families = GlobalFonts.families.map((f) => f.family);
   if (count === 0) {
