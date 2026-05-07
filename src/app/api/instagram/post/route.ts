@@ -99,25 +99,34 @@ function loadCanvas() {
 function ensureFonts() {
   if (fontsLoaded) return;
   const { GlobalFonts } = loadCanvas();
-  const fontCandidates = [
-    join(process.cwd(), "public/fonts/NotoSansJP-Bold.ttf"),
-    join(process.cwd(), "../../public/fonts/NotoSansJP-Bold.ttf"),
-    join(dirname(process.cwd()), "public/fonts/NotoSansJP-Bold.ttf"),
-    "/workspace/public/fonts/NotoSansJP-Bold.ttf",
-    "/workspace/.next/standalone/public/fonts/NotoSansJP-Bold.ttf",
+  const dirCandidates = [
+    join(process.cwd(), "public/fonts"),
+    join(process.cwd(), "../../public/fonts"),
+    join(dirname(process.cwd()), "public/fonts"),
+    "/workspace/public/fonts",
+    "/workspace/.next/standalone/public/fonts",
   ];
   const errors: string[] = [];
-  for (const fontPath of fontCandidates) {
-    if (!existsSync(fontPath)) {
-      errors.push(`${fontPath}: missing`);
+  for (const dir of dirCandidates) {
+    if (!existsSync(dir)) {
+      errors.push(`${dir}: missing`);
       continue;
     }
-    const keyFromPath = GlobalFonts.registerFromPath(fontPath, "SparksNotoSansJP");
-    if (keyFromPath) {
-      registeredFontFamily = "SparksNotoSansJP";
+    const count = GlobalFonts.loadFontsFromDir(dir);
+    const notoFamily = GlobalFonts.families
+      .map((f) => f.family)
+      .find((f) => f.toLowerCase() === "noto sans jp" || f.toLowerCase().includes("noto sans jp"));
+    if (count > 0 && notoFamily) {
+      registeredFontFamily = notoFamily;
       fontsLoaded = true;
       return;
     }
+    errors.push(`${dir}: count=${count}, families=[${GlobalFonts.families.map((f) => f.family).join(",")}]`);
+  }
+
+  const fontCandidates = dirCandidates.map((dir) => join(dir, "NotoSansJP-Bold.ttf"));
+  for (const fontPath of fontCandidates) {
+    if (!existsSync(fontPath)) continue;
     try {
       const keyFromBuffer = GlobalFonts.register(readFileSync(fontPath), "SparksNotoSansJP");
       if (keyFromBuffer) {

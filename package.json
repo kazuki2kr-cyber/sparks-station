@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@google/genai": "^1.50.1",
-    "@napi-rs/canvas": "^1.0.0",
+    "@napi-rs/canvas": "0.1.99",
     "@next/third-parties": "^16.1.6",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-checkbox": "^1.3.3",
