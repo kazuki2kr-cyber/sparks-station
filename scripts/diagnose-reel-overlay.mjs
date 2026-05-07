@@ -71,7 +71,7 @@ async function main() {
           style: {
             position: "absolute",
             left: 0,
-            top: Math.round(height * 0.18) - fontSize,
+            top: Math.round(height * 0.24) - fontSize,
             width,
             display: "flex",
             flexDirection: "column",
@@ -104,7 +104,7 @@ async function main() {
           style: {
             position: "absolute",
             left: 0,
-            top: height - 106,
+            top: height - 178,
             width,
             display: "flex",
             justifyContent: "center",

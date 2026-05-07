@@ -411,14 +411,14 @@ async function compositeTextAndBrandingVertical(
   const W = 1080;
   const H = 1920;
   const lines = normalizeForImage(overlayText).split("\n").filter(Boolean);
-  // Instagram UIの安全ゾーン（ステータスバー+オーバーレイ ~250px）を避けるため H の20%以降に配置
-  const startY = lines.length === 1 ? Math.round(H * 0.20) : Math.round(H * 0.18);
+  // スマホのリールUIで上下が見切れないよう、テキストはやや中央寄り、ブランドは少し上へ逃がす。
+  const startY = lines.length === 1 ? Math.round(H * 0.25) : Math.round(H * 0.24);
   const textOverlay = await makeOverlayPng(W, H, overlayText, {
     baseFontSize: 88,
     minFontSize: 44,
     maxChars: 12,
     startY,
-    brandY: H - 64,
+    brandY: H - 136,
     brandFontSize: 42,
   });
 
