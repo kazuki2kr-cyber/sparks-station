@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   serverExternalPackages: ["@napi-rs/canvas"],
   outputFileTracingIncludes: {
-    "/api/instagram/post": [
+    "/*": [
       "./node_modules/@napi-rs/canvas/**/*",
       "./node_modules/@napi-rs/canvas-linux-x64-gnu/**/*",
       "./node_modules/@napi-rs/canvas-linux-x64-musl/**/*",

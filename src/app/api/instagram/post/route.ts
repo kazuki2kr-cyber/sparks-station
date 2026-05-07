@@ -99,27 +99,38 @@ function loadCanvas() {
 function ensureFonts() {
   if (fontsLoaded) return;
   const { GlobalFonts } = loadCanvas();
-  const baseCandidates = [
-    join(process.cwd(), "public/fonts"),
-    join(process.cwd(), "../../public/fonts"),
-    join(dirname(process.cwd()), "public/fonts"),
-    "/workspace/public/fonts",
+  const fontCandidates = [
+    join(process.cwd(), "public/fonts/NotoSansJP-Bold.ttf"),
+    join(process.cwd(), "../../public/fonts/NotoSansJP-Bold.ttf"),
+    join(dirname(process.cwd()), "public/fonts/NotoSansJP-Bold.ttf"),
+    "/workspace/public/fonts/NotoSansJP-Bold.ttf",
+    "/workspace/.next/standalone/public/fonts/NotoSansJP-Bold.ttf",
   ];
-  const base = baseCandidates.find((candidate) => existsSync(candidate));
-  if (!base) {
-    throw new Error(`フォントディレクトリ未検出: candidates=[${baseCandidates.join(",")}]`);
+  const errors: string[] = [];
+  for (const fontPath of fontCandidates) {
+    if (!existsSync(fontPath)) {
+      errors.push(`${fontPath}: missing`);
+      continue;
+    }
+    const keyFromPath = GlobalFonts.registerFromPath(fontPath, "SparksNotoSansJP");
+    if (keyFromPath) {
+      registeredFontFamily = "SparksNotoSansJP";
+      fontsLoaded = true;
+      return;
+    }
+    try {
+      const keyFromBuffer = GlobalFonts.register(readFileSync(fontPath), "SparksNotoSansJP");
+      if (keyFromBuffer) {
+        registeredFontFamily = "SparksNotoSansJP";
+        fontsLoaded = true;
+        return;
+      }
+      errors.push(`${fontPath}: register returned null`);
+    } catch (error) {
+      errors.push(`${fontPath}: ${String(error)}`);
+    }
   }
-  const count = GlobalFonts.loadFontsFromDir(base);
-  const families = GlobalFonts.families.map((f) => f.family);
-  if (count === 0) {
-    throw new Error(`フォントロード失敗: count=0, base=${base}`);
-  }
-  const notoFamily = families.find((f) => f.toLowerCase().includes("noto"));
-  if (!notoFamily) {
-    throw new Error(`日本語フォント未検出: families=[${families.join(",")}]`);
-  }
-  registeredFontFamily = notoFamily;
-  fontsLoaded = true;
+  throw new Error(`フォントロード失敗: ${errors.join(" | ")}`);
 }
 
 // ─────────────────────────────────────────────
@@ -838,6 +849,26 @@ export async function POST(req: NextRequest) {
       if (cronSecret !== expectedSecret) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
       }
+    }
+
+    if (body.diagnostic === "font") {
+      ensureFonts();
+      const overlay = makeOverlaySvg(1080, 1920, "6ヶ月で\n116億円Exit", {
+        baseFontSize: 88,
+        minFontSize: 44,
+        maxChars: 12,
+        startY: Math.round(1920 * 0.18),
+        brandY: 1920 - 64,
+        brandFontSize: 42,
+        topGradientEnd: 0,
+        bottomGradientStart: 1920,
+      });
+      return NextResponse.json({
+        success: true,
+        diagnostic: "font",
+        fontFamily: registeredFontFamily,
+        overlayBytes: overlay.byteLength,
+      });
     }
 
     // Firestoreキューまたはリクエストボディからポストデータを取得
