@@ -1,7 +1,6 @@
 import { AuthProvider } from "@/lib/auth-context";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/Footer";
-import InstallPwaPrompt from "./components/InstallPwaPrompt";
 
 import type { Metadata } from "next";
 
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
         description: "知識と速さで運命を切り拓け。忘年会や結婚式の余興に最適な、最大同時対戦可能なRPG風クイズゲーム。",
         images: ["/key-visual.png"],
     },
-    manifest: '/manifest.webmanifest',
 };
 
 export default function QuizLayout({
@@ -32,7 +30,6 @@ export default function QuizLayout({
                 <div className="flex-grow">
                     {children}
                 </div>
-                <InstallPwaPrompt />
                 <Footer />
                 <Toaster />
             </AuthProvider>

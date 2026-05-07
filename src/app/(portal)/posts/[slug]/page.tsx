@@ -9,6 +9,7 @@ import { Metadata } from 'next';
 import { getThemeForTag } from '@/lib/theme';
 import FeedbackSection from '../../components/FeedbackSection';
 import RelatedArticles from './components/RelatedArticles';
+import RecommendedTools from './components/RecommendedTools';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://sparks-station.com';
 
@@ -174,6 +175,8 @@ export default async function PostPage({ params }: Props) {
                 `}>
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
             </div>
+
+            <RecommendedTools tags={post.metadata.tags} content={post.content} />
 
             {/* Feedback & Comments */}
             <FeedbackSection slug={post.slug} />
