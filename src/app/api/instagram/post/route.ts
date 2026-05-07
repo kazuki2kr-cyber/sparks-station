@@ -96,11 +96,16 @@ let overlayFontData: ArrayBuffer | null = null;
 
 function findOverlayFontPath(): string {
   const candidates = [
-    join(process.cwd(), "public/fonts/NotoSansJP-Bold.ttf"),
-    join(process.cwd(), "../../public/fonts/NotoSansJP-Bold.ttf"),
-    join(dirname(process.cwd()), "public/fonts/NotoSansJP-Bold.ttf"),
-    "/workspace/public/fonts/NotoSansJP-Bold.ttf",
-    "/workspace/.next/standalone/public/fonts/NotoSansJP-Bold.ttf",
+    join(process.cwd(), "public/fonts/noto-sans-jp-japanese-700-normal.woff"),
+    join(process.cwd(), "../../public/fonts/noto-sans-jp-japanese-700-normal.woff"),
+    join(dirname(process.cwd()), "public/fonts/noto-sans-jp-japanese-700-normal.woff"),
+    "/workspace/public/fonts/noto-sans-jp-japanese-700-normal.woff",
+    "/workspace/.next/standalone/public/fonts/noto-sans-jp-japanese-700-normal.woff",
+    join(process.cwd(), "public/fonts/noto-sans-jp-japanese-700-normal.woff2"),
+    join(process.cwd(), "../../public/fonts/noto-sans-jp-japanese-700-normal.woff2"),
+    join(dirname(process.cwd()), "public/fonts/noto-sans-jp-japanese-700-normal.woff2"),
+    "/workspace/public/fonts/noto-sans-jp-japanese-700-normal.woff2",
+    "/workspace/.next/standalone/public/fonts/noto-sans-jp-japanese-700-normal.woff2",
   ];
   const fontPath = candidates.find((candidate) => existsSync(candidate));
   if (!fontPath) {
