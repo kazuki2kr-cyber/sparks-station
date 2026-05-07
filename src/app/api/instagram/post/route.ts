@@ -1,6 +1,8 @@
 // Sparks Station SNS auto-posting — Reels + Threads thread support
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { ImageResponse } from "@vercel/og";
+import * as React from "react";
 import sharp from "sharp";
 import { readFileSync, writeFileSync, unlinkSync, existsSync, chmodSync } from "fs";
 import { dirname, join } from "path";
@@ -90,6 +92,29 @@ function normalizeForImage(text: string): string {
 
 let fontsLoaded = false;
 let registeredFontFamily = "NotoSansJP";
+let overlayFontData: ArrayBuffer | null = null;
+
+function findOverlayFontPath(): string {
+  const candidates = [
+    join(process.cwd(), "public/fonts/NotoSansJP-Bold.ttf"),
+    join(process.cwd(), "../../public/fonts/NotoSansJP-Bold.ttf"),
+    join(dirname(process.cwd()), "public/fonts/NotoSansJP-Bold.ttf"),
+    "/workspace/public/fonts/NotoSansJP-Bold.ttf",
+    "/workspace/.next/standalone/public/fonts/NotoSansJP-Bold.ttf",
+  ];
+  const fontPath = candidates.find((candidate) => existsSync(candidate));
+  if (!fontPath) {
+    throw new Error(`フォントファイル未検出: candidates=[${candidates.join(",")}]`);
+  }
+  return fontPath;
+}
+
+function getOverlayFontData(): ArrayBuffer {
+  if (overlayFontData) return overlayFontData;
+  const buffer = readFileSync(findOverlayFontPath());
+  overlayFontData = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
+  return overlayFontData;
+}
 
 function loadCanvas() {
   const req = eval("require") as NodeRequire;
@@ -230,6 +255,107 @@ function makeOverlaySvg(
   return canvas.toBuffer("image/png");
 }
 
+async function makeOverlayPng(
+  width: number,
+  height: number,
+  text: string,
+  options: {
+    baseFontSize: number;
+    minFontSize: number;
+    maxChars: number;
+    startY: number;
+    brandY: number;
+    brandFontSize: number;
+  }
+): Promise<Buffer> {
+  const lines = normalizeForImage(text).split("\n").filter(Boolean);
+  const fontSize = estimateFontSize(lines, options.baseFontSize, options.minFontSize, options.maxChars);
+  const lineHeight = Math.round(fontSize * 1.22);
+  const e = React.createElement;
+  const response = new ImageResponse(
+    e(
+      "div",
+      {
+        style: {
+          width,
+          height,
+          display: "flex",
+          position: "relative",
+          background: "transparent",
+          fontFamily: "SparksNotoSansJP",
+        },
+      },
+      e(
+        "div",
+        {
+          style: {
+            position: "absolute",
+            left: 0,
+            top: options.startY - fontSize,
+            width,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: Math.max(0, Math.round(lineHeight - fontSize)),
+          },
+        },
+        ...lines.map((line, index) =>
+          e(
+            "div",
+            {
+              key: `${line}-${index}`,
+              style: {
+                color: "white",
+                fontSize,
+                fontWeight: 700,
+                lineHeight: `${lineHeight}px`,
+                textShadow:
+                  "0 5px 14px rgba(0,0,0,0.92), 0 0 4px rgba(0,0,0,0.95), 2px 2px 0 rgba(0,0,0,0.70), -2px 2px 0 rgba(0,0,0,0.70), 2px -2px 0 rgba(0,0,0,0.70), -2px -2px 0 rgba(0,0,0,0.70)",
+                textAlign: "center",
+                whiteSpace: "pre",
+              },
+            },
+            line
+          )
+        )
+      ),
+      e(
+        "div",
+        {
+          style: {
+            position: "absolute",
+            left: 0,
+            top: options.brandY - options.brandFontSize,
+            width,
+            display: "flex",
+            justifyContent: "center",
+            color: "white",
+            fontFamily: "Arial",
+            fontSize: options.brandFontSize,
+            fontWeight: 700,
+            textShadow: "0 3px 8px rgba(0,0,0,0.85)",
+          },
+        },
+        "SPARKS STATION"
+      )
+    ),
+    {
+      width,
+      height,
+      fonts: [
+        {
+          name: "SparksNotoSansJP",
+          data: getOverlayFontData(),
+          weight: 700,
+          style: "normal",
+        },
+      ],
+    }
+  );
+
+  return Buffer.from(await response.arrayBuffer());
+}
+
 // ─────────────────────────────────────────────
 // テキスト + ブランド合成（正方形 1:1 用）
 // ─────────────────────────────────────────────
@@ -241,15 +367,13 @@ async function compositeTextAndBranding(
   const SIZE = 1024;
   const lines = normalizeForImage(hookText).split("\n").filter(Boolean);
   const startY = lines.length === 1 ? 118 : 94;
-  const textOverlay = makeOverlaySvg(SIZE, SIZE, hookText, {
+  const textOverlay = await makeOverlayPng(SIZE, SIZE, hookText, {
     baseFontSize: 76,
     minFontSize: 40,
     maxChars: 12,
     startY,
     brandY: SIZE - 48,
     brandFontSize: 34,
-    topGradientEnd: Math.round(SIZE * 0.42),
-    bottomGradientStart: Math.round(SIZE * 0.76),
   });
 
   return sharp(jpegBuffer)
@@ -273,15 +397,13 @@ async function compositeTextAndBrandingVertical(
   const lines = normalizeForImage(overlayText).split("\n").filter(Boolean);
   // Instagram UIの安全ゾーン（ステータスバー+オーバーレイ ~250px）を避けるため H の20%以降に配置
   const startY = lines.length === 1 ? Math.round(H * 0.20) : Math.round(H * 0.18);
-  const textOverlay = makeOverlaySvg(W, H, overlayText, {
+  const textOverlay = await makeOverlayPng(W, H, overlayText, {
     baseFontSize: 88,
     minFontSize: 44,
     maxChars: 12,
     startY,
     brandY: H - 64,
     brandFontSize: 42,
-    topGradientEnd: Math.round(H * 0.36),
-    bottomGradientStart: Math.round(H * 0.78),
   });
 
   return sharp(jpegBuffer)
@@ -861,21 +983,18 @@ export async function POST(req: NextRequest) {
     }
 
     if (body.diagnostic === "font") {
-      ensureFonts();
-      const overlay = makeOverlaySvg(1080, 1920, "6ヶ月で\n116億円Exit", {
+      const overlay = await makeOverlayPng(1080, 1920, "6ヶ月で\n116億円Exit", {
         baseFontSize: 88,
         minFontSize: 44,
         maxChars: 12,
         startY: Math.round(1920 * 0.18),
         brandY: 1920 - 64,
         brandFontSize: 42,
-        topGradientEnd: 0,
-        bottomGradientStart: 1920,
       });
       return NextResponse.json({
         success: true,
         diagnostic: "font",
-        fontFamily: registeredFontFamily,
+        fontFamily: "SparksNotoSansJP",
         overlayBytes: overlay.byteLength,
       });
     }
