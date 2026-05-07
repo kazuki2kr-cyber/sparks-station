@@ -88,6 +88,31 @@ function normalizeForImage(text: string): string {
     .replace(/↓/g, "v");
 }
 
+let fontsLoaded = false;
+let registeredFontFamily = "NotoSansJP";
+
+function loadCanvas() {
+  const req = eval("require") as NodeRequire;
+  return req("@napi-rs/canvas") as typeof import("@napi-rs/canvas");
+}
+
+function ensureFonts() {
+  if (fontsLoaded) return;
+  const { GlobalFonts } = loadCanvas();
+  const base = join(process.cwd(), "public/fonts");
+  const count = GlobalFonts.loadFontsFromDir(base);
+  const families = GlobalFonts.families.map((f) => f.family);
+  if (count === 0) {
+    throw new Error(`フォントロード失敗: count=0, base=${base}`);
+  }
+  const notoFamily = families.find((f) => f.toLowerCase().includes("noto"));
+  if (!notoFamily) {
+    throw new Error(`日本語フォント未検出: families=[${families.join(",")}]`);
+  }
+  registeredFontFamily = notoFamily;
+  fontsLoaded = true;
+}
+
 // ─────────────────────────────────────────────
 // SVGオーバーレイ生成
 // ─────────────────────────────────────────────
@@ -133,55 +158,47 @@ function makeOverlaySvg(
     bottomGradientStart: number;
   }
 ): Buffer {
+  ensureFonts();
+  const { createCanvas } = loadCanvas();
   const lines = normalizeForImage(text).split("\n").filter(Boolean);
-  const fontSize = estimateFontSize(lines, options.baseFontSize, options.minFontSize, options.maxChars);
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext("2d");
+
+  const maxTextWidth = width === 1080 ? 980 : 900;
+  let fontSize = options.baseFontSize;
+  ctx.font = `bold ${fontSize}px "${registeredFontFamily}", sans-serif`;
+  for (const line of lines) {
+    while (ctx.measureText(line).width > maxTextWidth && fontSize > options.minFontSize) {
+      fontSize -= 2;
+      ctx.font = `bold ${fontSize}px "${registeredFontFamily}", sans-serif`;
+    }
+  }
+
+  ctx.fillStyle = "white";
+  ctx.strokeStyle = "rgba(0,0,0,0.82)";
+  ctx.lineWidth = width === 1080 ? 10 : 8;
+  ctx.lineJoin = "round";
+  ctx.textAlign = "center";
+  ctx.shadowColor = "rgba(0,0,0,0.55)";
+  ctx.shadowBlur = width === 1080 ? 18 : 14;
+  ctx.shadowOffsetY = width === 1080 ? 6 : 4;
+
   const lineHeight = Math.round(fontSize * 1.22);
-  const textNodes = lines
-    .map((line, index) => {
-      const y = options.startY + index * lineHeight;
-      return `<text x="50%" y="${y}" text-anchor="middle">${escapeXml(line)}</text>`;
-    })
-    .join("");
+  lines.forEach((line, index) => {
+    ctx.strokeText(line, width / 2, options.startY + index * lineHeight);
+    ctx.fillText(line, width / 2, options.startY + index * lineHeight);
+  });
 
-  const svg = `
-<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="topGrad" x1="0" y1="0" x2="0" y2="${options.topGradientEnd}">
-      <stop offset="0%" stop-color="rgba(0,0,0,0.72)"/>
-      <stop offset="70%" stop-color="rgba(0,0,0,0.30)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
-    </linearGradient>
-    <linearGradient id="bottomGrad" x1="0" y1="${options.bottomGradientStart}" x2="0" y2="${height}">
-      <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,0.68)"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="black" flood-opacity="0.85"/>
-    </filter>
-    <style>
-      ${getEmbeddedFontCss()}
-      text {
-        font-family: 'SparksNotoSansJP', 'Noto Sans JP', sans-serif;
-        font-weight: 700;
-        fill: white;
-        filter: url(#shadow);
-      }
-      .main { font-size: ${fontSize}px; }
-      .brand {
-        font-family: Arial, sans-serif;
-        font-size: ${options.brandFontSize}px;
-        letter-spacing: 0;
-        opacity: 0.94;
-      }
-    </style>
-  </defs>
-  <rect x="0" y="0" width="${width}" height="${options.topGradientEnd}" fill="url(#topGrad)"/>
-  <rect x="0" y="${options.bottomGradientStart}" width="${width}" height="${height - options.bottomGradientStart}" fill="url(#bottomGrad)"/>
-  <g class="main">${textNodes}</g>
-  <text class="brand" x="50%" y="${options.brandY}" text-anchor="middle">SPARKS STATION</text>
-</svg>`;
+  ctx.shadowColor = "rgba(0,0,0,0.55)";
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetY = 2;
+  ctx.font = `bold ${options.brandFontSize}px Arial, sans-serif`;
+  ctx.strokeStyle = "rgba(0,0,0,0.70)";
+  ctx.lineWidth = 5;
+  ctx.strokeText("SPARKS STATION", width / 2, options.brandY);
+  ctx.fillText("SPARKS STATION", width / 2, options.brandY);
 
-  return Buffer.from(svg);
+  return canvas.toBuffer("image/png");
 }
 
 // ─────────────────────────────────────────────
