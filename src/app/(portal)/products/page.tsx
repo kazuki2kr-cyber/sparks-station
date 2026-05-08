@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { ArrowRight, BadgeCheck, Database, Sparkles } from "lucide-react";
 import { SAAS_CASE_DB_BETA_PRICE_JPY } from "@/lib/saas-case-db";
 import { SaasCaseDbCheckoutButton } from "./components/SaasCaseDbCheckoutButton";
+import { ProWaitlistButton } from "./components/ProWaitlistButton";
 
 export const metadata: Metadata = {
   title: "Products | Sparks Station",
@@ -69,15 +70,9 @@ export default function ProductsPage() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-md bg-emerald-400 px-4 py-2 text-sm font-semibold text-neutral-950 transition-colors hover:bg-emerald-300"
-            >
-              先行案内を受け取る
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <ProWaitlistButton />
             <span className="text-sm text-neutral-500">
-              準備中です。初期価格は月額980円から検証予定です。
+              Googleログインだけで登録できます。初期価格は月額980円から検証予定です。
             </span>
           </div>
         </div>

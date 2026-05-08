@@ -395,5 +395,33 @@
     "monetizationFit": "Sparks Stationの買い切りDB設計そのもの。Pro/DB/記事導線の戦略説明に使える。",
     "confidence": "medium",
     "notes": "複数サービスをまとめた戦略エントリ。販売版ではサービス単位に分割可能。"
+  },
+  {
+    "id": "cuppa-ai-seo-saas-acquisition",
+    "productName": "Cuppa",
+    "url": "https://cuppa.ai",
+    "sourceUrls": [
+      "/posts/cuppa-ai-seo-saas-acquisition",
+      "src/content/posts/cuppa-ai-seo-saas-acquisition.md",
+      "https://www.indiehackers.com/post/tech/acquiring-an-ai-micro-saas-and-building-it-to-58k-mrr-within-two-years-kIRoiABUe3yTPC6AgvrN",
+      "https://cuppa.ai"
+    ],
+    "category": "AI SaaS / SEO / Content Operations",
+    "targetCustomer": "SEO記事を大量に作りたいアフィリエイター、代理店、コンテンツ運用チーム",
+    "pain": "SEO記事制作は構成、執筆、校正、編集、CMS投入が分断され、AIを使っても品質管理と運用設計が残る。",
+    "productSummary": "AIでSEO-readyな記事を短時間で作るライティングSaaS。派生サービスでは代理店のコンテンツ運用をAI自動化と人間の運用で支援する。",
+    "pricingModel": "月額サブスクリプション / 初期Lifetime Deal / Done-for-youサービス",
+    "priceRange": "SaaSは$20/月から。派生サービスは代理店向け高単価モデル。",
+    "revenue": "Cuppa本体が$41k-$45k MRR、派生DFYサービスが$13.5k MRR。合算で約$58k-$59k/月。",
+    "acquisitionChannel": "買収済み無料ツールの既存フォロワー、Lifetime Deal、SEO業界ネットワーク、インフルエンサー流通、メールリスト、クロスセル。",
+    "gtmPattern": "acquire micro-SaaS / LTD validation / influencer distribution / service expansion",
+    "successFactor": "SEO経験者が顧客の痛みを理解し、買収直後のLTDで需要と現金を確認し、流通パートナーで初速を作った。",
+    "riskOrFailure": "LTDによる低単価顧客とサポート負荷、AI記事生成市場の競争、価格が安すぎることによるチャーン、開発チーム構築の難しさ。",
+    "japanHypothesis": "汎用AI記事生成ではなく、歯科、工務店、採用広報、士業など業界特化のコンテンツ運用支援としてSaaSと代行を組み合わせると成立しやすい。",
+    "firstExperiment": "1業界に絞り、10本分の記事テンプレートを作り、初月3万円でAI下書きと人間編集込みの記事制作を3社に手動提供して継続意向を確認する。",
+    "recommendedTools": ["Next.js", "OpenAI API", "Stripe", "Airtable", "WordPress", "Ahrefs"],
+    "monetizationFit": "SaaS単体にこだわらず、買い切りDB、Pro、代行型検証へ広げる設計の参考になる。記事制作・SEO・AI自動化のDB事例として価値が高い。",
+    "confidence": "high",
+    "notes": "MRR、買収後LTD、顧客数、派生サービスの数字はIndie Hackers記事を参照。価格は記事内の$20/月からを参照。"
   }
 ]
