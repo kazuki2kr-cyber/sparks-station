@@ -11,7 +11,10 @@ export async function GET(req: NextRequest) {
 
   const allowed = await verifySaasCaseDbAccessForUser(auth.uid, auth.email);
   if (!allowed) {
-    return NextResponse.json({ error: "購入済みアカウントではありません" }, { status: 403 });
+    return NextResponse.json(
+      { error: "購入済みアカウントではありません" },
+      { status: 403 },
+    );
   }
 
   return NextResponse.json({ rows: saasCaseDbRows });

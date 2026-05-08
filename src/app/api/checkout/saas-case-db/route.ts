@@ -1,5 +1,4 @@
-import { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { SAAS_CASE_DB_PRODUCT_ID } from "@/lib/saas-case-db";
 import { verifyIdToken } from "@/lib/firebase-admin";
 import {
@@ -25,7 +24,7 @@ export async function POST(req: NextRequest) {
     if (auth instanceof NextResponse) return auth;
     if (!auth.email) {
       return NextResponse.json(
-        { error: "Googleログイン済みメールアドレスが必要です" },
+        { error: "Googleログイン済みメールアドレスが必要です。" },
         { status: 400 },
       );
     }
@@ -47,11 +46,14 @@ export async function POST(req: NextRequest) {
       customer_email: auth.email,
     });
 
-    const session = await stripeRequest<StripeCheckoutSession>("/checkout/sessions", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params,
-    });
+    const session = await stripeRequest<StripeCheckoutSession>(
+      "/checkout/sessions",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params,
+      },
+    );
 
     if (!session.url) {
       throw new Error("Stripe Checkout URL was not returned");
@@ -59,9 +61,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    return NextResponse.json(
-      { error: String(error) },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }

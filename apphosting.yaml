@@ -50,8 +50,8 @@ env:
   - variable: NEXT_PUBLIC_CONTACT_EMAIL
     value: "sparks.station.contact@gmail.com"
   - variable: SAAS_CASE_DB_CHECKOUT_ENABLED
-    value: "false"
+    value: "true"
   - variable: NEXT_PUBLIC_SAAS_CASE_DB_CHECKOUT_ENABLED
-    value: "false"
+    value: "true"
   - variable: REEL_BGM_URL
     value: "https://res.cloudinary.com/dxexypvx6/video/upload/v1777169940/Morning_in_Minato_sgnp7f.mp3"

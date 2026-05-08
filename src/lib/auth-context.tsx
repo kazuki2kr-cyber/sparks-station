@@ -7,7 +7,8 @@ import {
     signInAnonymously,
     signOut,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "./firebase";
 
@@ -15,7 +16,7 @@ interface AuthContextType {
     user: User | null;
     loading: boolean;
     loginAnonymously: () => Promise<void>;
-    loginWithGoogle: () => Promise<void>;
+    loginWithGoogle: () => Promise<boolean>;
     logout: () => Promise<void>;
 }
 
@@ -47,7 +48,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const provider = new GoogleAuthProvider();
         try {
             await signInWithPopup(auth, provider);
+            return true;
         } catch (error) {
+            const code = typeof error === "object" && error && "code" in error
+                ? String((error as { code?: unknown }).code)
+                : "";
+            if (code === "auth/popup-blocked" || code === "auth/cancelled-popup-request") {
+                await signInWithRedirect(auth, provider);
+                return false;
+            }
             console.error("Error signing in with Google:", error);
             throw error;
         }

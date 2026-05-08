@@ -4,7 +4,8 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 
-const checkoutEnabled = process.env.NEXT_PUBLIC_SAAS_CASE_DB_CHECKOUT_ENABLED === "true";
+const checkoutEnabled =
+  process.env.NEXT_PUBLIC_SAAS_CASE_DB_CHECKOUT_ENABLED === "true";
 
 export function SaasCaseDbCheckoutButton() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ export function SaasCaseDbCheckoutButton() {
 
   async function startCheckout() {
     if (!checkoutEnabled) {
-      setError("現在、購入受付の準備中です。公開前のテストが完了し次第、受付を開始します。");
+      setError("現在、購入受付は準備中です。公開前の確認が完了次第、受付を開始します。");
       return;
     }
 
@@ -22,10 +23,15 @@ export function SaasCaseDbCheckoutButton() {
     try {
       let currentUser = user;
       if (!currentUser) {
-        await loginWithGoogle();
+        const completedWithPopup = await loginWithGoogle();
+        if (!completedWithPopup) {
+          setLoading(false);
+          return;
+        }
         const { auth } = await import("@/lib/firebase");
         currentUser = auth.currentUser;
       }
+
       const token = await currentUser?.getIdToken();
       if (!token) {
         throw new Error("Googleログインを確認できませんでした。");

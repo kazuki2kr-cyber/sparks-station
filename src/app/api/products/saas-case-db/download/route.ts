@@ -1,8 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { makeSaasCaseDbCsv, saasCaseDbRows } from "@/lib/saas-case-db";
 import { verifyIdToken } from "@/lib/firebase-admin";
-import { verifySaasCaseDbAccess, verifySaasCaseDbAccessForUser } from "@/lib/purchases";
-import { NextRequest } from "next/server";
+import {
+  verifySaasCaseDbAccess,
+  verifySaasCaseDbAccessForUser,
+} from "@/lib/purchases";
 
 export const runtime = "nodejs";
 
@@ -29,7 +31,8 @@ export async function GET(req: NextRequest) {
     return new NextResponse(JSON.stringify(saasCaseDbRows, null, 2), {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Content-Disposition": 'attachment; filename="sparks-saas-case-db-beta.json"',
+        "Content-Disposition":
+          'attachment; filename="sparks-saas-case-db-beta.json"',
       },
     });
   }
@@ -37,7 +40,8 @@ export async function GET(req: NextRequest) {
   return new NextResponse(`\uFEFF${makeSaasCaseDbCsv()}`, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="sparks-saas-case-db-beta.csv"',
+      "Content-Disposition":
+        'attachment; filename="sparks-saas-case-db-beta.csv"',
     },
   });
 }

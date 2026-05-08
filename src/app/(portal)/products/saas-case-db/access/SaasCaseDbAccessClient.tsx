@@ -18,13 +18,18 @@ export function SaasCaseDbAccessClient() {
       setFetching(true);
       setError("");
       try {
-        const token = await user.getIdToken();
+        const headers = new Headers();
+        if (user) {
+          headers.set("Authorization", `Bearer ${await user.getIdToken()}`);
+        }
         const res = await fetch("/api/products/saas-case-db/rows", {
-          headers: { Authorization: `Bearer ${token}` },
+          headers,
         });
         const data = await res.json();
         if (!res.ok) {
-          throw new Error(data.error ?? "データベースを取得できませんでした。");
+          throw new Error(
+            data.error ?? "データベースを取得できませんでした。",
+          );
         }
         setRows(data.rows);
       } catch (err) {
@@ -37,10 +42,12 @@ export function SaasCaseDbAccessClient() {
   }, [user]);
 
   async function download(format: "csv" | "json") {
-    if (!user) return;
-    const token = await user.getIdToken();
+    const headers = new Headers();
+    if (user) {
+      headers.set("Authorization", `Bearer ${await user.getIdToken()}`);
+    }
     const res = await fetch(`/api/products/saas-case-db/download?format=${format}`, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers,
     });
     if (!res.ok) {
       setError("ダウンロードできませんでした。");
@@ -112,7 +119,7 @@ export function SaasCaseDbAccessClient() {
           </h1>
         </div>
         <p className="text-sm leading-7 text-neutral-400">
-          {user.email} でログイン中。ベータ版には、既存記事から抽出した15件の事例を収録しています。
+          {user.email} でアクセス中。ベータ版には、既存記事から抽出した15件の事例を収録しています。
         </p>
         <div className="flex flex-wrap gap-3">
           <button
