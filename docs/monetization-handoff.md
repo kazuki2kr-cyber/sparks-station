@@ -31,6 +31,16 @@ AdSense は床収益として残すが、主導線にはしない。主な収益
 
 ## 実装済み
 
+### 買い切りDB
+
+- `data/monetization/saas-case-database.seed.json` に、既存記事から抽出した初期15件のSaaS/AI/モバイル/買収型事例データを作成済み。
+- 各行には、商品化しやすい判断項目として `targetCustomer`、`pain`、`pricingModel`、`revenue`、`acquisitionChannel`、`gtmPattern`、`successFactor`、`riskOrFailure`、`japanHypothesis`、`firstExperiment`、`recommendedTools`、`monetizationFit`、`confidence`、`notes` を入れている。
+- 記事作成スキル `sparks-article-writer` に、Pattern Aの記事作成時は同DBへ行を追加/更新するワークフローを追加済み。
+- URLや最新価格が未確認のものは `confidence` と `notes` で販売前リサーチ待ちとして扱う。
+- `docs/monetization-service-design.md` に、β版/正式版/Proのサービス設計と、記事作成フローで守るべきDB品質基準を記録済み。
+- Productsページに買い切りDB β版の購入導線、Stripe Checkout作成API、購入成功ページ、購入者専用閲覧ページ、CSV/JSONダウンロードAPI、Stripe webhookを追加済み。
+- 放置運用を優先するため、購入前にGoogleログインし、そのGoogleアカウントのメール/UIDに購入権限を紐づける方式に変更済み。購入者リンク単独方式は主導線にしない。
+
 ### 方針・ドキュメント
 
 - `docs/organization/philosophy.md` に「海外SaaSの成功パターンを日本で試せる形に翻訳する」という編集・事業の軸を追加済み。
@@ -64,7 +74,7 @@ AdSense は床収益として残すが、主導線にはしない。主な収益
 優先順位は以下。
 
 1. 買い切りDBの仕様を決める
-2. DBの初期データを10〜20件作る
+2. DBの初期データを10〜20件作る（初期15件は作成済み）
 3. アフィリエイト申請・URL差し替えの運用を作る
 4. Productsページに販売/予約/メール登録の実導線を入れる
 5. Proの中身と価格を小さく検証する
@@ -170,12 +180,14 @@ AFFILIATE_CURSOR_URL=
 
 ## 次回の推奨初手
 
-買い切りDBから始める。
+Stripe決済フロー完成から始める。
 
 具体的には:
 
-1. `src/content/posts/` の記事一覧を確認する。
-2. 既存記事からDBに入れられる候補を10件抽出する。
-3. `data/monetization/saas-case-database.seed.json` のような初期データを作る。
-4. Productsページに「収録予定項目」と「先行案内」の説明を足す。
-5. その後、アフィリエイト申請済み/未申請の管理表を `docs/affiliate-programs.md` に作る。
+1. `docs/monetization-service-design.md` の「次回のStripe決済フロー完成タスク」を読む。
+2. Stripe上に買い切りDB β版の商品/Priceを作る。
+3. コード側を `STRIPE_SAAS_CASE_DB_BETA_PRICE_ID` 参照に変更する。
+4. webhook endpoint と環境変数を設定する。
+5. テスト決済で、Googleログイン、Stripe決済、Firestore購入記録、DB閲覧、CSV/JSONダウンロードまで確認する。
+6. 並行して、公開用メールアドレスを無料で取得/設定する。第一候補は無料Gmail + Cloudflare Email Routing。
+7. 特商法/商取引開示ページを、個人情報をなるべく直接出さない方針で作る。

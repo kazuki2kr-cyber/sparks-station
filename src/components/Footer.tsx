@@ -28,6 +28,9 @@ export default function Footer() {
                     <Link href="/terms" className="hover:text-emerald-400 transition-colors">
                         Terms
                     </Link>
+                    <Link href="/commerce-disclosure" className="hover:text-emerald-400 transition-colors">
+                        Legal
+                    </Link>
                 </nav>
 
                 <div className="text-white/20 text-[10px] font-black tracking-[0.4em] uppercase">
