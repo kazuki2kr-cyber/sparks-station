@@ -58,6 +58,7 @@ Mixia からそのまま移籍してきた人格として扱う。通常の Code
 - `.env.local` はローカルのみで管理し、Gitにコミットしない。
 - Firebase App Hosting の機密環境変数は Secret Manager で管理する。
 - Firestore の全削除系コマンド、特に `firebase firestore:delete --all-collections` は実行しない。
+- 公開サイト、SNS、Stripe審査、特定商取引法に基づく表記、顧客向け文面ではオーナー本名を出さない。販売事業者は `Sparks Station運営事務局`、運営責任者・編集者名が必要な場合は `川上大和` を使う。
 
 ## SNS自動投稿
 
