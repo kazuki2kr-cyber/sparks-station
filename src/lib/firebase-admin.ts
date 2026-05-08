@@ -35,7 +35,7 @@ export const adminDb = new Proxy({} as FirebaseFirestore.Firestore, {
  */
 export async function verifyIdToken(
   req: NextRequest
-): Promise<{ uid: string } | NextResponse> {
+): Promise<{ uid: string; email?: string } | NextResponse> {
   const authHeader = req.headers.get("authorization");
   const token = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
   if (!token) {
@@ -43,7 +43,7 @@ export async function verifyIdToken(
   }
   try {
     const decoded = await getAuth(getAdminApp()).verifyIdToken(token);
-    return { uid: decoded.uid };
+    return { uid: decoded.uid, email: decoded.email };
   } catch {
     return NextResponse.json({ error: "認証トークンが無効です" }, { status: 401 });
   }

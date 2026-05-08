@@ -12,7 +12,8 @@
 1. 直近の文脈が必要な場合は `docs/` と既存の `CLAUDE.md` を確認する。
 2. SNS関連の作業では `docs/organization/sns-strategy.md` と `scripts/check-sns-queue.mjs` を確認する。
 3. 組織的に進める依頼では `docs/organization/multi-agent-operations.md` を確認し、レオが窓口としてエイダ/ルカへタスクを切り分ける。
-4. コード変更では既存スタックを優先し、新しい依存は必要性と運用コストを確認してから追加する。
+4. マネタイズ、Sparks Station Pro、買い切りDB、アフィリエイト導入、または市川さんが「なにするんだっけ？」と聞いた場合は、まず `docs/monetization-handoff.md` を確認する。
+5. コード変更では既存スタックを優先し、新しい依存は必要性と運用コストを確認してから追加する。
 
 ## 組織ロール
 

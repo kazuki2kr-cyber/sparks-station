@@ -52,11 +52,6 @@ export const metadata: Metadata = {
     "google-adsense-account": "ca-pub-3577742758028719",
     "google-site-verification": "dVgTYxnAWJx8eAoxaxU8D9y7c40_RJP1RuDTJ2aPXRI",
   },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Sparks Station",
-  },
 };
 
 
