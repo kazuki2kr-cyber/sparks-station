@@ -152,6 +152,47 @@ FIREBASE_ADMIN_PRIVATE_KEY=
 4. Firebase App Hosting / Secret Manager に必要な環境変数を入れる。
 5. テスト決済で、購入前Googleログイン、Stripe決済、Firestore購入記録、DB閲覧、CSV/JSONダウンロードまで確認する。
 
+## Stripeテスト環境での確認手順
+
+本番モードでは実際に課金できてしまうため、公開サイトでは `SAAS_CASE_DB_CHECKOUT_ENABLED=false` のままにする。
+
+テスト決済はローカル環境で行う。Stripeプラグインから取得できる商品/Priceは本番側のみのため、テスト環境で作成した1980円商品のPrice IDはStripe Dashboardから手動でコピーする。
+
+ローカル `.env.local` に一時的に入れる値:
+
+```text
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+STRIPE_SAAS_CASE_DB_BETA_PRICE_ID=price_...
+SAAS_CASE_DB_CHECKOUT_ENABLED=true
+NEXT_PUBLIC_SAAS_CASE_DB_CHECKOUT_ENABLED=true
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_CONTACT_EMAIL=sparks.station.contact@gmail.com
+```
+
+注意:
+
+- `STRIPE_SECRET_KEY` は必ず `sk_test_` で始まるものを使う。
+- テスト用Price IDは、テスト環境で作った1980円商品のPrice IDを使う。
+- 本番 `apphosting.yaml` は `SAAS_CASE_DB_CHECKOUT_ENABLED=false` のままにする。
+- テスト完了後、本番公開するときだけ `SAAS_CASE_DB_CHECKOUT_ENABLED=true` / `NEXT_PUBLIC_SAAS_CASE_DB_CHECKOUT_ENABLED=true` に切り替える。
+
+ローカルWebhook確認は、Stripe CLIが使える場合は以下で転送する。
+
+```powershell
+stripe listen --forward-to localhost:3000/api/stripe/webhook
+```
+
+表示された `whsec_...` をローカル `.env.local` の `STRIPE_WEBHOOK_SECRET` に入れる。
+
+テストカード:
+
+```text
+4242 4242 4242 4242
+任意の未来日付
+任意のCVC
+```
+
 ## Stripe・サイト表示・個人情報の方針
 
 できるだけ個人情報を表に出さない。ただし、通信販売/オンライン販売として必要な表示は避けない。
