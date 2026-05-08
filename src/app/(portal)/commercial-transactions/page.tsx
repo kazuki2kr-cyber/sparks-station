@@ -1,5 +1,10 @@
 import { Metadata } from "next";
-import { SITE_CONTACT_EMAIL, SITE_OWNER_NAME, getMailtoHref } from "@/lib/site-config";
+import {
+  SITE_CONTACT_EMAIL,
+  SITE_OPERATOR_NAME,
+  SITE_SELLER_NAME,
+  getMailtoHref,
+} from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記 | Sparks Station",
@@ -9,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 const rows = [
-  ["販売事業者", SITE_OWNER_NAME],
-  ["運営責任者", SITE_OWNER_NAME],
+  ["販売事業者", SITE_SELLER_NAME],
+  ["運営責任者", SITE_OPERATOR_NAME],
   [
     "所在地",
     "請求があった場合、法令に基づき遅滞なく電子メールで開示します。",
