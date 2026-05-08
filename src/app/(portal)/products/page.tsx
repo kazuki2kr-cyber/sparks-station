@@ -7,7 +7,7 @@ import { SaasCaseDbCheckoutButton } from "./components/SaasCaseDbCheckoutButton"
 export const metadata: Metadata = {
   title: "Products | Sparks Station",
   description:
-    "Sparks Stationのプロダクトとメンバーシップ。海外SaaSの成功パターンを日本で試せる形に整理します。",
+    "Sparks Stationのプロダクト一覧。海外SaaSの成功パターンを日本で試せる判断材料として整理します。",
   alternates: {
     canonical: "/products",
   },
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 const betaFeatures = [
   "既存記事から抽出した海外SaaS事例15件",
-  "価格、GTM、初期顧客、収益化パターンの整理",
-  "CSV/JSONダウンロードと購入者専用Web閲覧",
+  "価格、GTM、初期顧客、収益化パターンを整理",
+  "購入後のWeb閲覧とCSV/JSONダウンロードに対応",
 ];
 
 export default function ProductsPage() {
@@ -30,7 +30,7 @@ export default function ProductsPage() {
           海外SaaSの成功パターンを、日本で試せる判断材料にする。
         </h1>
         <p className="text-base leading-8 text-neutral-400">
-          Sparks Stationは、記事で読んだ事例を「読むだけ」で終わらせず、価格、GTM、顧客獲得、最初の検証手順まで持ち帰れる形に整えていきます。
+          Sparks Stationは、記事で読んだ事例を「読むだけ」で終わらせず、価格、GTM、顧客獲得、検証手順まで持ち帰れる形に整えていきます。
         </p>
       </header>
 
@@ -48,11 +48,9 @@ export default function ProductsPage() {
             </div>
           </div>
 
-          <div className="mt-6 space-y-4 text-neutral-300">
-            <p className="text-lg leading-8">
-              月額の小さなメンバーシップとして、海外Micro-SaaS / AI SaaSの事例を「日本で再現するならどう動くか」まで分解します。買い切りDBの反応を見ながら、無理のない頻度で準備します。
-            </p>
-          </div>
+          <p className="mt-6 text-lg leading-8 text-neutral-300">
+            月額の小さなメンバーシップとして、海外Micro-SaaS / AI SaaSの事例を「日本で再現するならどう動くか」まで分解します。買い切りDBの反応を見ながら、無理のない頻度で準備します。
+          </p>
 
           <div className="mt-7 grid gap-3 md:grid-cols-3">
             {[
@@ -79,7 +77,7 @@ export default function ProductsPage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <span className="text-sm text-neutral-500">
-              準備中。初期価格は月額980円から検証予定です。
+              準備中です。初期価格は月額980円から検証予定です。
             </span>
           </div>
         </div>
@@ -91,9 +89,11 @@ export default function ProductsPage() {
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
             Beta
           </p>
-          <h2 className="mt-1 text-xl font-bold text-white">買い切り事例データベース</h2>
+          <h2 className="mt-1 text-xl font-bold text-white">
+            買い切り事例データベース
+          </h2>
           <p className="mt-3 text-sm leading-7 text-neutral-400">
-            海外SaaSの収益モデル、価格、買収、GTM、日本での再現仮説を整理したデータベースです。まずは15件収録のベータ版として販売検証します。
+            海外SaaSの収益モデル、価格、買収、GTM、日本での再現仮説を整理したデータベースです。まずは15件収録のベータ版として販売します。
           </p>
           <div className="mt-5 space-y-2 rounded-md border border-white/10 bg-neutral-950/60 p-3 text-sm text-neutral-400">
             <div className="flex items-center justify-between gap-3">
@@ -114,6 +114,12 @@ export default function ProductsPage() {
           <div className="mt-5">
             <SaasCaseDbCheckoutButton />
           </div>
+          <Link
+            href="/products/saas-case-db/access"
+            className="mt-3 inline-flex w-full items-center justify-center rounded-md border border-white/10 bg-neutral-950 px-4 py-2 text-sm font-semibold text-neutral-200 transition-colors hover:bg-neutral-800"
+          >
+            購入済みの方はこちら
+          </Link>
           <p className="mt-4 text-xs leading-5 text-neutral-500">
             決済はStripe Checkoutで処理されます。購入前に
             <Link href="/commerce-disclosure" className="text-emerald-300 underline">
@@ -129,15 +135,17 @@ export default function ProductsPage() {
           <h2 className="text-lg font-bold text-white">ベータ版と正式版</h2>
           <div className="mt-4 grid gap-3 text-sm leading-6 text-neutral-400">
             <div className="rounded-md border border-white/10 bg-neutral-950/50 p-3">
-              <p className="font-semibold text-white">ベータ版: 2,980円</p>
+              <p className="font-semibold text-white">
+                ベータ版: {SAAS_CASE_DB_BETA_PRICE_JPY.toLocaleString("ja-JP")}円
+              </p>
               <p className="mt-1">
-                15件収録。Web閲覧、CSV/JSONダウンロードに対応します。正式版v1まで差額なしで更新予定です。
+                15件収録、Web閲覧、CSV/JSONダウンロードに対応します。正式版v1まで追加料金なしで更新予定です。
               </p>
             </div>
             <div className="rounded-md border border-white/10 bg-neutral-950/50 p-3">
               <p className="font-semibold text-white">正式版: 準備中</p>
               <p className="mt-1">
-                4,980円から9,800円を想定。30件以上を目安に、主要URL、価格、売上情報を確認してから公開します。
+                30件以上を目安に、主要URL、価格、売上情報、GTM仮説を確認してから公開します。
               </p>
             </div>
           </div>
