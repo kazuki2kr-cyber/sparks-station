@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { SAAS_CASE_DB_PRODUCT_ID } from "@/lib/saas-case-db";
 import { verifyIdToken } from "@/lib/firebase-admin";
 import {
+  cleanEnv,
   getBaseUrl,
   getSaasCaseDbBetaPriceId,
   stripeRequest,
@@ -13,6 +14,13 @@ export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   try {
+    if (cleanEnv("SAAS_CASE_DB_CHECKOUT_ENABLED") !== "true") {
+      return NextResponse.json(
+        { error: "SaaS Case DBの購入受付は現在準備中です。" },
+        { status: 503 },
+      );
+    }
+
     const auth = await verifyIdToken(req);
     if (auth instanceof NextResponse) return auth;
     if (!auth.email) {
