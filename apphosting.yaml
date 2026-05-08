@@ -39,5 +39,15 @@ env:
     secret: THREADS_ACCESS_TOKEN
   - variable: CRON_SECRET
     secret: CRON_SECRET
+  - variable: STRIPE_SECRET_KEY
+    secret: STRIPE_SECRET_KEY
+  - variable: STRIPE_WEBHOOK_SECRET
+    secret: STRIPE_WEBHOOK_SECRET
+  - variable: STRIPE_SAAS_CASE_DB_BETA_PRICE_ID
+    value: "price_1TUe2U0MQKwsAMDfkqkBItcn"
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: "https://sparks-station.com"
+  - variable: NEXT_PUBLIC_CONTACT_EMAIL
+    value: "sparks.station.contact@gmail.com"
   - variable: REEL_BGM_URL
     value: "https://res.cloudinary.com/dxexypvx6/video/upload/v1777169940/Morning_in_Minato_sgnp7f.mp3"

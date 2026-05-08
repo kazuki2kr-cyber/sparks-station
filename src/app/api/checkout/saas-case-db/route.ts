@@ -1,11 +1,13 @@
-import { NextResponse } from "next/server";
-import {
-  SAAS_CASE_DB_BETA_PRICE_JPY,
-  SAAS_CASE_DB_PRODUCT_ID,
-} from "@/lib/saas-case-db";
-import { verifyIdToken } from "@/lib/firebase-admin";
-import { getBaseUrl, stripeRequest, type StripeCheckoutSession } from "@/lib/stripe-rest";
 import { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { SAAS_CASE_DB_PRODUCT_ID } from "@/lib/saas-case-db";
+import { verifyIdToken } from "@/lib/firebase-admin";
+import {
+  getBaseUrl,
+  getSaasCaseDbBetaPriceId,
+  stripeRequest,
+  type StripeCheckoutSession,
+} from "@/lib/stripe-rest";
 
 export const runtime = "nodejs";
 
@@ -21,6 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const baseUrl = getBaseUrl(req);
+    const priceId = getSaasCaseDbBetaPriceId();
 
     const params = new URLSearchParams({
       mode: "payment",
@@ -28,11 +31,7 @@ export async function POST(req: NextRequest) {
       cancel_url: `${baseUrl}/products`,
       allow_promotion_codes: "true",
       "line_items[0][quantity]": "1",
-      "line_items[0][price_data][currency]": "jpy",
-      "line_items[0][price_data][unit_amount]": String(SAAS_CASE_DB_BETA_PRICE_JPY),
-      "line_items[0][price_data][product_data][name]": "Sparks Station SaaS Case DB β版",
-      "line_items[0][price_data][product_data][description]":
-        "海外SaaS事例の価格、GTM、日本での再現仮説、初回検証手順を整理した買い切りDB",
+      "line_items[0][price]": priceId,
       "metadata[productId]": SAAS_CASE_DB_PRODUCT_ID,
       "metadata[release]": "beta",
       "metadata[authUid]": auth.uid,

@@ -126,6 +126,7 @@ Proは「DBを無料で見られる月額」ではなく、最新の事例と実
 ```text
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
+STRIPE_SAAS_CASE_DB_BETA_PRICE_ID=
 NEXT_PUBLIC_SITE_URL=https://sparks-station.com
 ```
 
@@ -141,8 +142,10 @@ FIREBASE_ADMIN_PRIVATE_KEY=
 
 次回はここから再開する。
 
-1. Stripe上に `Sparks Station SaaS Case DB β版` の商品と2,980円のPriceを作る。
-2. コード側を動的 `price_data` ではなく、環境変数 `STRIPE_SAAS_CASE_DB_BETA_PRICE_ID` 参照に変更する。
+1. Stripe上に `Sparks Station SaaS Case DB β版` の商品と2,980円のPriceを作る。（対応済み）
+   - Product ID: `prod_UTbEFvlOvdpBDG`
+   - Price ID: `price_1TUe2U0MQKwsAMDfkqkBItcn`
+2. コード側を動的 `price_data` ではなく、環境変数 `STRIPE_SAAS_CASE_DB_BETA_PRICE_ID` 参照に変更する。（対応済み）
 3. Stripe webhook endpoint を本番URLに登録する。
    - URL: `https://sparks-station.com/api/stripe/webhook`
    - Event: `checkout.session.completed`

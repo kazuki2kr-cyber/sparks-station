@@ -105,6 +105,7 @@ NEXT_PUBLIC_CONTACT_EMAIL=sparks.station.contact@gmail.com
 ```text
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
+STRIPE_SAAS_CASE_DB_BETA_PRICE_ID=price_1TUe2U0MQKwsAMDfkqkBItcn
 NEXT_PUBLIC_SITE_URL=https://sparks-station.com
 ```
 

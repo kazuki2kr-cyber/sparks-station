@@ -11,7 +11,7 @@ export type StripeCheckoutSession = {
   url?: string | null;
 };
 
-function cleanEnv(name: string): string {
+export function cleanEnv(name: string): string {
   return (process.env[name] ?? "")
     .replace(/^\uFEFF/, "")
     .trim()
@@ -24,6 +24,14 @@ export function getStripeSecretKey(): string {
     throw new Error("STRIPE_SECRET_KEY is not configured");
   }
   return key;
+}
+
+export function getSaasCaseDbBetaPriceId(): string {
+  const priceId = cleanEnv("STRIPE_SAAS_CASE_DB_BETA_PRICE_ID");
+  if (!priceId) {
+    throw new Error("STRIPE_SAAS_CASE_DB_BETA_PRICE_ID is not configured");
+  }
+  return priceId;
 }
 
 export async function stripeRequest<T>(
