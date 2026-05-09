@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sns:diagnose-overlay": "node scripts/diagnose-reel-overlay.mjs"
+    "sns:diagnose-overlay": "node scripts/diagnose-reel-overlay.mjs",
+    "sns:insights": "node scripts/check-sns-insights.mjs --limit=20 --out=tmp/sns-insights-latest.json"
   },
   "dependencies": {
     "@google/genai": "^1.50.1",

@@ -423,5 +423,33 @@
     "monetizationFit": "SaaS単体にこだわらず、買い切りDB、Pro、代行型検証へ広げる設計の参考になる。記事制作・SEO・AI自動化のDB事例として価値が高い。",
     "confidence": "high",
     "notes": "MRR、買収後LTD、顧客数、派生サービスの数字はIndie Hackers記事を参照。価格は記事内の$20/月からを参照。"
+  },
+  {
+    "id": "youform-affordable-typeform-alternative",
+    "productName": "Youform",
+    "url": "https://youform.com",
+    "sourceUrls": [
+      "/posts/youform-affordable-typeform-alternative",
+      "src/content/posts/youform-affordable-typeform-alternative.md",
+      "https://www.indiehackers.com/post/tech/competing-on-price-to-carve-out-an-18k-mrr-foothold-Hp57IRVPq7v51y4jVDiD",
+      "https://youform.com/pricing/"
+    ],
+    "category": "Micro-SaaS / Form Builder / Productivity",
+    "targetCustomer": "Typeformの価格や制限に不満がある個人事業主、中小企業、採用・イベント・相談受付の担当者",
+    "pain": "既存フォーム作成ツールは高価、無料枠が狭い、または業務利用に必要な機能が有料壁の奥にある。",
+    "productSummary": "無料でもフォーム数・回答数を広く開放し、業務利用に必要なブランド削除、Stripe決済、カスタムドメイン、詳細分析などで課金するフォームSaaS。",
+    "pricingModel": "Freemium / 月額サブスクリプション / 初期Lifetime Deal",
+    "priceRange": "Proは月$29、年払いで月$20相当。初期LTDは$299から$399。",
+    "revenue": "MRR約$18k、ユーザー約80,000人。初期LTDは40日で$35k超。",
+    "acquisitionChannel": "X/RedditでTypeform関連キーワードを検索し手動DM、共同創業者のXオーディエンス、無料フォームのブランド露出、代替キーワード。",
+    "gtmPattern": "competitor alternative / social listening / freemium viral loop / LTD to subscription",
+    "successFactor": "Typeformの価格不満を拾い、『安価なTypeform代替』という一言で比較対象と切り替え理由を同時に伝えた。",
+    "riskOrFailure": "安価ポジションによるARPU上限、フォーム市場の競争、無料ユーザー増加によるサポート負荷、ブランド表示の嫌悪感。",
+    "japanHypothesis": "汎用フォームではなく、採用応募、士業相談、イベント受付、スクール入会など用途特化で『Googleフォームでは物足りないが大手は高い』層を狙う。",
+    "firstExperiment": "X、note、レビューサイトで既存フォームツールの不満を20件集め、1用途に絞ったLPを作り、手動DMで20人に無料MVPを試してもらう。",
+    "recommendedTools": ["Laravel", "Vue.js", "AWS", "Stripe", "Zapier", "Slack"],
+    "monetizationFit": "価格不満の拾い方、競合代替SEO、無料プランから業務利用課金への導線としてDB価値が高い。Sparks Stationの小さなSaaS検証テンプレにも使える。",
+    "confidence": "high",
+    "notes": "MRR、ユーザー数、LTD売上、初期GTMはIndie Hackers記事を参照。現行価格と無料枠はYouform公式価格ページを参照。"
   }
 ]

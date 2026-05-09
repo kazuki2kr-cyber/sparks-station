@@ -20,14 +20,16 @@ export async function POST(req: NextRequest) {
       ? body.source.trim()
       : "products";
 
-  await adminDb.collection("proWaitlist").doc(auth.uid).set(
+  const waitlistRef = adminDb.collection("proWaitlist").doc(auth.uid);
+  const existing = await waitlistRef.get();
+  await waitlistRef.set(
     {
       uid: auth.uid,
       email: auth.email,
       source,
       status: "active",
       updatedAt: FieldValue.serverTimestamp(),
-      createdAt: FieldValue.serverTimestamp(),
+      ...(existing.exists ? {} : { createdAt: FieldValue.serverTimestamp() }),
     },
     { merge: true },
   );
