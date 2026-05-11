@@ -25,17 +25,38 @@ The article must not be a shallow summary. It should help the reader understand:
 2. Classify the article:
    - Pattern A: SaaS, Micro-SaaS, overseas business success/failure, acquisition, monetization, GTM.
    - Pattern B: advanced technology, concept, product philosophy, engineering paradigm.
-3. Browse for current facts when the topic depends on recent information, external sources, or precise numbers.
+3. **[Pattern A] Ken parallel research phase** — Before writing, launch 3 concurrent research agents (Ken). Each agent covers one domain and returns only confirmed facts with source URLs. "未確認" for anything unverifiable.
+   - **Ken-A (ビジネスファクト)**: MRR, ARR, exit price, user count, team size, funding, pricing tiers.
+   - **Ken-B (テック・GTM)**: tech stack, first acquisition channel (Product Hunt / Reddit / SEO / X), competitive landscape, GTM trigger.
+   - **Ken-C (日本市場)**: Japanese analogues, barriers (regulation / culture / language), minimum localization experiment.
+   - In **Codex**: send all three as parallel subagent sessions simultaneously.
+   - In **Claude Code**: call Agent tool three times in parallel (run_in_background: true for Ken-A and Ken-B while Ken-C also runs); collect all three results before proceeding.
+   - Wait for all three agents to complete before moving to step 4.
+   - **[Pattern B]** Skip Ken research. Browse for conceptual context, technical background, and implementation examples directly.
 4. Decide a slug:
    - English lowercase words and hyphens only.
    - Include service/concept and topic keyword.
    - Avoid Japanese, underscores, and generic slugs.
    - Check `src/content/posts` for duplicates.
 5. Draft the article as Markdown under `src/content/posts/[slug].md`.
-6. Verify frontmatter, tags, length, internal style, and build impact.
-7. Produce X/SNS copy separately in the final response or a doc section.
-8. After user approval, commit and push only the article-related files.
-9. Wait for App Hosting deployment before any Search Console indexing step.
+6. For Pattern A, add or update the matching row in `data/monetization/saas-case-database.seed.json`.
+7. Update article insight assets by running `npm run articles:analyze`. This regenerates `data/insights/sparks-article-insights.json` and draft SNS candidate data from the article/DB corpus.
+8. Verify frontmatter, tags, length, internal style, JSON validity, insight output, and build impact.
+8b. **[Pattern A] Fact-check gate** — Before presenting the draft to the user, cross-check all numbers in the article body against Ken's research output:
+   - Numbers confirmed by Ken with a source URL → keep as stated.
+   - Numbers Ken marked as 未確認 → add 「推定」or「約」, or remove entirely.
+   - Numbers not present in Ken's output at all → treat as unverified; apply same rule as above.
+   - Do not pass any number as a stated fact unless Ken recorded a source URL for it.
+   - Pattern B articles skip this gate.
+9. Produce X/SNS copy separately in the final response or a doc section.
+10. Do not create or seed SNS weekly posts unless the user explicitly asks for SNS post planning, for example "次の週のSNS投稿案を作成して".
+11. If the user explicitly asks to post to X during or after article work, follow `docs/organization/sns-strategy.md` and create/post the standard two X posts:
+    - checklist post: a short saved checklist distilled from the article insight
+    - Japan-localization post: concrete Japanese industries, workflows, or first experiments
+    Do not include article URLs or external links in the X post body. Avoid domain-like product names that trigger link cards.
+    This also applies when the user asks to make X posts from an older article. In that case, identify the article by slug, URL, title, service name, or theme; consult `data/insights/sparks-article-insights.json`; reread the article file; then produce/post the same two X formats.
+12. After user approval, commit and push only the article-related files.
+13. Wait for App Hosting deployment before any Search Console indexing step.
 
 ## Frontmatter
 
@@ -149,10 +170,13 @@ Use direct citations and links in the final response when browsing informed the 
 
 Generate X copy after the article draft:
 
-- Main post: 140 Japanese characters or less, no URL, strong first phrase, 2〜3 hashtags.
-- Self-reply: short CTA with `https://sparks-station.com/posts/[slug]`.
+- X checklist post: no URL, no hashtag by default, strong first phrase, 3〜5 saved checklist items, article insight distilled into one practical takeaway.
+- X Japan-localization post: no URL, no hashtag by default, concrete Japanese industries/workflows/minimum experiments that could reuse the article insight.
+- Avoid domain-like product notation that creates automatic link cards. For example, use `Meerkats AI` instead of `Meerkats.ai` in X post bodies.
 
-Do not auto-post unless the user explicitly asks.
+Do not post to X unless the user explicitly asks. When posting to X, use Browser/Chrome extension against the user's logged-in Chrome session and verify that no URL card is attached before publishing.
+
+If the user approves the two X drafts with a short confirmation such as "OK", "これで", "投稿して", or "お願いします", treat that as permission to proceed to browser-based posting. Post both drafts one by one, verify that each post appears, and return the two X post URLs.
 
 ## Validation
 
@@ -160,6 +184,7 @@ Before presenting work:
 
 - Confirm the Markdown file path.
 - Run a character count when an article file is created.
+- For Pattern A, confirm the SaaS Case DB row and article insight output were updated.
+- Run `npm run articles:analyze` after article/DB changes.
 - Run `npm run build` when article/frontmatter changes may affect routing.
 - Mention if browsing or indexing could not be completed.
-
