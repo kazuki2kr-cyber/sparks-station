@@ -7,8 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "articles:analyze": "node scripts/analyze-sparks-articles.mjs",
     "sns:diagnose-overlay": "node scripts/diagnose-reel-overlay.mjs",
-    "sns:insights": "node scripts/check-sns-insights.mjs --limit=20 --out=tmp/sns-insights-latest.json"
+    "sns:insights": "node scripts/check-sns-insights.mjs --limit=20 --out=tmp/sns-insights-latest.json",
+    "sns:seed-approved": "node scripts/seed-approved-sns-candidates.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.50.1",

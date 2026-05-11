@@ -1,0 +1,1936 @@
+{
+  "generatedAt": "2026-05-11T07:57:04.286Z",
+  "source": {
+    "postsDir": "src/content/posts",
+    "dbPath": "data/monetization/saas-case-database.seed.json"
+  },
+  "totals": {
+    "posts": 37,
+    "dbRows": 18,
+    "postsWithDbRows": 18,
+    "postsWithoutDbRows": 19
+  },
+  "patterns": [
+    {
+      "id": "failure_or_payer_risk",
+      "label": "失敗診断 / 支払い手と導入コスト",
+      "count": 10,
+      "examples": [
+        {
+          "slug": "20260313",
+          "title": "ゼロイチを捨てて月商1,800万円。年商数千万円のMicro-SaaSを買収して育てる「ソフトウェア・ホールディングカンパニー」の生存戦略",
+          "productName": "Noosa Labs / Sendtric / Evalart / Mava"
+        },
+        {
+          "slug": "20260306",
+          "title": "規制とマネタイズの壁に散った「究極の個別化医療」。1人の患者に1つの薬を届けるEveryONE Medicinesの敗北と遺産",
+          "productName": "究極の個別化医療"
+        },
+        {
+          "slug": "20260227",
+          "title": "「ベンチャーの時計」と「規制の時計」の不一致。2800万ドルを調達したAI医療スタートアップKintsugiの教訓",
+          "productName": "ベンチャーの時計"
+        },
+        {
+          "slug": "20260221",
+          "title": "11年、135億円、そして「完璧なプロダクト」の完成。AI簿記Botkeeperが技術的理想に達した瞬間に閉鎖した理由",
+          "productName": "完璧なプロダクト"
+        },
+        {
+          "slug": "20260213saas_is_dead",
+          "title": "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First APIの実装論",
+          "productName": "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First A"
+        }
+      ]
+    },
+    {
+      "id": "pricing_and_packaging",
+      "label": "価格設計 / 課金理由の明確化",
+      "count": 8,
+      "examples": [
+        {
+          "slug": "meerkats-ai-gtm-agent-3k-mrr",
+          "title": "Meerkats.aiはなぜ4週間で月3,000ドルMRRに届いたのか。AIエージェントでGTMの手作業を置き換える方法",
+          "productName": "Meerkats.ai"
+        },
+        {
+          "slug": "20260323",
+          "title": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS開発の軍資金を稼ぐまで",
+          "productName": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS"
+        },
+        {
+          "slug": "20260305",
+          "title": "安定の職を捨て、無計画から月商210万円へ。80%をAIで自動化する「ハイブリッド・エージェンシー」の衝撃",
+          "productName": "AI Podcasting (AIP)"
+        },
+        {
+          "slug": "20260228",
+          "title": "全財産喪失から月商1,500万円のAI企業へ。「Magai」創業者が証明した”顧客との対話”と”限界突破”の軌跡",
+          "productName": "Magai"
+        },
+        {
+          "slug": "20260227_2",
+          "title": "VC調達の失敗から月商2万ドルのAI起業家へ。Xのバズから生まれた「AI Chat Flow」と「Starpop」のゲリラGTM戦略",
+          "productName": "AI Flow Chat / Starpop"
+        }
+      ]
+    },
+    {
+      "id": "search_or_template_wedge",
+      "label": "検索需要 / テンプレート導線",
+      "count": 6,
+      "examples": [
+        {
+          "slug": "20260307",
+          "title": "年収6,000万円を捨てて起業。AIを駆使し8ヶ月で月商450万円のポートフォリオを築いた軌跡",
+          "productName": "年収6,000万円を捨てて起業"
+        },
+        {
+          "slug": "20260202",
+          "title": "2027年、エンジニアは「ツール」ではなく「生命」を実装する。シンギュラリティとEpoch 6の実装論",
+          "productName": "ツール"
+        },
+        {
+          "slug": "20260129",
+          "title": "3度の「全ロス」から月商900万円へ。アプリ量産で勝つ「Sarafan Mobile」の不死鳥戦略",
+          "productName": "Sarafan Mobile"
+        },
+        {
+          "slug": "20260127",
+          "title": "20時間開発でARR数百万円。枯れた技術「jQuery」で勝つSEO特化CMS「BlogMaker」",
+          "productName": "BlogMaker"
+        },
+        {
+          "slug": "20260126",
+          "title": "数学で「運」を支配する。『確率思考の戦略論』とエンジニアのための本能工学",
+          "productName": "運"
+        }
+      ]
+    },
+    {
+      "id": "pre_sold_or_ltd",
+      "label": "作る前に売る / LTD検証",
+      "count": 4,
+      "examples": [
+        {
+          "slug": "youform-affordable-typeform-alternative",
+          "title": "Youformはなぜ月1.8万ドルMRRまで伸びたのか。Typeformの価格不満を拾ったフォームSaaSの作り方",
+          "productName": "Youform"
+        },
+        {
+          "slug": "subscribr-youtube-ai-saas-bootstrap",
+          "title": "VC出資のスタートアップを捨て、LaravelとAIで勝負。YouTubeクリエイター向けSaaS「Subscribr」が100日で$10k MRR、18ヶ月で月商930万円に到達した「検証ファースト」戦略",
+          "productName": "Subscribr"
+        },
+        {
+          "slug": "20260226",
+          "title": "「脱・サブスク」で月商237万円。既存SaaSの隙間を射抜く個人開発者の生存戦略",
+          "productName": "脱・サブスク"
+        },
+        {
+          "slug": "20260121_2",
+          "title": "「一発屋」で終わらない。月商1.3億円超えを実現する「Micro-SaaSポートフォリオ」の極意",
+          "productName": "Micro-SaaS portfolio strategy"
+        }
+      ]
+    },
+    {
+      "id": "buy_then_optimize",
+      "label": "買って直す / 小規模SaaS運用改善",
+      "count": 4,
+      "examples": [
+        {
+          "slug": "cuppa-ai-seo-saas-acquisition",
+          "title": "Cuppaはなぜ買収直後のAI Micro-SaaSを月5.9万ドル規模まで伸ばせたのか。LTD、SEO知見、インフルエンサー流通の組み合わせ",
+          "productName": "Cuppa"
+        },
+        {
+          "slug": "base44-vibe-coding-80m-exit",
+          "title": "広告費ゼロ・資金調達ゼロ。Vibeコーディング特化のBase44が6ヶ月で116億円Exitを達成した構造",
+          "productName": "Base44"
+        },
+        {
+          "slug": "20260120",
+          "title": "レッドオーシャンで勝つ。月商1,200万円超えの電子署名SaaS「SignWell」の緻密な戦略",
+          "productName": "SignWell"
+        },
+        {
+          "slug": "20260120_2",
+          "title": "自己資金2,500ドルから165億円へ。住宅診断SaaS「Spectora」に学ぶ垂直統合戦略",
+          "productName": "Spectora"
+        }
+      ]
+    },
+    {
+      "id": "founder_distribution",
+      "label": "創業者発信 / コミュニティGTM",
+      "count": 4,
+      "examples": [
+        {
+          "slug": "20260212-future-of-saas",
+          "title": "「アプリ」が消える日。Nothingが描く『Just-in-Time Software』とSaaSの終焉",
+          "productName": "アプリ"
+        },
+        {
+          "slug": "20260207",
+          "title": "「買う」時代は終わった。AIエージェントが引き起こす『SaaSの黄昏』とエンジニアリングの復権",
+          "productName": "買う"
+        },
+        {
+          "slug": "20260205",
+          "title": "従業員ゼロで年商1.5億円。AIネイティブ企業「Swan AI」が実践する自律型ビジネスの全貌",
+          "productName": "Swan AI"
+        },
+        {
+          "slug": "20260204",
+          "title": "インフルエンサーと共同創業する「反則級」のGTM戦略。動画ポッドキャストSaaS「Flightcast」の事例",
+          "productName": "Flightcast"
+        }
+      ]
+    },
+    {
+      "id": "general_case_breakdown",
+      "label": "事例分解 / 日本転用",
+      "count": 1,
+      "examples": [
+        {
+          "slug": "20260224",
+          "title": "AIを「使う」から「飼う」時代へ。OpenClawとMac miniが引き起こすローカル・エージェント革命",
+          "productName": "使う"
+        }
+      ]
+    }
+  ],
+  "insights": [
+    {
+      "slug": "meerkats-ai-gtm-agent-3k-mrr",
+      "title": "Meerkats.aiはなぜ4週間で月3,000ドルMRRに届いたのか。AIエージェントでGTMの手作業を置き換える方法",
+      "date": "2026-05-11",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "SaaS",
+        "GTM"
+      ],
+      "articleUrl": "/posts/meerkats-ai-gtm-agent-3k-mrr",
+      "file": "src/content/posts/meerkats-ai-gtm-agent-3k-mrr.md",
+      "hasDbRow": true,
+      "dbRowId": "meerkats-ai-gtm-agent-3k-mrr",
+      "productName": "Meerkats.ai",
+      "category": "AI SaaS / GTM Automation / AI Agents",
+      "payer": "小規模な成長チーム、BtoB SaaS、営業代行会社、マーケティング代理店、複数クライアントのGTM作業を繰り返すチーム。",
+      "pain": "リード抽出、エンリッチ、アウトリーチ文面、CRM更新、レポート作成が毎週人手で発生し、売上に近い作業なのに実行コストが粗利を削る。",
+      "pricingModel": "消費ベース / 月額サブスクリプション / サービス併用",
+      "revenue": "ローンチ4週間で月3,000ドル超MRR。",
+      "acquisitionChannel": "既存ネットワークの代理店へのターゲットアウトリーチ、AIエージェント活用のオンライン・オフライン教育イベント、LinkedIn投稿。",
+      "gtmPattern": "agency wedge / service as software / outcome-oriented automation / founder-led outreach",
+      "successOrFailureFactor": "汎用AIエージェントではなく、代理店や成長チームの売上に近い反復作業を1つずつ握ったこと。完全自動化ではなく、テーブル確認と承認を挟むことで導入不安を下げた。",
+      "japanHypothesis": "営業代行、採用支援、展示会フォロー、士業マーケティング、補助金営業など、毎週似たリード作成と文面作成を行う日本の小規模チームに転用できる。最初はGoogle SheetsとHubSpotまたはkintoneに絞ると導入しやすい。",
+      "firstExperiment": "1業種を選び、展示会名簿CSVや企業リストから会社情報、担当者候補、優先度、初回メール文面をGoogle Sheetsへ出す手動サービスを3社に月3万から10万円で売り、繰り返し部分をSaaS化する。",
+      "recommendedTools": [
+        "Next.js",
+        "Supabase",
+        "Google Cloud",
+        "Fly.io",
+        "OpenAI API",
+        "Anthropic API",
+        "HubSpot",
+        "Google Sheets"
+      ],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 営業代行、採用支援、展示会フォロー、士業マーケティング、補助金営業など、毎週似たリード作成と文面作成を行う日本の小規模チームに転用できる。最初はGoogle SheetsとHubSpotまたはkintoneに絞ると導入しやすい。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "youform-affordable-typeform-alternative",
+      "title": "Youformはなぜ月1.8万ドルMRRまで伸びたのか。Typeformの価格不満を拾ったフォームSaaSの作り方",
+      "date": "2026-05-09",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM",
+        "Monetization"
+      ],
+      "articleUrl": "/posts/youform-affordable-typeform-alternative",
+      "file": "src/content/posts/youform-affordable-typeform-alternative.md",
+      "hasDbRow": true,
+      "dbRowId": "youform-affordable-typeform-alternative",
+      "productName": "Youform",
+      "category": "Micro-SaaS / Form Builder / Productivity",
+      "payer": "Typeformの価格や制限に不満がある個人事業主、中小企業、採用・イベント・相談受付の担当者",
+      "pain": "既存フォーム作成ツールは高価、無料枠が狭い、または業務利用に必要な機能が有料壁の奥にある。",
+      "pricingModel": "Freemium / 月額サブスクリプション / 初期Lifetime Deal",
+      "revenue": "MRR約$18k、ユーザー約80,000人。初期LTDは40日で$35k超。",
+      "acquisitionChannel": "X/RedditでTypeform関連キーワードを検索し手動DM、共同創業者のXオーディエンス、無料フォームのブランド露出、代替キーワード。",
+      "gtmPattern": "competitor alternative / social listening / freemium viral loop / LTD to subscription",
+      "successOrFailureFactor": "Typeformの価格不満を拾い、『安価なTypeform代替』という一言で比較対象と切り替え理由を同時に伝えた。",
+      "japanHypothesis": "汎用フォームではなく、採用応募、士業相談、イベント受付、スクール入会など用途特化で『Googleフォームでは物足りないが大手は高い』層を狙う。",
+      "firstExperiment": "X、note、レビューサイトで既存フォームツールの不満を20件集め、1用途に絞ったLPを作り、手動DMで20人に無料MVPを試してもらう。",
+      "recommendedTools": [
+        "Laravel",
+        "Vue.js",
+        "AWS",
+        "Stripe",
+        "Zapier",
+        "Slack"
+      ],
+      "sellingPattern": {
+        "id": "pre_sold_or_ltd",
+        "label": "作る前に売る / LTD検証",
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
+        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 汎用フォームではなく、採用応募、士業相談、イベント受付、スクール入会など用途特化で『Googleフォームでは物足りないが大手は高い』層を狙う。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "cuppa-ai-seo-saas-acquisition",
+      "title": "Cuppaはなぜ買収直後のAI Micro-SaaSを月5.9万ドル規模まで伸ばせたのか。LTD、SEO知見、インフルエンサー流通の組み合わせ",
+      "date": "2026-05-08",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "SaaS",
+        "GTM"
+      ],
+      "articleUrl": "/posts/cuppa-ai-seo-saas-acquisition",
+      "file": "src/content/posts/cuppa-ai-seo-saas-acquisition.md",
+      "hasDbRow": true,
+      "dbRowId": "cuppa-ai-seo-saas-acquisition",
+      "productName": "Cuppa",
+      "category": "AI SaaS / SEO / Content Operations",
+      "payer": "SEO記事を大量に作りたいアフィリエイター、代理店、コンテンツ運用チーム",
+      "pain": "SEO記事制作は構成、執筆、校正、編集、CMS投入が分断され、AIを使っても品質管理と運用設計が残る。",
+      "pricingModel": "月額サブスクリプション / 初期Lifetime Deal / Done-for-youサービス",
+      "revenue": "Cuppa本体が$41k-$45k MRR、派生DFYサービスが$13.5k MRR。合算で約$58k-$59k/月。",
+      "acquisitionChannel": "買収済み無料ツールの既存フォロワー、Lifetime Deal、SEO業界ネットワーク、インフルエンサー流通、メールリスト、クロスセル。",
+      "gtmPattern": "acquire micro-SaaS / LTD validation / influencer distribution / service expansion",
+      "successOrFailureFactor": "SEO経験者が顧客の痛みを理解し、買収直後のLTDで需要と現金を確認し、流通パートナーで初速を作った。",
+      "japanHypothesis": "汎用AI記事生成ではなく、歯科、工務店、採用広報、士業など業界特化のコンテンツ運用支援としてSaaSと代行を組み合わせると成立しやすい。",
+      "firstExperiment": "1業界に絞り、10本分の記事テンプレートを作り、初月3万円でAI下書きと人間編集込みの記事制作を3社に手動提供して継続意向を確認する。",
+      "recommendedTools": [
+        "Next.js",
+        "OpenAI API",
+        "Stripe",
+        "Airtable",
+        "WordPress",
+        "Ahrefs"
+      ],
+      "sellingPattern": {
+        "id": "buy_then_optimize",
+        "label": "買って直す / 小規模SaaS運用改善",
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
+        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 汎用AI記事生成ではなく、歯科、工務店、採用広報、士業など業界特化のコンテンツ運用支援としてSaaSと代行を組み合わせると成立しやすい。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "base44-vibe-coding-80m-exit",
+      "title": "広告費ゼロ・資金調達ゼロ。Vibeコーディング特化のBase44が6ヶ月で116億円Exitを達成した構造",
+      "date": "2026-04-30",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "Bootstrapped",
+        "Exit"
+      ],
+      "articleUrl": "/posts/base44-vibe-coding-80m-exit",
+      "file": "src/content/posts/base44-vibe-coding-80m-exit.md",
+      "hasDbRow": true,
+      "dbRowId": "base44-vibe-coding-80m-exit",
+      "productName": "Base44",
+      "category": "AI SaaS / Vibe Coding / No-code",
+      "payer": "非エンジニアの業務担当者、中小企業、社内ツールを素早く作りたいチーム",
+      "pain": "業務アプリを作りたいが、要件定義、DB設計、認証、デプロイを自力で扱えない。",
+      "pricingModel": "サブスクリプション / usage based",
+      "revenue": "売却額 約116億円。ローンチ3週間でARR約1.45億円、2025年5月の月次利益約2,740万円、6ヶ月で登録40万人超。",
+      "acquisitionChannel": "LinkedInでのBuild in Public、AWS/Anthropic周辺の露出、デモ起点の企業導入。",
+      "gtmPattern": "Build in Public / LinkedIn / ecosystem leverage / timing capture",
+      "successOrFailureFactor": "Vibe Coding市場の波に乗りつつ、UIだけでなくバックエンドまで作れる実務性で差別化した。",
+      "japanHypothesis": "汎用AIアプリビルダーではなく、飲食店、クリニック、製造業などの特定業務に絞った日本語業務アプリ生成なら勝ち筋がある。",
+      "firstExperiment": "1業種を選び、自然言語から予約管理・在庫管理・日報など1機能だけ生成できるデモを作り、10社に有料トライアルを提案する。",
+      "recommendedTools": [
+        "Cursor",
+        "Claude",
+        "Supabase",
+        "Render",
+        "Cloudflare"
+      ],
+      "sellingPattern": {
+        "id": "buy_then_optimize",
+        "label": "買って直す / 小規模SaaS運用改善",
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
+        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 汎用AIアプリビルダーではなく、飲食店、クリニック、製造業などの特定業務に絞った日本語業務アプリ生成なら勝ち筋がある。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "subscribr-youtube-ai-saas-bootstrap",
+      "title": "VC出資のスタートアップを捨て、LaravelとAIで勝負。YouTubeクリエイター向けSaaS「Subscribr」が100日で$10k MRR、18ヶ月で月商930万円に到達した「検証ファースト」戦略",
+      "date": "2026-04-29",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "AI",
+        "GTM",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/subscribr-youtube-ai-saas-bootstrap",
+      "file": "src/content/posts/subscribr-youtube-ai-saas-bootstrap.md",
+      "hasDbRow": true,
+      "dbRowId": "subscribr-youtube-ai-saas-bootstrap",
+      "productName": "Subscribr",
+      "category": "AI SaaS / Creator Economy / YouTube",
+      "payer": "YouTubeクリエイター、動画編集者、チャンネル運営チーム",
+      "pain": "動画の企画、構成、スクリプト作成に時間がかかり、投稿頻度を上げられない。",
+      "pricingModel": "月額サブスクリプション。初期はLifetime Dealで検証。",
+      "revenue": "$62k MRR超、顧客4,000人超、100日で$10k MRR、18ヶ月で年商$1Mペース。",
+      "acquisitionChannel": "Xでのギブアウェイ、AppSumo、SEO、アフィリエイト、業界インフルエンサー/CFOによる顧客教育。",
+      "gtmPattern": "pre-sell / LTD / SEO / affiliate / influencer-operator",
+      "successOrFailureFactor": "製品完成前にLTDで現金を回収し、需要を検証してから開発を進めた。",
+      "japanHypothesis": "日本語YouTuber向けに、企画、台本、タイトル、サムネ案、Shorts転用まで一気通貫で支援する特化SaaSが成立し得る。",
+      "firstExperiment": "登録者1万から50万人のYouTuber 20人にDMし、Lifetime Deal 3万円の先行販売ページを出して30件の購入意向を見る。",
+      "recommendedTools": [
+        "Laravel",
+        "OpenAI API",
+        "Stripe",
+        "Framer",
+        "beehiiv"
+      ],
+      "sellingPattern": {
+        "id": "pre_sold_or_ltd",
+        "label": "作る前に売る / LTD検証",
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
+        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 日本語YouTuber向けに、企画、台本、タイトル、サムネ案、Shorts転用まで一気通貫で支援する特化SaaSが成立し得る。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260323",
+      "title": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS開発の軍資金を稼ぐまで",
+      "date": "2026-03-23",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "Bootstrapped",
+        "Strategy"
+      ],
+      "articleUrl": "/posts/20260323",
+      "file": "src/content/posts/20260323.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS",
+      "category": "SuccessCase / SaaS / Bootstrapped / Strategy",
+      "payer": "SaaSや業務ツールに課金する小規模事業者・個人開発者",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260313",
+      "title": "ゼロイチを捨てて月商1,800万円。年商数千万円のMicro-SaaSを買収して育てる「ソフトウェア・ホールディングカンパニー」の生存戦略",
+      "date": "2026-03-13",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "Strategy",
+        "Monetization"
+      ],
+      "articleUrl": "/posts/20260313",
+      "file": "src/content/posts/20260313.md",
+      "hasDbRow": true,
+      "dbRowId": "noosa-labs-software-holdco",
+      "productName": "Noosa Labs / Sendtric / Evalart / Mava",
+      "category": "Micro-SaaS / Acquisition / Software Holding Company",
+      "payer": "既存小規模SaaSのオーナー、買収後に1から10へ伸ばせる運営者",
+      "pain": "0から作るのは再現性が低く、放置された小規模SaaSにはマーケティング・価格改善の余地が残っている。",
+      "pricingModel": "複数SaaSの月額サブスクリプション",
+      "revenue": "Noosa Labs全体でMRR約$120k、約1,800万円。",
+      "acquisitionChannel": "既存プロダクトごとのSEO、口コミ、Google広告、アウトバウンド、バイラル機能。",
+      "gtmPattern": "buy then optimize / pricing improvement / onboarding improvement / platform-risk filter",
+      "successOrFailureFactor": "新機能開発より価格と導線改善に集中し、プラットフォームリスクの高い事業を避けた。",
+      "japanHypothesis": "月5万から30万円を稼ぐ放置サイドプロジェクトをSNS/GitHubで探し、数百万円規模で譲受してLPと価格を改善する。",
+      "firstExperiment": "日本の個人開発者に20件アウトバウンドし、『メンテ負担のある有料ツールを譲渡/共同運営しませんか』と打診する。",
+      "recommendedTools": [
+        "Ruby on Rails",
+        "PHP",
+        "TypeScript",
+        "Stripe",
+        "GitHub"
+      ],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 月5万から30万円を稼ぐ放置サイドプロジェクトをSNS/GitHubで探し、数百万円規模で譲受してLPと価格を改善する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260307",
+      "title": "年収6,000万円を捨てて起業。AIを駆使し8ヶ月で月商450万円のポートフォリオを築いた軌跡",
+      "date": "2026-03-07",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "Strategy",
+        "BuildInPublic"
+      ],
+      "articleUrl": "/posts/20260307",
+      "file": "src/content/posts/20260307.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "年収6,000万円を捨てて起業",
+      "category": "SuccessCase / SaaS / Strategy / BuildInPublic",
+      "payer": "SaaSや業務ツールに課金する小規模事業者・個人開発者",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "search_or_template_wedge",
+        "label": "検索需要 / テンプレート導線",
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
+        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260306",
+      "title": "規制とマネタイズの壁に散った「究極の個別化医療」。1人の患者に1つの薬を届けるEveryONE Medicinesの敗北と遺産",
+      "date": "2026-03-06",
+      "tags": [
+        "FailureCase",
+        "DeepTech",
+        "Strategy",
+        "Monetization"
+      ],
+      "articleUrl": "/posts/20260306",
+      "file": "src/content/posts/20260306.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "究極の個別化医療",
+      "category": "FailureCase / DeepTech / Strategy / Monetization",
+      "payer": "規制産業・研究開発領域の事業者または支払い手",
+      "pain": "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260305",
+      "title": "安定の職を捨て、無計画から月商210万円へ。80%をAIで自動化する「ハイブリッド・エージェンシー」の衝撃",
+      "date": "2026-03-05",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "SaaS",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/20260305",
+      "file": "src/content/posts/20260305.md",
+      "hasDbRow": true,
+      "dbRowId": "aip-hybrid-ai-podcasting-agency",
+      "productName": "AI Podcasting (AIP)",
+      "category": "AI Service / Hybrid Agency / Podcast",
+      "payer": "企業ポッドキャスト、B2Bメディア、クリエイター、採用広報チーム",
+      "pain": "録音後の編集、音声処理、文字起こし、ショーノート、SNS投稿、配信作業が重い。",
+      "pricingModel": "月額代行サブスクリプション",
+      "revenue": "月商約$14.5k、約210万円。",
+      "acquisitionChannel": "紹介のみ。広告費ゼロ。",
+      "gtmPattern": "done-for-you / manual first / AI automation backend / referral growth",
+      "successOrFailureFactor": "SaaSから入らず、手作業で痛みを理解してから自動化した。",
+      "japanHypothesis": "企業ポッドキャスト、採用広報、B2Bオウンドメディアの『録音後全部お任せ』は日本でも高単価化しやすい。",
+      "firstExperiment": "月額20万から30万円で、1社のポッドキャスト後処理を手作業で受け、Python/Make/OpenAIで裏側を自動化する。",
+      "recommendedTools": [
+        "Python",
+        "Next.js",
+        "OpenAI API",
+        "FFmpeg",
+        "MongoDB",
+        "Azure",
+        "Modal",
+        "Make"
+      ],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 企業ポッドキャスト、採用広報、B2Bオウンドメディアの『録音後全部お任せ』は日本でも高単価化しやすい。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260228",
+      "title": "全財産喪失から月商1,500万円のAI企業へ。「Magai」創業者が証明した”顧客との対話”と”限界突破”の軌跡",
+      "date": "2026-02-28",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "SaaS",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/20260228",
+      "file": "src/content/posts/20260228.md",
+      "hasDbRow": true,
+      "dbRowId": "magai-all-in-one-ai-platform",
+      "productName": "Magai",
+      "category": "AI SaaS / AI Workspace",
+      "payer": "複数AIを仕事で使うクリエイター、マーケター、個人事業主、中小企業",
+      "pain": "複数のAIサブスク、APIキー、プロンプト、ファイル、会話履歴が分散して管理できない。",
+      "pricingModel": "月額サブスクリプション",
+      "revenue": "MRR $100,000、広告費ゼロで成長。",
+      "acquisitionChannel": "10万人のメールリスト、ブログ、SNSでのBuild in Public、口コミ。",
+      "gtmPattern": "build in public / newsletter audience / no-code MVP / rebuild after traction",
+      "successOrFailureFactor": "複雑なAI利用をユーザーから隠蔽し、まずノーコードで需要を取り、売上後に作り直した。",
+      "japanHypothesis": "汎用AI統合ではなく、不動産、士業、採用など日本の業務文脈に絞ったAIワークスペースが成立しやすい。",
+      "firstExperiment": "不動産賃貸仲介向けに、物件PDFからSUUMO向けPR文を作るノーコードMVPを作り、月額5,000円で10社に試す。",
+      "recommendedTools": [
+        "Bubble",
+        "Zapier",
+        "Next.js",
+        "Supabase",
+        "Stripe",
+        "ConvertKit"
+      ],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 汎用AI統合ではなく、不動産、士業、採用など日本の業務文脈に絞ったAIワークスペースが成立しやすい。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260227",
+      "title": "「ベンチャーの時計」と「規制の時計」の不一致。2800万ドルを調達したAI医療スタートアップKintsugiの教訓",
+      "date": "2026-02-27",
+      "tags": [
+        "FailureCase",
+        "AI",
+        "DeepTech"
+      ],
+      "articleUrl": "/posts/20260227",
+      "file": "src/content/posts/20260227.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "ベンチャーの時計",
+      "category": "FailureCase / AI / DeepTech",
+      "payer": "規制産業・研究開発領域の事業者または支払い手",
+      "pain": "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260227_2",
+      "title": "VC調達の失敗から月商2万ドルのAI起業家へ。Xのバズから生まれた「AI Chat Flow」と「Starpop」のゲリラGTM戦略",
+      "date": "2026-02-27",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "GTM",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/20260227_2",
+      "file": "src/content/posts/20260227_2.md",
+      "hasDbRow": true,
+      "dbRowId": "ai-flow-chat-starpop-community-infiltration",
+      "productName": "AI Flow Chat / Starpop",
+      "category": "AI SaaS / Marketing / Creative Automation",
+      "payer": "インフルエンサー、マーケター、ECブランド、広告代理店",
+      "pain": "AIモデルや素材が増えすぎ、コピー・画像・動画制作を文脈込みで回すのが難しい。",
+      "pricingModel": "月額サブスクリプション",
+      "revenue": "2プロダクト合算でMRR $20,000。X投稿で300万インプレッション、MVPは1から2週間で開発。",
+      "acquisitionChannel": "Xのバズ、Reddit/Discordでの価値提供、DM起点の高コンバージョン営業。",
+      "gtmPattern": "community infiltration / thought leadership / founder-distribution fit",
+      "successOrFailureFactor": "宣伝ではなく、コミュニティに深いノウハウを投下して相手からDMさせた。",
+      "japanHypothesis": "Zenn/Qiita/note/Discordで、売り込みなしの専門ノウハウ記事からAI業務支援の相談を獲得する形に転用できる。",
+      "firstExperiment": "Shopify在庫管理や広告クリエイティブなど1テーマで、超具体的なノウハウ記事を書き、文末で無料相談だけ開く。",
+      "recommendedTools": [
+        "Next.js",
+        "Supabase",
+        "Vercel",
+        "Render",
+        "OpenAI API",
+        "Anthropic API",
+        "Fal"
+      ],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: Zenn/Qiita/note/Discordで、売り込みなしの専門ノウハウ記事からAI業務支援の相談を獲得する形に転用できる。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260226",
+      "title": "「脱・サブスク」で月商237万円。既存SaaSの隙間を射抜く個人開発者の生存戦略",
+      "date": "2026-02-26",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM",
+        "Monetization"
+      ],
+      "articleUrl": "/posts/20260226",
+      "file": "src/content/posts/20260226.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "脱・サブスク",
+      "category": "SuccessCase / SaaS / GTM / Monetization",
+      "payer": "SaaSや業務ツールに課金する小規模事業者・個人開発者",
+      "pain": "良い製品を作っても、最初の顧客に届かない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pre_sold_or_ltd",
+        "label": "作る前に売る / LTD検証",
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
+        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260224",
+      "title": "AIを「使う」から「飼う」時代へ。OpenClawとMac miniが引き起こすローカル・エージェント革命",
+      "date": "2026-02-24",
+      "tags": [
+        "Concept",
+        "AI",
+        "TechStack"
+      ],
+      "articleUrl": "/posts/20260224",
+      "file": "src/content/posts/20260224.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "使う",
+      "category": "Concept / AI / TechStack",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "general_case_breakdown",
+        "label": "事例分解 / 日本転用",
+        "buyerLogic": "顧客、課金理由、初期導線、日本で試せる小さな実験に分解する。",
+        "snsAngle": "成功事例の分解、日本で試すなら、作る前の問い"
+      },
+      "productCta": {
+        "id": "products",
+        "label": "Products",
+        "reason": "記事の学びを、DBや先行案内から次の検証へつなげる。",
+        "href": "/products"
+      },
+      "snsSeeds": {
+        "instagramAngle": "成功事例の分解、日本で試すなら、作る前の問い",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260221",
+      "title": "11年、135億円、そして「完璧なプロダクト」の完成。AI簿記Botkeeperが技術的理想に達した瞬間に閉鎖した理由",
+      "date": "2026-02-15",
+      "tags": [
+        "FailureCase",
+        "AI",
+        "SaaS",
+        "DeepTech"
+      ],
+      "articleUrl": "/posts/20260221",
+      "file": "src/content/posts/20260221.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "完璧なプロダクト",
+      "category": "FailureCase / AI / SaaS / DeepTech",
+      "payer": "規制産業・研究開発領域の事業者または支払い手",
+      "pain": "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260213saas_is_dead",
+      "title": "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First APIの実装論",
+      "date": "2026-02-14",
+      "tags": [
+        "Concept",
+        "AI",
+        "SaaS",
+        "Product"
+      ],
+      "articleUrl": "/posts/20260213saas_is_dead",
+      "file": "src/content/posts/20260213saas_is_dead.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First A",
+      "category": "Concept / AI / SaaS / Product",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260213",
+      "title": "「打ち上げ0回」で240億円が消えた。英国のグリーンロケット「Orbex」が陥った国策ベンチャーの罠と死の谷",
+      "date": "2026-02-13",
+      "tags": [
+        "FailureCase",
+        "DeepTech",
+        "Strategy",
+        "GTM"
+      ],
+      "articleUrl": "/posts/20260213",
+      "file": "src/content/posts/20260213.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "打ち上げ0回",
+      "category": "FailureCase / DeepTech / Strategy / GTM",
+      "payer": "規制産業・研究開発領域の事業者または支払い手",
+      "pain": "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260212-future-of-saas",
+      "title": "「アプリ」が消える日。Nothingが描く『Just-in-Time Software』とSaaSの終焉",
+      "date": "2026-02-12",
+      "tags": [
+        "Concept",
+        "AI",
+        "SaaS"
+      ],
+      "articleUrl": "/posts/20260212-future-of-saas",
+      "file": "src/content/posts/20260212-future-of-saas.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "アプリ",
+      "category": "Concept / AI / SaaS",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "founder_distribution",
+        "label": "創業者発信 / コミュニティGTM",
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
+        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260207",
+      "title": "「買う」時代は終わった。AIエージェントが引き起こす『SaaSの黄昏』とエンジニアリングの復権",
+      "date": "2026-02-07",
+      "tags": [
+        "Concept",
+        "AI",
+        "Strategy",
+        "TechStack"
+      ],
+      "articleUrl": "/posts/20260207",
+      "file": "src/content/posts/20260207.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "買う",
+      "category": "Concept / AI / Strategy / TechStack",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "founder_distribution",
+        "label": "創業者発信 / コミュニティGTM",
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
+        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260206",
+      "title": "90億円の負債と700人の解雇。ケニアのユニコーン候補「Koko」はなぜ\"炭素クレジットの沼\"に沈んだのか？【深層分析】",
+      "date": "2026-02-06",
+      "tags": [
+        "FailureCase",
+        "DeepTech",
+        "Strategy"
+      ],
+      "articleUrl": "/posts/20260206",
+      "file": "src/content/posts/20260206.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "Koko",
+      "category": "FailureCase / DeepTech / Strategy",
+      "payer": "規制産業・研究開発領域の事業者または支払い手",
+      "pain": "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260205",
+      "title": "従業員ゼロで年商1.5億円。AIネイティブ企業「Swan AI」が実践する自律型ビジネスの全貌",
+      "date": "2026-02-05",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "SaaS",
+        "GTM"
+      ],
+      "articleUrl": "/posts/20260205",
+      "file": "src/content/posts/20260205.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "Swan AI",
+      "category": "SuccessCase / AI / SaaS / GTM",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "良い製品を作っても、最初の顧客に届かない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "founder_distribution",
+        "label": "創業者発信 / コミュニティGTM",
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
+        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260204",
+      "title": "インフルエンサーと共同創業する「反則級」のGTM戦略。動画ポッドキャストSaaS「Flightcast」の事例",
+      "date": "2026-02-04",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM"
+      ],
+      "articleUrl": "/posts/20260204",
+      "file": "src/content/posts/20260204.md",
+      "hasDbRow": true,
+      "dbRowId": "flightcast-prefilled-distribution-video-podcast",
+      "productName": "Flightcast",
+      "category": "SaaS / Creator Economy / Podcast",
+      "payer": "動画ポッドキャスター、クリエイター、メディア運営者",
+      "pain": "動画ポッドキャストのファイル管理、配信、分析が複数プラットフォームに分断されている。",
+      "pricingModel": "月額サブスクリプション",
+      "revenue": "ローンチ24時間で数百万インプレッション、数百人の有料顧客、MRR数百万円規模。",
+      "acquisitionChannel": "The Diary of a CEOのSteven Bartlettを共同創業者として巻き込んだ既存オーディエンス活用。",
+      "gtmPattern": "prefilled distribution / influencer co-founder / one amazing feature",
+      "successOrFailureFactor": "製品完成後に集客するのではなく、巨大な流通網を持つ共同創業者を先に組み込んだ。",
+      "japanHypothesis": "Voicy、stand.fm、YouTube、Spotifyを横断する国内向け音声/動画メディア分析ツールに余地がある。",
+      "firstExperiment": "オンラインサロン運営者に、会員向け配信の分析ダッシュボードをレベニューシェアで提案する。",
+      "recommendedTools": [
+        "Next.js",
+        "Go",
+        "Cloudflare R2",
+        "OVH",
+        "Planetscale"
+      ],
+      "sellingPattern": {
+        "id": "founder_distribution",
+        "label": "創業者発信 / コミュニティGTM",
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
+        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: Voicy、stand.fm、YouTube、Spotifyを横断する国内向け音声/動画メディア分析ツールに余地がある。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260202",
+      "title": "2027年、エンジニアは「ツール」ではなく「生命」を実装する。シンギュラリティとEpoch 6の実装論",
+      "date": "2026-02-02",
+      "tags": [
+        "Concept",
+        "AI"
+      ],
+      "articleUrl": "/posts/20260202",
+      "file": "src/content/posts/20260202.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "ツール",
+      "category": "Concept / AI",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "search_or_template_wedge",
+        "label": "検索需要 / テンプレート導線",
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
+        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+      },
+      "productCta": {
+        "id": "products",
+        "label": "Products",
+        "reason": "記事の学びを、DBや先行案内から次の検証へつなげる。",
+        "href": "/products"
+      },
+      "snsSeeds": {
+        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260130",
+      "title": "手数料70%を回避せよ。3週間で1,600万円を売り上げたWeb解析ツール「Usermaven」の自社LTD戦略",
+      "date": "2026-01-30",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/20260130",
+      "file": "src/content/posts/20260130.md",
+      "hasDbRow": true,
+      "dbRowId": "usermaven-owned-ltd-analytics",
+      "productName": "Usermaven",
+      "category": "Micro-SaaS / Analytics / Privacy",
+      "payer": "中小企業のWeb担当者、SaaS運営者、GA4に疲れたマーケター",
+      "pain": "GA4が複雑で、ビジネス上重要な指標をすぐ把握できない。プライバシー対応も面倒。",
+      "pricingModel": "Lifetime Dealからサブスクリプションへ展開",
+      "revenue": "3週間で$120,260のローンチ売上、純利益$113,414、顧客373名。",
+      "acquisitionChannel": "自社LP、既存顧客リスト、SaaSコミュニティ、管理者への無料アカウント提供。",
+      "gtmPattern": "owned LTD / community trust / anti-GA4 positioning",
+      "successOrFailureFactor": "AppSumo手数料を避け、自前の信頼構築で高利益率のLTD販売に成功した。",
+      "japanHypothesis": "GA4が苦手な非IT企業向けに、外部送信規律やCookie対応を含む『見ればわかる』国産解析ツールが刺さる。",
+      "firstExperiment": "地方クリニック/士業向けに、タグ1行で問い合わせ貢献だけ見えるダッシュボードを作り、LTD 5万円で10社に売る。",
+      "recommendedTools": [
+        "SvelteKit",
+        "ClickHouse",
+        "Tinybird",
+        "Stripe"
+      ],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: GA4が苦手な非IT企業向けに、外部送信規律やCookie対応を含む『見ればわかる』国産解析ツールが刺さる。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260129",
+      "title": "3度の「全ロス」から月商900万円へ。アプリ量産で勝つ「Sarafan Mobile」の不死鳥戦略",
+      "date": "2026-01-29",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "MobileApp",
+        "Strategy"
+      ],
+      "articleUrl": "/posts/20260129",
+      "file": "src/content/posts/20260129.md",
+      "hasDbRow": true,
+      "dbRowId": "sarafan-mobile-before-after-apps",
+      "productName": "Sarafan Mobile",
+      "category": "MobileApp / Photo & Video Utility / Portfolio",
+      "payer": "美容サロン、リフォーム業者、パーソナルジム、SNSでBefore/Afterを見せたい現場職",
+      "pain": "施術前後や成果の比較動画を簡単に作れず、SNS集客に使える素材化が面倒。",
+      "pricingModel": "アプリ内課金 / 週額・年額サブスクリプション",
+      "revenue": "月商$60,100超、特定アプリを$410,000で売却。",
+      "acquisitionChannel": "ASO、TikTok/Instagram Reels、Build in Public、Xでの売上公開。",
+      "gtmPattern": "mobile portfolio / ASO / vertical video / build in public",
+      "successOrFailureFactor": "身近な現場ペインを単機能アプリに落とし込み、動画SNSで用途を見せた。",
+      "japanHypothesis": "美容師専用カルテ動画、古民家リノベ進捗、ジム成果報告など、日本の職人・美容領域に特化したBefore/Afterアプリが狙える。",
+      "firstExperiment": "美容師や整体師など3職種に聞き取り、1職種だけに絞ったBefore/After動画生成アプリをFlutterで作る。",
+      "recommendedTools": [
+        "Swift",
+        "Kotlin Multiplatform",
+        "React Native",
+        "Flutter",
+        "RevenueCat"
+      ],
+      "sellingPattern": {
+        "id": "search_or_template_wedge",
+        "label": "検索需要 / テンプレート導線",
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
+        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 美容師専用カルテ動画、古民家リノベ進捗、ジム成果報告など、日本の職人・美容領域に特化したBefore/Afterアプリが狙える。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260127",
+      "title": "20時間開発でARR数百万円。枯れた技術「jQuery」で勝つSEO特化CMS「BlogMaker」",
+      "date": "2026-01-27",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM",
+        "TechStack"
+      ],
+      "articleUrl": "/posts/20260127",
+      "file": "src/content/posts/20260127.md",
+      "hasDbRow": true,
+      "dbRowId": "blogmaker-stable-tech-seo-cms",
+      "productName": "BlogMaker",
+      "category": "Micro-SaaS / CMS / SEO",
+      "payer": "個人開発者、小規模チーム、WordPressやSubstackに不満がある発信者",
+      "pain": "WordPressは重く、SubstackやMediumではSEOやカスタマイズ性が足りない。",
+      "pricingModel": "年払いから月額サブスクリプションへ移行",
+      "revenue": "ARR数百万円から1,000万円規模。",
+      "acquisitionChannel": "競合比較SEO、代替キーワード、購買直前の検索需要。",
+      "gtmPattern": "comparison SEO / stable tech / weekend MVP",
+      "successOrFailureFactor": "最新技術を捨て、20時間でMVPを作り、比較検討キーワードに集中した。",
+      "japanHypothesis": "Shopifyアプリ開発者向けブログ、採用広報向けMarkdown CMSなど、用途特化型CMSなら日本でも成立しやすい。",
+      "firstExperiment": "『WordPress vs Notion vs 日本語Markdown CMS』の比較記事を作り、LPで有料ベータ登録を受け付ける。",
+      "recommendedTools": [
+        "PHP",
+        "CodeIgniter",
+        "jQuery",
+        "Stripe"
+      ],
+      "sellingPattern": {
+        "id": "search_or_template_wedge",
+        "label": "検索需要 / テンプレート導線",
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
+        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: Shopifyアプリ開発者向けブログ、採用広報向けMarkdown CMSなど、用途特化型CMSなら日本でも成立しやすい。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260126",
+      "title": "数学で「運」を支配する。『確率思考の戦略論』とエンジニアのための本能工学",
+      "date": "2026-01-26",
+      "tags": [
+        "Concept",
+        "Strategy"
+      ],
+      "articleUrl": "/posts/20260126",
+      "file": "src/content/posts/20260126.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "運",
+      "category": "Concept / Strategy",
+      "payer": "SaaSや業務ツールに課金する小規模事業者・個人開発者",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "search_or_template_wedge",
+        "label": "検索需要 / テンプレート導線",
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
+        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+      },
+      "productCta": {
+        "id": "products",
+        "label": "Products",
+        "reason": "記事の学びを、DBや先行案内から次の検証へつなげる。",
+        "href": "/products"
+      },
+      "snsSeeds": {
+        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260124",
+      "title": "月商6万円の壁を突破し、年商2億円へ。エンジニア×インフルエンサーの最強タッグ「Outrank」の成長物語",
+      "date": "2026-01-24",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM"
+      ],
+      "articleUrl": "/posts/20260124",
+      "file": "src/content/posts/20260124.md",
+      "hasDbRow": true,
+      "dbRowId": "outrank-influencer-led-seo-saas",
+      "productName": "Outrank",
+      "category": "AI SaaS / MarketingTech / SEO",
+      "payer": "B2Bマーケター、SEO担当者、コンテンツ制作会社",
+      "pain": "AI記事生成だけでは検索上位に必要な文脈・競合分析・ビジネス理解が足りない。",
+      "pricingModel": "月額サブスクリプション",
+      "revenue": "ARR約1.5億円以上。共同創業直後にMRR $400から$10,000超へ成長。",
+      "acquisitionChannel": "マーケター/インフルエンサー共同創業、Xでの既存オーディエンス、ドッグフーディング。",
+      "gtmPattern": "influencer co-founder / dogfooding / distribution first",
+      "successOrFailureFactor": "エンジニア単独で売るのをやめ、流通網を持つマーケターと組んだ。",
+      "japanHypothesis": "日本語特有の検索意図、Yahoo!知恵袋、note、Xの悩みを統合するSEO企画ツールなら差別化できる。",
+      "firstExperiment": "SEO/Instagram運用を発信する日本のマーケターにレベニューシェア提案を送り、手作業コンサルの一部をツール化する。",
+      "recommendedTools": [
+        "Next.js",
+        "PostgreSQL",
+        "Vercel",
+        "OpenAI API"
+      ],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 日本語特有の検索意図、Yahoo!知恵袋、note、Xの悩みを統合するSEO企画ツールなら差別化できる。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260123",
+      "title": "「評価」が通貨になる世界を実装せよ。『評価経済社会』と信頼アルゴリズムの設計論",
+      "date": "2026-01-23",
+      "tags": [
+        "Concept",
+        "TechStack"
+      ],
+      "articleUrl": "/posts/20260123",
+      "file": "src/content/posts/20260123.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "評価",
+      "category": "Concept / TechStack",
+      "payer": "SaaSや業務ツールに課金する小規模事業者・個人開発者",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260122",
+      "title": "「ツール」の時代は終わった。成果を売る新概念『Outcome-as-a-Service』と実装戦略",
+      "date": "2026-01-22",
+      "tags": [
+        "Concept",
+        "AI",
+        "SaaS",
+        "Monetization"
+      ],
+      "articleUrl": "/posts/20260122",
+      "file": "src/content/posts/20260122.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "ツール",
+      "category": "Concept / AI / SaaS / Monetization",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "価格、課金理由、継続利用の設計が難しい。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260122_2",
+      "title": "「自己満足の高品質」を作るな。個人開発者が30個のアプリで月商3,000万円を作る「多作・高速試行」戦略",
+      "date": "2026-01-22",
+      "tags": [
+        "SuccessCase",
+        "MobileApp",
+        "Strategy",
+        "GTM"
+      ],
+      "articleUrl": "/posts/20260122_2",
+      "file": "src/content/posts/20260122_2.md",
+      "hasDbRow": true,
+      "dbRowId": "mobile-app-portfolio-aso-speed",
+      "productName": "Max Artemov / Connor Burd mobile app portfolio",
+      "category": "MobileApp / Subscription / Portfolio",
+      "payer": "iOS/Androidユーザー、特定用途の単機能アプリを探す個人",
+      "pain": "検索需要はあるが、既存アプリが古い、使いにくい、または特定用途に合わない。",
+      "pricingModel": "アプリ内課金 / 月額・年額サブスクリプション",
+      "revenue": "MRR約330万円から2,800万円。1年で30アプリをリリースした事例。",
+      "acquisitionChannel": "ASO、TikTokトレンド、インフルエンサー提携、ストア自然流入。",
+      "gtmPattern": "ASO-first / portfolio / weekend build / distribution first",
+      "successOrFailureFactor": "作りたいものではなく、検索需要と競合難易度から作るものを決めた。",
+      "japanHypothesis": "インボイス計算、国家資格暗記、推し活管理など日本独自の複合キーワードに単機能アプリを当てる。",
+      "firstExperiment": "ASO/キーワード調査で『記録』『計算』『管理』系の弱い複合キーワードを10個選び、2日で1本ずつMVPを出す。",
+      "recommendedTools": [
+        "Flutter",
+        "Firebase",
+        "RevenueCat",
+        "Cursor",
+        "FoxData"
+      ],
+      "sellingPattern": {
+        "id": "search_or_template_wedge",
+        "label": "検索需要 / テンプレート導線",
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
+        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: インボイス計算、国家資格暗記、推し活管理など日本独自の複合キーワードに単機能アプリを当てる。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260121",
+      "title": "機能飽和時代の生存戦略。ナラティブ工学と『デジタルな魂』の実装論",
+      "date": "2026-01-21",
+      "tags": [
+        "Concept",
+        "AI",
+        "Product"
+      ],
+      "articleUrl": "/posts/20260121",
+      "file": "src/content/posts/20260121.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "デジタルな魂",
+      "category": "Concept / AI / Product",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "failure_or_payer_risk",
+        "label": "失敗診断 / 支払い手と導入コスト",
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
+        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+      },
+      "productCta": {
+        "id": "pro_validation",
+        "label": "Sparks Station Pro先行案内",
+        "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
+        "href": "/products#pro"
+      },
+      "snsSeeds": {
+        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "作る前の検証メモとして保存"
+      }
+    },
+    {
+      "slug": "20260121_2",
+      "title": "「一発屋」で終わらない。月商1.3億円超えを実現する「Micro-SaaSポートフォリオ」の極意",
+      "date": "2026-01-21",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "Strategy",
+        "GTM"
+      ],
+      "articleUrl": "/posts/20260121_2",
+      "file": "src/content/posts/20260121_2.md",
+      "hasDbRow": true,
+      "dbRowId": "micro-saas-portfolio-tweet-hunter-curator-frill",
+      "productName": "Micro-SaaS portfolio strategy",
+      "category": "Micro-SaaS / Portfolio / SEO / Social",
+      "payer": "複数の小規模SaaSを持ちたい個人開発者、ブートストラップ創業者",
+      "pain": "単一プロダクトに賭けると外れた時のリスクが大きく、広告依存では利益が残りにくい。",
+      "pricingModel": "月額サブスクリプション / 初期LTD",
+      "revenue": "合計MRR約1億3,500万円、推定Exit 12億円以上。",
+      "acquisitionChannel": "LTDで初期資金を作り、その後SEO記事やプロダクト別GTMへ投資。",
+      "gtmPattern": "portfolio / LTD to SEO / risk diversification / operator leverage",
+      "successOrFailureFactor": "初期LTDで現金を作り、時間差でSEO資産を積み上げ、複数事業でリスクを分散した。",
+      "japanHypothesis": "日本でも最初の買い切り販売でSEO投資資金を作り、1年後の自然流入を予約する戦い方が使える。",
+      "firstExperiment": "1つ目の小型SaaSでLTDを30件販売し、その売上をZenn/Qiita/noteの比較SEO記事10本に再投資する。",
+      "recommendedTools": [
+        "Framer",
+        "Stripe",
+        "beehiiv",
+        "Cursor",
+        "Ahrefs"
+      ],
+      "sellingPattern": {
+        "id": "pre_sold_or_ltd",
+        "label": "作る前に売る / LTD検証",
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
+        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 日本でも最初の買い切り販売でSEO投資資金を作り、1年後の自然流入を予約する戦い方が使える。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260120",
+      "title": "レッドオーシャンで勝つ。月商1,200万円超えの電子署名SaaS「SignWell」の緻密な戦略",
+      "date": "2026-01-20",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM",
+        "Exit"
+      ],
+      "articleUrl": "/posts/20260120",
+      "file": "src/content/posts/20260120.md",
+      "hasDbRow": true,
+      "dbRowId": "signwell-template-led-esignature",
+      "productName": "SignWell",
+      "category": "SaaS / LegalTech / eSignature",
+      "payer": "中小企業、契約書を扱う士業、SaaSに電子署名を組み込みたい開発チーム",
+      "pain": "DocuSignなどの大手電子署名ツールが高価で複雑。契約テンプレート作成から署名までの流れが分断されている。",
+      "pricingModel": "月額サブスクリプション",
+      "revenue": "MRR約1,245万円、売却額は推定15億円以上。",
+      "acquisitionChannel": "契約書テンプレートSEO、競合ユーザーへのヒアリング、API/DX改善。",
+      "gtmPattern": "SEO / template lead magnet / wedge into red ocean",
+      "successOrFailureFactor": "電子署名を探す前段階の『契約書テンプレート』需要を押さえた。",
+      "japanHypothesis": "汎用電子署名ではなく、BASE/STORES事業者、業務委託契約、インボイス対応など特定契約テンプレートから入ると差別化できる。",
+      "firstExperiment": "日本法準拠の契約書プロンプト集とテンプレートLPを作り、無料DL後にLINE完結の署名MVPへ誘導する。",
+      "recommendedTools": [
+        "Ruby on Rails",
+        "PostgreSQL",
+        "Stripe",
+        "Vanta"
+      ],
+      "sellingPattern": {
+        "id": "buy_then_optimize",
+        "label": "買って直す / 小規模SaaS運用改善",
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
+        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 汎用電子署名ではなく、BASE/STORES事業者、業務委託契約、インボイス対応など特定契約テンプレートから入ると差別化できる。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260120_2",
+      "title": "自己資金2,500ドルから165億円へ。住宅診断SaaS「Spectora」に学ぶ垂直統合戦略",
+      "date": "2026-01-20",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "Bootstrapped",
+        "Exit"
+      ],
+      "articleUrl": "/posts/20260120_2",
+      "file": "src/content/posts/20260120_2.md",
+      "hasDbRow": true,
+      "dbRowId": "spectora-vertical-home-inspection-saas",
+      "productName": "Spectora",
+      "category": "Vertical SaaS / PropTech",
+      "payer": "住宅診断士、現場点検業者、レポート作成を伴う専門職",
+      "pain": "現場報告書の作成、顧客管理、決済が紙やレガシーソフトに分断されている。",
+      "pricingModel": "月額サブスクリプション",
+      "revenue": "ARR約45億円、評価額約165億円。",
+      "acquisitionChannel": "Facebookグループへの長期参加、対面ヒアリング、SEO、業界内の信頼構築。",
+      "gtmPattern": "vertical community / field research / SEO / payment lock-in",
+      "successOrFailureFactor": "現場のワークフローに深く入り、決済まで押さえてLTVを高めた。",
+      "japanHypothesis": "消防設備点検、浄化槽点検、ビルメンテナンスなど、法定報告書が残る現場のVertical SaaSに転用できる。",
+      "firstExperiment": "消防設備点検業者3社にヒアリングし、指定様式PDFをスマホ入力から生成する1機能MVPを作る。",
+      "recommendedTools": [
+        "Next.js",
+        "Supabase",
+        "react-pdf",
+        "Stripe"
+      ],
+      "sellingPattern": {
+        "id": "buy_then_optimize",
+        "label": "買って直す / 小規模SaaS運用改善",
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
+        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 消防設備点検、浄化槽点検、ビルメンテナンスなど、法定報告書が残る現場のVertical SaaSに転用できる。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
+    {
+      "slug": "20260120_3",
+      "title": "「GitHub Copilotの次」はこれだ。公開半年で売上75億円ペース「Augment Code」の衝撃",
+      "date": "2026-01-20",
+      "tags": [
+        "SuccessCase",
+        "AI",
+        "SaaS",
+        "Strategy"
+      ],
+      "articleUrl": "/posts/20260120_3",
+      "file": "src/content/posts/20260120_3.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "GitHub Copilotの次",
+      "category": "SuccessCase / AI / SaaS / Strategy",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
+        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    }
+  ]
+}

@@ -8,6 +8,17 @@ export type RecommendedTool = {
     keywords: string[];
 };
 
+export type ArticleProductCta = {
+    id: "saas-case-db" | "sparks-pro" | "products";
+    eyebrow: string;
+    title: string;
+    description: string;
+    href: string;
+    primaryLabel: string;
+    secondaryHref?: string;
+    secondaryLabel?: string;
+};
+
 export const recommendedTools: RecommendedTool[] = [
     {
         id: "beehiiv",
@@ -83,4 +94,62 @@ export function selectRecommendedTools(tags: string[], content: string, limit = 
         .sort((a, b) => b.score - a.score)
         .slice(0, limit)
         .map(({ tool }) => tool);
+}
+
+export function selectArticleProductCta(tags: string[], content: string): ArticleProductCta {
+    const haystack = `${tags.join(" ")} ${content}`.toLowerCase();
+
+    const isFailureOrDeepTech =
+        tags.includes("FailureCase") ||
+        tags.includes("DeepTech") ||
+        ["規制", "閉鎖", "失敗", "支払い手", "導入コスト", "保険償還", "cac"].some((word) =>
+            haystack.includes(word.toLowerCase())
+        );
+
+    if (isFailureOrDeepTech) {
+        return {
+            id: "sparks-pro",
+            eyebrow: "Before building",
+            title: "作る前に、支払い手と導入の壁を確認する",
+            description:
+                "技術が強くても続かない事例は、検証項目に落とすと価値が出ます。Pro先行案内では、作る前の市場・価格・GTM設計を扱います。",
+            href: "/products#pro",
+            primaryLabel: "Pro先行案内を見る",
+            secondaryHref: "/products",
+            secondaryLabel: "Productsを見る",
+        };
+    }
+
+    const isCaseDbFit =
+        tags.includes("SuccessCase") ||
+        tags.includes("GTM") ||
+        tags.includes("Monetization") ||
+        tags.includes("Bootstrapped") ||
+        ["mrr", "arr", "ltd", "価格", "課金", "買い切り", "gtm", "seo", "初期顧客", "売却"].some((word) =>
+            haystack.includes(word.toLowerCase())
+        );
+
+    if (isCaseDbFit) {
+        return {
+            id: "saas-case-db",
+            eyebrow: "Case database",
+            title: "似た事例を横断して、売れる型を探す",
+            description:
+                "SaaS Case DBでは、海外SaaSの価格、GTM、初期顧客、日本での試し方を比較できます。次の仮説づくりに使うための実務用DBです。",
+            href: "/products#saas-case-db",
+            primaryLabel: "SaaS Case DBを見る",
+            secondaryHref: "/products/saas-case-db/access",
+            secondaryLabel: "購入済みの方はこちら",
+        };
+    }
+
+    return {
+        id: "products",
+        eyebrow: "Next step",
+        title: "記事の学びを、次の検証へつなげる",
+        description:
+            "Sparks Stationでは、記事、事例DB、Pro構想をつなげて、日本で試せる形に整理しています。",
+        href: "/products",
+        primaryLabel: "Productsを見る",
+    };
 }
