@@ -451,5 +451,33 @@
     "monetizationFit": "価格不満の拾い方、競合代替SEO、無料プランから業務利用課金への導線としてDB価値が高い。Sparks Stationの小さなSaaS検証テンプレにも使える。",
     "confidence": "high",
     "notes": "MRR、ユーザー数、LTD売上、初期GTMはIndie Hackers記事を参照。現行価格と無料枠はYouform公式価格ページを参照。"
+  },
+  {
+    "id": "meerkats-ai-gtm-agent-3k-mrr",
+    "productName": "Meerkats.ai",
+    "url": "https://www.meerkats.ai",
+    "sourceUrls": [
+      "/posts/meerkats-ai-gtm-agent-3k-mrr",
+      "src/content/posts/meerkats-ai-gtm-agent-3k-mrr.md",
+      "https://www.indiehackers.com/post/tech/growing-an-ai-orchestration-platform-to-3k-mrr-in-4-weeks-gK3zYDqQjXYG9ANwmxzA",
+      "https://www.meerkats.ai/"
+    ],
+    "category": "AI SaaS / GTM Automation / AI Agents",
+    "targetCustomer": "小規模な成長チーム、BtoB SaaS、営業代行会社、マーケティング代理店、複数クライアントのGTM作業を繰り返すチーム。",
+    "pain": "リード抽出、エンリッチ、アウトリーチ文面、CRM更新、レポート作成が毎週人手で発生し、売上に近い作業なのに実行コストが粗利を削る。",
+    "productSummary": "CRMや営業・マーケティングツールの上にAIエージェントを置き、GTMワークフローを自然言語の指示から実行するSaaS。結果はテーブルで確認し、承認してから実行できる。",
+    "pricingModel": "消費ベース / 月額サブスクリプション / サービス併用",
+    "priceRange": "公式サイトでは月100ドルから。利用量、エンリッチメント数、LLMアクション数、タスクの複雑さに応じた課金。",
+    "revenue": "ローンチ4週間で月3,000ドル超MRR。",
+    "acquisitionChannel": "既存ネットワークの代理店へのターゲットアウトリーチ、AIエージェント活用のオンライン・オフライン教育イベント、LinkedIn投稿。",
+    "gtmPattern": "agency wedge / service as software / outcome-oriented automation / founder-led outreach",
+    "successFactor": "汎用AIエージェントではなく、代理店や成長チームの売上に近い反復作業を1つずつ握ったこと。完全自動化ではなく、テーブル確認と承認を挟むことで導入不安を下げた。",
+    "riskOrFailure": "AIエージェント領域の競争が激しく、モデルやフレームワークの変化が速い。CRM連携や送信ミスの信頼性、顧客ごとのワークフロー差分、LLM原価管理が運用リスクになる。",
+    "japanHypothesis": "営業代行、採用支援、展示会フォロー、士業マーケティング、補助金営業など、毎週似たリード作成と文面作成を行う日本の小規模チームに転用できる。最初はGoogle SheetsとHubSpotまたはkintoneに絞ると導入しやすい。",
+    "firstExperiment": "1業種を選び、展示会名簿CSVや企業リストから会社情報、担当者候補、優先度、初回メール文面をGoogle Sheetsへ出す手動サービスを3社に月3万から10万円で売り、繰り返し部分をSaaS化する。",
+    "recommendedTools": ["Next.js", "Supabase", "Google Cloud", "Fly.io", "OpenAI API", "Anthropic API", "HubSpot", "Google Sheets"],
+    "monetizationFit": "Sparks Station ProやSaaS Case DBで扱うAI時代のGTM事例として強い。AIエージェント、Service as Software、代理店向け粗利改善、BtoB初期顧客獲得の教材になる。",
+    "confidence": "high",
+    "notes": "MRR、ローンチ時期、GTMチャネル、技術構成はIndie Hackers記事を参照。価格と機能、対応CRM、確認フローは公式サイトを参照。"
   }
 ]
