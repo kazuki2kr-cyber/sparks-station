@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-05-11T07:57:04.286Z",
+  "generatedAt": "2026-05-14T02:33:31.442Z",
   "source": {
     "postsDir": "src/content/posts",
     "dbPath": "data/monetization/saas-case-database.seed.json"
   },
   "totals": {
-    "posts": 37,
-    "dbRows": 18,
-    "postsWithDbRows": 18,
+    "posts": 38,
+    "dbRows": 19,
+    "postsWithDbRows": 19,
     "postsWithoutDbRows": 19
   },
   "patterns": [
@@ -108,6 +108,38 @@
       ]
     },
     {
+      "id": "buy_then_optimize",
+      "label": "買って直す / 小規模SaaS運用改善",
+      "count": 5,
+      "examples": [
+        {
+          "slug": "cloakist-sotion-micro-saas-acquisition",
+          "title": "Cloakistはなぜ2,000ドルMRRの買収から月1.2万ドル超へ伸びたのか。小さなMicro-SaaSをSEOと特化プロダクトで育てる方法",
+          "productName": "Cloakist / Sotion"
+        },
+        {
+          "slug": "cuppa-ai-seo-saas-acquisition",
+          "title": "Cuppaはなぜ買収直後のAI Micro-SaaSを月5.9万ドル規模まで伸ばせたのか。LTD、SEO知見、インフルエンサー流通の組み合わせ",
+          "productName": "Cuppa"
+        },
+        {
+          "slug": "base44-vibe-coding-80m-exit",
+          "title": "広告費ゼロ・資金調達ゼロ。Vibeコーディング特化のBase44が6ヶ月で116億円Exitを達成した構造",
+          "productName": "Base44"
+        },
+        {
+          "slug": "20260120",
+          "title": "レッドオーシャンで勝つ。月商1,200万円超えの電子署名SaaS「SignWell」の緻密な戦略",
+          "productName": "SignWell"
+        },
+        {
+          "slug": "20260120_2",
+          "title": "自己資金2,500ドルから165億円へ。住宅診断SaaS「Spectora」に学ぶ垂直統合戦略",
+          "productName": "Spectora"
+        }
+      ]
+    },
+    {
       "id": "pre_sold_or_ltd",
       "label": "作る前に売る / LTD検証",
       "count": 4,
@@ -131,33 +163,6 @@
           "slug": "20260121_2",
           "title": "「一発屋」で終わらない。月商1.3億円超えを実現する「Micro-SaaSポートフォリオ」の極意",
           "productName": "Micro-SaaS portfolio strategy"
-        }
-      ]
-    },
-    {
-      "id": "buy_then_optimize",
-      "label": "買って直す / 小規模SaaS運用改善",
-      "count": 4,
-      "examples": [
-        {
-          "slug": "cuppa-ai-seo-saas-acquisition",
-          "title": "Cuppaはなぜ買収直後のAI Micro-SaaSを月5.9万ドル規模まで伸ばせたのか。LTD、SEO知見、インフルエンサー流通の組み合わせ",
-          "productName": "Cuppa"
-        },
-        {
-          "slug": "base44-vibe-coding-80m-exit",
-          "title": "広告費ゼロ・資金調達ゼロ。Vibeコーディング特化のBase44が6ヶ月で116億円Exitを達成した構造",
-          "productName": "Base44"
-        },
-        {
-          "slug": "20260120",
-          "title": "レッドオーシャンで勝つ。月商1,200万円超えの電子署名SaaS「SignWell」の緻密な戦略",
-          "productName": "SignWell"
-        },
-        {
-          "slug": "20260120_2",
-          "title": "自己資金2,500ドルから165億円へ。住宅診断SaaS「Spectora」に学ぶ垂直統合戦略",
-          "productName": "Spectora"
         }
       ]
     },
@@ -202,6 +207,59 @@
     }
   ],
   "insights": [
+    {
+      "slug": "cloakist-sotion-micro-saas-acquisition",
+      "title": "Cloakistはなぜ2,000ドルMRRの買収から月1.2万ドル超へ伸びたのか。小さなMicro-SaaSをSEOと特化プロダクトで育てる方法",
+      "date": "2026-05-14",
+      "tags": [
+        "SuccessCase",
+        "SaaS",
+        "GTM",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/cloakist-sotion-micro-saas-acquisition",
+      "file": "src/content/posts/cloakist-sotion-micro-saas-acquisition.md",
+      "hasDbRow": true,
+      "dbRowId": "cloakist-sotion-micro-saas-acquisition",
+      "productName": "Cloakist / Sotion",
+      "category": "Micro-SaaS / Custom Domain / Notion / Client Portals",
+      "payer": "Notion、Airtable、Canva、Calendly、Google Docsなどの公開ページを自社ドメインとブランド付きで見せたい個人、代理店、中小企業、クリエイター。",
+      "pain": "外部ツールで作った公開ページは便利だが、URLや見た目がプラットフォーム依存になり、顧客に見せるときの信頼感、SEO、アクセス制御、会員管理が弱い。",
+      "pricingModel": "月額サブスクリプション / 年払い割引 / サイト数・機能深度別プラン",
+      "revenue": "Cloakist買収時は約$2k MRR、買収額$60k、顧客約160名。2025年10月時点でCloakist + Sotion合計$12k+ MRR。",
+      "acquisitionChannel": "買収済みプロダクトの既存顧客、オンボーディング自動化、対応プラットフォーム拡張、プラットフォーム別ユースケースSEO、口コミ、Notion特化スピンオフ。",
+      "gtmPattern": "micro-SaaS acquisition / SEO by use case / niche spin-off / retention improvement",
+      "successOrFailureFactor": "ゼロから市場を作るのではなく、既存MRRと顧客がある小さなSaaSを買い、検索される具体用途をSEOで拾い、伸びるNotion需要をSotionとして深掘りした。",
+      "japanHypothesis": "日本では単なるNotionサイト化ではなく、士業、制作会社、講師、小規模コンサル向けに、NotionやGoogle Docsで作った顧客別ページを独自ドメイン、パスワード、資料提出、予約リンク付きの顧客ポータルにする用途が狙える。",
+      "firstExperiment": "士業、講師、制作会社のいずれか1業種を選び、Notionテンプレート、独自ドメイン、パスワード、フォーム、予約リンクを組み合わせた顧客ポータルを3社に月5,000円から2万円で手動提供し、繰り返し部分をSaaS化する。",
+      "recommendedTools": [
+        "Next.js",
+        "Supabase",
+        "Cloudflare",
+        "AWS",
+        "Stripe",
+        "Notion API",
+        "Google Forms",
+        "Make"
+      ],
+      "sellingPattern": {
+        "id": "buy_then_optimize",
+        "label": "買って直す / 小規模SaaS運用改善",
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
+        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      },
+      "snsSeeds": {
+        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
+        "threadsAngle": "背景、課金理由、日本転用案まで分解する。日本転用: 日本では単なるNotionサイト化ではなく、士業、制作会社、講師、小規模コンサル向けに、NotionやGoogle Docsで作った顧客別ページを独自ドメイン、パスワード、資料提出、予約リンク付きの顧客ポータルにする用途が狙える。",
+        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
+      }
+    },
     {
       "slug": "meerkats-ai-gtm-agent-3k-mrr",
       "title": "Meerkats.aiはなぜ4週間で月3,000ドルMRRに届いたのか。AIエージェントでGTMの手作業を置き換える方法",

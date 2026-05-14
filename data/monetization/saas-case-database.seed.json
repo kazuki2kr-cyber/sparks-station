@@ -479,5 +479,35 @@
     "monetizationFit": "Sparks Station ProやSaaS Case DBで扱うAI時代のGTM事例として強い。AIエージェント、Service as Software、代理店向け粗利改善、BtoB初期顧客獲得の教材になる。",
     "confidence": "high",
     "notes": "MRR、ローンチ時期、GTMチャネル、技術構成はIndie Hackers記事を参照。価格と機能、対応CRM、確認フローは公式サイトを参照。"
+  },
+  {
+    "id": "cloakist-sotion-micro-saas-acquisition",
+    "productName": "Cloakist / Sotion",
+    "url": "https://cloak.ist",
+    "sourceUrls": [
+      "/posts/cloakist-sotion-micro-saas-acquisition",
+      "src/content/posts/cloakist-sotion-micro-saas-acquisition.md",
+      "https://www.indiehackers.com/post/tech/acquiring-a-micro-saas-and-quitting-his-job-after-years-of-side-hustling-KreQWf7VhwxVW9calYa5",
+      "https://www.indiehackers.com/post/closed-a-60k-saas-acquisition-all-the-details-26ff021031",
+      "https://cloak.ist/",
+      "https://sotion.so/"
+    ],
+    "category": "Micro-SaaS / Custom Domain / Notion / Client Portals",
+    "targetCustomer": "Notion、Airtable、Canva、Calendly、Google Docsなどの公開ページを自社ドメインとブランド付きで見せたい個人、代理店、中小企業、クリエイター。",
+    "pain": "外部ツールで作った公開ページは便利だが、URLや見た目がプラットフォーム依存になり、顧客に見せるときの信頼感、SEO、アクセス制御、会員管理が弱い。",
+    "productSummary": "Cloakistは30以上の公開ページを独自ドメイン化し、ブランド変更、SEO、CSS/JS、分析タグ追加を可能にする。SotionはNotion特化で、独自ドメイン、パスワード、メール許可リスト、有料会員、API/Webhookを提供する。",
+    "pricingModel": "月額サブスクリプション / 年払い割引 / サイト数・機能深度別プラン",
+    "priceRange": "Cloakistは月$10から$95。Sotionは月$7から$97。",
+    "revenue": "Cloakist買収時は約$2k MRR、買収額$60k、顧客約160名。2025年10月時点でCloakist + Sotion合計$12k+ MRR。",
+    "acquisitionChannel": "買収済みプロダクトの既存顧客、オンボーディング自動化、対応プラットフォーム拡張、プラットフォーム別ユースケースSEO、口コミ、Notion特化スピンオフ。",
+    "gtmPattern": "micro-SaaS acquisition / SEO by use case / niche spin-off / retention improvement",
+    "successFactor": "ゼロから市場を作るのではなく、既存MRRと顧客がある小さなSaaSを買い、検索される具体用途をSEOで拾い、伸びるNotion需要をSotionとして深掘りした。",
+    "riskOrFailure": "Notion Sitesなど公式機能への吸収、30以上の外部連携先の仕様変更、顧客サイトの障害対応、フィッシング等の悪用対策、低単価ゆえのサポート負荷。",
+    "japanHypothesis": "日本では単なるNotionサイト化ではなく、士業、制作会社、講師、小規模コンサル向けに、NotionやGoogle Docsで作った顧客別ページを独自ドメイン、パスワード、資料提出、予約リンク付きの顧客ポータルにする用途が狙える。",
+    "firstExperiment": "士業、講師、制作会社のいずれか1業種を選び、Notionテンプレート、独自ドメイン、パスワード、フォーム、予約リンクを組み合わせた顧客ポータルを3社に月5,000円から2万円で手動提供し、繰り返し部分をSaaS化する。",
+    "recommendedTools": ["Next.js", "Supabase", "Cloudflare", "AWS", "Stripe", "Notion API", "Google Forms", "Make"],
+    "monetizationFit": "Sparks Stationの買い切りDBにおいて、ゼロから作るだけでなく小さなSaaSを買って伸ばす戦略、SEO資産化、Notion/顧客ポータル系の日本転用事例として価値が高い。",
+    "confidence": "high",
+    "notes": "買収額、買収時MRR、顧客数、買収プロセスはIndie Hackersの買収記事を参照。$12k+ MRR、成長要因、スタックは2025年10月のIndie Hackers記事を参照。2026年5月時点の最新MRR内訳は未確認。"
   }
 ]
