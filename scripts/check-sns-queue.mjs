@@ -26,8 +26,8 @@ for (const doc of snap.docs) {
   const d = doc.data();
   const label = d.instagram?.hookText || d.hookText || d.instagram?.slides?.[0]?.overlayText || d.slides?.[0]?.overlayText || "-";
   const type = d.instagram?.type || d.type || "-";
-  const threadCount = d.threads?.posts?.length || d.threadPosts?.length || 0;
+  const platforms = Array.isArray(d.platforms) ? d.platforms.join(",") : "instagram";
   const scheduledAt = d.scheduledAt?.toDate?.()?.toISOString?.() || d.scheduledAt?.toISOString?.() || "-";
-  console.log(`#${d.order} [${type}] status=${d.status} scheduledAt=${scheduledAt} threads=${threadCount}  "${label.replace(/\n/g, " ")}"`);
+  console.log(`#${d.order} [${type}] status=${d.status} scheduledAt=${scheduledAt} platforms=${platforms}  "${label.replace(/\n/g, " ")}"`);
 }
 process.exit(0);

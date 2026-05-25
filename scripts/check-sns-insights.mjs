@@ -29,7 +29,6 @@ const db = getFirestore();
 
 const IG_API_VERSION = process.env.INSTAGRAM_GRAPH_API_VERSION || "v21.0";
 const INSTAGRAM_API_BASE = process.env.INSTAGRAM_API_BASE || `https://graph.instagram.com/${IG_API_VERSION}`;
-const THREADS_API_BASE = process.env.THREADS_API_BASE || "https://graph.threads.net/v1.0";
 
 const instagramMetrics = [
   "views",
@@ -42,8 +41,6 @@ const instagramMetrics = [
   "ig_reels_avg_watch_time",
   "ig_reels_video_view_total_time",
 ];
-
-const threadsMetrics = ["views", "likes", "replies", "reposts", "quotes"];
 
 function cleanEnv(name) {
   return (process.env[name] ?? "").replace(/^\uFEFF/, "").trim().replace(/^["']|["']$/g, "");
@@ -114,34 +111,6 @@ async function fetchInstagramInsights(mediaId, token) {
   return { values, errors };
 }
 
-async function fetchThreadsMetadata(mediaId, token) {
-  const fields = ["id", "text", "timestamp", "permalink"].join(",");
-  const url = `${THREADS_API_BASE}/${mediaId}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(token)}`;
-  try {
-    return await fetchJson(url);
-  } catch (error) {
-    return { id: mediaId, error: String(error.message || error) };
-  }
-}
-
-async function fetchThreadsInsights(mediaId, token) {
-  const values = {};
-  const errors = {};
-
-  for (const metric of threadsMetrics) {
-    const url = `${THREADS_API_BASE}/${mediaId}/insights?metric=${encodeURIComponent(metric)}&access_token=${encodeURIComponent(token)}`;
-    try {
-      const json = await fetchJson(url);
-      const item = json.data?.find((entry) => entry.name === metric);
-      values[metric] = getMetricValue(item);
-    } catch (error) {
-      errors[metric] = String(error.message || error);
-    }
-  }
-
-  return { values, errors };
-}
-
 function engagementRate(values, denominatorKey) {
   const denominator = Number(values[denominatorKey] ?? 0);
   if (!denominator) return null;
@@ -166,7 +135,6 @@ function saveReport(report, outPath) {
 const limit = Number(getArgValue("--limit") || 20);
 const outPath = getArgValue("--out");
 const instagramToken = cleanEnv("INSTAGRAM_ACCESS_TOKEN");
-const threadsToken = cleanEnv("THREADS_ACCESS_TOKEN") || instagramToken;
 
 if (!instagramToken) {
   throw new Error("INSTAGRAM_ACCESS_TOKEN が .env.local に見つかりません。");
@@ -182,7 +150,6 @@ const report = {
   source: "Firestore postsQueue",
   count: snap.size,
   instagramApiBase: INSTAGRAM_API_BASE,
-  threadsApiBase: THREADS_API_BASE,
   posts: [],
 };
 
@@ -200,7 +167,6 @@ for (const doc of postedDocs) {
   const data = doc.data();
   const result = data.result ?? {};
   const instagramPostId = result.instagramPostId || data.instagramPostId || null;
-  const threadsPostIds = result.threadsPostIds || data.threadsPostIds || [];
 
   const item = {
     docId: doc.id,
@@ -213,7 +179,6 @@ for (const doc of postedDocs) {
     postedAt: toIso(data.postedAt),
     articleUrl: data.articleUrl ?? null,
     instagram: null,
-    threads: [],
   };
 
   if (instagramPostId) {
@@ -229,19 +194,6 @@ for (const doc of postedDocs) {
       interactionRateByReach: engagementRate(insights.values, "reach"),
       interactionRateByPlays: engagementRate(insights.values, "plays"),
     };
-  }
-
-  for (const threadId of threadsPostIds) {
-    const [metadata, insights] = await Promise.all([
-      fetchThreadsMetadata(threadId, threadsToken),
-      fetchThreadsInsights(threadId, threadsToken),
-    ]);
-    item.threads.push({
-      id: threadId,
-      metadata,
-      insights: insights.values,
-      insightErrors: insights.errors,
-    });
   }
 
   report.posts.push(item);
@@ -264,10 +216,6 @@ const summary = report.posts.map((post) => ({
   interactionRateByReach: post.instagram?.interactionRateByReach ?? null,
   avgWatchSec: msToSeconds(post.instagram?.insights?.ig_reels_avg_watch_time),
   totalWatchSec: msToSeconds(post.instagram?.insights?.ig_reels_video_view_total_time),
-  threadPosts: post.threads.length,
-  threadViews: post.threads.reduce((sum, thread) => sum + Number(thread.insights?.views ?? 0), 0),
-  threadLikes: post.threads.reduce((sum, thread) => sum + Number(thread.insights?.likes ?? 0), 0),
-  threadReplies: post.threads.reduce((sum, thread) => sum + Number(thread.insights?.replies ?? 0), 0),
 }));
 
 console.log(`SNS insights: posted=${report.count}`);
@@ -277,9 +225,8 @@ const errorSummary = report.posts
   .map((post) => ({
     caseName: post.caseName,
     instagramErrors: Object.keys(post.instagram?.insightErrors ?? {}),
-    threadsErrors: post.threads.flatMap((thread) => Object.keys(thread.insightErrors ?? {})),
   }))
-  .filter((post) => post.instagramErrors.length || post.threadsErrors.length);
+  .filter((post) => post.instagramErrors.length);
 
 if (errorSummary.length) {
   console.log("\n取得できなかったメトリクス:");

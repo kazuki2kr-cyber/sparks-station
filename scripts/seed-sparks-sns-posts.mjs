@@ -65,12 +65,10 @@ function reelPost({
   hookText,
   caption,
   slides,
-  threadTemplateId,
-  threadPosts,
 }) {
   return {
     type: "reel",
-    platforms: ["instagram", "threads"],
+    platforms: ["instagram"],
     contentTheme,
     caseName,
     articleUrl,
@@ -86,20 +84,12 @@ function reelPost({
       ctaType: "save",
       targetKpi: "saves",
     },
-    threads: {
-      templateId: threadTemplateId,
-      posts: threadPosts,
-      ctaType: "article_click",
-      targetKpi: "link_clicks",
-    },
     tracking: {
       utmCampaign: "sns_2026_w20",
       experimentId: `sparks_article_w20_${String(order).padStart(2, "0")}`,
     },
     result: {
       instagramPostId: null,
-      threadsRootId: null,
-      threadsPostIds: [],
       postedAt: null,
     },
     status: "pending",

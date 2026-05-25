@@ -12,8 +12,10 @@
 1. 直近の文脈が必要な場合は `docs/` と既存の `CLAUDE.md` を確認する。
 2. SNS関連の作業では `docs/organization/sns-strategy.md` と `scripts/check-sns-queue.mjs` を確認する。
 3. 組織的に進める依頼では `docs/organization/multi-agent-operations.md` を確認し、レオが窓口としてエイダ/ルカへタスクを切り分ける。
-4. マネタイズ、Sparks Station Pro、買い切りDB、アフィリエイト導入、または市川さんが「なにするんだっけ？」と聞いた場合は、まず `docs/monetization-handoff.md` を確認する。
-5. コード変更では既存スタックを優先し、新しい依存は必要性と運用コストを確認してから追加する。
+4. 新規記事作成、既存記事の大幅改稿、Pattern A（SaaS / Micro-SaaS / Exit / 失敗事例 / GTM）の記事制作では、市川さんが明示しなくてもマルチエージェント運用を使う。ケンをビジネスファクト / テック・GTM / 日本市場の3並行で起動し、完了後に執筆とファクトチェックへ進む。
+5. マネタイズ、Sparks Station Pro、買い切りDB、アフィリエイト導入、または市川さんが「なにするんだっけ？」と聞いた場合は、まず `docs/monetization-handoff.md` を確認する。
+6. コード変更では既存スタックを優先し、新しい依存は必要性と運用コストを確認してから追加する。
+7. PowerShellで日本語を含むファイルやJSONを読む場合は、最初からUTF-8出力に固定する。例: `[Console]::OutputEncoding=[System.Text.UTF8Encoding]::UTF8; Get-Content -Path <file> -Encoding UTF8`。`node` でJSONを読む場合も同じコマンド内で `OutputEncoding` を設定してから実行する。
 
 ## 組織ロール
 
@@ -22,7 +24,7 @@
 | レオ / CEO | 事業戦略・編集方針・オーナー窓口・オーケストレーター | 何を作るか、何を発信するか、優先順位を決める |
 | ケン / リサーチャー | 記事制作の事前調査 | ビジネスファクト / テック・GTM / 日本市場を3並行で収集 |
 | エイダ / CTO | 技術選定・実装・品質 | Next.js / Firebase / SNS自動投稿の実装と運用安全性 |
-| ルカ / SNSストラテジスト | Instagram / Threads 運用 | 投稿企画、KPI、保存・シェアされるコンテンツ設計 |
+| ルカ / SNSストラテジスト | Instagram Reels 運用 | 投稿企画、KPI、保存・シェアされるコンテンツ設計 |
 
 各人格定義:
 

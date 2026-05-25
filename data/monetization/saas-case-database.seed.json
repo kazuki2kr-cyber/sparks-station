@@ -481,6 +481,37 @@
     "notes": "MRR、ローンチ時期、GTMチャネル、技術構成はIndie Hackers記事を参照。価格と機能、対応CRM、確認フローは公式サイトを参照。"
   },
   {
+    "id": "my-askai-ai-support-agent-40k-mrr",
+    "productName": "My AskAI",
+    "url": "https://myaskai.com",
+    "sourceUrls": [
+      "/posts/my-askai-ai-support-agent-40k-mrr",
+      "src/content/posts/my-askai-ai-support-agent-40k-mrr.md",
+      "https://www.indiehackers.com/post/tech/bootstrapping-to-40k-mrr-after-his-vc-backed-startup-failed-LF1CwRs1vL3oVLcuoIoE",
+      "https://myaskai.com/pricing",
+      "https://myaskai.com/blog/my-askai-pricing-explained-2026",
+      "https://myaskai.com/blog/my-askai-traveljoy-case-study-2026",
+      "https://myaskai.com/blog/my-askai-customerio-case-study-2026"
+    ],
+    "category": "AI SaaS / Customer Support / Helpdesk Automation",
+    "targetCustomer": "Intercom、Zendesk、Freshdesk、HubSpot、Gorgiasなどを使うSaaS企業、EC、サポートチーム。",
+    "pain": "サポート問い合わせが増えるほど人件費が増え、既存ヘルプデスクのAI機能は高価または課金単位が読みにくい。",
+    "productSummary": "既存ヘルプデスクに接続し、ナレッジベースやWebサイトを元にAIが問い合わせへ回答し、必要に応じて人間へ引き継ぐAIサポートエージェント。",
+    "pricingModel": "月額サブスクリプション + チケット単位の従量課金",
+    "priceRange": "Proは月$199から、Scaleは月$499から。Scaleの超過分は1チケットあたり$0.10。",
+    "revenue": "Indie Hackers記事時点で約$40k MRR、約$500k ARR、月75k超のサポートチャット処理。AI原価込みの粗利は約82%。",
+    "acquisitionChannel": "Google/SEO、Intercom FinやZendesk AIの代替検索、ChatGPT経由の代替ツール探索、オンボーディングコール、既存ユーザーの事例公開。",
+    "gtmPattern": "existing workflow wedge / competitor alternative SEO / price anchoring / support automation",
+    "successFactor": "既存ヘルプデスクを置き換えずにAIを差し込み、Intercom FinやZendesk AIとの価格差をチケット単位で明確に示したこと。",
+    "riskOrFailure": "AI回答の品質、FAQや社内ナレッジの整備不足、誤回答時の責任範囲、競合の価格改定、ヘルプデスク側の標準AI機能強化。",
+    "japanHypothesis": "日本では汎用AIサポートではなく、Shopify/BASEの配送・返品、スクール入会前質問、士業の必要書類案内、SaaSのヘルプセンター回答など、1業種・1チャネルに絞ると導入しやすい。",
+    "firstExperiment": "ShopifyまたはBASE店舗10社から過去1か月の問い合わせを匿名化してもらい、上位20パターンのFAQ整備とAI返信下書きを月3万から10万円で手動提供する。",
+    "recommendedTools": ["Next.js", "OpenAI API", "Supabase", "Firebase", "Zendesk", "Intercom", "Shopify", "Stripe"],
+    "monetizationFit": "Sparks Station ProのAI SaaS価格設計、既存ワークフローへの差し込み、SEO比較ページ、サポート業務自動化の教材に向く。",
+    "confidence": "high",
+    "notes": "MRR、チーム規模、チャット件数、粗利、MVP、スタックはIndie Hackers記事を参照。価格と比較試算、TravelJoy/Customer.io事例は公式サイトを参照。"
+  },
+  {
     "id": "cloakist-sotion-micro-saas-acquisition",
     "productName": "Cloakist / Sotion",
     "url": "https://cloak.ist",

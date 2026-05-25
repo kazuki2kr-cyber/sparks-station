@@ -1,4 +1,4 @@
-// Sparks Station SNS auto-posting — Reels + Threads thread support
+// Sparks Station SNS auto-posting — Instagram Reels support
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import * as React from "react";
@@ -44,7 +44,6 @@ interface ReelPost {
   caption: string;
   hookText: string;
   slides: Slide[];
-  threadPosts?: string[];
 }
 
 type QueuedPost = ReelPost;
@@ -436,7 +435,6 @@ async function compositeTextAndBrandingVertical(
 // ─────────────────────────────────────────────
 
 const INSTAGRAM_API_BASE = "https://graph.instagram.com/v21.0";
-const THREADS_API_BASE = "https://graph.threads.net/v1.0";
 
 // ─────────────────────────────────────────────
 // Firestoreデキュー
@@ -444,21 +442,17 @@ const THREADS_API_BASE = "https://graph.threads.net/v1.0";
 
 function normalizeQueuedPost(data: Record<string, unknown>): QueuedPost {
   const instagram = (data.instagram ?? data) as Record<string, unknown>;
-  const threads = (data.threads ?? data) as Record<string, unknown>;
   const type = instagram.type ?? data.type;
 
   if (type !== "reel") {
     throw new Error(`Sparks StationのInstagram投稿はreelのみ対応です: type=${String(type ?? "undefined")}`);
   }
 
-  const threadPosts = threads.posts ?? data.threadPosts ?? data.threadsPosts ?? [];
-
   return {
     type: "reel",
     caption: instagram.caption as string,
     hookText: instagram.hookText as string,
     slides: instagram.slides as Slide[],
-    threadPosts: threadPosts as string[],
   };
 }
 
@@ -839,7 +833,7 @@ async function uploadVideoToCloudinary(videoBuffer: Buffer): Promise<string> {
   return uploadJson.secure_url as string;
 }
 
-async function postReel(post: ReelPost): Promise<{ postId: string; firstFrameUrl: string }> {
+async function postReel(post: ReelPost): Promise<string> {
   const accountId = cleanEnv("INSTAGRAM_BUSINESS_ACCOUNT_ID");
   const token = cleanEnv("INSTAGRAM_ACCESS_TOKEN");
 
@@ -859,9 +853,6 @@ async function postReel(post: ReelPost): Promise<{ postId: string; firstFrameUrl
       return compositeTextAndBrandingVertical(jpegBuffer, text);
     })
   );
-
-  // 1枚目フレームをCloudinaryに画像としてもアップロード（Threads流用用）
-  const firstFrameUrl = await uploadImageToCloudinary(frames[0]);
 
   // ffmpegでスライドショーMP4生成
   const bgmUrl = cleanEnv("REEL_BGM_URL") || undefined;
@@ -905,73 +896,7 @@ async function postReel(post: ReelPost): Promise<{ postId: string; firstFrameUrl
   if (!published.id)
     throw new Error(`Reels公開失敗: ${JSON.stringify(published)}`);
 
-  return { postId: published.id as string, firstFrameUrl };
-}
-
-// ─────────────────────────────────────────────
-// Threads スレッド投稿（Instagramとは別設計）
-// ─────────────────────────────────────────────
-
-async function publishThreadPost(
-  text: string,
-  options: { replyToId?: string } = {},
-): Promise<string | null> {
-  // Secret Manager 経由の値はBOM・CRLF・クォートが混入することがある
-  const userId = cleanEnv("THREADS_USER_ID");
-  const token = cleanEnv("THREADS_ACCESS_TOKEN") || cleanEnv("INSTAGRAM_ACCESS_TOKEN");
-  if (!userId || !token) return null;
-
-  const body: Record<string, string> = {
-    media_type: "TEXT",
-    text,
-    access_token: token,
-  };
-  if (options.replyToId) body.reply_to_id = options.replyToId;
-
-  const containerRes = await fetch(`${THREADS_API_BASE}/${userId}/threads`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  const container = await containerRes.json();
-  if (!container.id) {
-    console.error("Threads コンテナ作成失敗:", container);
-    return null;
-  }
-
-  await new Promise((r) => setTimeout(r, 30000));
-
-  const publishRes = await fetch(`${THREADS_API_BASE}/${userId}/threads_publish`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ creation_id: container.id, access_token: token }),
-  });
-  const published = await publishRes.json();
-  if (!published.id) {
-    console.error("Threads 公開失敗:", published);
-    return null;
-  }
   return published.id as string;
-}
-
-async function postThreadChain(post: QueuedPost): Promise<{ rootId: string; postIds: string[] } | null> {
-  const threadPosts = (post.threadPosts ?? [])
-    .map((text) => text.trim())
-    .filter(Boolean);
-  if (!threadPosts.length) return null;
-
-  const postIds: string[] = [];
-  let replyToId: string | undefined;
-
-  for (const text of threadPosts) {
-    const id = await publishThreadPost(text, { replyToId });
-    if (!id) return postIds.length ? { rootId: postIds[0], postIds } : null;
-    postIds.push(id);
-    replyToId = id;
-    await new Promise((r) => setTimeout(r, 5000));
-  }
-
-  return { rootId: postIds[0], postIds };
 }
 
 // ─────────────────────────────────────────────
@@ -1033,13 +958,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const { postId } = await postReel(post);
-    const threadResult = await postThreadChain(post).catch(() => null);
+    const postId = await postReel(post);
     const result = NextResponse.json({
       success: true,
       postId,
-      threadsRootId: threadResult?.rootId ?? null,
-      threadsPostIds: threadResult?.postIds ?? [],
       type: "reel",
       caption: post.caption,
       slideCount: post.slides.length,
@@ -1051,8 +973,6 @@ export async function POST(req: NextRequest) {
         postedAt: new Date(),
         result: {
           instagramPostId: postId,
-          threadsRootId: threadResult?.rootId ?? null,
-          threadsPostIds: threadResult?.postIds ?? [],
         },
       });
     }

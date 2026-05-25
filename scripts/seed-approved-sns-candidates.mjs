@@ -51,7 +51,6 @@ function validateQueuePost(candidate) {
     ["instagram.hookText", post.instagram?.hookText],
     ["instagram.caption", post.instagram?.caption],
     ["instagram.slides", post.instagram?.slides],
-    ["threads.posts", post.threads?.posts],
   ];
 
   for (const [path, value] of required) {
@@ -72,15 +71,19 @@ function validateQueuePost(candidate) {
     throw new Error(`${candidate.id ?? candidate.slug}: scheduledAt が未設定です。`);
   }
 
+  const instagramPost = { ...post };
+  delete instagramPost.threads;
+  delete instagramPost.threadPosts;
+  delete instagramPost.threadsPosts;
+
   return {
-    ...post,
+    ...instagramPost,
+    platforms: ["instagram"],
     scheduledAt,
     status: post.status === "draft" ? "pending" : (post.status ?? "pending"),
     createdAt: new Date(),
     result: post.result ?? {
       instagramPostId: null,
-      threadsRootId: null,
-      threadsPostIds: [],
       postedAt: null,
     },
   };
@@ -106,7 +109,7 @@ console.table(
     caseName: post.caseName,
     scheduledAt: post.scheduledAt.toISOString(),
     slides: post.instagram.slides.length,
-    threads: post.threads.posts.length,
+    platforms: post.platforms.join(","),
     status: post.status,
   }))
 );

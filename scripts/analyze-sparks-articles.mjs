@@ -210,9 +210,6 @@ function buildInsights(posts, dbRows) {
       productCta: cta,
       snsSeeds: {
         instagramAngle: pattern.snsAngle,
-        threadsAngle: row?.japanHypothesis
-          ? `背景、課金理由、日本転用案まで分解する。日本転用: ${row.japanHypothesis}`
-          : "背景、課金理由、日本転用案まで分解する。",
         suggestedCta:
           cta.id === "saas_case_db"
             ? "詳しい事例比較はSaaS Case DBへ"
@@ -286,13 +283,9 @@ function buildSnsCandidates(insights, snsReport) {
     const pattern = post.contentTheme ?? "unknown";
     const saved = Number(post.instagram?.insights?.saved ?? 0);
     const shares = Number(post.instagram?.insights?.shares ?? 0);
-    const threadViews = (post.threads ?? []).reduce(
-      (sum, thread) => sum + Number(thread.insights?.views ?? 0),
-      0
-    );
     patternsByRecentPerformance.set(
       pattern,
-      (patternsByRecentPerformance.get(pattern) ?? 0) + saved * 3 + shares * 2 + threadViews / 100
+      (patternsByRecentPerformance.get(pattern) ?? 0) + saved * 3 + shares * 2
     );
   }
 
@@ -317,17 +310,16 @@ function buildSnsCandidates(insights, snsReport) {
       contentTheme: mapPatternToTheme(item.sellingPattern.id),
       reason: `${item.sellingPattern.label}として再利用しやすい。${item.productCta.reason}`,
       instagramAngle: item.snsSeeds.instagramAngle,
-      threadsAngle: item.snsSeeds.threadsAngle,
       suggestedCta: item.snsSeeds.suggestedCta,
       requiredBeforeSeeding: [
         "市川さんが「次の週のSNS投稿案を作成して」などSNS投稿案作成を明示指示する",
-        "投稿本文、hookText、slides、threadPostsをレビュー済みにする",
+        "Instagramの投稿本文、hookText、slidesをレビュー済みにする",
         "`approved: true` に変更する",
         "scheduledAtを設定する",
       ],
       queueDraft: {
         type: "reel",
-        platforms: ["instagram", "threads"],
+        platforms: ["instagram"],
         contentTheme: mapPatternToTheme(item.sellingPattern.id),
         caseName: item.productName,
         articleUrl: `https://sparks-station.com${item.articleUrl}`,
@@ -343,12 +335,6 @@ function buildSnsCandidates(insights, snsReport) {
           slides: [],
           ctaType: item.productCta.id === "saas_case_db" ? "profile" : "save",
           targetKpi: item.productCta.id === "saas_case_db" ? "profile_visits" : "saves",
-        },
-        threads: {
-          templateId: `thread_${mapPatternToTheme(item.sellingPattern.id)}`,
-          posts: [],
-          ctaType: item.productCta.id === "saas_case_db" ? "article_click" : "reply",
-          targetKpi: item.productCta.id === "saas_case_db" ? "link_clicks" : "replies",
         },
       },
     }));
