@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T07:16:08.384Z",
+  "generatedAt": "2026-07-11T14:24:23.928Z",
   "source": {
     "postsDir": "src/content/posts",
     "dbPath": "data/monetization/saas-case-database.seed.json"
@@ -245,18 +245,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -297,18 +292,13 @@
       "sellingPattern": {
         "id": "buy_then_optimize",
         "label": "買って直す / 小規模SaaS運用改善",
-        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
-        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -349,18 +339,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -399,18 +384,13 @@
       "sellingPattern": {
         "id": "pre_sold_or_ltd",
         "label": "作る前に売る / LTD検証",
-        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
-        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -449,18 +429,13 @@
       "sellingPattern": {
         "id": "buy_then_optimize",
         "label": "買って直す / 小規模SaaS運用改善",
-        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
-        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -498,18 +473,13 @@
       "sellingPattern": {
         "id": "buy_then_optimize",
         "label": "買って直す / 小規模SaaS運用改善",
-        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
-        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -548,18 +518,13 @@
       "sellingPattern": {
         "id": "pre_sold_or_ltd",
         "label": "作る前に売る / LTD検証",
-        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
-        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -591,18 +556,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -640,18 +600,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -683,18 +638,13 @@
       "sellingPattern": {
         "id": "search_or_template_wedge",
         "label": "検索需要 / テンプレート導線",
-        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
-        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -726,18 +676,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -778,18 +723,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -828,18 +768,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -870,18 +805,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -921,18 +851,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -964,18 +889,13 @@
       "sellingPattern": {
         "id": "pre_sold_or_ltd",
         "label": "作る前に売る / LTD検証",
-        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
-        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1006,18 +926,13 @@
       "sellingPattern": {
         "id": "general_case_breakdown",
         "label": "事例分解 / 日本転用",
-        "buyerLogic": "顧客、課金理由、初期導線、日本で試せる小さな実験に分解する。",
-        "snsAngle": "成功事例の分解、日本で試すなら、作る前の問い"
+        "buyerLogic": "顧客、課金理由、初期導線、日本で試せる小さな実験に分解する。"
       },
       "productCta": {
         "id": "products",
         "label": "Products",
         "reason": "記事の学びを、DBや先行案内から次の検証へつなげる。",
         "href": "/products"
-      },
-      "snsSeeds": {
-        "instagramAngle": "成功事例の分解、日本で試すなら、作る前の問い",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1049,18 +964,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1092,18 +1002,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1135,18 +1040,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1177,18 +1077,13 @@
       "sellingPattern": {
         "id": "founder_distribution",
         "label": "創業者発信 / コミュニティGTM",
-        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
-        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1220,18 +1115,13 @@
       "sellingPattern": {
         "id": "founder_distribution",
         "label": "創業者発信 / コミュニティGTM",
-        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
-        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1262,18 +1152,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1305,18 +1190,13 @@
       "sellingPattern": {
         "id": "founder_distribution",
         "label": "創業者発信 / コミュニティGTM",
-        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
-        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1353,18 +1233,13 @@
       "sellingPattern": {
         "id": "founder_distribution",
         "label": "創業者発信 / コミュニティGTM",
-        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。",
-        "snsAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方"
+        "buyerLogic": "製品完成前から信頼と流通を作り、初期顧客に届ける。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1394,18 +1269,13 @@
       "sellingPattern": {
         "id": "search_or_template_wedge",
         "label": "検索需要 / テンプレート導線",
-        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
-        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。"
       },
       "productCta": {
         "id": "products",
         "label": "Products",
         "reason": "記事の学びを、DBや先行案内から次の検証へつなげる。",
         "href": "/products"
-      },
-      "snsSeeds": {
-        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1442,18 +1312,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1491,18 +1356,13 @@
       "sellingPattern": {
         "id": "search_or_template_wedge",
         "label": "検索需要 / テンプレート導線",
-        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
-        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1539,18 +1399,13 @@
       "sellingPattern": {
         "id": "search_or_template_wedge",
         "label": "検索需要 / テンプレート導線",
-        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
-        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1586,18 +1441,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1629,18 +1479,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1678,18 +1523,13 @@
       "sellingPattern": {
         "id": "search_or_template_wedge",
         "label": "検索需要 / テンプレート導線",
-        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
-        "snsAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法"
+        "buyerLogic": "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1720,18 +1560,13 @@
       "sellingPattern": {
         "id": "failure_or_payer_risk",
         "label": "失敗診断 / 支払い手と導入コスト",
-        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-        "snsAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト"
+        "buyerLogic": "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。"
       },
       "productCta": {
         "id": "pro_validation",
         "label": "Sparks Station Pro先行案内",
         "reason": "作る前の検証、支払い手、導入コストの見極めに向いている。",
         "href": "/products#pro"
-      },
-      "snsSeeds": {
-        "instagramAngle": "技術が強くても売れない理由、規制産業、CACと導入コスト",
-        "suggestedCta": "作る前の検証メモとして保存"
       }
     },
     {
@@ -1769,18 +1604,13 @@
       "sellingPattern": {
         "id": "pre_sold_or_ltd",
         "label": "作る前に売る / LTD検証",
-        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
-        "snsAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行"
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1817,18 +1647,13 @@
       "sellingPattern": {
         "id": "buy_then_optimize",
         "label": "買って直す / 小規模SaaS運用改善",
-        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
-        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1865,18 +1690,13 @@
       "sellingPattern": {
         "id": "buy_then_optimize",
         "label": "買って直す / 小規模SaaS運用改善",
-        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
-        "snsAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善"
+        "buyerLogic": "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     },
     {
@@ -1908,18 +1728,13 @@
       "sellingPattern": {
         "id": "pricing_and_packaging",
         "label": "価格設計 / 課金理由の明確化",
-        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-        "snsAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け"
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
       },
       "productCta": {
         "id": "saas_case_db",
         "label": "SaaS Case DB",
         "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
         "href": "/products#saas-case-db"
-      },
-      "snsSeeds": {
-        "instagramAngle": "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
-        "suggestedCta": "詳しい事例比較はSaaS Case DBへ"
       }
     }
   ]

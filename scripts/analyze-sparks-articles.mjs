@@ -6,17 +6,11 @@ const root = process.cwd();
 const postsDir = join(root, "src/content/posts");
 const dbPath = join(root, "data/monetization/saas-case-database.seed.json");
 const defaultOutPath = join(root, "data/insights/sparks-article-insights.json");
-const defaultCandidatesPath = join(root, "tmp/sns-candidates-latest.json");
-const defaultInsightsPath = join(root, "tmp/sns-insights-latest.json");
 
 function getArgValue(name, fallback = null) {
   const prefix = `${name}=`;
   const match = process.argv.find((arg) => arg.startsWith(prefix));
   return match ? match.slice(prefix.length) : fallback;
-}
-
-function hasFlag(name) {
-  return process.argv.includes(name);
 }
 
 function readJson(path, fallback) {
@@ -97,7 +91,6 @@ function detectPattern(post, row) {
       id: "failure_or_payer_risk",
       label: "失敗診断 / 支払い手と導入コスト",
       buyerLogic: "技術より先に、誰が払うか、導入と継続で利益が残るかを見る。",
-      snsAngle: "技術が強くても売れない理由、規制産業、CACと導入コスト",
     };
   }
   if (includesAny(titleAndTags, ["買収", "売却", "Exit", "Acquisition", "acquire", "holding company", "ホールディング"])) {
@@ -105,7 +98,6 @@ function detectPattern(post, row) {
       id: "buy_then_optimize",
       label: "買って直す / 小規模SaaS運用改善",
       buyerLogic: "ゼロから作らず、既存SaaSの価格・導線・オンボーディングを直して伸ばす。",
-      snsAngle: "新機能なしで売上を伸ばす、SaaS買収/DD、運用改善",
     };
   }
   if (includesAny(haystack, ["Lifetime Deal", "LTD", "買い切り", "先行販売", "pre-sell"])) {
@@ -113,7 +105,6 @@ function detectPattern(post, row) {
       id: "pre_sold_or_ltd",
       label: "作る前に売る / LTD検証",
       buyerLogic: "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。",
-      snsAngle: "作る前に売る順番、LTDの使い方、買い切りから月額への移行",
     };
   }
   if (includesAny(haystack, ["価格", "値上げ", "pricing", "安価", "Typeform", "BYOK", "APIキー"])) {
@@ -121,7 +112,6 @@ function detectPattern(post, row) {
       id: "pricing_and_packaging",
       label: "価格設計 / 課金理由の明確化",
       buyerLogic: "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。",
-      snsAngle: "価格の決め方、安売りの罠、買い切り/BYOK/従量課金の使い分け",
     };
   }
   if (includesAny(haystack, ["SEO", "GEO", "検索", "comparison", "代替キーワード", "テンプレート"])) {
@@ -129,7 +119,6 @@ function detectPattern(post, row) {
       id: "search_or_template_wedge",
       label: "検索需要 / テンプレート導線",
       buyerLogic: "購買前の検索行動を押さえ、比較・テンプレート・代替需要から獲得する。",
-      snsAngle: "SEOだけで買われる条件、比較記事、テンプレートを入口にする方法",
     };
   }
   if (includesAny(haystack, ["Build in Public", "LinkedIn", "X", "Reddit", "Discord", "コミュニティ", "インフルエンサー"])) {
@@ -137,14 +126,12 @@ function detectPattern(post, row) {
       id: "founder_distribution",
       label: "創業者発信 / コミュニティGTM",
       buyerLogic: "製品完成前から信頼と流通を作り、初期顧客に届ける。",
-      snsAngle: "発信を販売導線に変える方法、共同創業者やコミュニティの使い方",
     };
   }
   return {
     id: "general_case_breakdown",
     label: "事例分解 / 日本転用",
     buyerLogic: "顧客、課金理由、初期導線、日本で試せる小さな実験に分解する。",
-    snsAngle: "成功事例の分解、日本で試すなら、作る前の問い",
   };
 }
 
@@ -210,13 +197,6 @@ function buildInsights(posts, dbRows) {
       recommendedTools: row?.recommendedTools ?? [],
       sellingPattern: pattern,
       productCta: cta,
-      snsSeeds: {
-        instagramAngle: pattern.snsAngle,
-        suggestedCta:
-          cta.id === "saas_case_db"
-            ? "詳しい事例比較はSaaS Case DBへ"
-            : "作る前の検証メモとして保存",
-      },
     };
   });
 }
@@ -261,104 +241,7 @@ function summarizePatterns(insights) {
   }, {});
 }
 
-function scoreInsightForSns(item, snsReport) {
-  const recentPostedSlugs = new Set(
-    (snsReport?.posts ?? [])
-      .map((post) => String(post.articleUrl ?? "").split("/posts/")[1])
-      .filter(Boolean)
-  );
-
-  let score = item.hasDbRow ? 3 : 1;
-  if (item.tags.includes("GTM")) score += 2;
-  if (item.tags.includes("Monetization")) score += 2;
-  if (item.tags.includes("SuccessCase") || item.tags.includes("CaseStudy")) score += 1;
-  if (item.tags.includes("FailureCase") || item.tags.includes("Failure")) score += 1;
-  if (item.revenue) score += 1;
-  if (item.firstExperiment) score += 1;
-  if (recentPostedSlugs.has(item.slug)) score -= 2;
-  return score;
-}
-
-function buildSnsCandidates(insights, snsReport) {
-  const patternsByRecentPerformance = new Map();
-  for (const post of snsReport?.posts ?? []) {
-    const pattern = post.contentTheme ?? "unknown";
-    const saved = Number(post.instagram?.insights?.saved ?? 0);
-    const shares = Number(post.instagram?.insights?.shares ?? 0);
-    patternsByRecentPerformance.set(
-      pattern,
-      (patternsByRecentPerformance.get(pattern) ?? 0) + saved * 3 + shares * 2
-    );
-  }
-
-  return insights
-    .map((item) => ({
-      score: scoreInsightForSns(item, snsReport),
-      item,
-    }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 10)
-    .map(({ item, score }, index) => ({
-      id: `candidate_${String(index + 1).padStart(2, "0")}_${item.slug}`,
-      approved: false,
-      status: "proposal",
-      manualOnly: true,
-      seedScript: "scripts/seed-approved-sns-candidates.mjs",
-      score,
-      slug: item.slug,
-      caseName: item.productName,
-      articleUrl: `https://sparks-station.com${item.articleUrl}`,
-      sourceUrl: item.file,
-      contentTheme: mapPatternToTheme(item.sellingPattern.id),
-      reason: `${item.sellingPattern.label}として再利用しやすい。${item.productCta.reason}`,
-      instagramAngle: item.snsSeeds.instagramAngle,
-      suggestedCta: item.snsSeeds.suggestedCta,
-      requiredBeforeSeeding: [
-        "市川さんが「次の週のSNS投稿案を作成して」などSNS投稿案作成を明示指示する",
-        "Instagramの投稿本文、hookText、slidesをレビュー済みにする",
-        "`approved: true` に変更する",
-        "scheduledAtを設定する",
-      ],
-      queueDraft: {
-        type: "reel",
-        platforms: ["instagram"],
-        contentTheme: mapPatternToTheme(item.sellingPattern.id),
-        caseName: item.productName,
-        articleUrl: `https://sparks-station.com${item.articleUrl}`,
-        sourceUrl: item.file,
-        order: index + 1,
-        scheduledAt: null,
-        status: "draft",
-        instagram: {
-          type: "reel",
-          templateId: `reel_${mapPatternToTheme(item.sellingPattern.id)}`,
-          hookText: "",
-          caption: "",
-          slides: [],
-          ctaType: item.productCta.id === "saas_case_db" ? "profile" : "save",
-          targetKpi: item.productCta.id === "saas_case_db" ? "profile_visits" : "saves",
-        },
-      },
-    }));
-}
-
-function mapPatternToTheme(patternId) {
-  const map = {
-    pre_sold_or_ltd: "validation",
-    pricing_and_packaging: "pricing",
-    search_or_template_wedge: "seo",
-    founder_distribution: "gtm",
-    buy_then_optimize: "acquisition",
-    failure_or_payer_risk: "failure",
-    general_case_breakdown: "case_breakdown",
-  };
-  return map[patternId] ?? "case_breakdown";
-}
-
 const outPath = getArgValue("--out", defaultOutPath);
-const candidatesPath = getArgValue("--candidates-out", defaultCandidatesPath);
-const snsInsightsPath = getArgValue("--sns-insights", defaultInsightsPath);
-const writeCandidates = hasFlag("--with-candidates");
 
 const dbRows = readJson(dbPath, []);
 const posts = readPosts();
@@ -382,20 +265,6 @@ const report = {
 
 writeJson(outPath, report);
 
-let candidates = [];
-if (writeCandidates) {
-  const snsReport = readJson(snsInsightsPath, null);
-  candidates = buildSnsCandidates(insights, snsReport);
-  writeJson(candidatesPath, {
-    generatedAt: new Date().toISOString(),
-    manualOnly: true,
-    note: "このファイルはSNS投稿候補です。市川さんからSNS投稿案作成の明示指示があるまで投稿本文作成やFirestore投入は開始しません。Firestore投入には approved: true と手動スクリプト実行が必要です。",
-    sourceInsightPath: outPath.replace(`${root}\\`, "").replace(`${root}/`, ""),
-    snsInsightsPath: existsSync(snsInsightsPath) ? snsInsightsPath.replace(`${root}\\`, "").replace(`${root}/`, "") : null,
-    candidates,
-  });
-}
-
 console.log(`Article insights: posts=${report.totals.posts}, dbMatched=${report.totals.postsWithDbRows}/${report.totals.posts}`);
 console.table(
   patternSummary.map((pattern) => ({
@@ -404,6 +273,3 @@ console.table(
   }))
 );
 console.log(`Saved: ${outPath}`);
-if (writeCandidates) {
-  console.log(`SNS candidates saved: ${candidatesPath}`);
-}

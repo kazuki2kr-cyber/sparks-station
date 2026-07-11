@@ -2,7 +2,7 @@
 
 ## 目的
 
-Codex automation で、Sparks Station の記事制作を定期的に進める。対象はリサーチ、記事作成、DB更新、検証、commit / push、公開確認まで。PR目的のX/SNS投稿、投稿案作成、投稿キュー投入は行わない。
+Codex automation で、Sparks Station の記事制作を定期的に進める。対象はリサーチ、記事作成、DB更新、検証、mainへの自動commit / push、本番公開確認まで。オーナー承認は待たない。SNS/X/Instagram/Threadsのファイル、分析、投稿案、キュー、スクリプトには一切触れない。
 
 記事は以下の2本軸で運用する。
 
@@ -18,6 +18,7 @@ Codex automation で、Sparks Station の記事制作を定期的に進める。
 - Pattern A（SaaS / Micro-SaaS / Exit / 失敗事例 / GTM）はケンの3領域リサーチを前提にする。
 - Pattern B（概念 / 技術思想）は必要な外部確認を行い、ファクトチェック対象の数字を無理に増やさない。
 - Pattern C（AIアップデート）は速報性と実用性を重視し、公式発表または一次情報を優先して確認する。
+- Pattern Aの3領域リサーチと数値照合結果は `docs/research/articles/[slug].md` に保存する。
 
 ## 命名規則
 
@@ -37,11 +38,30 @@ Codex automation で、Sparks Station の記事制作を定期的に進める。
 7. Pattern Cなら、何が変わったか、誰に影響するか、どんな小さなプロダクトや業務自動化に転用できるかを整理する。
 8. `src/content/posts/[slug].md` に記事を作成する。
 9. Pattern Aなら `data/monetization/saas-case-database.seed.json` を追加または更新する。Pattern Cでは原則DB行を作らない。
-10. `npm run articles:analyze` を実行する。
-11. JSON parse、記事文字数、frontmatter、内部リンク、タグを確認する。
+10. `npm run articles:validate -- --article=[slug]` を実行し、slug、frontmatter、タグ、文字数、構成、リンク、画像、DB整合、JSONを機械検証する。
+11. `npm run articles:analyze` を実行する。このコマンドは記事インサイトだけを扱い、SNS派生物を生成しない。
 12. `npm run build` を実行する。
-13. 変更内容が妥当なら記事関連ファイルだけをcommit / pushする。
-14. デプロイが完了したら公開URLを確認し、Search Console indexing が必要なURLを最終報告に残す。
+13. 記事、Pattern A調査メモ、該当DB、記事インサイトだけをstageする。
+14. `npm run articles:publish-scope -- --article=[slug] --staged` で `main`、`HEAD`、`origin/main` の整合とstage済みファイルallowlistを確認する。
+15. 承認を待たずcommitし、`main` へpushする。
+16. pushしたcommit SHAに対応するApp Hosting rolloutの成功を上限時間付きで待つ。
+17. 公開URLのHTTP 200、記事タイトル、sitemap掲載を確認し、Search Console indexing が必要なURLを最終報告に残す。
+
+## 自動公開ゲート
+
+以下をすべて通過した場合だけmainへ自動pushする。
+
+1. `git branch --show-current` が `main`。
+2. fetch後の `HEAD` が最新の `origin/main` を含む。
+3. `articles:validate`、`articles:analyze`、`build` が成功。
+4. 変更対象が次のallowlist内だけ。
+   - `src/content/posts/[slug].md`
+   - `docs/research/articles/[slug].md`（Pattern Aのみ）
+   - `data/monetization/saas-case-database.seed.json`（Pattern Aのみ）
+   - `data/insights/sparks-article-insights.json`
+5. `.env*`、秘密鍵、Firebase認証情報、SNS関連ファイル、Fantasy Quizzes Kingdomのファイルが含まれていない。
+
+push成功と本番公開成功は別々に判定する。rolloutや公開確認に失敗した場合、追加commitで取り繕わず「push済み・公開未確認」としてcommit SHA、失敗理由、再確認手順を報告する。
 
 ## Pattern C: AIアップデート記事
 
@@ -94,6 +114,7 @@ frontmatter:
 - Instagram Reels、Threads、その他SNS投稿案を作らない。
 - Firestore `postsQueue` へ投入しない。
 - `scripts/seed-sparks-sns-posts.mjs`、`scripts/check-sns-queue.mjs`、`npm run sns:insights` は実行しない。
+- `tmp/sns-*`、SNSインサイト、SNS候補、SNS本文を読まない・生成しない・更新しない。
 - 本名を公開面に出さない。
 - 同一サービスのDB行を重複作成しない。
 - AIアップデート記事で未確認の性能、料金、提供範囲を断言しない。
@@ -109,5 +130,6 @@ automation は以下を報告する。
 - DB更新の有無
 - 実行した検証コマンド
 - commit / push の結果
-- 公開URL、または公開確認できなかった理由
+- pushしたcommit SHAとApp Hosting rolloutの結果
+- 公開URLのHTTP、タイトル、sitemap確認結果、または公開確認できなかった理由
 - Search Console indexing が必要なURL
