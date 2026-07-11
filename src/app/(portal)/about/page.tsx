@@ -88,8 +88,8 @@ export default function AboutPage() {
                         <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                     </span>
                 </Link>
-                <Link href="/categories/cases" className="group border-t border-emerald-400/30 py-5 transition-colors hover:border-emerald-300">
-                    <span className="text-sm font-semibold text-emerald-300">Case Studies</span>
+                <Link href="/categories/cases" className="group border-t border-amber-400/30 py-5 transition-colors hover:border-amber-300">
+                    <span className="text-sm font-semibold text-amber-300">Case Studies</span>
                     <span className="mt-2 flex items-center justify-between text-lg font-bold text-white">
                         海外SaaSの事例分析を読む
                         <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

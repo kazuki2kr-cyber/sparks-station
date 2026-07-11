@@ -22,7 +22,7 @@ export default function CategorySection({ title, description, posts, theme, limi
         <section className="py-8">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 border-b border-neutral-800 pb-4">
                 <div>
-                    <h2 className={`text-2xl md:text-3xl font-bold flex items-center gap-3 ${theme.heading}`}>
+                    <h2 className={`text-2xl md:text-3xl font-bold flex items-center gap-3 ${theme.primary}`}>
                         <span className={`w-1.5 h-8 ${theme.bg.replace('/10', '')} rounded-full`}></span>
                         {title}
                     </h2>

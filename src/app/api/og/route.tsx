@@ -8,7 +8,7 @@ function getAccentColor(tag: string): { primary: string; secondary: string } {
     if (['aiupdate', 'ai', 'llm', 'concept', 'thought', 'philosophy'].some(t => lower.startsWith(t))) {
         return { primary: '#06b6d4', secondary: '#0891b2' };
     }
-    return { primary: '#10b981', secondary: '#059669' };
+    return { primary: '#f59e0b', secondary: '#d97706' };
 }
 
 function getCategoryLabel(tag: string): string {

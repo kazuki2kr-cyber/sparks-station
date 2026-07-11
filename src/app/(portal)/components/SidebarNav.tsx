@@ -33,7 +33,7 @@ export default function SidebarNav() {
                     </Link>
                     <Link
                         href="/categories/cases"
-                        className="block text-sm text-emerald-400 hover:text-emerald-300 transition-colors py-1.5"
+                        className="block text-sm text-amber-400 hover:text-amber-300 transition-colors py-1.5"
                     >
                         Case Studies →
                     </Link>

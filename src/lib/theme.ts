@@ -30,6 +30,21 @@ export const THEMES: Record<string, Theme> = {
         metricValue: 'text-emerald-400',
         gradient: 'from-emerald-600 via-teal-600 to-green-600',
     },
+    amber: {
+        primary: 'text-amber-400',
+        bg: 'bg-amber-500/10',
+        border: 'border-amber-500/20',
+        hoverBorder: 'hover:border-amber-500/50',
+        hoverShadow: 'hover:shadow-amber-500/10',
+        groupHoverText: 'group-hover:text-amber-400',
+        prose: 'prose-amber',
+        heading: 'prose-h3:text-amber-400',
+        codeText: 'text-amber-300',
+        codeBg: 'bg-amber-950/40',
+        metricLabel: 'text-amber-400',
+        metricValue: 'text-amber-400',
+        gradient: 'from-amber-600 via-orange-600 to-yellow-600',
+    },
     purple: {
         primary: 'text-purple-400',
         bg: 'bg-purple-500/10',
@@ -90,6 +105,6 @@ export function getThemeForTag(tag: string): Theme {
         return THEMES.blue;
     }
 
-    // Case studies and business articles default to Emerald.
-    return THEMES.emerald;
+    // Case studies use amber so the category stays distinct from the brand emerald.
+    return THEMES.amber;
 }

@@ -13,7 +13,7 @@ export const CATEGORIES: Record<CategoryType, { title: string; description: stri
     cases: {
         title: 'Case Studies',
         description: '海外Micro-SaaS / AI SaaSの成功・失敗・Exitを、事業アイデアへ分解する。',
-        theme: THEMES.emerald,
+        theme: THEMES.amber,
         slug: 'cases'
     }
 };
