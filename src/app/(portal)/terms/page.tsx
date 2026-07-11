@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { SITE_CONTACT_EMAIL } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "利用規約 | Sparks Station",
+  title: "利用規約",
+  description: "Sparks Stationが提供する記事、デジタル商品、関連サービスの利用条件です。",
   alternates: {
     canonical: "/terms",
   },

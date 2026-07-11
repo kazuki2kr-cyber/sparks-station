@@ -7,7 +7,8 @@ import {
 } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "特定商取引法に基づく表記 | Sparks Station",
+  title: "特定商取引法に基づく表記",
+  description: "Sparks Stationの販売事業者、販売価格、支払方法、商品の提供条件などを掲載しています。",
   alternates: {
     canonical: "/commerce-disclosure",
   },

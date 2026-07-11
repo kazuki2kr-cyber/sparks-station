@@ -66,6 +66,11 @@ const nextConfig: NextConfig = {
         destination: '/FantasyQuizzesKingdom',
         permanent: true,
       },
+      {
+        source: '/commercial-transactions',
+        destination: '/commerce-disclosure',
+        permanent: true,
+      },
     ];
   },
 

@@ -15,27 +15,28 @@
 ## コンテンツ構成（記事）
 
 ### ファイル配置
-- **場所**: `src/content/posts/YYYYMMDD.md`
-- **命名規則**: `YYYYMMDD.md`（同日2本目は `YYYYMMDD_2.md`）
-- **画像**: `public/images/YYYYMMDD.webp`（任意）
+- **場所**: `src/content/posts/[slug].md`
+- **命名規則**: 英語小文字とハイフンだけのslug（例: `base44-vibe-coding-80m-exit.md`）
+- **画像**: `public/images/[slug].webp`（任意）
 
 ### Frontmatter スキーマ
 ```yaml
 ---
 title: "（記事タイトル）"
 date: "YYYY-MM-DD"
-tags: ["SuccessCase", "SaaS", "Bootstrapped", "Strategy"]
+tags: ["CaseStudy", "SaaS", "Bootstrapped", "Strategy"]
 summary: "（200字程度の要約）"
 mrr: "約 xxx万円"          # 任意
 exit_price: "推定 xxx億円"  # 任意
 isPremium: false            # 任意
-image: "/images/YYYYMMDD.webp"  # 任意
+isArchived: false           # 任意。公開面から外す場合のみ true
+image: "/images/[slug].webp"  # 任意
 ---
 ```
 
 ### 利用可能タグ
-- **カテゴリ**: `SuccessCase`, `FailureCase`, `Thought`, `Concept`
-- **テーマ**: `SaaS`, `AI`, `LLM`, `Strategy`, `GTM`, `Exit`, `Bootstrapped`, `BuildInPublic`, `Monetization`, `NarrativeEngineering`
+- **メイン種別**: `AIUpdate`, `CaseStudy`
+- **補助タグ**: `Failure`, `SaaS`, `AI`, `LLM`, `Strategy`, `GTM`, `Exit`, `Bootstrapped`, `BuildInPublic`, `Monetization`, `Product`, `TechStack`, `DeepTech`, `MobileApp`
 
 ### 記事の4セクション構成（必須）
 ```
@@ -49,10 +50,9 @@ image: "/images/YYYYMMDD.webp"  # 任意
 
 ## 記事カテゴリ分類ロジック
 
-`src/lib/classifier.ts` が1番目のタグで振り分け:
-- `SuccessCase` → **成功事例 & テック** (emerald)
-- `FailureCase` → **失敗事例** (rose)
-- それ以外 → **哲学 & 思想** (purple)
+`src/lib/classifier.ts` が記事を2本軸へ分類:
+- `AIUpdate` またはAI/LLM/開発者ツール系 → **AI Updates**
+- `CaseStudy`、SaaS、Exit、GTM、失敗事例系 → **Case Studies**
 
 ---
 
@@ -84,7 +84,8 @@ npm run lint      # ESLint チェック
 
 ## コンテンツ作業ルール
 
-- 新記事は `src/content/posts/YYYYMMDD.md` に作成する
+- 新記事は `src/content/posts/[slug].md` に作成する
+- slugは英語小文字・数字・ハイフンのみ。日本語、アンダースコア、日付だけのファイル名は使わない
 - 4セクション構成（サマリー・Fact・Insight・Localize）を必ず守る
 - 事実・数字はソースに基づき記載する（AI による捏造は禁止）
 - 画像が不要な場合は `image` フィールドを省略する

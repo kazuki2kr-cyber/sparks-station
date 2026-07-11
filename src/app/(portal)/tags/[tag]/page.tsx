@@ -1,18 +1,27 @@
 import { getSortedPostsData } from '@/lib/content';
 import { CATEGORIES, classifyPosts } from '@/lib/classifier';
 import CategorySection from '../../components/CategorySection';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { Metadata } from 'next';
 
 type Props = {
     params: { tag: string };
 };
 
+const LEGACY_TAG_REDIRECTS: Record<string, string> = {
+    AIUpdate: '/categories/ai',
+    Concept: '/categories/ai',
+    Thought: '/categories/ai',
+    CaseStudy: '/categories/cases',
+    SuccessCase: '/categories/cases',
+    FailureCase: '/categories/cases',
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const resolvedParams = await params;
     const decodedTag = decodeURIComponent(resolvedParams.tag);
     return {
-        title: `${decodedTag} - Sparks Station`,
+        title: `${decodedTag}の記事一覧`,
         description: `「${decodedTag}」タグの記事一覧 | Sparks Station`,
         alternates: {
             canonical: `/tags/${resolvedParams.tag}`,
@@ -23,6 +32,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TagPage({ params }: Props) {
     const resolvedParams = await params;
     const decodedTag = decodeURIComponent(resolvedParams.tag);
+    if (LEGACY_TAG_REDIRECTS[decodedTag]) {
+        redirect(LEGACY_TAG_REDIRECTS[decodedTag]);
+    }
+
     const allPosts = getSortedPostsData();
 
     // Filter posts by tag
@@ -55,30 +68,21 @@ export default async function TagPage({ params }: Props) {
 
             {/* Category Sections */}
             <div className="space-y-12">
-                {classified.success.length > 0 && (
+                {classified.ai.length > 0 && (
                     <CategorySection
-                        title={CATEGORIES.success.title}
-                        description={CATEGORIES.success.description}
-                        posts={classified.success}
-                        theme={CATEGORIES.success.theme}
+                        title={CATEGORIES.ai.title}
+                        description={CATEGORIES.ai.description}
+                        posts={classified.ai}
+                        theme={CATEGORIES.ai.theme}
                     />
                 )}
 
-                {classified.thought.length > 0 && (
+                {classified.cases.length > 0 && (
                     <CategorySection
-                        title={CATEGORIES.thought.title}
-                        description={CATEGORIES.thought.description}
-                        posts={classified.thought}
-                        theme={CATEGORIES.thought.theme}
-                    />
-                )}
-
-                {classified.failure.length > 0 && (
-                    <CategorySection
-                        title={CATEGORIES.failure.title}
-                        description={CATEGORIES.failure.description}
-                        posts={classified.failure}
-                        theme={CATEGORIES.failure.theme}
+                        title={CATEGORIES.cases.title}
+                        description={CATEGORIES.cases.description}
+                        posts={classified.cases}
+                        theme={CATEGORIES.cases.theme}
                     />
                 )}
             </div>
@@ -89,7 +93,9 @@ export default async function TagPage({ params }: Props) {
 // Generate static params for all tags
 export async function generateStaticParams() {
     const allPosts = getSortedPostsData();
-    const allTags = allPosts.flatMap(post => post.metadata.tags);
+    const allTags = allPosts
+        .flatMap(post => post.metadata.tags)
+        .filter((tag) => !LEGACY_TAG_REDIRECTS[tag]);
     const uniqueTags = [...new Set(allTags)];
 
     return uniqueTags.map(tag => ({

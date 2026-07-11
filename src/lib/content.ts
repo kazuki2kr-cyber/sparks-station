@@ -12,6 +12,7 @@ export type PostMetadata = {
     mrr?: string;
     exit_price?: string;
     isPremium?: boolean;
+    isArchived?: boolean;
     image?: string; // Optional image path relative to public folder
 };
 
@@ -50,7 +51,7 @@ export function getSortedPostsData(): Post[] {
     });
 
     // Sort posts by date
-    return allPostsData.sort((a, b) => {
+    return allPostsData.filter((post) => !post.metadata.isArchived).sort((a, b) => {
         if (a.metadata.date < b.metadata.date) {
             return 1;
         } else {
@@ -72,7 +73,7 @@ export async function getPostData(slug: string): Promise<Post> {
     // Use gray-matter to parse the post metadata section
     const { data, content } = matter(fileContents);
 
-    return {
+    const post = {
         slug,
         content,
         metadata: {
@@ -80,5 +81,11 @@ export async function getPostData(slug: string): Promise<Post> {
             tags: data.tags || [],
         } as PostMetadata,
     };
+
+    if (post.metadata.isArchived) {
+        throw new Error('Post not found');
+    }
+
+    return post;
 }
 

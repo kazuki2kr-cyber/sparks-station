@@ -6,9 +6,9 @@ import { SaasCaseDbCheckoutButton } from "./components/SaasCaseDbCheckoutButton"
 import { ProWaitlistButton } from "./components/ProWaitlistButton";
 
 export const metadata: Metadata = {
-  title: "Products | Sparks Station",
+  title: "Sparks Stationのプロダクト",
   description:
-    "Sparks Stationのプロダクト一覧。海外SaaSの成功パターンを日本で試せる判断材料として整理します。",
+    "AIの活用方法と海外SaaS事例を、日本で試せる判断材料やデータベースとして提供します。",
   alternates: {
     canonical: "/products",
   },
@@ -31,9 +31,14 @@ export default function ProductsPage() {
           海外SaaSの成功パターンを、日本で試せる判断材料にする。
         </h1>
         <p className="text-base leading-8 text-neutral-400">
-          Sparks Stationは、記事で読んだ事例を「読むだけ」で終わらせず、価格、GTM、顧客獲得、検証手順まで持ち帰れる形に整えていきます。
+          Sparks Stationは、AIの活用方法と記事で読んだ事例を「読むだけ」で終わらせず、価格、GTM、顧客獲得、検証手順まで持ち帰れる形に整えていきます。
         </p>
       </header>
+
+      <Link href="/categories/cases" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 hover:text-emerald-200">
+        無料の事例分析を読む
+        <ArrowRight className="h-4 w-4" />
+      </Link>
 
       <section className="grid gap-5 lg:grid-cols-[1.4fr_0.8fr]">
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/[0.04] p-6 md:p-8">

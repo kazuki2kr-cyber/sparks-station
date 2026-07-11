@@ -28,14 +28,14 @@ export const metadata: Metadata = {
 
 
   title: {
-    default: "Sparks Station | 最新の「開発事例」と先進的な「思想」を「プロダクト」へ。",
+    default: "Sparks Station | AIアップデートと海外SaaS事例を、日本で試せる形へ。",
     template: "%s | Sparks Station",
   },
-  description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
-  keywords: ["Micro-SaaS", "個人開発", "エンジニア", "副業", "スタートアップ", "SaaS"],
+  description: "AIの最新アップデートと海外Micro-SaaS・AI SaaS事例を日本語で解説。活用方法、価格、GTM、日本で試せるプロダクト仮説まで整理します。",
+  keywords: ["AIアップデート", "生成AI", "Micro-SaaS", "AI SaaS", "個人開発", "SaaS事例", "GTM"],
   openGraph: {
     title: "Sparks Station",
-    description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
+    description: "AIの最新アップデートと海外SaaS事例を、日本で試せる活用方法とプロダクト仮説まで整理します。",
     url: "https://sparks-station.com",
     siteName: "Sparks Station",
     locale: "ja_JP",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sparks Station",
-    description: "最新の「開発事例」と先進的な「思想」を「プロダクト」へ。海の向こうの開発事例と、世界をアップデートする概念。2つの知見を種火（Sparks）に変えて、プロダクトを創り出す。",
+    description: "AIの最新アップデートと海外SaaS事例を、日本で試せる活用方法とプロダクト仮説まで整理します。",
     images: ["/sparks-station-kv.png"],
   },
   other: {

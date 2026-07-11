@@ -1,8 +1,14 @@
 import { getSortedPostsData } from '@/lib/content';
 import { CATEGORIES, CategoryType, classifyPosts } from '@/lib/classifier';
 import PostCard from '../../components/PostCard';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { Metadata } from 'next';
+
+const LEGACY_CATEGORY_REDIRECTS: Record<string, CategoryType> = {
+    success: 'cases',
+    failure: 'cases',
+    thought: 'ai',
+};
 
 export async function generateStaticParams() {
     return Object.keys(CATEGORIES).map((slug) => ({
@@ -12,7 +18,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const categoryKey = slug as CategoryType;
+    const categoryKey = (LEGACY_CATEGORY_REDIRECTS[slug] ?? slug) as CategoryType;
     const category = CATEGORIES[categoryKey];
 
     if (!category) {
@@ -22,13 +28,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
 
     return {
-        title: `${category.title} | Sparks Station`,
+        title: category.title,
         description: category.description,
+        alternates: {
+            canonical: `/categories/${categoryKey}`,
+        },
     };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
+    if (LEGACY_CATEGORY_REDIRECTS[slug]) {
+        redirect(`/categories/${LEGACY_CATEGORY_REDIRECTS[slug]}`);
+    }
+
     const categoryKey = slug as CategoryType;
     const category = CATEGORIES[categoryKey];
 
@@ -43,7 +56,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     return (
         <div className="space-y-12 py-12">
             <header className="border-b border-neutral-800 pb-8">
-                <h1 className={`text-4xl font-bold mb-4 flex items-center gap-4 ${category.theme.heading}`}>
+                <h1 className={`mb-4 flex items-center gap-4 text-4xl font-bold text-white`}>
                     <span className={`w-2 h-10 ${category.theme.bg.replace('/10', '')} rounded-full`}></span>
                     {category.title}
                 </h1>

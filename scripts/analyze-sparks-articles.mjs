@@ -53,12 +53,14 @@ function readPosts() {
         title: compact(parsed.data.title),
         date: compact(parsed.data.date),
         tags: Array.isArray(parsed.data.tags) ? parsed.data.tags : [],
+        isArchived: Boolean(parsed.data.isArchived),
         summary: compact(parsed.data.summary),
         mrr: parsed.data.mrr ?? null,
         exitPrice: parsed.data.exit_price ?? null,
         content: parsed.content,
       };
     })
+    .filter((post) => !post.isArchived)
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }
 
@@ -90,7 +92,7 @@ function detectPattern(post, row) {
     row?.japanHypothesis,
   ].join("\n");
 
-  if (post.tags.includes("FailureCase") || includesAny(haystack, ["閉鎖", "活動停止", "規制", "支払い手", "保険償還", "CAC", "顧客獲得コスト"])) {
+  if (post.tags.includes("FailureCase") || post.tags.includes("Failure") || includesAny(haystack, ["閉鎖", "活動停止", "規制", "支払い手", "保険償還", "CAC", "顧客獲得コスト"])) {
     return {
       id: "failure_or_payer_risk",
       label: "失敗診断 / 支払い手と導入コスト",
@@ -156,7 +158,7 @@ function pickProductCta(post, row, pattern) {
     pattern.id,
   ].join(" ");
 
-  if (includesAny(haystack, ["失敗", "FailureCase", "規制", "DeepTech", "payer_risk"])) {
+  if (includesAny(haystack, ["失敗", "FailureCase", "Failure", "規制", "DeepTech", "payer_risk"])) {
     return {
       id: "pro_validation",
       label: "Sparks Station Pro先行案内",
@@ -232,7 +234,7 @@ function inferPayer(post) {
 }
 
 function inferPain(post) {
-  if (post.tags.includes("FailureCase")) return "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。";
+  if (post.tags.includes("FailureCase") || post.tags.includes("Failure")) return "技術やプロダクトはあっても、支払い手・導入・継続の構造が弱い。";
   if (post.tags.includes("GTM")) return "良い製品を作っても、最初の顧客に届かない。";
   if (post.tags.includes("Monetization")) return "価格、課金理由、継続利用の設計が難しい。";
   return "作れるが、何を誰にどう売るかの解像度が足りない。";
@@ -269,8 +271,8 @@ function scoreInsightForSns(item, snsReport) {
   let score = item.hasDbRow ? 3 : 1;
   if (item.tags.includes("GTM")) score += 2;
   if (item.tags.includes("Monetization")) score += 2;
-  if (item.tags.includes("SuccessCase")) score += 1;
-  if (item.tags.includes("FailureCase")) score += 1;
+  if (item.tags.includes("SuccessCase") || item.tags.includes("CaseStudy")) score += 1;
+  if (item.tags.includes("FailureCase") || item.tags.includes("Failure")) score += 1;
   if (item.revenue) score += 1;
   if (item.firstExperiment) score += 1;
   if (recentPostedSlugs.has(item.slug)) score -= 2;
@@ -356,7 +358,7 @@ function mapPatternToTheme(patternId) {
 const outPath = getArgValue("--out", defaultOutPath);
 const candidatesPath = getArgValue("--candidates-out", defaultCandidatesPath);
 const snsInsightsPath = getArgValue("--sns-insights", defaultInsightsPath);
-const skipCandidates = hasFlag("--no-candidates");
+const writeCandidates = hasFlag("--with-candidates");
 
 const dbRows = readJson(dbPath, []);
 const posts = readPosts();
@@ -381,7 +383,7 @@ const report = {
 writeJson(outPath, report);
 
 let candidates = [];
-if (!skipCandidates) {
+if (writeCandidates) {
   const snsReport = readJson(snsInsightsPath, null);
   candidates = buildSnsCandidates(insights, snsReport);
   writeJson(candidatesPath, {
@@ -402,6 +404,6 @@ console.table(
   }))
 );
 console.log(`Saved: ${outPath}`);
-if (!skipCandidates) {
+if (writeCandidates) {
   console.log(`SNS candidates saved: ${candidatesPath}`);
 }

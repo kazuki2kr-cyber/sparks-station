@@ -5,19 +5,16 @@ export const runtime = 'edge';
 
 function getAccentColor(tag: string): { primary: string; secondary: string } {
     const lower = tag.toLowerCase();
-    if (lower.startsWith('failurecase')) return { primary: '#f43f5e', secondary: '#e11d48' };
-    if (['narrativeengineering', 'thought', 'concept', 'philosophy'].some(t => lower.startsWith(t))) {
-        return { primary: '#a855f7', secondary: '#9333ea' };
+    if (['aiupdate', 'ai', 'llm', 'concept', 'thought', 'philosophy'].some(t => lower.startsWith(t))) {
+        return { primary: '#06b6d4', secondary: '#0891b2' };
     }
-    if (['ai', 'llm'].some(t => lower.startsWith(t))) return { primary: '#06b6d4', secondary: '#0891b2' };
     return { primary: '#10b981', secondary: '#059669' };
 }
 
 function getCategoryLabel(tag: string): string {
     const lower = tag.toLowerCase();
-    if (lower.startsWith('failurecase')) return 'Failure Case';
-    if (['narrativeengineering', 'thought', 'concept', 'philosophy'].some(t => lower.startsWith(t))) return 'Philosophy';
-    return 'Success Case';
+    if (['aiupdate', 'ai', 'llm', 'concept', 'thought', 'philosophy'].some(t => lower.startsWith(t))) return 'AI Updates';
+    return 'Case Studies';
 }
 
 export async function GET(request: NextRequest) {
@@ -25,7 +22,7 @@ export async function GET(request: NextRequest) {
     const title = searchParams.get('title') || 'Sparks Station';
     const mrr = searchParams.get('mrr') || '';
     const exitPrice = searchParams.get('exit') || '';
-    const tag = searchParams.get('tag') || 'SuccessCase';
+    const tag = searchParams.get('tag') || 'CaseStudy';
 
     const { primary, secondary } = getAccentColor(tag);
     const categoryLabel = getCategoryLabel(tag);

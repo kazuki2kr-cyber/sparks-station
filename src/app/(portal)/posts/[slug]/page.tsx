@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { getThemeForTag } from '@/lib/theme';
+import { CATEGORIES, getPostCategory } from '@/lib/classifier';
 import FeedbackSection from '../../components/FeedbackSection';
 import RelatedArticles from './components/RelatedArticles';
 import RecommendedTools from './components/RecommendedTools';
@@ -23,14 +23,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         const post = await getPostData(slug);
         const ogImageParams = new URLSearchParams({
             title: post.metadata.title,
-            tag: post.metadata.tags[0] || 'SuccessCase',
+            tag: post.metadata.tags[0] || 'CaseStudy',
             ...(post.metadata.mrr ? { mrr: post.metadata.mrr } : {}),
             ...(post.metadata.exit_price ? { exit: post.metadata.exit_price } : {}),
         });
         const ogImageUrl = `${BASE_URL}/api/og?${ogImageParams.toString()}`;
 
         return {
-            title: `${post.metadata.title} | Sparks Station`,
+            title: post.metadata.title,
             description: post.metadata.summary,
             alternates: {
                 canonical: `/posts/${slug}`,
@@ -74,8 +74,10 @@ export default async function PostPage({ params }: Props) {
         notFound();
     }
 
-    const mainTag = post.metadata.tags[0] || 'Tech';
-    const theme = getThemeForTag(mainTag);
+    const category = CATEGORIES[getPostCategory(post)];
+    const theme = category.theme;
+    const hiddenTags = new Set(['AIUpdate', 'CaseStudy', 'SuccessCase', 'FailureCase', 'Concept', 'Thought']);
+    const displayTags = post.metadata.tags.filter((tag) => !hiddenTags.has(tag));
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -83,6 +85,10 @@ export default async function PostPage({ params }: Props) {
         headline: post.metadata.title,
         description: post.metadata.summary,
         datePublished: post.metadata.date,
+        dateModified: post.metadata.date,
+        image: post.metadata.image
+            ? new URL(post.metadata.image, BASE_URL).toString()
+            : `${BASE_URL}/api/og?${new URLSearchParams({ title: post.metadata.title, tag: post.metadata.tags[0] || 'CaseStudy' }).toString()}`,
         author: {
             '@type': 'Organization',
             name: 'Sparks Station',
@@ -93,7 +99,7 @@ export default async function PostPage({ params }: Props) {
             name: 'Sparks Station',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://sparks-station.com/icon.png'
+                url: 'https://sparks-station.com/sparks-station-kv.png'
             }
         },
         mainEntityOfPage: {
@@ -114,7 +120,10 @@ export default async function PostPage({ params }: Props) {
                     <time dateTime={post.metadata.date}>{post.metadata.date}</time>
                     <span className="hidden md:inline">•</span>
                     <div className="flex flex-wrap justify-center gap-2">
-                        {post.metadata.tags.map(tag => (
+                        <span className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border}`}>
+                            {category.title}
+                        </span>
+                        {displayTags.map(tag => (
                             <span key={tag} className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border}`}>
                                 {tag}
                             </span>

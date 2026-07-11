@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowRight, BadgeCheck, Database, FileText, Wrench } from "lucide-react";
+import { ArrowRight, BadgeCheck, FileText, Wrench } from "lucide-react";
 import { getSortedPostsData } from "@/lib/content";
 import { CATEGORIES, classifyPosts } from "@/lib/classifier";
 import HeroSection from "./components/HeroSection";
@@ -45,34 +45,34 @@ export default async function PortalPage() {
               Sparks Station
             </p>
             <h1 className="text-4xl font-bold leading-[1.08] text-white md:text-6xl">
-              <span className="block">海外SaaSの成功パターンを、</span>
+              <span className="block">AIの変化と海外SaaS事例を、</span>
               <span className="block">日本で試せる形に翻訳する。</span>
             </h1>
             <p className="max-w-2xl text-base leading-8 text-neutral-300 md:text-lg">
-              AIで作れる時代に残る壁は、何を誰にどう売るか。Sparks Stationは海外Micro-SaaS / AI SaaSの事例を、価格・GTM・初期顧客・使うツールまで分解します。
+              Sparks Stationは、最新AIアップデートと海外Micro-SaaS / AI SaaS事例を、実装・価格・GTM・日本での活用アイデアまで分解します。
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <Link
-                href="#latest"
+                href="/categories/ai"
                 className="inline-flex items-center gap-2 rounded-md bg-emerald-400 px-4 py-2 text-sm font-semibold text-neutral-950 transition-colors hover:bg-emerald-300"
               >
-                最新事例を読む
+                AIアップデートを読む
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/products"
+                href="/categories/cases"
                 className="inline-flex items-center gap-2 rounded-md border border-white/15 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-emerald-300/60 hover:text-emerald-200"
               >
-                Proを見る
+                事例分析を読む
               </Link>
             </div>
           </div>
 
           <div className="grid gap-3 border-t border-white/10 pt-6 text-sm text-neutral-400 md:grid-cols-3">
             {[
-              ["Case", "収益・売却・成功事例を読む"],
-              ["Translate", "日本で再現する仮説に変える"],
-              ["Build", "ツールと検証手順へ接続する"],
+              ["AI", "最新アップデートを活用案に変える"],
+              ["Case", "収益・売却・GTM事例を読む"],
+              ["Build", "小さな検証手順へ接続する"],
             ].map(([label, text]) => (
               <div key={label} className="flex items-center gap-3">
                 <span className="font-semibold text-emerald-300">{label}</span>
@@ -88,28 +88,28 @@ export default async function PortalPage() {
           <section className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
             <div className="space-y-3">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-300">
-                What this is
+                Editorial Focus
               </p>
               <h2 className="text-2xl font-bold leading-tight text-white md:text-3xl">
-                記事を読むだけで終わらせない。
+                AIの変化と事例分析を、次の一手に変える。
               </h2>
             </div>
             <div className="grid gap-4 text-neutral-300">
               {[
                 {
                   icon: FileText,
-                  title: "事例を分解する",
+                  title: "AIアップデートを読む",
+                  body: "モデル、開発者ツール、エージェント機能の更新を、日本語で要点と活用方法まで整理します。",
+                },
+                {
+                  icon: FileText,
+                  title: "海外事例を分解する",
                   body: "売れた理由、価格、顧客獲得、買収背景を、作り手の意思決定として読める形にします。",
                 },
                 {
                   icon: Wrench,
-                  title: "実行手順へ翻訳する",
-                  body: "日本の個人開発者や小規模事業者が試せる検証手順とツール選定に落とします。",
-                },
-                {
-                  icon: Database,
-                  title: "再利用できる資産にする",
-                  body: "記事、Pro、買い切りDBとして蓄積し、次のプロダクト判断に使える形で残します。",
+                  title: "小さな検証へ落とす",
+                  body: "日本の個人開発者や小規模事業者が試せるプロダクト仮説、業務自動化、GTM手順へつなげます。",
                 },
               ].map((item) => (
                 <div key={item.title} className="grid grid-cols-[2rem_1fr] gap-4 border-b border-white/10 pb-4">
@@ -130,7 +130,7 @@ export default async function PortalPage() {
                   Latest Spark
                 </p>
                 <h2 className="mt-2 text-2xl font-bold text-white md:text-3xl">
-                  最新の海外SaaS事例
+                  最新記事
                 </h2>
               </div>
               <Link href="/products" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 hover:text-emerald-200">
@@ -174,28 +174,20 @@ export default async function PortalPage() {
 
           <div className="space-y-12">
             <CategorySection
-              title={CATEGORIES.success.title}
-              description={CATEGORIES.success.description}
-              posts={classified.success}
-              theme={CATEGORIES.success.theme}
+              title={CATEGORIES.ai.title}
+              description={CATEGORIES.ai.description}
+              posts={classified.ai}
+              theme={CATEGORIES.ai.theme}
               limit={6}
-              viewAllLink={`/categories/${CATEGORIES.success.slug}`}
+              viewAllLink={`/categories/${CATEGORIES.ai.slug}`}
             />
             <CategorySection
-              title={CATEGORIES.thought.title}
-              description={CATEGORIES.thought.description}
-              posts={classified.thought}
-              theme={CATEGORIES.thought.theme}
+              title={CATEGORIES.cases.title}
+              description={CATEGORIES.cases.description}
+              posts={classified.cases}
+              theme={CATEGORIES.cases.theme}
               limit={6}
-              viewAllLink={`/categories/${CATEGORIES.thought.slug}`}
-            />
-            <CategorySection
-              title={CATEGORIES.failure.title}
-              description={CATEGORIES.failure.description}
-              posts={classified.failure}
-              theme={CATEGORIES.failure.theme}
-              limit={6}
-              viewAllLink={`/categories/${CATEGORIES.failure.slug}`}
+              viewAllLink={`/categories/${CATEGORIES.cases.slug}`}
             />
           </div>
         </div>

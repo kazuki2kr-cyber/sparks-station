@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { Post } from '@/lib/content';
-import { getThemeForTag } from '@/lib/theme';
+import { CATEGORIES, getPostCategory } from '@/lib/classifier';
 import PostStats from './PostStats';
 
 export default function PostCard({ post }: { post: Post }) {
-    const mainTag = post.metadata.tags[0] || 'Tech';
-    const theme = getThemeForTag(mainTag);
+    const categoryKey = getPostCategory(post);
+    const category = CATEGORIES[categoryKey];
+    const theme = category.theme;
+    const supportingTags = post.metadata.tags.filter((tag) => !['AIUpdate', 'CaseStudy', 'SuccessCase', 'FailureCase', 'Concept'].includes(tag));
 
     return (
         <Link href={`/posts/${post.slug}`} className="block group h-full">
@@ -16,7 +18,7 @@ export default function PostCard({ post }: { post: Post }) {
                     {/* Corner Badge */}
                     <div className="absolute top-3 right-3 z-10">
                         <span className="inline-block bg-black/20 backdrop-blur-md border border-white/10 text-white/90 text-[10px] font-bold px-2 py-1 rounded tracking-wide shadow-sm">
-                            {mainTag}
+                            {category.title}
                         </span>
                     </div>
                     {/* Decorative shine effect */}
@@ -28,7 +30,7 @@ export default function PostCard({ post }: { post: Post }) {
                         <span>{post.metadata.date}</span>
                         <span>•</span>
                         <div className="flex gap-2">
-                            {post.metadata.tags.slice(0, 2).map(tag => (
+                            {supportingTags.slice(0, 2).map(tag => (
                                 <span key={tag} className={`${theme.bg} px-1.5 py-0.5 rounded border ${theme.border}`}>
                                     {tag}
                                 </span>

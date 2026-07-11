@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import {
-  ArrowRight,
   BadgeCheck,
   ExternalLink,
   GraduationCap,
@@ -11,9 +10,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Tools | Sparks Station",
+  title: "AI活用・SaaS検証のツール",
   description:
-    "Sparks Stationが個人開発、SaaS検証、記事制作、運用で使うツールとギアの一覧。",
+    "Sparks StationがAI活用、個人開発、SaaS検証、記事制作、運用で使うツールとギアの一覧。",
   alternates: {
     canonical: "/tools",
   },
@@ -195,16 +194,16 @@ export default function ToolsPage() {
             Tools
           </p>
           <h1 className="text-3xl font-bold leading-tight text-white md:text-4xl">
-            事例を読んだあと、実際に試すための道具箱。
+            AIの変化と事例を、実際に試すための道具箱。
           </h1>
         </div>
         <p className="max-w-2xl text-sm leading-7 text-neutral-400">
-          Sparks Stationで扱うのは、単なる便利ツール集ではありません。海外SaaSの成功パターンを自分の検証に落とすために、開発、公開、集客、収益化で使える候補を整理しています。
+          Sparks Stationで扱うのは、単なる便利ツール集ではありません。AIの新機能や海外SaaS事例を自分の検証に落とすために、開発、公開、集客、収益化で使える候補を整理しています。
         </p>
       </header>
 
       <div className="grid gap-5 lg:grid-cols-3">
-        {toolsData.slice(0, 3).map((category) => (
+        {toolsData.map((category) => (
           <a
             key={category.title}
             href={`#${category.title.toLowerCase().replaceAll(" ", "-").replaceAll("&", "and")}`}

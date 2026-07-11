@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { SITE_CONTACT_EMAIL } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "プライバシーポリシー | Sparks Station",
+  title: "プライバシーポリシー",
+  description: "Sparks Stationにおける個人情報、Cookie、アクセス解析、決済情報の取り扱いについて説明します。",
   alternates: {
     canonical: "/privacy",
   },

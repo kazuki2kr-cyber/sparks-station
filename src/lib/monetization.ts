@@ -101,6 +101,7 @@ export function selectArticleProductCta(tags: string[], content: string): Articl
 
     const isFailureOrDeepTech =
         tags.includes("FailureCase") ||
+        tags.includes("Failure") ||
         tags.includes("DeepTech") ||
         ["規制", "閉鎖", "失敗", "支払い手", "導入コスト", "保険償還", "cac"].some((word) =>
             haystack.includes(word.toLowerCase())
@@ -122,6 +123,7 @@ export function selectArticleProductCta(tags: string[], content: string): Articl
 
     const isCaseDbFit =
         tags.includes("SuccessCase") ||
+        tags.includes("CaseStudy") ||
         tags.includes("GTM") ||
         tags.includes("Monetization") ||
         tags.includes("Bootstrapped") ||

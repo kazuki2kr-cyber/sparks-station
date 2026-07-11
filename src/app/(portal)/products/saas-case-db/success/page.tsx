@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "購入完了",
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = "force-dynamic";
 

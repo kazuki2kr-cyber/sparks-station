@@ -4,6 +4,7 @@ import { getSortedPostsData } from '@/lib/content'
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://sparks-station.com'
     const posts = getSortedPostsData()
+    const hiddenTags = new Set(['AIUpdate', 'CaseStudy', 'SuccessCase', 'FailureCase', 'Concept', 'Thought'])
 
     const postUrls = posts.map((post) => ({
         url: `${baseUrl}/posts/${post.slug}`,
@@ -13,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
 
     // Tag pages
-    const allTags = posts.flatMap(post => post.metadata.tags)
+    const allTags = posts.flatMap(post => post.metadata.tags).filter((tag) => !hiddenTags.has(tag))
     const uniqueTags = [...new Set(allTags)]
     const tagUrls = uniqueTags.map((tag) => ({
         url: `${baseUrl}/tags/${encodeURIComponent(tag)}`,
@@ -61,19 +62,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.6,
         },
         {
-            url: `${baseUrl}/categories/success`,
+            url: `${baseUrl}/categories/ai`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
         },
         {
-            url: `${baseUrl}/categories/thought`,
+            url: `${baseUrl}/tools`,
             lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
+            changeFrequency: 'monthly',
+            priority: 0.6,
         },
         {
-            url: `${baseUrl}/categories/failure`,
+            url: `${baseUrl}/commerce-disclosure`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly',
+            priority: 0.2,
+        },
+        {
+            url: `${baseUrl}/categories/cases`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,

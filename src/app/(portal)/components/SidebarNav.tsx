@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { CATEGORIES } from '@/lib/classifier';
 import { getSortedPostsData } from '@/lib/content';
+
+const HIDDEN_TAGS = new Set(['AIUpdate', 'CaseStudy', 'SuccessCase', 'FailureCase', 'Concept', 'Thought']);
 
 export default function SidebarNav() {
     const allPosts = getSortedPostsData();
 
     // Extract unique tags from all posts (top 10)
-    const allTags = allPosts.flatMap(post => post.metadata.tags);
+    const allTags = allPosts.flatMap(post => post.metadata.tags).filter((tag) => !HIDDEN_TAGS.has(tag));
     const tagCounts = allTags.reduce((acc, tag) => {
         acc[tag] = (acc[tag] || 0) + 1;
         return acc;
@@ -25,22 +26,16 @@ export default function SidebarNav() {
                 </h3>
                 <div className="space-y-2">
                     <Link
-                        href="/categories/success"
-                        className="block text-sm text-emerald-400 hover:text-emerald-300 transition-colors py-1.5 border-b border-neutral-800 last:border-0"
+                        href="/categories/ai"
+                        className="block text-sm text-cyan-400 hover:text-cyan-300 transition-colors py-1.5 border-b border-neutral-800 last:border-0"
                     >
-                        Success Case & Tech →
+                        AI Updates →
                     </Link>
                     <Link
-                        href="/categories/thought"
-                        className="block text-sm text-purple-400 hover:text-purple-300 transition-colors py-1.5 border-b border-neutral-800 last:border-0"
+                        href="/categories/cases"
+                        className="block text-sm text-emerald-400 hover:text-emerald-300 transition-colors py-1.5"
                     >
-                        Philosophy & Narrative →
-                    </Link>
-                    <Link
-                        href="/categories/failure"
-                        className="block text-sm text-rose-400 hover:text-rose-300 transition-colors py-1.5"
-                    >
-                        Failure & Lessons →
+                        Case Studies →
                     </Link>
                 </div>
             </div>
@@ -69,7 +64,7 @@ export default function SidebarNav() {
                     About
                 </h3>
                 <p className="text-xs text-neutral-400 leading-relaxed mb-4">
-                    世界の開発事例と先進思想を蓄積し、プロダクトとして形にするSaaS Analysis & Studio。事例研究と次世代概念の探求を通じて、ビジネスと技術の種火を生み出します。
+                    AIの変化と海外SaaS事例を、日本で試せるプロダクト仮説へ翻訳するSaaS Analysis & Studio。
                 </p>
                 <Link
                     href="/about"

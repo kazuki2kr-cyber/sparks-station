@@ -35,7 +35,7 @@ export default function CategorySection({ title, description, posts, theme, limi
 
                 {viewAllLink && hasMore && (
                     <Link href={viewAllLink} className={`hidden md:flex items-center gap-2 text-sm font-medium ${theme.primary} hover:opacity-80 transition-opacity`}>
-                        View All Cases →
+                        View All →
                     </Link>
                 )}
             </div>
@@ -49,7 +49,7 @@ export default function CategorySection({ title, description, posts, theme, limi
             {viewAllLink && hasMore && (
                 <div className="mt-8 text-center md:hidden">
                     <Link href={viewAllLink} className={`inline-flex items-center gap-2 text-sm font-medium px-6 py-3 rounded-full border ${theme.border} ${theme.bg} ${theme.primary}`}>
-                        View All Cases →
+                        View All →
                     </Link>
                 </div>
             )}

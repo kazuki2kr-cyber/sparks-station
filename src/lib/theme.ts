@@ -80,21 +80,16 @@ export const THEMES: Record<string, Theme> = {
 export function getThemeForTag(tag: string): Theme {
     const lowerTag = tag.toLowerCase();
 
-    // Failure Case tags trigger Rose theme
-    if (lowerTag.startsWith('failurecase')) {
+    // Failure tags stay rose as supporting labels.
+    if (lowerTag.startsWith('failurecase') || lowerTag === 'failure') {
         return THEMES.rose;
     }
 
-    // Concept / Thought related tags trigger Purple theme
-    if (['narrativeengineering', 'thought', 'concept', 'singularity', 'philosophy'].some(t => lowerTag.startsWith(t))) {
-        return THEMES.purple;
-    }
-
-    // AI / Tech related tags trigger Blue theme
-    if (['ai agent', 'ai', 'llm', 'machine learning', 'tech', 'agent'].some(t => lowerTag.includes(t))) {
+    // AI / Tech related tags trigger Blue theme.
+    if (['aiupdate', 'ai agent', 'ai', 'llm', 'machine learning', 'tech', 'agent'].some(t => lowerTag.includes(t))) {
         return THEMES.blue;
     }
 
-    // Default to Emerald (SaaS, Business, etc.)
+    // Case studies and business articles default to Emerald.
     return THEMES.emerald;
 }

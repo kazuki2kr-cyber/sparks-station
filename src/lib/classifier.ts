@@ -1,47 +1,61 @@
 import { Post } from './content';
-import { getThemeForTag, THEMES, Theme } from './theme';
+import { THEMES, Theme } from './theme';
 
-export type CategoryType = 'success' | 'thought' | 'failure';
+export type CategoryType = 'ai' | 'cases';
 
 export const CATEGORIES: Record<CategoryType, { title: string; description: string; theme: Theme; slug: string }> = {
-    success: {
-        title: 'Success Case & Tech',
-        description: '世界の最先端事例と、実装のための技術スタック。',
+    ai: {
+        title: 'AI Updates',
+        description: '最新AIと開発者ツールの変化を、日本で試せる使い方へ翻訳する。',
+        theme: THEMES.blue,
+        slug: 'ai'
+    },
+    cases: {
+        title: 'Case Studies',
+        description: '海外Micro-SaaS / AI SaaSの成功・失敗・Exitを、事業アイデアへ分解する。',
         theme: THEMES.emerald,
-        slug: 'success'
-    },
-    thought: {
-        title: 'Philosophy & Narrative',
-        description: 'プロダクトの魂となる「思想」と「物語」。',
-        theme: THEMES.purple,
-        slug: 'thought'
-    },
-    failure: {
-        title: 'Failure Cases',
-        description: '先人たちの失敗から学ぶ、生存への羅針盤。',
-        theme: THEMES.rose,
-        slug: 'failure'
+        slug: 'cases'
     }
 };
 
 export function getPostCategory(post: Post): CategoryType {
-    const mainTag = post.metadata.tags[0] || '';
-    const theme = getThemeForTag(mainTag);
+    const tags = post.metadata.tags.map((tag) => tag.toLowerCase());
+    const primary = tags[0] || '';
+    const haystack = [
+        post.metadata.title,
+        post.metadata.summary,
+        ...post.metadata.tags,
+    ].join(' ').toLowerCase();
 
-    if (theme === THEMES.rose) {
-        return 'failure';
-    } else if (theme === THEMES.purple) {
-        return 'thought';
-    } else {
-        return 'success';
+    if (primary === 'casestudy' || primary === 'successcase' || primary === 'failurecase') {
+        return 'cases';
     }
+
+    if (
+        primary === 'aiupdate' ||
+        primary === 'concept' ||
+        primary === 'thought' ||
+        tags.includes('ai') ||
+        tags.includes('llm') ||
+        tags.includes('techstack') ||
+        tags.includes('product') ||
+        haystack.includes('ai') ||
+        haystack.includes('agent') ||
+        haystack.includes('claude') ||
+        haystack.includes('openai') ||
+        haystack.includes('gemini') ||
+        haystack.includes('cursor')
+    ) {
+        return 'ai';
+    }
+
+    return 'cases';
 }
 
 export function classifyPosts(posts: Post[]) {
     const categorized = {
-        success: [] as Post[],
-        thought: [] as Post[],
-        failure: [] as Post[]
+        ai: [] as Post[],
+        cases: [] as Post[]
     };
 
     posts.forEach(post => {

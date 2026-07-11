@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Post } from '@/lib/content';
-import { getThemeForTag } from '@/lib/theme';
+import { CATEGORIES, getPostCategory } from '@/lib/classifier';
 import PostStats from './PostStats';
 
 export default function HeroSection({ post }: { post: Post }) {
-    const mainTag = post.metadata.tags[0] || 'Tech';
-    const theme = getThemeForTag(mainTag);
+    const categoryKey = getPostCategory(post);
+    const category = CATEGORIES[categoryKey];
+    const theme = category.theme;
 
     return (
         <section className="w-full">
@@ -33,7 +34,7 @@ export default function HeroSection({ post }: { post: Post }) {
                                     {/* Tag Overlay - Only shown when no image */}
                                     <div className="absolute inset-0 flex items-center justify-center z-10">
                                         <div className="text-white font-bold text-3xl md:text-5xl tracking-tighter opacity-90 drop-shadow-lg transform group-hover:scale-105 transition-transform duration-700 text-center px-4 leading-tight">
-                                            {mainTag.replace(/([a-z])([A-Z][a-z])/g, '$1 $2').trim()}
+                                            {category.title}
                                         </div>
                                     </div>
                                     {/* Decorative shine */}
@@ -45,7 +46,7 @@ export default function HeroSection({ post }: { post: Post }) {
                         {/* Content Side */}
                         <div className="md:col-span-5 p-4 md:p-6 flex flex-col justify-center relative bg-neutral-900/50 backdrop-blur-sm">
                             <div className={`inline-flex items-center gap-2 text-xs font-mono mb-4 ${theme.primary}`}>
-                                <span className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border} tracking-wide`}>LATEST SPARK</span>
+                                <span className={`${theme.bg} px-2 py-0.5 rounded border ${theme.border} tracking-wide`}>{category.title}</span>
                                 <span>{post.metadata.date}</span>
                             </div>
 

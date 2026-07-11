@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 import { ArrowRight, BadgeCheck, Database, Lightbulb, Wrench } from 'lucide-react';
 
 export const metadata: Metadata = {
-    title: 'About | Sparks Station',
-    description: 'Sparks Stationは、海外SaaSの成功パターンを日本の個人開発者・小規模事業者が使える形に翻訳するメディア兼プロダクトスタジオです。',
+    title: 'AIアップデートとSaaS事例について',
+    description: 'Sparks Stationは、AIの最新アップデートと海外SaaS事例を、日本の個人開発者・小規模事業者が試せる形に翻訳するメディア兼プロダクトスタジオです。',
     alternates: {
         canonical: '/about',
     },
@@ -19,11 +19,11 @@ export default function AboutPage() {
                         About Sparks Station
                     </p>
                     <h1 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
-                        海外SaaSの成功パターンを、日本で実行できる形へ。
+                        AIの変化と海外SaaS事例を、日本で実行できる形へ。
                     </h1>
                 </div>
                 <p className="text-base leading-8 text-neutral-300 md:text-lg">
-                    AIで「作る」敷居が下がった時代に、最後に残るのはマネタイズの壁です。Sparks Station は、海外Micro-SaaS / AI SaaSの事例を収集し、価格・GTM・初期顧客・ツール選定まで分解して届けます。
+                    Sparks Stationは、AIの最新アップデートと海外Micro-SaaS / AI SaaSの事例を追い、日本語で要点を整理します。新機能の活用方法から、価格・GTM・初期顧客・ツール選定まで、次の検証に使える形で届けます。
                 </p>
             </section>
 
@@ -32,13 +32,13 @@ export default function AboutPage() {
                     {[
                         {
                             icon: Database,
-                            title: 'Case',
-                            body: '売上、売却、ユーザー獲得、価格変更。数字と一次情報から、成功パターンを読む。',
+                            title: 'AI Updates',
+                            body: 'モデル、開発者ツール、エージェント機能の更新を、公式情報から読み解く。',
                         },
                         {
                             icon: Lightbulb,
-                            title: 'Translate',
-                            body: '海外で起きたことを、日本の開発者・小規模事業者が試せる仮説に変える。',
+                            title: 'Case Studies',
+                            body: '売上、売却、顧客獲得、価格変更。数字と一次情報から、事例の構造を読む。',
                         },
                         {
                             icon: Wrench,
@@ -68,7 +68,8 @@ export default function AboutPage() {
                     {[
                         '何を作ったかより、誰がなぜ払ったかを優先して読む。',
                         'PVや話題性より、価格・継続利用・販売チャネルを重視する。',
-                        '成功事例だけでなく、売れなかった理由と撤退パターンも扱う。',
+                        'AIの更新は、機能紹介だけでなく具体的な活用方法まで整理する。',
+                        '事例は成功だけでなく、売れなかった理由と撤退パターンも扱う。',
                         '記事の最後には、日本で試すなら何から始めるかを残す。',
                     ].map((item) => (
                         <div key={item} className="flex gap-3 border-b border-white/10 pb-4 text-neutral-300">
@@ -79,12 +80,29 @@ export default function AboutPage() {
                 </div>
             </section>
 
+            <nav aria-label="記事カテゴリ" className="grid gap-4 md:grid-cols-2">
+                <Link href="/categories/ai" className="group border-t border-cyan-400/30 py-5 transition-colors hover:border-cyan-300">
+                    <span className="text-sm font-semibold text-cyan-300">AI Updates</span>
+                    <span className="mt-2 flex items-center justify-between text-lg font-bold text-white">
+                        最新AIの解説と活用方法を読む
+                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                </Link>
+                <Link href="/categories/cases" className="group border-t border-emerald-400/30 py-5 transition-colors hover:border-emerald-300">
+                    <span className="text-sm font-semibold text-emerald-300">Case Studies</span>
+                    <span className="mt-2 flex items-center justify-between text-lg font-bold text-white">
+                        海外SaaSの事例分析を読む
+                        <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                </Link>
+            </nav>
+
             <section className="rounded-lg border border-emerald-500/20 bg-emerald-500/[0.04] p-6 md:p-8">
                 <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
                     <div className="space-y-3">
                         <h2 className="text-2xl font-bold text-white">Sparks Station Pro</h2>
                         <p className="max-w-2xl text-sm leading-7 text-neutral-400">
-                            無料記事で公開する事例を、より深く、より実行寄りに整理するメンバーシップを準備しています。買い切りDBと合わせて、小さく検証していきます。
+                            無料記事で公開するAI活用とSaaS事例を、より深く、より実行寄りに整理するメンバーシップを準備しています。買い切りDBと合わせて、小さく検証していきます。
                         </p>
                     </div>
                     <Link
@@ -107,7 +125,7 @@ export default function AboutPage() {
                             <dt>開設</dt>
                             <dd>2026年1月</dd>
                             <dt>事業内容</dt>
-                            <dd>SaaSビジネスの事例研究・情報発信、Webアプリケーション開発</dd>
+                            <dd>AIアップデート・SaaS事例の調査と情報発信、Webアプリケーション開発</dd>
                             <dt>URL</dt>
                             <dd>https://sparks-station.com</dd>
                             <dt>お問い合わせ</dt>
