@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-11T14:24:23.928Z",
+  "generatedAt": "2026-07-13T03:21:28.151Z",
   "source": {
     "postsDir": "src/content/posts",
     "dbPath": "data/monetization/saas-case-database.seed.json"
   },
   "totals": {
-    "posts": 37,
+    "posts": 38,
     "dbRows": 20,
     "postsWithDbRows": 20,
-    "postsWithoutDbRows": 17
+    "postsWithoutDbRows": 18
   },
   "patterns": [
     {
@@ -46,8 +46,13 @@
     {
       "id": "pricing_and_packaging",
       "label": "価格設計 / 課金理由の明確化",
-      "count": 8,
+      "count": 9,
       "examples": [
+        {
+          "slug": "gpt-5-6-agent-workflows",
+          "title": "GPT-5.6は何を変えたのか。Sol・Terra・Lunaで始める実務エージェント設計",
+          "productName": "GPT-5"
+        },
         {
           "slug": "my-askai-ai-support-agent-40k-mrr",
           "title": "My AskAIはなぜ2人で月4万ドルMRRに届いたのか。AIサポートSaaSが価格差と既存導線で勝つ方法",
@@ -67,11 +72,6 @@
           "slug": "20260305",
           "title": "安定の職を捨て、無計画から月商210万円へ。80%をAIで自動化する「ハイブリッド・エージェンシー」の衝撃",
           "productName": "AI Podcasting (AIP)"
-        },
-        {
-          "slug": "20260228",
-          "title": "全財産喪失から月商1,500万円のAI企業へ。「Magai」創業者が証明した”顧客との対話”と”限界突破”の軌跡",
-          "productName": "Magai"
         }
       ]
     },
@@ -207,6 +207,44 @@
     }
   ],
   "insights": [
+    {
+      "slug": "gpt-5-6-agent-workflows",
+      "title": "GPT-5.6は何を変えたのか。Sol・Terra・Lunaで始める実務エージェント設計",
+      "date": "2026-07-13",
+      "tags": [
+        "AIUpdate",
+        "AI",
+        "Product",
+        "TechStack"
+      ],
+      "articleUrl": "/posts/gpt-5-6-agent-workflows",
+      "file": "src/content/posts/gpt-5-6-agent-workflows.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "GPT-5",
+      "category": "AIUpdate / AI / Product / TechStack",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      }
+    },
     {
       "slug": "my-askai-ai-support-agent-40k-mrr",
       "title": "My AskAIはなぜ2人で月4万ドルMRRに届いたのか。AIサポートSaaSが価格差と既存導線で勝つ方法",
