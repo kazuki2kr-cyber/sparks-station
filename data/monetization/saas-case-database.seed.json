@@ -540,5 +540,43 @@
     "monetizationFit": "Sparks Stationの買い切りDBにおいて、ゼロから作るだけでなく小さなSaaSを買って伸ばす戦略、SEO資産化、Notion/顧客ポータル系の日本転用事例として価値が高い。",
     "confidence": "high",
     "notes": "買収額、買収時MRR、顧客数、買収プロセスはIndie Hackersの買収記事を参照。$12k+ MRR、成長要因、スタックは2025年10月のIndie Hackers記事を参照。2026年5月時点の最新MRR内訳は未確認。"
+  },
+  {
+    "id": "dropinblog-seven-figure-growth",
+    "productName": "DropInBlog",
+    "url": "https://dropinblog.com",
+    "sourceUrls": [
+      "/posts/dropinblog-seven-figure-growth",
+      "src/content/posts/dropinblog-seven-figure-growth.md",
+      "https://www.indiehackers.com/post/shattering-the-7-figure-ceiling-after-a-4-year-plateau-OCmI5NQKKqyyCH0SqoiQ",
+      "https://dropinblog.com/company/",
+      "https://dropinblog.com/pricing/",
+      "https://dropinblog.com/features/",
+      "https://dropinblog.com/agencies/",
+      "https://docs.dropinblog.com/en/article/how-does-dropinblog-work-and-for-who-7ts1hq/",
+      "https://dev.dropinblog.com/reference/api-reference",
+      "https://dev.dropinblog.com/reference/mcp-server",
+      "https://github.com/DropInBlog/react-nextjs",
+      "https://microcms.co.jp/news/20260520-01",
+      "https://kuroco.app/ja/",
+      "https://piyocms.webcolor.jp/"
+    ],
+    "category": "Bootstrapped SaaS / Headless CMS / SEO / Developer Tools",
+    "targetCustomer": "既存サイトを作り直さずにブログを追加したい企業、コンテンツマーケティングチーム、制作会社、B2B SaaS、ECブランド。",
+    "pain": "マーケティングサイトと別管理のブログは見た目、SEO、保守、権限、編集体験が分断される一方、汎用ヘッドレスCMSは表示画面の実装負担が大きい。",
+    "productSummary": "既存サイトのページまたはフォルダへ、JavaScript、Cloudflare静的化、SDK、APIでブログを組み込めるホスティング型CMS。SEO、編集、分析、権限、MCPによるAI操作まで一式で提供する。",
+    "pricingModel": "月額・年額サブスクリプション / チーム規模・法人導入機能別 / 代理店・Enterpriseは個別対応",
+    "priceRange": "Soloは月$49、Teamは月$199、Businessは月$499。年払い時月額は$39、$159、$399。Business Plusは年$9,000。",
+    "revenue": "Indie Hackersは2026年5月時点の月間売上を$83K超と掲載。MRRとは明記されていない。7桁ドル付近で約4年停滞後に再成長。",
+    "acquisitionChannel": "制作会社顧客の反復要望、SEO、制作会社経由の口コミ、上位顧客向けデモ、直接営業、ポッドキャストスポンサー。",
+    "gtmPattern": "service-to-SaaS / platform SEO / self-serve to upmarket / pricing and channel reset / agency distribution",
+    "successFactor": "SEO流入と解約が均衡した停滞を、流入増ではなく未成約の上位企業を観測することで診断し、価格、法人機能、ブランド、デモ、採用、新チャネルを一体で組み直した。",
+    "riskOrFailure": "SEO単一チャネルへの依存、WordPressや国産ヘッドレスCMSとの競争、JavaScript描画のSEO検証、外部プラットフォーム仕様変更、上位市場移行による営業・サポート負荷。",
+    "japanHypothesis": "国産汎用CMSではなく、Webflow制作会社、Shopify小規模EC、Next.jsのB2B SaaSなどへ『既存サイトを壊さず1日で事例・ブログ運用を追加』する用途特化型なら差別化余地がある。",
+    "firstExperiment": "制作会社または小規模B2B SaaS約5社へヒアリングし、日本語LP1枚とデモ5記事を用意する。3社以上のデモ希望と1社以上の有料継続意思を初期判定にする。",
+    "recommendedTools": ["Next.js", "Cloudflare", "Laravel", "PlanetScale", "microCMS", "Stripe", "Google Search Console"],
+    "monetizationFit": "SaaS Case DBで、受託課題の製品化、SEO資産、セルフサーブから上位市場への移行、価格と販売チャネルの同時再設計を比較できる事例として価値が高い。",
+    "confidence": "high",
+    "notes": "月間売上$83K超はIndie Hackers編集部の掲載値でありMRRではない。2,000超は顧客社数ではなく稼働ブログ数。現行MRR、ARR、利益率、解約率、顧客社数は未確認。料金は2026年7月16日確認。"
   }
 ]

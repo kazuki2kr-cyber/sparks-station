@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-13T03:21:28.151Z",
+  "generatedAt": "2026-07-16T03:14:01.848Z",
   "source": {
     "postsDir": "src/content/posts",
     "dbPath": "data/monetization/saas-case-database.seed.json"
   },
   "totals": {
-    "posts": 38,
-    "dbRows": 20,
-    "postsWithDbRows": 20,
+    "posts": 39,
+    "dbRows": 21,
+    "postsWithDbRows": 21,
     "postsWithoutDbRows": 18
   },
   "patterns": [
@@ -76,6 +76,38 @@
       ]
     },
     {
+      "id": "pre_sold_or_ltd",
+      "label": "作る前に売る / LTD検証",
+      "count": 5,
+      "examples": [
+        {
+          "slug": "dropinblog-seven-figure-growth",
+          "title": "DropInBlogはなぜ7桁ドルの壁を越えたのか。SEO依存を脱し月間売上8.3万ドル超へ",
+          "productName": "DropInBlog"
+        },
+        {
+          "slug": "youform-affordable-typeform-alternative",
+          "title": "Youformはなぜ月1.8万ドルMRRまで伸びたのか。Typeformの価格不満を拾ったフォームSaaSの作り方",
+          "productName": "Youform"
+        },
+        {
+          "slug": "subscribr-youtube-ai-saas-bootstrap",
+          "title": "VC出資のスタートアップを捨て、LaravelとAIで勝負。YouTubeクリエイター向けSaaS「Subscribr」が100日で$10k MRR、18ヶ月で月商930万円に到達した「検証ファースト」戦略",
+          "productName": "Subscribr"
+        },
+        {
+          "slug": "20260226",
+          "title": "「脱・サブスク」で月商237万円。既存SaaSの隙間を射抜く個人開発者の生存戦略",
+          "productName": "脱・サブスク"
+        },
+        {
+          "slug": "20260121_2",
+          "title": "「一発屋」で終わらない。月商1.3億円超えを実現する「Micro-SaaSポートフォリオ」の極意",
+          "productName": "Micro-SaaS portfolio strategy"
+        }
+      ]
+    },
+    {
       "id": "buy_then_optimize",
       "label": "買って直す / 小規模SaaS運用改善",
       "count": 5,
@@ -140,33 +172,6 @@
       ]
     },
     {
-      "id": "pre_sold_or_ltd",
-      "label": "作る前に売る / LTD検証",
-      "count": 4,
-      "examples": [
-        {
-          "slug": "youform-affordable-typeform-alternative",
-          "title": "Youformはなぜ月1.8万ドルMRRまで伸びたのか。Typeformの価格不満を拾ったフォームSaaSの作り方",
-          "productName": "Youform"
-        },
-        {
-          "slug": "subscribr-youtube-ai-saas-bootstrap",
-          "title": "VC出資のスタートアップを捨て、LaravelとAIで勝負。YouTubeクリエイター向けSaaS「Subscribr」が100日で$10k MRR、18ヶ月で月商930万円に到達した「検証ファースト」戦略",
-          "productName": "Subscribr"
-        },
-        {
-          "slug": "20260226",
-          "title": "「脱・サブスク」で月商237万円。既存SaaSの隙間を射抜く個人開発者の生存戦略",
-          "productName": "脱・サブスク"
-        },
-        {
-          "slug": "20260121_2",
-          "title": "「一発屋」で終わらない。月商1.3億円超えを実現する「Micro-SaaSポートフォリオ」の極意",
-          "productName": "Micro-SaaS portfolio strategy"
-        }
-      ]
-    },
-    {
       "id": "founder_distribution",
       "label": "創業者発信 / コミュニティGTM",
       "count": 4,
@@ -207,6 +212,52 @@
     }
   ],
   "insights": [
+    {
+      "slug": "dropinblog-seven-figure-growth",
+      "title": "DropInBlogはなぜ7桁ドルの壁を越えたのか。SEO依存を脱し月間売上8.3万ドル超へ",
+      "date": "2026-07-16",
+      "tags": [
+        "CaseStudy",
+        "SaaS",
+        "GTM",
+        "Bootstrapped"
+      ],
+      "articleUrl": "/posts/dropinblog-seven-figure-growth",
+      "file": "src/content/posts/dropinblog-seven-figure-growth.md",
+      "hasDbRow": true,
+      "dbRowId": "dropinblog-seven-figure-growth",
+      "productName": "DropInBlog",
+      "category": "Bootstrapped SaaS / Headless CMS / SEO / Developer Tools",
+      "payer": "既存サイトを作り直さずにブログを追加したい企業、コンテンツマーケティングチーム、制作会社、B2B SaaS、ECブランド。",
+      "pain": "マーケティングサイトと別管理のブログは見た目、SEO、保守、権限、編集体験が分断される一方、汎用ヘッドレスCMSは表示画面の実装負担が大きい。",
+      "pricingModel": "月額・年額サブスクリプション / チーム規模・法人導入機能別 / 代理店・Enterpriseは個別対応",
+      "revenue": "Indie Hackersは2026年5月時点の月間売上を$83K超と掲載。MRRとは明記されていない。7桁ドル付近で約4年停滞後に再成長。",
+      "acquisitionChannel": "制作会社顧客の反復要望、SEO、制作会社経由の口コミ、上位顧客向けデモ、直接営業、ポッドキャストスポンサー。",
+      "gtmPattern": "service-to-SaaS / platform SEO / self-serve to upmarket / pricing and channel reset / agency distribution",
+      "successOrFailureFactor": "SEO流入と解約が均衡した停滞を、流入増ではなく未成約の上位企業を観測することで診断し、価格、法人機能、ブランド、デモ、採用、新チャネルを一体で組み直した。",
+      "japanHypothesis": "国産汎用CMSではなく、Webflow制作会社、Shopify小規模EC、Next.jsのB2B SaaSなどへ『既存サイトを壊さず1日で事例・ブログ運用を追加』する用途特化型なら差別化余地がある。",
+      "firstExperiment": "制作会社または小規模B2B SaaS約5社へヒアリングし、日本語LP1枚とデモ5記事を用意する。3社以上のデモ希望と1社以上の有料継続意思を初期判定にする。",
+      "recommendedTools": [
+        "Next.js",
+        "Cloudflare",
+        "Laravel",
+        "PlanetScale",
+        "microCMS",
+        "Stripe",
+        "Google Search Console"
+      ],
+      "sellingPattern": {
+        "id": "pre_sold_or_ltd",
+        "label": "作る前に売る / LTD検証",
+        "buyerLogic": "事前支払いで需要を確認し、開発前後の資金と学習速度を確保する。"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      }
+    },
     {
       "slug": "gpt-5-6-agent-workflows",
       "title": "GPT-5.6は何を変えたのか。Sol・Terra・Lunaで始める実務エージェント設計",
