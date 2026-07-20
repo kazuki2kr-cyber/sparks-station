@@ -1,16 +1,48 @@
 {
-  "generatedAt": "2026-07-16T03:14:01.848Z",
+  "generatedAt": "2026-07-20T03:06:29.979Z",
   "source": {
     "postsDir": "src/content/posts",
     "dbPath": "data/monetization/saas-case-database.seed.json"
   },
   "totals": {
-    "posts": 39,
+    "posts": 40,
     "dbRows": 21,
     "postsWithDbRows": 21,
-    "postsWithoutDbRows": 18
+    "postsWithoutDbRows": 19
   },
   "patterns": [
+    {
+      "id": "pricing_and_packaging",
+      "label": "価格設計 / 課金理由の明確化",
+      "count": 10,
+      "examples": [
+        {
+          "slug": "vercel-agentmail-email-agents",
+          "title": "VercelでAgentMailを導入可能に。AIエージェントへ専用メール受信箱を持たせる方法",
+          "productName": "VercelでAgentMailを導入可能に"
+        },
+        {
+          "slug": "gpt-5-6-agent-workflows",
+          "title": "GPT-5.6は何を変えたのか。Sol・Terra・Lunaで始める実務エージェント設計",
+          "productName": "GPT-5"
+        },
+        {
+          "slug": "my-askai-ai-support-agent-40k-mrr",
+          "title": "My AskAIはなぜ2人で月4万ドルMRRに届いたのか。AIサポートSaaSが価格差と既存導線で勝つ方法",
+          "productName": "My AskAI"
+        },
+        {
+          "slug": "meerkats-ai-gtm-agent-3k-mrr",
+          "title": "Meerkats.aiはなぜ4週間で月3,000ドルMRRに届いたのか。AIエージェントでGTMの手作業を置き換える方法",
+          "productName": "Meerkats.ai"
+        },
+        {
+          "slug": "20260323",
+          "title": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS開発の軍資金を稼ぐまで",
+          "productName": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS"
+        }
+      ]
+    },
     {
       "id": "failure_or_payer_risk",
       "label": "失敗診断 / 支払い手と導入コスト",
@@ -40,38 +72,6 @@
           "slug": "20260213saas_is_dead",
           "title": "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First APIの実装論",
           "productName": "SaaSは死んだのか？AIエージェントが書き換える生存戦略とAI-First A"
-        }
-      ]
-    },
-    {
-      "id": "pricing_and_packaging",
-      "label": "価格設計 / 課金理由の明確化",
-      "count": 9,
-      "examples": [
-        {
-          "slug": "gpt-5-6-agent-workflows",
-          "title": "GPT-5.6は何を変えたのか。Sol・Terra・Lunaで始める実務エージェント設計",
-          "productName": "GPT-5"
-        },
-        {
-          "slug": "my-askai-ai-support-agent-40k-mrr",
-          "title": "My AskAIはなぜ2人で月4万ドルMRRに届いたのか。AIサポートSaaSが価格差と既存導線で勝つ方法",
-          "productName": "My AskAI"
-        },
-        {
-          "slug": "meerkats-ai-gtm-agent-3k-mrr",
-          "title": "Meerkats.aiはなぜ4週間で月3,000ドルMRRに届いたのか。AIエージェントでGTMの手作業を置き換える方法",
-          "productName": "Meerkats.ai"
-        },
-        {
-          "slug": "20260323",
-          "title": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS開発の軍資金を稼ぐまで",
-          "productName": "50歳で会社を辞め、月商220万円のコンサル会社を半年で立ち上げた男が、SaaS"
-        },
-        {
-          "slug": "20260305",
-          "title": "安定の職を捨て、無計画から月商210万円へ。80%をAIで自動化する「ハイブリッド・エージェンシー」の衝撃",
-          "productName": "AI Podcasting (AIP)"
         }
       ]
     },
@@ -212,6 +212,44 @@
     }
   ],
   "insights": [
+    {
+      "slug": "vercel-agentmail-email-agents",
+      "title": "VercelでAgentMailを導入可能に。AIエージェントへ専用メール受信箱を持たせる方法",
+      "date": "2026-07-20",
+      "tags": [
+        "AIUpdate",
+        "AI",
+        "Product",
+        "TechStack"
+      ],
+      "articleUrl": "/posts/vercel-agentmail-email-agents",
+      "file": "src/content/posts/vercel-agentmail-email-agents.md",
+      "hasDbRow": false,
+      "dbRowId": null,
+      "productName": "VercelでAgentMailを導入可能に",
+      "category": "AIUpdate / AI / Product / TechStack",
+      "payer": "AIで業務や制作を効率化したい個人・小規模チーム",
+      "pain": "作れるが、何を誰にどう売るかの解像度が足りない。",
+      "pricingModel": null,
+      "revenue": null,
+      "acquisitionChannel": null,
+      "gtmPattern": null,
+      "successOrFailureFactor": null,
+      "japanHypothesis": null,
+      "firstExperiment": null,
+      "recommendedTools": [],
+      "sellingPattern": {
+        "id": "pricing_and_packaging",
+        "label": "価格設計 / 課金理由の明確化",
+        "buyerLogic": "機能ではなく、支払い理由と料金形態を顧客の不満に合わせる。"
+      },
+      "productCta": {
+        "id": "saas_case_db",
+        "label": "SaaS Case DB",
+        "reason": "類似事例を横断して、価格・GTM・日本転用を比較しやすい。",
+        "href": "/products#saas-case-db"
+      }
+    },
     {
       "slug": "dropinblog-seven-figure-growth",
       "title": "DropInBlogはなぜ7桁ドルの壁を越えたのか。SEO依存を脱し月間売上8.3万ドル超へ",
